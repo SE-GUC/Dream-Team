@@ -13,7 +13,8 @@ const books = [
     new Book('Macbeth', 'William Shakespeare', 349, 1606),
     new Book('A Tale of Two Cities', 'Charles Dickens', 489, 1859),
     new Book('The Archetypes and the Collective Unconscious', 'Carl Jung', 550, 1959),
-    new Book('Man\'s Search for Meaning', 'Viktor Frankl', 165, 1946)
+    new Book('Man\'s Search for Meaning', 'Viktor Frankl', 165, 1946),
+    new Book('A walk to remember', 'Nicholas Sparks', 50, 1990)
 ];
 
 router.get('/', (req, res) => res.json({ data: books }))
