@@ -7,7 +7,7 @@ const LawyerSchema= new Schema({
         required: true
     },
     Account_Status  :{
-        type: String,
+        type: boolean,
         required: true
 }
 })

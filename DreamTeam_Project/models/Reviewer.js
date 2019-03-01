@@ -10,7 +10,7 @@ const reviewerschema = new Schema({
     
     ,
     account_status: {
-        type: String, 
+        type: boolean, 
         required: true
     },
 })
