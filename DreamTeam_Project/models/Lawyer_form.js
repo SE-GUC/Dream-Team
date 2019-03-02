@@ -1,14 +1,22 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const LawyerformSchema= new Schema({
-    Person :{
-        type: mongoose.Schema.Type.ObjectId,
-        ref: 'Person',
-        required: true
+    
+    lawyer:{
+      type: Schema.Types.ObjectId,
+      ref: 'Lawyer'
     },
-    Account_Status  :{
-        type: String,
-        required: true
-}
+    comment:{
+     type:String,
+    required: false
+    },
+    form :{
+       type: Schema.Types.ObjectId,
+        ref: 'Form'
+    },
+    approved:{
+      type:Number,
+      required:false
+    }
 })
-module.exports = Lawyer_form  = mongoose.model('Lawyer', LawyerformSchema);
+module.exports = mongoose.model('Lawyer_form', LawyerformSchema);

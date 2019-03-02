@@ -10,7 +10,7 @@ const Review_formSchema=new Schema({
       ref:'Reviewer',
       required:true
     },
-    commment :{
+    comment :{
       type:String,
        required: true
     },

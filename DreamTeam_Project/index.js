@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+//const router = express.Router()
 
 // Require Router Handlers
 
@@ -35,14 +36,14 @@ app.get('/', (req,res) => res.send(`<h1>Person</h1>`))
 
 // Direct to Route Handlers
 
-/*app.use('/api/reviewer', reviewer)
+app.use('/api/reviewer', reviewer)
 app.use('/api/admin',Admin)
 app.use('/api/lawyer',Laywer)
 app.use('/api/investor',Investor)
 app.use('/api/form',form)
 app.use('/api/lawyer_form',lawyer_form)
 app.use('/api/reviewer_form',reviewer_form)
-app.use('/api/company',company)*/
+app.use('/api/company',company)
 
 
 
