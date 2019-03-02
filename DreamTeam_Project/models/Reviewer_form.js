@@ -2,12 +2,12 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Review_formSchema=new Schema({
     form :{
-    type:mongoose.Schema.Type.ObjectId,
-    ref='Lawyer_form',
-    required:true},
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'Lawyer_form',
+      required:true},
     reviewer:{
-      type:mongoose.Schema.Type.ObjectId,
-      ref='Reviewer',
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'Reviewer',
       required:true
     },
     commment :{
