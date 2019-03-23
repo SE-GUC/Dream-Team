@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 const User = require('../../models/User')
 const validator = require('../../validations/userValidations')
 const bcrypt = require('bcryptjs')
+const typesEnum = require ('../../enums/accountTypes')
 //yomna
 mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
@@ -104,6 +105,77 @@ router.put('/:id', async (req, res) => {
         console.log(error)
     }
 })
+//Admin approving an account
+router.put("/approve/:id", async (req, res) => {
+    try {
+        const id = req.params.id
+        const user = await User.findById(id);
+        if (!user)
+            return res.status(404).send({
+                error: "This User does not exist"
+            });
+        const approve={
+            accountStatus: true
+        }
+        const approvedacc = await User.findByIdAndUpdate(id,approve)
+        const acc= await User.findById(id);
+
+        res.json({
+            msg: "account have been approved",
+            data: acc
+    })
+    } catch (err) {
+        res.json({
+            msg: err.message
+        });
+    }
+});
+
+
+//admin viewing all entity employess
+    router.get("/rrr/employee", async (req, res) => {
+    try{
+ //   const admin = await User.find({"accountType": "admin"})
+   const users= await User.find({accountType: {$ne: typesEnum.accountTypes.INVESTOR}})
+ 
+    res.json({
+ 
+       data: users
+ 
+    })
+}
+catch(err){
+    res.json({
+        msg: err.message
+    })
+}
+ 
+ })
+
+//Admin rejecting an account
+router.put("/reject/:id", async (req, res) => {
+    try {
+        const id = req.params.id
+        const user = await User.findById(id);
+        if (!user)
+            return res.status(404).send({
+                error: "This User does not exist"
+            });
+        const approve={
+            accountStatus: false
+        }
+        const approvedacc = await User.findByIdAndUpdate(id,approve);
+        const acc= await User.findById(id);
+        res.json({
+                msg: "account have been disapproved",
+                data: acc
+        })
+    } catch (err) {
+        res.json({
+            msg: err.message
+        });
+    }
+});
 
 
 //DELETE USER BY ID
