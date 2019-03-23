@@ -12,7 +12,7 @@ const userschema = new Schema({
    },
    gender: {
        type: String,
-       required: true
+      // required: true
    },
    nationality: {
        type: String,
@@ -36,29 +36,29 @@ const userschema = new Schema({
        required: true
    },
     phoneNumber: {
-       type: Number,
-       required: true
+       type: Number
+      // required: true
    },
    faxNumber: {
-       type: Number,
-       required: true
+       type: Number
+      // required: true
    },
    accountStatus: {
        type: Boolean,
-       required: true
+       default : false
    },
 
    email: {
        type: String,
-       required: true
+      // required: true
    },
    password: {
        type: String,
        required: true
    },
    investorType  :{
-       type: String,
-       require: true
+       type: String
+      // require: true
    } ,
    capital:{
        type:Number,

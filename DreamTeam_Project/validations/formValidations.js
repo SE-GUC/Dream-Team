@@ -57,7 +57,7 @@ module.exports = {
             reviwerComment:Joi.string().min(4).max(100),
             reviwerDecision:Joi.number(),
             dateOfApproval:Joi.date(),
-            amountOfPayment:Joi.number(),
+            amountOfPayment:Joi.number() ,
             DateOfPayment:Joi.string().min(3).max(100),
             PaymentId:Joi.number().min(0).max(100000),
             formType:Joi.string() 
