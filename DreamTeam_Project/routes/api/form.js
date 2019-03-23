@@ -153,6 +153,47 @@ router.delete('/:id', async (req,res) => {
         console.log(error)
     }  
 })
+// 6.3 As a reviewer I should view all forms that I have approved/rejected
+
+router.get("/:type/AR/:id", async (req, res) => 
+{
+   const type = req.params.type
+   const id = req.params.id
+   const user = await User.findById(id);
+       if (!user)
+           return res.status(404).send({
+               error: "This User does not exist"
+           });
+    const dec = await Form.find(({"reviewerDecision": 1 } || {"reviewerDecision": -1 }));       
+   if(type===typesEnum.accountTypes.REVIEWER && dec){
+     
+   const form = await Form.find({"reviewer": id }&& ({"reviewerDecision": 1 } || {"reviewerDecision": -1 }));
+
+   res.json({ data: form });}
+   else res.json({ msg: "No Forms for this reviewer "});
+   
+   
+ });
+// 5.3 Add comment to Form by lawyer after rejection
+router.put("/:idform/:idlawyer", async (req, res) => {
+ 
+   const id = req.params.idform;
+   const idlaw = req.params.idlawyer;
+   const form = await Form.findById(id);
+   if (!form) return res.status(404).send({ error: "Form does not exist" });
+   // const isValidated = validator.updateValidation(req.body)
+   // if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+   //const lawform = await Form.find({"lawyer": idlaw ,"lawyerDecision": -1  })
+  //const dec = await Form.find(( {"lawyerDecision": -1 }));
+  var forms = await Form.findOne({"lawyerDecision": -1 ,"lawyer": idlaw ,"_id":id}) 
+  // if((form.lawyerDecision==-1)&&(form.lawyer==idlaw)){
+   if(forms){
+   //const updatedForm = await Form.findByIdAndUpdate(id, req.body)
+   const updatedForm = await Form.findOneAndUpdate({"lawyerDecision": -1,"lawyer": idlaw ,"_id":id } ,req.body)
+   res.json({ msg: "Form updated successfully" })}
+   else res.json({ msg: "No Forms for this lawyer "});
+
+});
 //Investor(Investor created form), lawyer(Investors' form forwarded to lawyer), Reviewer , Payment , Approved ENUM (FORM STATUS ENUM)
         //User Story 4.2 , investor vieweing pending companies
         router.get('/pending/:id', async (req, res) => {
