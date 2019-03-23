@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
     } catch (err) {
         res.json({
             msg: err.message
-        });
+        }   );
     }
 });
 
