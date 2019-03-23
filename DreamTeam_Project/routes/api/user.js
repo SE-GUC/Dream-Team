@@ -29,6 +29,15 @@ router.get("/", async (req, res) => {
     })
 })
 
+//3.7-As an admin I should be able to view all reviewers
+
+router.get('/reviewer', async (req, res) => {
+    const users = await User.find({"accountType": "reviewer"})
+    res.json({
+        data: users
+    })
+})
+
 //GET BY USER ID
 router.get("/:id", async (req, res) => {
     try {
