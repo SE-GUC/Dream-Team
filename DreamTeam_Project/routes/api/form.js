@@ -33,8 +33,9 @@ router.get("/:id", async (req, res) => {
         });
     }
 })
-//CREATE (waiting for Validation)
-router.post('/', async (req, res) => {
+//CREATE 
+router.post('/lawyer/:id', async (req,res) => {
+   
     try {
         const lawyerId = req.params.id
         var isValidated = validator.createValidation(req.body)
@@ -52,8 +53,6 @@ router.post('/', async (req, res) => {
         }
         
  })
- 
- //CREATE FORM BY INVESTOR
  router.post('/investor/:id', async (req,res) => {
    
     try {
