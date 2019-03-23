@@ -13,6 +13,47 @@ router.get('/', async (req,res) => {
     res.json({data: form})
 })
 
+ //CREATE FORM BY LAWYER
+router.post('/lawyer/:id', async (req,res) => {
+   
+    try {
+        const lawyerId = req.params.id
+        var isValidated = validator.createValidation(req.body)
+          if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+          const reqBody=req.body
+          body: Object.assign(reqBody, {
+            lawyer:lawyerId,
+            lawyerDecision:1,
+            formStatus:formEnum.formStatus.REVIEWER
+          })
+        const newForm = await Form.create(req.body)
+        res.json({msg:'Form was created successfully ', data: newForm})}
+        catch(error){
+            console.log(error)
+        }
+        
+ })
+ 
+ //CREATE FORM BY INVESTOR
+ router.post('/investor/:id', async (req,res) => {
+   
+    try {
+      const investorId = req.params.id
+        var isValidated = validator.createValidation(req.body)
+          if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+          const reqBody=req.body
+          body: Object.assign(reqBody, {
+            investor:investorId,
+            formStatus:formEnum.formStatus.LAWYER
+          })
+        const newForm = await Form.create(req.body)
+        res.json({msg:'Form was created successfully ', data: newForm})}
+        catch(error){
+            console.log(error)
+        }
+        
+ })
+
 //GET BY Form ID
 router.get("/:id", async (req, res) => {
     try {
@@ -31,44 +72,6 @@ router.get("/:id", async (req, res) => {
         });
     }
 })
-
-//CREATE FORM BY LAWYER
-router.post('/lawyer/', async (req,res) => {
-   
-    try {
-        //const id = req.params.id
-        var isValidated = validator.createValidation(req.body)
-          if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-          const reqBody=req.body
-          body: Object.assign(reqBody, {
-            lawyerDecision:1,
-            formStatus:formEnum.formStatus.REVIEWER
-          })
-        const newForm = await Form.create(req.body)
-        res.json({msg:'Form was created successfully ', data: newForm})}
-        catch(error){
-            console.log(error)
-        }
-        
- })
-
- //CREATE FORM BY INVESTOR
- router.post('/investor/', async (req,res) => {
-   
-    try {
-        var isValidated = validator.createValidation(req.body)
-          if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-          const reqBody=req.body
-          body: Object.assign(reqBody, {
-            formStatus:formEnum.formStatus.LAWYER
-          })
-        const newForm = await Form.create(req.body)
-        res.json({msg:'Form was created successfully ', data: newForm})}
-        catch(error){
-            console.log(error)
-        }
-        
- })
 
 //UPDATE FORM BY ID
 router.put('/:id', async (req,res) => {
