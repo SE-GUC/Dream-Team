@@ -1,44 +1,138 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-
-
 const FormSchema = new Schema({
-   company_name: {
-       type: String,
-        required: false
+ companyName: {
+   type: String,
+   required: true
+ },
+ companyNameEng: {
+   type: String,
+   required: false
+ },
+ companyType: {
+   type: String,
+   required: false
+ },
+ headquarters: {
+   governorate: {
+     type: String,
+     required: true
    },
-   company_name_E : {
-       type: String,
-       required: false
+   city: {
+     type: String,
+     required: true
    },
-   headquarters: {
-       governorate:{type: String},
-       city:{type: String},
-       address:{type: String},
-       telephone:{type: String},
-       fax:{type:String}
+   address: {
+     type: String,
+     required: true
    },
-   financial_info: {
-       Currency:{type:String},
-       Capital:{type:Number}
+   telephone: {
+     type: String,
+     required: true
    },
-   Investor: {
-       type: Schema.Types.ObjectId,
-       ref: 'Investor'
-    //    required: true
+   fax: {
+     type: String,
+     required: true
    }
-//   , _type:{
-//          type: String,
-//        required: true
-//   }
-//  ,  Board :[{
-//        type:mongoose.Schema.Types.ObjectId,
-//        ref:'InvestorBoardMember'
-//    }]
+ },
+
+ // boardOfDirectors: {
+ //       name: {
+ //       type: String,
+ //       required: true
+ //       } ,
+ //       investorType  :{
+ //       type: String,
+ //       require: true
+ //       } ,
+ //       gender: {
+ //         type: String,
+ //         required: true
+ //       } ,
+ //       Nationality: {
+ //         type: String,
+ //         required: true
+ //       },
+ //       typeID: {
+ //         type: String,
+ //         required: true
+ //        },
+ //       numberID: {
+ //         type: Number,
+ //         required: true
+ //       },
+ //       dateOfBirth: {
+ //         type: Date,
+ //         required: true
+ //       },
+ //       titleinBoard: {
+ //         type: String,
+ //         required: true
+ //       }
+
+ // },
+
+
+ financialInfo: {
+   Currency: {
+     type: String
+
+   },
+   Capital: {
+     type: Number
+
+   }
+ },
+ investor: {
+   type: Schema.Types.ObjectId,
+   ref: 'Investor',
+   required: true
+ },
+ lawyer: {
+   type: Schema.Types.ObjectId,
+   ref: 'Lawyer'
+ },
+ lawyerComment: {
+   type: String,
+   required: false
+ },
+
+ lawyerDecision: {
+   type: Number,
+   required: false
+ },
+ reviewer: {
+   type: mongoose.Schema.Types.ObjectId,
+   ref: 'Reviewer'
+
+ },
+ reviwerComment: {
+   type: String
+
+ },
+ reviewerDecision: {
+   type: Number
+
+ },
+ dateOfApproval: {
+   type: Date
+
+ },
+ amountOfPayment: {
+   type: Double
+
+ },
+ dateOfPayment: {
+   type: String
+ },
+ paymentId: {
+   type: Number
+ },
+ formStatus: {
+   type: String
+ }
+
+
 })
-
-/*const SPCSchema = new Schema({
-
-})*/
 module.exports = Form = mongoose.model('Form', FormSchema);

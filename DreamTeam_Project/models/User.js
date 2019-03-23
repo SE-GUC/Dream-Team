@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const InvestorSchema= new Schema({
-   /*Person :{
-       type: mongoose.Schema.Type.ObjectId,
-       ref: 'Person',
-       required: true
-   }*/
+
+const userschema = new Schema({
    name: {
+       type: String,
+       required: true
+   },
+   accountType:{
        type: String,
        required: true
    },
@@ -14,54 +14,60 @@ const InvestorSchema= new Schema({
        type: String,
        required: true
    },
-   Nationality: {
+   nationality: {
        type: String,
        required: true
    },
-   ID_Type: {
+   typeID: {
        type: String,
        required: true
    },
-   ID_number: {
+   numberID: {
        type: Number,
        required: true
    },
-   Date_of_Birth: {
+   dateOfBirth: {
        type: Date,
        required: true
-   }
-   ,
-   Address: {
+   },
+
+   address: {
        type: String,
        required: true
    },
-    Phone_number: {
+    phoneNumber: {
        type: Number,
        required: true
    },
-   Fax_number: {
+   faxNumber: {
        type: Number,
        required: true
    },
-   Email: {
+   accountStatus: {
+       type: Boolean,
+       required: true
+   },
+
+   email: {
        type: String,
        required: true
    },
-   password:{
+   password: {
        type: String,
        required: true
    },
-   Investor_Type  :{
-           type: String,
-           require: true
-   } ,
-   Capital:{
-           type:Number,
-           require:true
-   } ,
-   Capital_Currency: {
-       type:String,
+   investorType  :{
+       type: String,
        require: true
+   } ,
+   capital:{
+       type:Number,
+       require:true
+   } ,
+   capitalCurrency: {
+   type:String,
+   require: true
    }
 })
-module.exports = Investor = mongoose.model('Investor', InvestorSchema);
+
+module.exports = user = mongoose.model('User', userschema);
