@@ -10,6 +10,14 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
+// i should be able to view all lawyers (story 3.6)
+router.get('/lawyer', async (req, res) => {
+    const users = await User.find({"accountType": "lawyer"})
+    res.json({
+        data: users
+    })
+})
+
 
 router.use(bodyParser.urlencoded({
     extended: false
