@@ -6,7 +6,7 @@ const User = require('../../models/User')
 const validator = require('../../validations/userValidations')
 const bcrypt = require('bcryptjs')
 
-const typesEnum = require ('../../enums/accountTypes')
+const typesEnum = require ('../../enums/accountType')
 
 //yomna
 mongoose.set('useNewUrlParser', true);
@@ -161,7 +161,7 @@ router.put('/:id', async (req, res) => {
         console.log(error)
     }
 })
-<<<<<<< HEAD
+
 //Admin approving an account
 router.put("/approve/:id", async (req, res) => {
     try {
