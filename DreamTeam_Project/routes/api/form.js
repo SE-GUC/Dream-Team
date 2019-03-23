@@ -121,7 +121,6 @@ router.delete('/:id', async (req,res) => {
         console.log(error)
     }  
 })
-<<<<<<< HEAD
 //to get undecided forms for lawyer or reviwer
 router.get('/undecidedForms/:loggedintype', async (req, res) => {
  const loggedintype = req.params.loggedintype
@@ -167,7 +166,6 @@ router.get("/formStatus/:loggedintype/:id", async (req, res) => {
  })
 
 });
-=======
 //Investor(Investor created form), lawyer(Investors' form forwarded to lawyer), Reviewer , Payment , Approved ENUM (FORM STATUS ENUM)
         //User Story 4.2 , investor vieweing pending companies
         router.get('/pending/:id', async (req, res) => {
@@ -189,6 +187,4 @@ router.get("/formStatus/:loggedintype/:id", async (req, res) => {
 
 })
      
->>>>>>> Dev
-
 module.exports = router
