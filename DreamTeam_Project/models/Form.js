@@ -37,11 +37,11 @@ const FormSchema = new Schema({
     }
   },
   financialInfo: {
-    Currency: {
+    currency: {
       type: String ,
       required: true
     },
-    Capital: {
+    capital: {
       type: Number
       //required: true
     }

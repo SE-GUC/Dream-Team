@@ -16,15 +16,13 @@ module.exports = {
             financialInfo:{
               currency:Joi.string().min(3).max(300).required(),
               capital:Joi.when(request.formType,
-                {is : 'SSC', 
+                {is : 'SSC',
                 then: Joi.number().min(50000).required(),
-                otherwise : Joi.when(request.investor.nationality,{
-                    is:'Egyptian',
-                    then:Joi.number(),
-                    otherwise:Joi.number().min(100000)
-                }
-                   )
+                otherwise :Joi.number().min(100000)
+  
                 })},
+            entityType:Joi.string().required(),
+            regulatedLaw:Joi.string().required(),
                 //  otherwise : Joi.number().min(10000)})},
             lawyerDecision:Joi.number(),
             reviwerComment:Joi.string().min(4).max(100),
