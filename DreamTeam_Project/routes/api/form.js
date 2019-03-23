@@ -14,8 +14,27 @@ router.get('/', async (req,res) => {
 })
 
  //CREATE FORM BY LAWYER
-router.post('/lawyer/:id', async (req,res) => {
+// router.post('/lawyer/:id', async (req,res) => {
    
+router.get("/:id", async (req, res) => {
+    try {
+        const id = req.params.id
+        const form = await Form.findById(id);
+        if (!form)
+            return res.status(404).send({
+                error: "This Form does not exist"
+            });
+        res.json({
+            data: form
+        });
+    } catch (err) {
+        res.json({
+            msg: err.message
+        });
+    }
+})
+//CREATE (waiting for Validation)
+router.post('/', async (req, res) => {
     try {
         const lawyerId = req.params.id
         var isValidated = validator.createValidation(req.body)

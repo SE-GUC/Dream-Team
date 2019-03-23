@@ -4,47 +4,55 @@ const BoardofdirectorsSchema= require('../models/Boardofdirectors');
 const FormSchema = new Schema({
   companyName: {
     type: String,
-    //required: true
+    required: true
   },
   companyNameEng: {
-    type: String,
+    type: String
     //required: false
   },
   companyType: {
-    type: String,
+    type: String
    // required: false
   },
   headquarters: {
     governorate: {
       type: String,
-     // required: true
+      required: true
     },
     city: {
       type: String,
-      //required: true
+      required: true
     },
     address: {
       type: String,
-      //required: true
+      required: true
     },
     telephone: {
-      type: String,
+      type: String
       //required: true
     },
     fax: {
-      type: String,
+      type: String
      // required: true
     }
   },
   financialInfo: {
     Currency: {
-      type: String
-     
+      type: String ,
+      required: true
     },
     Capital: {
       type: Number
-     
+      //required: true
     }
+  },
+  entityType: {
+    type: String ,
+    required: true
+  },
+  regulatedLaw: {
+    type: String ,
+    required: true
   },
  investor: {
     type: Schema.Types.ObjectId,
@@ -56,12 +64,12 @@ const FormSchema = new Schema({
     ref: 'User'
   },
   lawyerComment: {
-    type: String,
+    type: String
     //required: false
   },
 
   lawyerDecision: {
-    tyzzpe: Number,
+    type: Number
     //required: false
   },
   reviewer: {

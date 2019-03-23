@@ -6,8 +6,11 @@ const User = require('../../models/User')
 const validator = require('../../validations/userValidations')
 const bcrypt = require('bcryptjs')
 //yomna
-mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+
+
 router.use(bodyParser.urlencoded({
     extended: false
 }))
@@ -32,7 +35,7 @@ router.get("/:id", async (req, res) => {
     } catch (err) {
         res.json({
             msg: err.message
-        });
+        }   );
     }
 });
 
@@ -87,17 +90,23 @@ router.post('/', async (req,res) => {
 router.put('/:id', async (req, res) => {
     try {
         const id = req.params.id
-        const law = await Admin.find({
+        const law = await User.find({
             id
         })
         if (!law) return res.status(404).send({
             error: 'Admin does not exist'
         })
-        // const isValidated = validator.updateValidation(req.body)
-        //if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-        const updatedAdm = await Admin.findByIdAndUpdate(id, req.body)
+        if(req.body.accountType==='investor')
+        var isValidated = validator.updateInvestorValidation(req.body)
+        else if(req.body.accountType==='lawyer')
+        var isValidated = validator.updateLawyerValidation(req.body)
+        else if(req.body.accountType==='reviewer')
+        var isValidated = validator.updateReviewerValidation(req.body)
+        else if(req.body.accountType==='admin')
+        var isValidated = validator.updateAdminValidation(req.body)
+        const updatedUser = await User.findByIdAndUpdate(id, req.body)
         res.json({
-            msg: 'Admin updated successfully'
+            msg: 'User updated successfully'
         })
     } catch (error) {
         // We will be handling the error later
