@@ -14,7 +14,7 @@ router.use(bodyParser.urlencoded({
 //Get all users
 router.get("/", async (req, res) => {
     const users = await User.find();
-    res.json({ data: user });
+    res.json({ data: users });
   });
 
 //GET BY USER ID
