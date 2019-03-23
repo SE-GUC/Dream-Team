@@ -243,6 +243,48 @@ router.put("/:idform/:idlawyer", async (req, res) => {
 
 });
 
+//As a Lawyer I should view all forms that I have approved/rejected
+router.get("/lawyer/:id", async (req, res) => 
+{
+   const id = req.params.id
+   const user = await User.findById(id);
+       if (!user)
+           return res.status(404).send({
+               error: "This User does not exist"
+           })
+    // const lawyerForm1 = await Form.findById(id,{"lawyerDecision": 1}) 
+    // const lawyerForm2 = await Form.findById(id, {"lawyerDecision": -1 })
+    const lawyers = await Form.find({"lawyer":id})       
+  
+       res.json({ data: lawyers })
+    
+})
+//As a Lawyer i should be able to accept or reject applications
+router.put('/lawyer/:lawyerId/accept/:id',async(req,res)=>{
+  const id = req.params.id
+  const lawyerId = req.params.id
+  const lawyer = await Form.findById(lawyerId)
+      if(!lawyer) 
+          return res.status(404).send({error: 'lawyer does not exist'})
+      const form = await Form.findById(id)
+      if(!form) 
+          return res.status(404).send({error: 'Form does not exist'})
+      await Form.findByIdAndUpdate(id,{formStatus:formEnum.formStatus.REVIEWER})
+      await Form.findByIdAndUpdate(id,{lawyerDecision:1})
+      res.json({msg: 'Form status is updated successfully'})
+
+})
+router.put('/lawyer/reject/:id',async(req,res)=>{
+  const id = req.params.id
+      const form = await Form.findById(id)
+      if(!form) 
+          return res.status(404).send({error: 'Form does not exist'})
+      await Form.findByIdAndUpdate(id,{formStatus:formEnum.formStatus.INVESTOR})
+      await Form.findByIdAndUpdate(id,{lawyerDecision:-1})
+      res.json({msg: 'Form status is updated successfully'})
+})
+
+
 //Investor(Investor created form), lawyer(Investors' form forwarded to lawyer), Reviewer , Payment , Approved ENUM (FORM STATUS ENUM)
         //User Story 4.2 , investor vieweing pending companies
         router.get('/pending/:id', async (req, res) => {
