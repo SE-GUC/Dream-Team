@@ -5,7 +5,7 @@ const User = require("../../models/User")
 const Form = require('../../models/Form')
 const formEnum=require('../../enums/formStatus')
 const validator = require('../../validations/formValidations')
-const typesEnum=require('../../enums/accountTypes')
+const typesEnum=require('../../enums/accountType')
 
 //READ ALL FORMS
 router.get('/', async (req,res) => {
