@@ -20,6 +20,15 @@ router.get("/", async (req, res) => {
     res.json({ data: users });
   });
 
+//3.4-As an admin I should be able to view all investors
+
+  router.get('/investor', async (req, res) => {
+    const users = await User.find({"accountType": "investor"})
+    res.json({
+        data: users
+    })
+})
+
 //GET BY USER ID
 router.get("/:id", async (req, res) => {
     try {
