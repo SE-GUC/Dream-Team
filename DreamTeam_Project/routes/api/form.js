@@ -14,6 +14,7 @@ router.get('/', async (req,res) => {
 })
 //As a reviewer i should be able to accept or reject applications  and add a comment to be viewed by lawyer when reviewer rejects the form
  // we merged 6.2 and 6.3 to be more efficient
+ 
  router.put('/reviewer/accept/:idform/:idrev',async(req,res)=>{
     const idform = req.params.idform
     const idrev = req.params.idrev
