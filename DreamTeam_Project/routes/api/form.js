@@ -130,6 +130,17 @@ router.delete('/:id', async (req,res) => {
            data: forms
        })
       })
+       //User Story 4.3, investor vieweing running companies
+       router.get('/running/:id', async (req, res) => {
+        
+        const id = req.params.id
+        const forms= await Form.find({investor:id, formStatus:formEnum.formStatus.APPROVED })
+          res.json({
+            data: forms
+        })
+       
+
+})
      
 
 module.exports = router
