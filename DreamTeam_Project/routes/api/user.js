@@ -38,6 +38,25 @@ router.get('/reviewer', async (req, res) => {
     })
 })
 
+//4.1-As an Investor I should be able to track request/case status
+
+router.get('/trackRequest/:id', async (req, res) => {
+    try{ const id = req.params.id
+     const form = await Form.find({"investor": id})
+
+      if (!form)
+             return res.status(404).send({
+                 error: "This form does not exist"
+             });
+         res.json({
+             data: form
+         });
+     } catch (err) {
+         res.json({
+             msg: err.message
+         });
+     }
+ });
 //GET BY USER ID
 router.get("/:id", async (req, res) => {
     try {
