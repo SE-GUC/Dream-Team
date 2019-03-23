@@ -5,10 +5,9 @@ var bodyParser = require('body-parser');
 const User = require('../../models/User')
 const validator = require('../../validations/userValidations')
 const bcrypt = require('bcryptjs')
-<<<<<<< HEAD
+
 const typesEnum = require ('../../enums/accountTypes')
-=======
->>>>>>> a370b59de4395f8f9351c4d529cb55c31252e9f1
+
 //yomna
 mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
