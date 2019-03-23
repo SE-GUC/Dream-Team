@@ -1,44 +1,100 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-
-
-
+const BoardofdirectorsSchema= require('../models/Boardofdirectors');
 const FormSchema = new Schema({
-   company_name: {
-       type: String,
-        required: false
-   },
-   company_name_E : {
-       type: String,
-       required: false
-   },
-   headquarters: {
-       governorate:{type: String},
-       city:{type: String},
-       address:{type: String},
-       telephone:{type: String},
-       fax:{type:String}
-   },
-   financial_info: {
-       Currency:{type:String},
-       Capital:{type:Number}
-   },
-   Investor: {
-       type: Schema.Types.ObjectId,
-       ref: 'Investor'
-    //    required: true
-   }
-//   , _type:{
-//          type: String,
-//        required: true
-//   }
-//  ,  Board :[{
-//        type:mongoose.Schema.Types.ObjectId,
-//        ref:'InvestorBoardMember'
-//    }]
+  companyName: {
+    type: String,
+    //required: true
+  },
+  companyNameEng: {
+    type: String,
+    //required: false
+  },
+  companyType: {
+    type: String,
+   // required: false
+  },
+  headquarters: {
+    governorate: {
+      type: String,
+     // required: true
+    },
+    city: {
+      type: String,
+      //required: true
+    },
+    address: {
+      type: String,
+      //required: true
+    },
+    telephone: {
+      type: String,
+      //required: true
+    },
+    fax: {
+      type: String,
+     // required: true
+    }
+  },
+  financialInfo: {
+    Currency: {
+      type: String
+     
+    },
+    Capital: {
+      type: Number
+     
+    }
+  },
+ investor: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  lawyer: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  lawyerComment: {
+    type: String,
+    //required: false
+  },
+
+  lawyerDecision: {
+    tyzzpe: Number,
+    //required: false
+  },
+  reviewer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+   
+  },
+  reviwerComment: {
+    type: String
+   
+  },
+  reviewerDecision: {
+    type: Number
+   
+  },
+  dateOfApproval: {
+    type: Date
+   
+  },
+  amountOfPayment: {
+    type: Number
+   
+  },
+  dateOfPayment: {
+    type: String
+  },
+  paymentId: {
+    type: Number
+  },
+  formStatus: {
+    type: String
+  },
+
+  board:[BoardofdirectorsSchema]
 })
-
-/*const SPCSchema = new Schema({
-
-})*/
 module.exports = Form = mongoose.model('Form', FormSchema);
