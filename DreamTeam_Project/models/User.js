@@ -56,6 +56,10 @@ const userschema = new Schema({
        type: String,
        required: true
    },
+   rejectionMessage: {
+    type: String,
+    default : false
+},
    investorType  :{
        type: String
       // require: true
