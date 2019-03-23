@@ -5,13 +5,17 @@ var bodyParser = require('body-parser');
 const User = require('../../models/User')
 const validator = require('../../validations/userValidations')
 const bcrypt = require('bcryptjs')
-
+//yomna
 mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
 router.use(bodyParser.urlencoded({
     extended: false
 }))
-
+//Get all users
+router.get("/", async (req, res) => {
+    const users = await User.find();
+    res.json({ data: users });
+  });
 
 //GET BY USER ID
 router.get("/:id", async (req, res) => {
