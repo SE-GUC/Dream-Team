@@ -155,6 +155,9 @@ router.delete('/:id', async (req,res) => {
 })
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e87278788df554ccf14af2f4f07006adb4fa2423
 //to get undecided forms for lawyer or reviwer
 router.get('/undecidedForms/:loggedintype', async (req, res) => {
  const loggedintype = req.params.loggedintype
@@ -200,6 +203,7 @@ router.get("/formStatus/:loggedintype/:id", async (req, res) => {
  })
 
 });
+<<<<<<< HEAD
 =======
 =======
 // 6.3 As a reviewer I should view all forms that I have approved/rejected
@@ -244,6 +248,8 @@ router.put("/:idform/:idlawyer", async (req, res) => {
 
 });
 >>>>>>> Dev
+=======
+>>>>>>> e87278788df554ccf14af2f4f07006adb4fa2423
 //Investor(Investor created form), lawyer(Investors' form forwarded to lawyer), Reviewer , Payment , Approved ENUM (FORM STATUS ENUM)
         //User Story 4.2 , investor vieweing pending companies
         router.get('/pending/:id', async (req, res) => {
@@ -265,6 +271,7 @@ router.put("/:idform/:idlawyer", async (req, res) => {
 
 })
      
+<<<<<<< HEAD
 >>>>>>> Dev
 
 // Sprint 2 User Story 2.2
@@ -572,3 +579,6 @@ var SSC = [
 
 
 module.exports = router
+=======
+module.exports = router
+>>>>>>> e87278788df554ccf14af2f4f07006adb4fa2423
