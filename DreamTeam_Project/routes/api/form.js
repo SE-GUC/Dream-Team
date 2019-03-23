@@ -387,8 +387,15 @@ var SSC = [
     response.send(SSCandSPC);
   });
   
+
+  //Sprint 2 2.1
  
-  
+  router.get("/publishedcompanies", async (req, res) => {
+    const form = await Form.find({ formStatus: { $nin: [false] } });
+    res.json({
+      data: form
+    });
+  });
 
 
 
