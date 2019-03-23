@@ -13,9 +13,6 @@ router.use(bodyParser.urlencoded({
 }))
 
 
-
-
-
 //GET BY USER ID
 router.get("/:id", async (req, res) => {
     try {
@@ -82,8 +79,7 @@ router.post('/', async (req,res) => {
 })
 
 
-
-// Update an admin's info
+// UPDATE USER INFO
 router.put('/:id', async (req, res) => {
     try {
         const id = req.params.id
@@ -105,7 +101,8 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-//DELETE USER
+
+//DELETE USER BY ID
 router.delete("/:id", async (req, res) => {
     try {
         const id = req.params.id
@@ -119,7 +116,7 @@ router.delete("/:id", async (req, res) => {
             msg: error.message
         });
     }
-}) // read all
+})
 
 
 module.exports = router
