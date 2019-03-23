@@ -45,7 +45,7 @@ const userschema = new Schema({
    },
    accountStatus: {
        type: Boolean,
-       required: true
+       default : false
    },
 
    email: {
