@@ -12,12 +12,10 @@ router.get('/', async (req,res) => {
     const form = await Form.find()
     res.json({data: form})
 })
-<<<<<<< HEAD
 
  //CREATE FORM BY LAWYER
-router.post('/lawyer/:id', async (req,res) => {
+// router.post('/lawyer/:id', async (req,res) => {
    
-=======
 router.get("/:id", async (req, res) => {
     try {
         const id = req.params.id
@@ -37,7 +35,6 @@ router.get("/:id", async (req, res) => {
 })
 //CREATE (waiting for Validation)
 router.post('/', async (req, res) => {
->>>>>>> 8aba814dcba11a88e9e9bf3e545e8cb8aecbef1a
     try {
         const lawyerId = req.params.id
         var isValidated = validator.createValidation(req.body)
