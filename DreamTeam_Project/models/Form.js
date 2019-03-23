@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-
+const BoardofdirectorsSchema= require('../models/Boardofdirectors');
 const FormSchema = new Schema({
  companyName: {
    type: String,
@@ -131,8 +131,8 @@ const FormSchema = new Schema({
  },
  formStatus: {
    type: String
- }
+ },
 
-
+ board:[BoardofdirectorsSchema]
 })
 module.exports = Form = mongoose.model('Form', FormSchema);
