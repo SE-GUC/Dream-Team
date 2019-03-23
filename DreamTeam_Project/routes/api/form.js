@@ -11,7 +11,23 @@ router.get('/', async (req, res) => {
         data: form
     })
 })
-
+router.get("/:id", async (req, res) => {
+    try {
+        const id = req.params.id
+        const form = await Form.findById(id);
+        if (!form)
+            return res.status(404).send({
+                error: "This Form does not exist"
+            });
+        res.json({
+            data: form
+        });
+    } catch (err) {
+        res.json({
+            msg: err.message
+        });
+    }
+})
 //CREATE (waiting for Validation)
 router.post('/', async (req, res) => {
     try {
