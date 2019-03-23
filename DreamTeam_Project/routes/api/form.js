@@ -12,7 +12,39 @@ router.get('/', async (req,res) => {
     const form = await Form.find()
     res.json({data: form})
 })
-
+//As a reviewer i should be able to accept or reject applications  and add a comment to be viewed by lawyer when reviewer rejects the form
+ // we merged 6.2 and 6.3 to be more efficient
+ router.put('/reviewer/accept/:idform/:idrev',async(req,res)=>{
+    const idform = req.params.idform
+    const idrev = req.params.idrev
+        const form = await Form.findById(idform)
+        if(!form) 
+            return res.status(404).send({error: 'Form does not exist'})
+        if(idrev==form.reviewer) {  
+        await Form.findByIdAndUpdate(idform,{formStatus:formEnum.formStatus.PAYMENT})
+        await Form.findByIdAndUpdate(idform,{reviewerDecision:1})}
+        else{
+          res.json({msg: 'not the same reviewer'})
+        }
+         
+        res.json({msg: 'Form status is updated successfully'})
+  
+  })
+  router.put('/reviewer/reject/:idform/:idrev',async(req,res)=>{
+        const idform = req.params.idform
+        const idrev = req.params.idrev
+        const form = await Form.findById(idform)
+        if(!form) 
+            return res.status(404).send({error: 'Form does not exist'})
+            if(form.reviewer==idrev){
+        await Form.findByIdAndUpdate(idform,{formStatus:formEnum.formStatus.LAWYER})
+        await Form.findByIdAndUpdate(idform,{reviewerDecision:-1,reviwerComment:req.body.reviwerComment})}
+        else{
+          res.json({msg: 'not the same reviewer'})
+        }
+        res.json({msg: 'Form status is updated successfully'})
+  
+  })  
  //CREATE FORM BY LAWYER
 // router.post('/lawyer/:id', async (req,res) => {
    
