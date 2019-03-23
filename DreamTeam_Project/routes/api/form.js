@@ -121,5 +121,50 @@ router.delete('/:id', async (req,res) => {
         console.log(error)
     }  
 })
+//to get undecided forms for lawyer or reviwer
+router.get('/undecidedForms/:loggedintype', async (req, res) => {
+ const loggedintype = req.params.loggedintype
+
+ if(loggedintype===typesEnum.accountTypes.LAWYER){
+   var forms = await Form.find({"lawyerDecision": 0 })
+   res.json({
+     data: forms
+   })
+ }
+ else if(loggedintype===typesEnum.accountTypes.REVIEWER){
+   var forms = await Form.find({"reviewerDecision": 0 })
+   res.json({
+     data: forms
+   })
+ }
+
+
+
+else return res.status(404).send({
+ error: "you are not allowed to perform the requested operation"
+})})
+
+//to get form status for any lawyer or reviewer or admin or specific investor to track his forms
+router.get("/formStatus/:loggedintype/:id", async (req, res) => {
+ const loggedintype = req.params.loggedintype
+ const id = req.params.id
+
+ if(loggedintype===typesEnum.accountTypes.INVESTOR){
+   var forms = await Form.find({"investor": id })
+   res.json({
+     data: forms
+   })
+ }
+ else if(loggedintype===typesEnum.accountTypes.REVIEWER||loggedintype===typesEnum.accountTypes.LAWYER||loggedintype===typesEnum.accountTypes.ADMIN){
+   const forms = await Form.find();
+   res.json({
+     data: forms
+   })
+ }
+ else return res.status(404).send({
+   error: "you are not allowed to perform the requested operation"
+ })
+
+});
 
 module.exports = router
