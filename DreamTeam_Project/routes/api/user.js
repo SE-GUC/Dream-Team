@@ -20,6 +20,43 @@ router.get("/", async (req, res) => {
     res.json({ data: users });
   });
 
+//3.4-As an admin I should be able to view all investors
+
+  router.get('/investor', async (req, res) => {
+    const users = await User.find({"accountType": "investor"})
+    res.json({
+        data: users
+    })
+})
+
+//3.7-As an admin I should be able to view all reviewers
+
+router.get('/reviewer', async (req, res) => {
+    const users = await User.find({"accountType": "reviewer"})
+    res.json({
+        data: users
+    })
+})
+
+//4.1-As an Investor I should be able to track request/case status
+
+router.get('/trackRequest/:id', async (req, res) => {
+    try{ const id = req.params.id
+     const form = await Form.find({"investor": id})
+
+      if (!form)
+             return res.status(404).send({
+                 error: "This form does not exist"
+             });
+         res.json({
+             data: form
+         });
+     } catch (err) {
+         res.json({
+             msg: err.message
+         });
+     }
+ });
 //GET BY USER ID
 router.get("/:id", async (req, res) => {
     try {
