@@ -121,5 +121,26 @@ router.delete('/:id', async (req,res) => {
         console.log(error)
     }  
 })
+//Investor(Investor created form), lawyer(Investors' form forwarded to lawyer), Reviewer , Payment , Approved ENUM (FORM STATUS ENUM)
+        //User Story 4.2 , investor vieweing pending companies
+        router.get('/pending/:id', async (req, res) => {
+            const id = req.params.id
+            const forms =await Form.find({investor:id, formStatus: {$ne:formEnum.formStatus.APPROVED}})
+               res.json({
+           data: forms
+       })
+      })
+       //User Story 4.3, investor vieweing running companies
+       router.get('/running/:id', async (req, res) => {
+        
+        const id = req.params.id
+        const forms= await Form.find({investor:id, formStatus:formEnum.formStatus.APPROVED })
+          res.json({
+            data: forms
+        })
+       
+
+})
+     
 
 module.exports = router
