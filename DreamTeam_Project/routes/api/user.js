@@ -130,6 +130,19 @@ router.delete("/:id", async (req, res) => {
         });
     }
 })
-
+router.put('/sendRejectionmsg/:id', async (req,res) => {
+    try {
+     const id = req.params.id
+     const user = await User.find({accountStatus:false},{_id:id} );
+     if(!user) return res.status(404).send({error: 'user does not exist'})
+     const updateduser = await User.findByIdAndUpdate(id,req.body)
+     res.json({msg: 'user updated successfully'})
+    }
+    catch(error) {
+        // We will be handling the error later
+        console.log(error)
+    }
+ 
+  })
 
 module.exports = router
