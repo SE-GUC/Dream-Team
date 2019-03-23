@@ -5,31 +5,40 @@ const BoardofdirectorsSchema = new Schema({
 
     name: {
         type: String,
-        //required: true
+        required: true
     },
     gender: {
         type: String,
-        //required: true
+        required: true
     },
     investorType: {
         type: String,
-        //required: true
+        required: true
+    },
+    nationality: {
+        type: String,
+        required: true
     },
     idType:{
-
-        type:String
+        type:String,
+        required: true
     },
     id:{
-        type:String
+        type:String,
+        required: true
     },
-    date:{
-        type:String
+    dateOfBirth:{
+        type:Date,
+        required: true
     },
     address:{
-        type:String
+        type:String,
+        required: true
     },
+    //enum for director role
     title:{
-        type:String
+        type:String ,
+        required: true
     }
 
     
