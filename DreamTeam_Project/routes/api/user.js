@@ -179,8 +179,7 @@ router.put("/reject/:id", async (req, res) => {
         });
     }
 });
-=======
->>>>>>> a370b59de4395f8f9351c4d529cb55c31252e9f1
+
 
 
 //DELETE USER BY ID
