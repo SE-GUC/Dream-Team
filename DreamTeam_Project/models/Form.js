@@ -1,109 +1,100 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const BoardofdirectorsSchema = require('../models/Boardofdirectors');
+const BoardofdirectorsSchema= require('../models/Boardofdirectors');
 const FormSchema = new Schema({
   companyName: {
     type: String,
-    required: true
+    //required: true
   },
-
   companyNameEng: {
     type: String,
-    required: false
+    //required: false
   },
-
   companyType: {
     type: String,
-    required: false
+   // required: false
   },
-
   headquarters: {
     governorate: {
       type: String,
-      required: true
+     // required: true
     },
     city: {
       type: String,
-      required: true
+      //required: true
     },
     address: {
       type: String,
-      required: true
+      //required: true
     },
     telephone: {
       type: String,
-      required: true
+      //required: true
     },
     fax: {
       type: String,
-      required: true
+     // required: true
     }
   },
-
   financialInfo: {
     Currency: {
       type: String
+     
     },
     Capital: {
       type: Number
+     
     }
   },
-
-  investor: {
+ investor: {
     type: Schema.Types.ObjectId,
-    ref: 'Investor',
+    ref: 'User',
     required: true
   },
-
   lawyer: {
     type: Schema.Types.ObjectId,
-    ref: 'Lawyer'
+    ref: 'User'
   },
-
   lawyerComment: {
     type: String,
-    required: false
+    //required: false
   },
 
   lawyerDecision: {
-    type: Number,
-    required: false
+    tyzzpe: Number,
+    //required: false
   },
-
   reviewer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Reviewer'
+    ref: 'User'
+   
   },
-
   reviwerComment: {
     type: String
+   
   },
-
   reviewerDecision: {
     type: Number
+   
   },
-
   dateOfApproval: {
     type: Date
+   
   },
-
   amountOfPayment: {
-    type: Double
+    type: Number
+   
   },
-
   dateOfPayment: {
     type: String
   },
-
   paymentId: {
     type: Number
   },
-  
   formStatus: {
     type: String
   },
 
-  board: [BoardofdirectorsSchema]
-  
+  board:[BoardofdirectorsSchema]
 })
 module.exports = Form = mongoose.model('Form', FormSchema);
