@@ -7,14 +7,14 @@ const formEnum=require('../../enums/formStatus')
 const validator = require('../../validations/formValidations')
 const typesEnum=require('../../enums/accountType')
 
-//READ ALL FORMS
+//I should be able to read all Forms
 router.get('/', async (req,res) => {
     const form = await Form.find()
     res.json({data: form})
 })
-//As a reviewer i should be able to accept or reject applications  and add a comment to be viewed by lawyer when reviewer rejects the form
+
  // we merged 6.2 and 6.3 to be more efficient
- 
+ //As a reviewer i should be able to accept applications  and add a comment to be viewed by lawyer when reviewer rejects the form
  router.put('/reviewer/accept/:idform/:idrev',async(req,res)=>{
     const idform = req.params.idform
     const idrev = req.params.idrev
@@ -31,6 +31,8 @@ router.get('/', async (req,res) => {
         res.json({msg: 'Form status is updated successfully'})
   
   })
+
+  //As a reviewer i should be able to reject applications  and add a comment to be viewed by lawyer when reviewer rejects the form
   router.put('/reviewer/reject/:idform/:idrev',async(req,res)=>{
         const idform = req.params.idform
         const idrev = req.params.idrev
@@ -46,27 +48,9 @@ router.get('/', async (req,res) => {
         res.json({msg: 'Form status is updated successfully'})
   
   })  
- //CREATE FORM BY LAWYER
-// router.post('/lawyer/:id', async (req,res) => {
-   
-router.get("/:id", async (req, res) => {
-    try {
-        const id = req.params.id
-        const form = await Form.findById(id);
-        if (!form)
-            return res.status(404).send({
-                error: "This Form does not exist"
-            });
-        res.json({
-            data: form
-        });
-    } catch (err) {
-        res.json({
-            msg: err.message
-        });
-    }
-})
-//CREATE 
+
+
+//As A Lawyer I should be able to fill in a Form
 router.post('/lawyer/:id', async (req,res) => {
    
     try {
@@ -86,6 +70,8 @@ router.post('/lawyer/:id', async (req,res) => {
         }
         
  })
+
+ //As an Investor I should be able to fill in a Form
  router.post('/investor/:id', async (req,res) => {
    
     try {
@@ -105,26 +91,28 @@ router.post('/lawyer/:id', async (req,res) => {
         
  })
 
-//GET BY Form ID
+   // I should be able to Read forms by ID 
 router.get("/:id", async (req, res) => {
-    try {
-        const id = req.params.id
-        const form = await Form.findById(id);
-        if (!form)
-            return res.status(404).send({
-                error: "This Form does not exist"
-            });
-        res.json({
-            data: form
-        });
-    } catch (err) {
-        res.json({
-            msg: err.message
-        });
-    }
+  try {
+      const id = req.params.id
+      const form = await Form.findById(id);
+      if (!form)
+          return res.status(404).send({
+              error: "This Form does not exist"
+          });
+      res.json({
+          data: form
+      });
+  } catch (err) {
+      res.json({
+          msg: err.message
+      });
+  }
 })
 
-//UPDATE FORM BY ID
+
+
+//I should be able to update a Form
 router.put('/:id', async (req,res) => {
         try {
          const id = req.params.id
@@ -143,7 +131,7 @@ router.put('/:id', async (req,res) => {
     })
     
 
-//DELETE FORM BY ID        
+//I should be able to delete a Form       
 router.delete('/:id', async (req,res) => {
     try {
     const id = req.params.id
@@ -156,7 +144,7 @@ router.delete('/:id', async (req,res) => {
     }  
 })
 
-//to get undecided forms for lawyer or reviwer
+//I should be able to get undecided forms for lawyer or reviwer
 router.get('/undecidedForms/:loggedintype', async (req, res) => {
  const loggedintype = req.params.loggedintype
 
@@ -179,7 +167,7 @@ else return res.status(404).send({
  error: "you are not allowed to perform the requested operation"
 })})
 
-//to get form status for any lawyer or reviewer or admin or specific investor to track his forms
+//As a lawyer or reviewer or admin I should be able to get form status for any or specific investor to track his forms
 router.get("/formStatus/:loggedintype/:id", async (req, res) => {
  const loggedintype = req.params.loggedintype
  const id = req.params.id
@@ -202,9 +190,9 @@ router.get("/formStatus/:loggedintype/:id", async (req, res) => {
 
 });
 
-// 6.3 As a reviewer I should view all forms that I have approved/rejected
+//As a reviewer I should view all forms that I have approved/rejected
 
-router.get("/:type/AR/:id", async (req, res) => 
+router.get("/reviewer/:type/AR/:id", async (req, res) => 
 {
    const type = req.params.type
    const id = req.params.id
@@ -223,8 +211,8 @@ router.get("/:type/AR/:id", async (req, res) =>
    
    
  });
-// 5.3 Add comment to Form by lawyer after rejection
-router.put("/:idform/:idlawyer", async (req, res) => {
+// As a lawyer I should be able to add comment to Form after rejection
+router.put("/lawyer/:idform/:idlawyer", async (req, res) => {
  
    const id = req.params.idform;
    const idlaw = req.params.idlawyer;
@@ -260,7 +248,7 @@ router.get("/lawyer/:id", async (req, res) =>
        res.json({ data: lawyers })
     
 })
-//As a Lawyer i should be able to accept or reject applications
+//As a Lawyer i should be able to accept applications
 router.put('/lawyer/:lawyerId/accept/:id',async(req,res)=>{
   const id = req.params.id
   const lawyerId = req.params.id
@@ -275,6 +263,8 @@ router.put('/lawyer/:lawyerId/accept/:id',async(req,res)=>{
       res.json({msg: 'Form status is updated successfully'})
 
 })
+
+//As a Lawyer i should be able to reject applications
 router.put('/lawyer/reject/:id',async(req,res)=>{
   const id = req.params.id
       const form = await Form.findById(id)
@@ -286,8 +276,8 @@ router.put('/lawyer/reject/:id',async(req,res)=>{
 })
 
 
-//Investor(Investor created form), lawyer(Investors' form forwarded to lawyer), Reviewer , Payment , Approved ENUM (FORM STATUS ENUM)
-        //User Story 4.2 , investor vieweing pending companies
+
+        //As an investor i should be able to view my pending companies
         router.get('/pending/:id', async (req, res) => {
             const id = req.params.id
             const forms =await Form.find({investor:id, formStatus: {$ne:formEnum.formStatus.APPROVED}})
@@ -295,7 +285,7 @@ router.put('/lawyer/reject/:id',async(req,res)=>{
            data: forms
        })
       })
-       //User Story 4.3, investor vieweing running companies
+       //As an Investor i should be able to view my running companies
        router.get('/running/:id', async (req, res) => {
         
         const id = req.params.id
@@ -307,7 +297,7 @@ router.put('/lawyer/reject/:id',async(req,res)=>{
 
 })
      
-// Sprint 2 User Story 2.2
+//As a User I should be able to view published company details
 var SSC = [
     ["قواعد التحقق", "اختیارات القائمة", "اجباري", "نوع الحقل", "اسم الحقل"],
     ["", "سیتم عرضهم من قاعدة البیانات", "نعم", "قائمة", "القانون المنظم"],
@@ -560,19 +550,19 @@ var SSC = [
     ["15", "The System should be available in Arabic and English"]
   ];
   //$("#DealerDiv").html("<h4>"+ SSCandSPC + "</h4>");
-  router.get("/SSC", (request, response) => {
+  router.get("/information/SSC", (request, response) => {
     response.send(SSC);
   });
   
-  router.get("/SPC", (request, response) => {
+  router.get("/information/SPC", (request, response) => {
     response.send(SPC);
   });
   
-  router.get("/SSCandSPC", (request, response) => {
+  router.get("/information/SSCandSPC", (request, response) => {
     response.send(SSCandSPC);
   });
   
-// Sprint 2 User Story 2.3
+//As a User I should be able to view fees Calculation Rules
   var feesCalculationRules = [
     ["Entity", "Law 159", "Law 72"],
     [
@@ -596,13 +586,12 @@ var SSC = [
       "610 جم مقسم إلى (100 إیرادات + 6دائنون)"
     ]
   ];
-  router.get("/feesCalculationRules", (request, response) => {
+  router.get("/information/feesCalculationRules", (request, response) => {
     response.send(feesCalculationRules);
   });
 
-  //Sprint 2 2.1
- 
-  router.get("/publishedcompanies", async (req, res) => {
+  //As a User I should be able to view all published companies
+  router.get("/companies/publishedcompanies", async (req, res) => {
     const form = await Form.find({ formStatus: { $nin: [false] } });
     res.json({
       data: form
