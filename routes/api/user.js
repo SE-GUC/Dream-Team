@@ -8,32 +8,32 @@ const bcrypt = require('bcryptjs')
 
 const typesEnum = require ('../../enums/accountType')
 
-//yomna
+
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
-// i should be able to view all lawyers (story 3.6)
-router.get('/lawyer', async (req, res) => {
+//3.6-Admin view all lawyers  
+router.get('/admin/getLawyer', async (req, res) => {
     const users = await User.find({"accountType": "lawyer"})
     res.json({
         data: users
     })
 })
 
-
+// configuration option that tells the parser to use the classic encoding 
 router.use(bodyParser.urlencoded({
     extended: false
 }))
-//Get all users
-router.get("/", async (req, res) => {
+
+//view all users
+router.get("/getUsers", async (req, res) => {
     const users = await User.find();
     res.json({ data: users });
   });
 
-//3.4-As an admin I should be able to view all investors
-
-  router.get('/investor', async (req, res) => {
+//3.4-Admin view all investors
+  router.get('/admin/viewinvestor', async (req, res) => {
     const users = await User.find({"accountType": "investor"})
     res.json({
         data: users
@@ -41,8 +41,7 @@ router.get("/", async (req, res) => {
 })
 
 //3.7-As an admin I should be able to view all reviewers
-
-router.get('/reviewer', async (req, res) => {
+router.get('/admin/getReviewer', async (req, res) => {
     const users = await User.find({"accountType": "reviewer"})
     res.json({
         data: users
@@ -50,8 +49,7 @@ router.get('/reviewer', async (req, res) => {
 })
 
 //4.1-As an Investor I should be able to track request/case status
-
-router.get('/trackRequest/:id', async (req, res) => {
+router.get('/investor/trackRequest/:id', async (req, res) => {
     try{ const id = req.params.id
      const form = await Form.find({"investor": id})
 
@@ -68,8 +66,9 @@ router.get('/trackRequest/:id', async (req, res) => {
          });
      }
  });
-//GET BY USER ID
-router.get("/:id", async (req, res) => {
+
+//get user by user id 
+router.get("/getUsers/:id", async (req, res) => {
     try {
         const id = req.params.id
         const user = await User.findById(id);
@@ -87,9 +86,8 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-
-//CREATE USER (M&M)
-router.post('/', async (req,res) => {
+// create user (reviewer/investor/admin/lawyer)
+router.post('/createUser', async (req,res) => {
     const {name, accountType , gender, nationality, typeID, numberID, dateOfBirth, address, phoneNumber,
     faxNumber, accountStatus, email, password, investorType,capital, capitalCurrency   }  = req.body
     const user = await User.findOne({email})
@@ -133,9 +131,8 @@ router.post('/', async (req,res) => {
     .catch(err => res.json({error: 'Can not create User'}))
 })
 
-
-// UPDATE USER INFO
-router.put('/:id', async (req, res) => {
+// UPDATE USER INFO by id
+router.put('/updateUser/:id', async (req, res) => {
     try {
         const id = req.params.id
         const law = await User.find({
@@ -163,7 +160,7 @@ router.put('/:id', async (req, res) => {
 })
 
 //Admin approving an account
-router.put("/approve/:id", async (req, res) => {
+router.put("/admin/approve/:id", async (req, res) => {
     try {
         const id = req.params.id
         const user = await User.findById(id);
@@ -190,7 +187,7 @@ router.put("/approve/:id", async (req, res) => {
 
 
 //admin viewing all entity employess
-    router.get("/rrr/employee", async (req, res) => {
+    router.get("/admin/employee", async (req, res) => {
     try{
  //   const admin = await User.find({"accountType": "admin"})
    const users= await User.find({accountType: {$ne: typesEnum.accountTypes.INVESTOR}})
@@ -209,8 +206,8 @@ catch(err){
  
  })
 
-//Admin rejecting an account
-router.put("/reject/:id", async (req, res) => {
+//As an Admin I should be able to Reject account
+router.put("/admin/reject/:id", async (req, res) => {
     try {
         const id = req.params.id
         const user = await User.findById(id);
@@ -234,8 +231,6 @@ router.put("/reject/:id", async (req, res) => {
     }
 });
 
-
-
 //DELETE USER BY ID
 router.delete("/:id", async (req, res) => {
     try {
@@ -251,7 +246,9 @@ router.delete("/:id", async (req, res) => {
         });
     }
 })
-router.put('/sendRejectionmsg/:id', async (req,res) => {
+
+//As an Admin I should be able to send message to rejected accounts
+router.put('/admin/sendRejectionMsg/:id', async (req,res) => {
     try {
      const id = req.params.id
      const user = await User.find({accountStatus:false},{_id:id} );
