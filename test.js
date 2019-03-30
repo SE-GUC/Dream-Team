@@ -61,7 +61,7 @@ const bodyParser = require('body-parser');
   test(`User's name should be YOMNA`,async () => {
     expect.assertions(1)
     const user =  await funcs.getUser()
-    const user1= user.bodyParser;
+    // const user1= user.bodyParser;
     console.log(user.data.name)
-    expect(user.data.name).toEqual('yomna')
+    expect(user.data.data[0].name).toEqual('yomna')
   });
