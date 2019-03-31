@@ -60,7 +60,7 @@ router.post('/createUser', async (req,res) => {
         investorType,
         capital,
         capitalCurrency
-
+       
         })
     newUser
     .save()
@@ -397,7 +397,6 @@ var SSC = [
       data: form
     });
   });
-
 
 
 module.exports = router
