@@ -41,6 +41,14 @@ const functions = {
         console.log(response)
         return response;
     },
+
+    getLawyerForm: async ()=>{
+        const lawyer=await axios.get('http://localhost:3000/api/lawyer/5ca10ccab7701f2158efbad1')
+        console.log(lawyer)
+        return lawyer
+    },
+
+
     getLawyer: async ()=>{
         const response = await axios.get('http://localhost:3000/api/admin/getLawyer',message)
         console.log(response)

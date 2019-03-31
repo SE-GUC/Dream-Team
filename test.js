@@ -71,4 +71,12 @@ const User = require('./models/User')
        
         expect(lawyer.data.data.lawyer).toEqual("5ca10ccab7701f2158efbad1")
     });
+
+    test(`Should test if the lawyer's forms equals lawyer entered `,async () => {
+      //expect.assertions(1)
+        const cases =  await funcs.getLawyerForm()
+    
+         console.log(cases)
+        
+        });
   
