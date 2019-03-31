@@ -79,6 +79,13 @@ const bodyParser = require('body-parser');
       expect(form.data.data.lawyer).toEqual( '5c94f8c7fe24291e38a3ae94')
       });
 
+      test(`should search on a specific field `,async ( ) => {
+        // expect.assertions(1)
+          const forms =  await funcs.getFormBySpeceficField()
+          
+        expect(forms.data.data[0].companyName).toEqual("My company")
+        });
+
 
    
 
