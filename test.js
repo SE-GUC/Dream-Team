@@ -44,3 +44,31 @@ const User = require('./models/User')
 
        expect(lawyerOfForm.data.data._id).toEqual("5ca11184911834593cc03510")
      });
+
+     test('lawyer accepting form',async ()=>{
+      expect.assertions(1)
+      const response =await funcs.lawyerAcceptForm();
+      console.log(response);
+      expect(response.data.msg).toEqual( 'form updated successfully')
+  
+    });
+  
+  
+    test('lawyer rejecting form',async ()=>{
+      expect.assertions(1)
+      const response =await funcs.lawyerRejectForm();
+      console.log(response);
+      expect(response.data.msg).toEqual( 'form updated successfully')
+  
+    });
+  
+  
+    test(`Should test if the lawyer's forms equals lawyer entered `,async () => {
+     // expect.assertions(1)
+        const lawyer =  await funcs.getLawyer()
+    
+         console.log(lawyer.data.data.lawyer)
+       
+        expect(lawyer.data.data.lawyer).toEqual("5ca10ccab7701f2158efbad1")
+    });
+  
