@@ -37,11 +37,11 @@ const functions = {
         console.log(form)
         return form
     },
-    // laywerUpdate: async () => {
-    //     // const message={gender:"wrong"}
-    //     const form = await axios.put('http://localhost:3000/api/internalPortal/lawyer/5ca10ccab7701f2158efbad1')
-    //     console.log(form)
-    //     return form
-    // }
+    laywerUpdate: async () => {
+        // const message={gender:"wrong"}
+        const form = await axios.put('http://localhost:3000/api/internalPortal/lawyer/5ca10ccab7701f2158efbad1')
+        console.log(form)
+        return form
+    }
 };
 module.exports = functions;

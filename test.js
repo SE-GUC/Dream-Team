@@ -95,12 +95,12 @@ const User = require('./models/User')
      },10000);
 
   // //User Story 6.7 Sprint 3
-  // test(`Should check field that i should update fees Calculation through  `,async () => {
-  //   expect.assertions(1)
-  //     const feesForms =  await funcs.getFormFees()
-  //     const fees =  await funcs.putFees()
-  //    expect(feesForms.data.data.feesCalculation).toEqual(fees.data.data.feesCalculation)
-  //   });
+  test(`Should check field that i should update fees Calculation through  `,async () => {
+    expect.assertions(1)
+      const feesForms =  await funcs.getFormFees()
+      const fees =  await funcs.putFees()
+     expect(feesForms.data.data.feesCalculation).toEqual(fees.data.data.feesCalculation)
+    });
      
   //User Story 6.7 Sprint 3
   test(`Should check field that i should update fees Calculation through  `,async () => {
