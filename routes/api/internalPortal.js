@@ -79,9 +79,10 @@ router.put('/lawyer/:id', async (req,res) => {
   try {
    const id = req.params.id
    const form = await Form.findById(id)
-   if(id==lawyer && investor==null ){
+   console.log(form)
+   if(id==form.lawyer ){
    if(!form) return res.status(404).send({error: 'Form does not exist'})
-   var isValidated = validator.updateValidation(req.body)
+   var isValidated = Formvalidator.updateValidation(req.body)
    if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
    const updatedForm = await Form.findByIdAndUpdate(id,req.body)
    res.json({msg: 'Form updated successfully'})

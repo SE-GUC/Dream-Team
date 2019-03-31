@@ -68,9 +68,11 @@ const User = require('./models/User')
   //      console.log(lawyerOfForm.data.data._id)
      
   //     expect(lawyerOfForm.data.data._id).toEqual("5ca0c1466a36eb47ec6db2a1")
-    });
+    // });
 
-    Sprint 2 user story 4.2
+
+
+    // Sprint 2 user story 4.2
     test(`Should test if running company of current investor is his running company `,async () => {
       expect.assertions(1)
        const runningcompanies =  await funcs.getrunningcompanies()
@@ -79,11 +81,11 @@ const User = require('./models/User')
      });
    //Sprint 2 user story 4.3
      test(`Should test if pending company of current investor is his pending company `,async () => {
-  //     expect.assertions(1)
-  //      const pendingcompanies =  await funcs.getpendingcompanies()
-  //      console.log(pendingcompanies.data.data[0].investor)
-  //      expect(pendingcompanies.data.data[0].investor).toEqual('5c92a43acf0719e94d1907a5')
-  //    });
+      expect.assertions(1)
+       const pendingcompanies =  await funcs.getpendingcompanies()
+       console.log(pendingcompanies.data.data[0].investor)
+       expect(pendingcompanies.data.data[0].investor).toEqual('5c92a43acf0719e94d1907a5')
+     });
   //Sprint 1 user story 5.4 
      test(`Should view my forms and checking if by id it gets right one  `,async () => {
      expect.assertions(1)
@@ -118,9 +120,9 @@ const User = require('./models/User')
 // test('adds 1 + 2 to be 3', () => {
 //   expect(funcs.add(1, 2)).toBe(3);
 // });
-afterEach(() => {
+// afterEach(() => {
   
-})
+// })
 // aftereach(()=>{
 
 // })

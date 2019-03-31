@@ -22,7 +22,10 @@ mongoose.set('useCreateIndex', true);
 router.use(bodyParser.urlencoded({
     extended: false
 }))
-
+router.get("/getUsers", async (req, res) => {
+  const users = await user.find();
+  res.json({ data: users });
+});
 // create user (reviewer/investor/admin/lawyer)
 router.post('/createUser', async (req,res) => {
     const {name, accountType , gender, nationality, typeID, numberID, dateOfBirth, address, phoneNumber,

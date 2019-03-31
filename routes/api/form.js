@@ -8,13 +8,11 @@ const validator = require('../../validations/formValidations')
 const typesEnum=require('../../enums/accountType')
 
 
-
 router.put('/feesCalculation/:id', async (req,res) => {
   try {
    const id = req.params.id
    const form = await Form.findById(id)
    if(form.reviewerDecision===1 ){
-    console.log("aya")
       if((form.entityType=="GAFI") && (form.regulatedLaw=="LAW159") ){
           var fees= form.financialInfo.capital
           var actualFees= (fees/1000)
@@ -49,7 +47,7 @@ router.put('/feesCalculation/:id', async (req,res) => {
     }
       // console.log(actualFees)
       if(!form) return res.status(404).send({error: 'Form does not exist'})
-   var isValidated = validator.updateValidation(req.body)
+   var isValidated = formValidator.updateValidation(req.body)
        if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
    const updatedForm = await Form.findByIdAndUpdate(id,{feesCalculation:actualFees})
    console.log(actualFees)
