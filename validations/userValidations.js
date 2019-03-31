@@ -5,7 +5,6 @@ module.exports = {
 
 
         const createSchema = {
-
             name: Joi.string().min(2).max(50).required(),
             //enum account type
             accountType: Joi.string().min(5).max(8).required(),
