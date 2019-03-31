@@ -102,6 +102,7 @@ let user1 = {
   //   expect(user.data.data.length).toBeGreaterThan(0)
   // });
 
+
   test(`lawyer comment`  ,async () => {
     expect.assertions(1)
     const message =  await funcs.sendMsg()
@@ -123,6 +124,27 @@ let user1 = {
 
  
   
+
+
+  
+  test(`Should test all users form status `,async () => {
+    expect.assertions(1)
+     const userStatus =  await funcs.userStatus()
+ 
+    //  console.log(reviewedForms.data.data[0].reviewerDecision)
+    
+     expect(userStatus.data.data[1]._id).toEqual("5c9f9ce82bc3d8aa3039f969")
+   });
+test(`Should test undecided forms for L&R `,async () => {
+    expect.assertions(2)
+     const undecided =  await funcs.LRundecidedForms()
+ 
+    //  console.log(reviewedForms.data.data[0].reviewerDecision)
+    
+     expect(undecided.data.data[0].lawyerDecision).toEqual(0),
+     expect(undecided.data.data[0]._id).toEqual("5c969a230db5b65ab05b2637")
+   });
+
 
   test(`get accepted users`,async () => {
     expect.assertions(1)

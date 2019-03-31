@@ -10,6 +10,7 @@ const functions = {
         return books;
     },
 
+
     assignReviewer: async () => {
         const form = await axios.put('http://localhost:3000/api/reviewer/reviewer/assign//5ca111505f1a5e6ea047740f/5ca11edf911834593cc03514')
         console.log(form)
@@ -26,6 +27,19 @@ const functions = {
         return reviewerDecidedForms
     },
  
+
+
+    userStatus: async () => {
+        const userStatus = await axios.get('http://localhost:3000/api/internalPortal/formStatus/investor/5c9d8481cf00d53f74c3737c')
+        console.log(userStatus)
+        return userStatus
+    },
+    LRundecidedForms: async () => {
+        const LRundecidedForms = await axios.get('http://localhost:3000/api/internalPortal/undecidedForms/lawyer')
+        console.log(LRundecidedForms)
+        return LRundecidedForms
+    }
+
 
     
     getLawyers: async () => {

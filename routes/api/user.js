@@ -84,6 +84,7 @@ router.get("/getUsers/:id", async (req, res) => {
     }
 });
 
+
 // create user (reviewer/investor/admin/lawyer)
 router.post('/createUser', async (req,res) => {
     const {name, accountType , gender, nationality, typeID, numberID, dateOfBirth, address, phoneNumber,
