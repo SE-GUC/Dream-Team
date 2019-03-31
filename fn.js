@@ -29,6 +29,22 @@ const functions = {
     lawyerViewForm :async()=>{
         const form = await axios.get('http://localhost:3000/api/lawyer/showForm/5ca11184911834593cc03510')
         return form
+    },
+
+    lawyerAcceptForm: async (message)=>{
+        const response = await axios.put('http://localhost:3000/api/lawyer/5ca10ccab7701f2158efbad1/accept/5ca11184911834593cc03510',message)
+        console.log(response)
+        return response;
+    },
+    lawyerRejectForm: async (message)=>{
+        const response = await axios.put('http://localhost:3000/api/lawyer/5ca10ccab7701f2158efbad1/reject/5ca11184911834593cc03510',message)
+        console.log(response)
+        return response;
+    },
+    getLawyer: async ()=>{
+        const response = await axios.get('http://localhost:3000/api/admin/getLawyer',message)
+        console.log(response)
+        return response;
     }
     
 
