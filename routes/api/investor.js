@@ -22,7 +22,20 @@ router.use(bodyParser.urlencoded({
     extended: false
 }))
 
-
+//As an investor , I should be able to view rejected apps and update them
+router.put("/investor/:idform/:idInvestor", async (req, res) => {
+ 
+    const id = req.params.idform;
+    const idinv = req.params.idInvestor;
+    const form = await Form.findById(id);
+    if (!form) return res.status(404).send({ error: "Form does not exist" });
+    var forms = await Form.findOne({"lawyerDecision": 0 ,"investor": idinv ,"_id":id}) 
+    if(forms){
+    const updatedForm = await Form.findOneAndUpdate({"lawyerDecision": 0,"investor": idinv ,"_id":id } ,req.body)
+    res.json({ msg: "Form updated successfully", data: updatedForm })}
+    else res.json({ msg: "form not rejected "});
+  
+  });
 
 //4.1-As an Investor I should be able to track request/case status
 router.get('/trackRequest/:id', async (req, res) => {
