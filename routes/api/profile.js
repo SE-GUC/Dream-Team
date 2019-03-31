@@ -50,7 +50,7 @@ router.put('/updateUser/:id', async (req, res) => {
 
 //get user by user id 
 //has to check the id is current user id
-router.get("/getUsers/:id", async (req, res) => {
+router.get('/getUsers/:id', async (req, res) => {
     try {
         const id = req.params.id
         const user = await User.findById(id);

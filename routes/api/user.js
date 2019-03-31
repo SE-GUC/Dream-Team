@@ -351,15 +351,15 @@ var SSC = [
   ];
   //$("#DealerDiv").html("<h4>"+ SSCandSPC + "</h4>");
 
-  router.get("/information/SSC", (request, response) => {
+  router.get('/information/SSC', (request, response) => {
     response.send(SSC);
   });
   
-  router.get("/information/SPC", (request, response) => {
+  router.get('/information/SPC', (request, response) => {
     response.send(SPC);
   });
   
-  router.get("/information/SSCandSPC", (request, response) => {
+  router.get('/information/SSCandSPC', (request, response) => {
     response.send(SSCandSPC);
   });
   
@@ -387,12 +387,12 @@ var SSC = [
       "610 جم مقسم إلى (100 إیرادات + 6دائنون)"
     ]
   ];
-  router.get("/information/feesCalculationRules", (request, response) => {
+  router.get('/information/feesCalculationRules', (request, response) => {
     response.send(feesCalculationRules);
   });
 
   //As a User I should be able to view all published companies
-  router.get("/companies/publishedcompanies", async (req, res) => {
+  router.get('/companies/publishedcompanies', async (req, res) => {
     const form = await Form.find({ formStatus: { $nin: [false] } });
     res.json({
       data: form

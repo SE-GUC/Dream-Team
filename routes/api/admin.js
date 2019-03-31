@@ -24,7 +24,7 @@ router.use(bodyParser.urlencoded({
 }))
 
 //3.6-Admin view all lawyers  
-router.get('/admin/getLawyer', async (req, res) => {
+router.get('/getLawyer', async (req, res) => {
     const users = await User.find({"accountType": "lawyer"})
     res.json({
         data: users
@@ -33,7 +33,7 @@ router.get('/admin/getLawyer', async (req, res) => {
 
 
 //3.4-Admin view all investors
-router.get('/admin/viewinvestor', async (req, res) => {
+router.get('/viewinvestor', async (req, res) => {
     const users = await User.find({"accountType": "investor"})
     res.json({
         data: users
@@ -41,7 +41,7 @@ router.get('/admin/viewinvestor', async (req, res) => {
 })
 
 //3.7-As an admin I should be able to view all reviewers
-router.get('/admin/getReviewer', async (req, res) => {
+router.get('/getReviewer', async (req, res) => {
     const users = await User.find({"accountType": "reviewer"})
     res.json({
         data: users
@@ -49,8 +49,8 @@ router.get('/admin/getReviewer', async (req, res) => {
 })
 
 
-//Admin approving an account
-router.put("/admin/approve/:id", async (req, res) => {
+// admin approving an account
+router.put('/approve/:id', async (req, res) => {
     try {
         const id = req.params.id
         const user = await User.findById(id);
@@ -77,7 +77,7 @@ router.put("/admin/approve/:id", async (req, res) => {
 
 
 //admin viewing all entity employees
-router.get("/admin/employee", async (req, res) => {
+router.get('/employee', async (req, res) => {
     try{
  //   const admin = await User.find({"accountType": "admin"})
    const users= await User.find({accountType: {$ne: typesEnum.accountTypes.INVESTOR}})
@@ -97,7 +97,7 @@ catch(err){
  })
 
 //As an Admin I should be able to Reject account
-router.put("/admin/reject/:id", async (req, res) => {
+router.put('/reject/:id', async (req, res) => {
     try {
         const id = req.params.id
         const user = await User.findById(id);
@@ -122,7 +122,7 @@ router.put("/admin/reject/:id", async (req, res) => {
 });
 
 //DELETE USER BY ID
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const id = req.params.id
         const deletedUser = await User.findByIdAndDelete(id);
@@ -138,7 +138,7 @@ router.delete("/:id", async (req, res) => {
 })
 
 //As an Admin I should be able to send message to rejected accounts
-router.put('/admin/sendRejectionMsg/:id', async (req,res) => {
+router.put('/sendRejectionMsg/:id', async (req,res) => {
     try {
      const id = req.params.id
      const user = await User.find({accountStatus:false},{_id:id} );
@@ -154,13 +154,13 @@ router.put('/admin/sendRejectionMsg/:id', async (req,res) => {
   })
 
 //view all users
-router.get("/getUsers", async (req, res) => {
+router.get('/getUsers', async (req, res) => {
     const users = await User.find();
     res.json({ data: users });
   });
 
 //get user by user id 
-router.get("/getUsers/:id", async (req, res) => {
+router.get('/getUsers/:id', async (req, res) => {
     try {
         const id = req.params.id
         const user = await User.findById(id);
@@ -179,7 +179,7 @@ router.get("/getUsers/:id", async (req, res) => {
 });
 
 //As a Lawyer I should view all forms that I have approved/rejected
-router.get("/lawyer/:id", async (req, res) => 
+router.get('/lawyer/:id', async (req, res) => 
 {
    const id = req.params.id
    const user = await User.findById(id);

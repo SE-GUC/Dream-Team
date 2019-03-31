@@ -32,7 +32,7 @@ router.get('/', async (req,res) => {
 
 
    // I should be able to Read forms by ID 
-   router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const id = req.params.id
         const form = await Form.findById(id);
@@ -74,7 +74,7 @@ router.get('/undecidedForms/:loggedintype', async (req, res) => {
    })})
    
    //As a lawyer or reviewer or admin I should be able to get form status for any or specific investor to track his forms
-   router.get("/formStatus/:loggedintype/:id", async (req, res) => {
+router.get('/formStatus/:loggedintype/:id', async (req, res) => {
     const loggedintype = req.params.loggedintype
     const id = req.params.id
    

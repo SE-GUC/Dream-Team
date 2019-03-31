@@ -26,7 +26,7 @@ router.use(bodyParser.urlencoded({
 
  // we merged 6.2 and 6.3 to be more efficient
  //As a reviewer i should be able to accept applications  and add a comment to be viewed by lawyer when reviewer rejects the form
- router.put('/reviewer/accept/:idform/:idrev',async(req,res)=>{
+ router.put('/accept/:idform/:idrev',async(req,res)=>{
     const idform = req.params.idform
     const idrev = req.params.idrev
         const form = await Form.findById(idform)
@@ -44,7 +44,7 @@ router.use(bodyParser.urlencoded({
   })
   
   //As a reviewer i should be able to reject applications  and add a comment to be viewed by lawyer when reviewer rejects the form
-  router.put('/reviewer/reject/:idform/:idrev',async(req,res)=>{
+  router.put('/reject/:idform/:idrev',async(req,res)=>{
     const idform = req.params.idform
     const idrev = req.params.idrev
     const form = await Form.findById(idform)
@@ -61,7 +61,7 @@ router.use(bodyParser.urlencoded({
 })  
 
 //As a reviewer I should view all forms that I have approved/rejected
-router.get("/reviewer/:type/AR/:id", async (req, res) => 
+router.get('/:type/AR/:id', async (req, res) => 
 {
    const type = req.params.type
    const id = req.params.id

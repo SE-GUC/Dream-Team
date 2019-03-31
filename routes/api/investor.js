@@ -26,7 +26,7 @@ router.use(bodyParser.urlencoded({
 
 
 //4.1-As an Investor I should be able to track request/case status
-router.get('/investor/trackRequest/:id', async (req, res) => {
+router.get('/trackRequest/:id', async (req, res) => {
     try{ const id = req.params.id
      const form = await Form.find({"investor": id})
 
@@ -45,7 +45,7 @@ router.get('/investor/trackRequest/:id', async (req, res) => {
  });
 
   //As an Investor I should be able to fill in a Form
-  router.post('/investor/:id', async (req,res) => {
+  router.post('/:id', async (req,res) => {
    
     try {
       const investorId = req.params.id

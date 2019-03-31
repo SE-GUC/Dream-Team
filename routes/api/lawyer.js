@@ -23,7 +23,7 @@ router.use(bodyParser.urlencoded({
     extended: false
 }))
 //As A Lawyer I should be able to fill in a Form
-router.post('/lawyer/:id', async (req,res) => {
+router.post('/:id', async (req,res) => {
    
     try {
         const lawyerId = req.params.id
@@ -44,7 +44,7 @@ router.post('/lawyer/:id', async (req,res) => {
  })
 
 // As a lawyer I should be able to add comment to Form after rejection
-router.put("/lawyer/:idform/:idlawyer", async (req, res) => {
+router.put('/:idform/:idlawyer', async (req, res) => {
  
   const id = req.params.idform;
   const idlaw = req.params.idlawyer;
@@ -66,7 +66,7 @@ router.put("/lawyer/:idform/:idlawyer", async (req, res) => {
 
 //As a Lawyer I should view all forms that I have approved/rejected 
 //has to be my id
-router.get("/lawyer/:id", async (req, res) => 
+router.get('/:id', async (req, res) => 
 {
    const id = req.params.id
    const user = await User.findById(id);
@@ -83,7 +83,7 @@ router.get("/lawyer/:id", async (req, res) =>
 })
 
 //As a Lawyer i should be able to accept applications
-router.put('/lawyer/:lawyerId/accept/:id',async(req,res)=>{
+router.put('/:lawyerId/accept/:id',async(req,res)=>{
   const id = req.params.id
   const lawyerId = req.params.id
   const lawyer = await Form.findById(lawyerId)
@@ -99,7 +99,7 @@ router.put('/lawyer/:lawyerId/accept/:id',async(req,res)=>{
 })
 
 //As a Lawyer i should be able to reject applications
-router.put('/lawyer/reject/:id',async(req,res)=>{
+router.put('/reject/:id',async(req,res)=>{
   const id = req.params.id
       const form = await Form.findById(id)
       if(!form) 
