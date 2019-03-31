@@ -46,7 +46,7 @@ router.post('/:id/:INV', async (req,res) => {
  })
 
  //As a Lawyer , I Can view all my Finalized cases . (after lawyer accepted) --tested
-router.get("/lawyer22/:id", async (req, res) => 
+router.get("/:id", async (req, res) => 
 {
   const type = req.params.type
    const id = req.params.id

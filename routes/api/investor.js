@@ -23,7 +23,7 @@ router.use(bodyParser.urlencoded({
 }))
 
 //As an investor , I should be able to view rejected apps and update them
-router.put("/investor/:idform/:idInvestor", async (req, res) => {
+router.put("/updateForm/:idform/:idInvestor", async (req, res) => {
  
     const id = req.params.idform;
     const idinv = req.params.idInvestor;
@@ -39,7 +39,7 @@ router.put("/investor/:idform/:idInvestor", async (req, res) => {
 
   
 //As an investor , I should be notified with the amount and the due date (fees calculation)
-router.get("/investor/notifyAmountAndDueDate/:id", async (req, res) => {
+router.get("/notifyAmountAndDueDate/:id", async (req, res) => {
     const type = req.params.type
     const id = req.params.id
     const user = await User.findById(id);
