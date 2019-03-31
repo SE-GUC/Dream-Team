@@ -27,7 +27,6 @@ router.put('/feesCalculation/:id', async (req,res) => {
    const id = req.params.id
    const form = await Form.findById(id)
    if(form.reviewerDecision===1 ){
-    console.log("aya")
       if((form.entityType=="GAFI") && (form.regulatedLaw=="LAW159") ){
           var fees= form.financialInfo.capital
           var actualFees= (fees/1000)

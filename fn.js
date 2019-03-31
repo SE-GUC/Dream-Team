@@ -26,8 +26,17 @@ const functions = {
         console.log(getform)
         return getform
     },
+    //User Story 6.7
+    getFormFees: async () => {
+        const form = await axios.get('http://localhost:3000/api/internalPortal/5ca09099f29bac0a8ca6467a')
+        console.log(form)
+        return form
+    },
+     putFees: async () => {
+        const form = await axios.put('http://localhost:3000/api/internalPortal/feesCalculation/5ca09099f29bac0a8ca6467a')
+        console.log(form)
+        return form
+    }
 	
-
-
 };
 module.exports = functions;
