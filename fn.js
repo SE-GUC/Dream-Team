@@ -10,6 +10,7 @@ const functions = {
         return books;
     },
 
+
     userStatus: async () => {
         const userStatus = await axios.get('http://localhost:3000/api/internalPortal/formStatus/investor/5c9d8481cf00d53f74c3737c')
         console.log(userStatus)
@@ -20,6 +21,34 @@ const functions = {
         console.log(LRundecidedForms)
         return LRundecidedForms
     }
+
+    
+    getLawyers: async () => {
+        const getLawyers = await axios.get('http://localhost:3000/api/admin/getLawyer')
+        console.log(getLawyers)
+        return getLawyers
+    },
+    getPendingUsers: async () => {
+        const getPendingUsers = await axios.get('http://localhost:3000/api/admin/admin/ViewPendingUsers')
+        console.log(getPendingUsers)
+        return getPendingUsers
+    },getAcceptedUsers: async () => {
+        const getAcceptedUsers = await axios.get('http://localhost:3000/api/admin/admin/ViewAcceptedUsers')
+        console.log(getAcceptedUsers)
+        return getAcceptedUsers
+    },
+    ReviewerAcceptForm: async () => {
+        const getAcceptedUsers = await axios.put('http://localhost:3000/api/reviewer/accept/5c9682f97908e018bc49734e/5c94f90a3ffb4b14d40bc87f')
+        console.log(getAcceptedUsers)
+        return getAcceptedUsers
+    },ReviewerRejectForm: async () => {
+        const getAcceptedUsers = await axios.put('http://localhost:3000/api/reviewer/reject/5ca09099f29bac0a8ca6467a/5c92a43acf0719e94d1907a5')
+        console.log(getAcceptedUsers)
+        return getAcceptedUsers
+    },
+    
+
+
 
     getForm: async () => {
         const SSC = await axios.get('http://localhost:3000/api/internalPortal/5c93bf2312c22705f4b0aab6')

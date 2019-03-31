@@ -16,13 +16,15 @@
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
     "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "joi": "^14.3.1",
-    "jsonwebtoken": "^8.5.0",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "mongoose": "^5.4.16",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
@@ -45,7 +47,9 @@
   "bugs": {
     "url": "https://github.com/SE-GUC/Dream-Team/issues"
   },
+
   "homepage": "https://github.com/SE-GUC/Dream-Team#readme"
+
 
     "testURL": "http://localhost:3000/api/user/getUsers"
   }
