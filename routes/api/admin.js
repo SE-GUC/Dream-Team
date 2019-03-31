@@ -21,6 +21,20 @@ mongoose.set('useCreateIndex', true);
 router.use(bodyParser.urlencoded({
     extended: false
 }))
+// story 4.1 sprint 3 i can view all users that still pending and those who were accepted
+router.get('/admin/ViewPendingUsers', async (req, res) => {
+    const users= await User.find({"accountStatus":false})
+    res.json({ 
+        data: users
+    })
+ })
+
+ router.get('/admin/ViewAcceptedUsers', async (req, res) => {
+    const users= await User.find({"accountStatus":true})
+    res.json({ 
+        data: users
+    })
+ })
 
 //3.6-Admin view all lawyers  
 router.get('/getLawyer', async (req, res) => {
