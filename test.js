@@ -8,24 +8,6 @@ const User = require('./models/User')
 afterEach(() => {
   
 })
-let user = {
-  accountType: "admin",
-  name: "Schroeder",
-  gender: "female",
-  nationality: "mangenese",
-  typeID: "other id",
-  numberID: 847372204,
-  dateOfBirth: "Tue Jul 10 1979 10:43:17 GMT+0000 (UTC)",
-  address: "115 Varick Street, Talpa, Tennessee, 2087",
-  phoneNumber: "15",
-  faxNumber: "15",
-  email: "schroeeedeeggerg@undefined.me",
-  password: "Racdkjbhael",
-  capital: 6369,
-  capitalCurrency: "USD",
-accountStatus:"true",
-  investorType: "SSC"
-}
 // aftereach(()=>{
 
 // })
@@ -98,7 +80,7 @@ let user1 = {
   password: "Racdkjbhael",
   capital: 6369,
   capitalCurrency: "USD",
-accountStatus:"true",
+  accountStatus:"true",
   investorType: "SSC"
 };
   it(`User's name should be vegerger`,async () => {
