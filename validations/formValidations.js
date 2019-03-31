@@ -15,7 +15,7 @@ module.exports = {
             },
             financialInfo:{
               currency:Joi.string().min(3).max(300).required(),
-              capital:Joi.when(request.formType,
+              capital:Joi.when(request.companyType,
                 {is : 'SSC',
                 then: Joi.number().min(50000).required(),
                 otherwise :Joi.number().min(100000)
@@ -31,7 +31,7 @@ module.exports = {
             amountOfPayment:Joi.number(),
             DateOfPayment:Joi.string().min(3).max(100),
             PaymentId:Joi.number().min(0).max(100000),
-            formType:Joi.string().required()
+           // formType:Joi.string().required()
         }
        
         return Joi.validate(request, createSchema)

@@ -50,14 +50,17 @@ router.put('/lawyer/:id', async (req,res) => {
   })
 
 //As A Lawyer I should be able to fill in a Form
-router.post('/:id', async (req,res) => {
+
+router.post('/:id/:INV', async (req,res) => {
    
     try {
         const lawyerId = req.params.id
+        const INV = req.params.INV
         var isValidated = formValidator.createValidation(req.body)
           if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
           const reqBody=req.body
           body: Object.assign(reqBody, {
+            investor: INV,
             lawyer:lawyerId,
             lawyerDecision:1,
             formStatus:formEnum.formStatus.REVIEWER
@@ -69,6 +72,26 @@ router.post('/:id', async (req,res) => {
         }
         
  })
+
+ 
+ //As a Lawyer , I Can view all my Finalized cases . (after lawyer accepted) --tested
+router.get("/:id", async (req, res) => 
+{
+  const type = req.params.type
+   const id = req.params.id
+   const user = await User.findById(id);
+       if (!user)
+           return res.status(404).send({
+               error: "This User does not exist"
+           })
+
+   const lawyers = await Form.find({"lawyerDecision": 1 ,"lawyer": id})      
+    //if(type===typesEnum.accountTypes.LAWYER){
+       res.json({ data: lawyers })
+      
+      // else res.json({ msg: "No Forms for this lawyer "});
+    
+})
 
 // As a lawyer I should be able to add comment to Form after rejection
 router.put('/:idform/:idlawyer', async (req, res) => {
