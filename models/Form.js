@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const BoardofdirectorsSchema= require('../models/Boardofdirectors');
+const regulatedLaw= require('../enums/regulatedLaw')
+const entityType= require('../enums/entityType')
+const formStatus=require('../enums/formStatus')
+const formType=require('../enums/formType')
 const FormSchema = new Schema({
   companyName: {
     type: String,
@@ -11,7 +15,7 @@ const FormSchema = new Schema({
     //required: false
   },
   companyType: {
-    type: String
+    type: formType.formTypes
    // required: false
   },
   headquarters: {
@@ -47,11 +51,11 @@ const FormSchema = new Schema({
     }
   },
   entityType: {
-    type: String ,
+    type: entityType.entityType ,
     required: true
   },
   regulatedLaw: {
-    type: String ,
+    type: regulatedLaw.regulatedLaw ,
     required: true
   },
  investor: {
@@ -103,7 +107,7 @@ const FormSchema = new Schema({
     type: Number
   },
   formStatus: {
-    type: String
+    type: formStatus.formStatus
   },
 
   board:[BoardofdirectorsSchema]

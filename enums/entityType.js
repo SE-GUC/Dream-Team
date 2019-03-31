@@ -1,6 +1,6 @@
 
 module.exports = Object.freeze({
-    entityTypes :{
+    entityType :{
     GAFI:"GAFI" ,
     NOTARYPUBLIC:"NOTARYPUBLIC",
     COMMERCIALREGISTER:"COMMERCIALREGISTER"
