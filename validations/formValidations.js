@@ -5,7 +5,7 @@ module.exports = {
         const createSchema = {
             companyName: Joi.string().min(3).max(500).required(),
             companyNameEnglish: Joi.string().min(3).max(500),
-            companyType:Joi.string(),
+            companyType:Joi.string().required(),
             headquarters:{
                 governorate:Joi.string().min(1).max(6).required(),
                 city:Joi.string().min(3).max(500).required(),
@@ -31,7 +31,7 @@ module.exports = {
             amountOfPayment:Joi.number(),
             DateOfPayment:Joi.string().min(3).max(100),
             PaymentId:Joi.number().min(0).max(100000),
-           // formType:Joi.string().required()
+            
         }
        
         return Joi.validate(request, createSchema)
