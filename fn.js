@@ -36,7 +36,12 @@ const functions = {
         const form = await axios.put('http://localhost:3000/api/internalPortal/feesCalculation/5ca09099f29bac0a8ca6467a')
         console.log(form)
         return form
+    },
+    laywerUpdate: async () => {
+        const message={gender:"wrong"}
+        const form = await axios.put('http://localhost:3000/api/internalPortal/lawyer/5ca0c1466a36eb47ec6db2a1',message)
+        console.log(form)
+        return form
     }
-	
 };
 module.exports = functions;

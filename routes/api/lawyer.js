@@ -22,7 +22,6 @@ router.use(bodyParser.urlencoded({
     extended: false
 }))
 
-
 //
 //UPDATE FORM BY ID, updated by lawyer created it only 
 router.put('/lawyer/:id', async (req,res) => {

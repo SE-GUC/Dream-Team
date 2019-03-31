@@ -68,9 +68,9 @@ const User = require('./models/User')
   //      console.log(lawyerOfForm.data.data._id)
      
   //     expect(lawyerOfForm.data.data._id).toEqual("5ca0c1466a36eb47ec6db2a1")
-  //   });
+    });
 
-    //Sprint 2 user story 4.2
+    Sprint 2 user story 4.2
     test(`Should test if running company of current investor is his running company `,async () => {
       expect.assertions(1)
        const runningcompanies =  await funcs.getrunningcompanies()
@@ -79,18 +79,18 @@ const User = require('./models/User')
      });
    //Sprint 2 user story 4.3
      test(`Should test if pending company of current investor is his pending company `,async () => {
-      expect.assertions(1)
-       const pendingcompanies =  await funcs.getpendingcompanies()
-       console.log(pendingcompanies.data.data[0].investor)
-       expect(pendingcompanies.data.data[0].investor).toEqual('5c92a43acf0719e94d1907a5')
-     });
+  //     expect.assertions(1)
+  //      const pendingcompanies =  await funcs.getpendingcompanies()
+  //      console.log(pendingcompanies.data.data[0].investor)
+  //      expect(pendingcompanies.data.data[0].investor).toEqual('5c92a43acf0719e94d1907a5')
+  //    });
   //Sprint 1 user story 5.4 
      test(`Should view my forms and checking if by id it gets right one  `,async () => {
      expect.assertions(1)
        const forms =  await funcs.getmyform()
        console.log(forms.data.data.investor)
       expect(forms.data.data.investor).toEqual('5c92a43acf0719e94d1907a5')
-     });
+     },10000);
 
   // //User Story 6.7 Sprint 3
   // test(`Should check field that i should update fees Calculation through  `,async () => {
@@ -106,7 +106,14 @@ const User = require('./models/User')
     const fees =  await funcs.putFees()
     expect(fees.data.msg).toEqual('Form updated successfully')
     });
-     
+
+    //User Story 6.8 Sprint 3
+  test(`Should check lawyer is updating forms that he created  `,async () => {
+    expect.assertions(1)
+    const lawyer1 =  await funcs.laywerUpdate()
+    expect(lawyer1.data.msg).toEqual('Form updated successfully')
+    });
+    
 
 // test('adds 1 + 2 to be 3', () => {
 //   expect(funcs.add(1, 2)).toBe(3);
