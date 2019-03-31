@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 const User = require('../../models/User')
 const validator = require('../../validations/userValidations')
 const bcrypt = require('bcryptjs')
-
+const jwt = require('jsonwebtoken');
 const typesEnum = require ('../../enums/accountType')
 
 //yomna
@@ -138,7 +138,7 @@ router.post('/', async (req,res) => {
         investorType,
         capital,
         capitalCurrency
-
+       
         })
     newUser
     .save()
