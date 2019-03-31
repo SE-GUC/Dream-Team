@@ -11,6 +11,7 @@ const functions = {
     },
 
 
+
     getAllEmployess: async()=>{
         const employees =await axios.get('http://localhost:3000/api/admin/employee')
         console.log(employees)
@@ -56,6 +57,37 @@ const functions = {
         console.log(response)
         return response;
     },
+
+    assignReviewer: async () => {
+        const form = await axios.put('http://localhost:3000/api/reviewer/reviewer/assign//5ca111505f1a5e6ea047740f/5ca11edf911834593cc03514')
+        console.log(form)
+        return form
+    },
+    sendMsg: async () => {
+        const form = await axios.put('http://localhost:3000/api/lawyer/:idform/:idlawyer')
+        console.log(form)
+        return form
+    },
+    reviewerDecidedForms: async () => {
+        const reviewerDecidedForms = await axios.get('http://localhost:3000/api/reviewer/reviewer/reviewer/AR/5ca0cdc9740ffeb81ac22875')
+        console.log(reviewerDecidedForms)
+        return reviewerDecidedForms
+    },
+ 
+
+
+    userStatus: async () => {
+        const userStatus = await axios.get('http://localhost:3000/api/internalPortal/formStatus/investor/5c9d8481cf00d53f74c3737c')
+        console.log(userStatus)
+        return userStatus
+    },
+    LRundecidedForms: async () => {
+        const LRundecidedForms = await axios.get('http://localhost:3000/api/internalPortal/undecidedForms/lawyer')
+        console.log(LRundecidedForms)
+        return LRundecidedForms
+    },
+
+
     
     getLawyers: async () => {
         const getLawyers = await axios.get('http://localhost:3000/api/admin/getLawyer')
@@ -81,6 +113,7 @@ const functions = {
         return getAcceptedUsers
     },
     
+
 
 
 

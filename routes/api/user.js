@@ -23,6 +23,68 @@ router.use(bodyParser.urlencoded({
     extended: false
 }))
 
+//view all users
+router.get("/getUsers", async (req, res) => {
+    const users = await User.find();
+    res.json({ data: users });
+  });
+
+//3.4-Admin view all investors
+  router.get('/admin/viewinvestor', async (req, res) => {
+    const users = await User.find({"accountType": "investor"})
+    res.json({
+        data: users
+    })
+})
+
+//3.7-As an admin I should be able to view all reviewers
+router.get('/admin/getReviewer', async (req, res) => {
+    const users = await User.find({"accountType": "reviewer"})
+    res.json({
+        data: users
+    })
+})
+
+
+//4.1-As an Investor I should be able to track request/case status
+router.get('/investor/trackRequest/:id', async (req, res) => {
+    try{ const id = req.params.id
+     const form = await Form.find({"investor": id})
+
+      if (!form)
+             return res.status(404).send({
+                 error: "This form does not exist"
+             });
+         res.json({
+             data: form
+         });
+     } catch (err) {
+         res.json({
+             msg: err.message
+         });
+     }
+ });
+
+//get user by user id 
+router.get("/getUsers/:id", async (req, res) => {
+    try {
+        const id = req.params.id
+        const user = await User.findById(id);
+        if (!user)
+            return res.status(404).send({
+                error: "This User does not exist"
+            });
+        res.json({
+            data: user
+        });
+    } catch (err) {
+        res.json({
+            msg: err.message
+        }   );
+    }
+});
+
+
 // create user (reviewer/investor/admin/lawyer)
 router.post('/createUser', async (req,res) => {
     const {name, accountType , gender, nationality, typeID, numberID, dateOfBirth, address, phoneNumber,
@@ -32,6 +94,13 @@ router.post('/createUser', async (req,res) => {
     
     const salt = bcrypt.genSaltSync(10)
     const hashedPassword = bcrypt.hashSync(password,salt)
+    if (
+      req.body.nationality == "egyptian" &&
+      req.body.typeID != "national id"
+    )
+      return res
+        .status(400)
+        .json({ error: "egyptians must have their national id as type id" });
     if(req.body.accountType==='investor')
     var isValidated = userValidator.createInvestorValidation(req.body)
     else if(req.body.accountType==='lawyer')
@@ -79,6 +148,13 @@ router.put('/updateUser/:id', async (req, res) => {
         if (!law) return res.status(404).send({
             error: 'Admin does not exist'
         })
+        if (
+          law.nationality == "egyptian" &&
+          req.body.typeID != "national id"
+        )
+          return res
+            .status(400)
+            .json({ error: "egyptians must have their national id as type id" });
         if(req.body.accountType==='investor')
         var isValidated = userValidator.updateInvestorValidation(req.body)
         else if(req.body.accountType==='lawyer')
