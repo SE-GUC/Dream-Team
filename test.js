@@ -67,7 +67,33 @@ afterEach(() => {
 //   });
 
 
- 
+let user1 = {
+  accountType: "admin",
+  name: "Schroeder",
+  gender: "female",
+  nationality: "mangenese",
+  typeID: "other id",
+  numberID: 847372204,
+  dateOfBirth: "Tue Jul 10 1979 10:43:17 GMT+0000 (UTC)",
+  address: "115 Varick Street, Talpa, Tennessee, 2087",
+  phoneNumber: "15",
+  faxNumber: "15",
+  email: "schrogggerg@undefined.me",
+  password: "Racdkjbhael",
+  capital: 6369,
+  capitalCurrency: "USD",
+  accountStatus:"true",
+  investorType: "SSC"
+};
+  it(`User's name should be vegerger`,async () => {
+    // // expect.assertions(1)
+   
+    const user =  await funcs.insert(user1)
+    // const user1= user.bodyParser;
+    expect(user.data.data.name).toEqual('Schroeder')
+    // expect(user.data.data.length).toBeGreaterThan(0)
+  });
+
   // test(`User's name should be vegerger`,async () => {
   //   expect.assertions(2)
   //   const user =  await funcs.getUser()
@@ -75,6 +101,27 @@ afterEach(() => {
   //   expect(user.data.data[0].name).toEqual('Schroeder')
   //   expect(user.data.data.length).toBeGreaterThan(0)
   // });
+
+
+  
+  test(`Should test all users form status `,async () => {
+    expect.assertions(1)
+     const userStatus =  await funcs.userStatus()
+ 
+    //  console.log(reviewedForms.data.data[0].reviewerDecision)
+    
+     expect(userStatus.data.data[1]._id).toEqual("5c9f9ce82bc3d8aa3039f969")
+   });
+test(`Should test undecided forms for L&R `,async () => {
+    expect.assertions(2)
+     const undecided =  await funcs.LRundecidedForms()
+ 
+    //  console.log(reviewedForms.data.data[0].reviewerDecision)
+    
+     expect(undecided.data.data[0].lawyerDecision).toEqual(0),
+     expect(undecided.data.data[0]._id).toEqual("5c969a230db5b65ab05b2637")
+   });
+
   test(`get accepted users`,async () => {
     expect.assertions(1)
       const getAcceptedUsers =  await funcs.getAcceptedUsers()
@@ -113,6 +160,7 @@ afterEach(() => {
            expect(revAccepts.data.msg).toEqual('Form status is updated successfully')
           
             });
+
 
 
 

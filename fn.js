@@ -9,6 +9,19 @@ const functions = {
         const books = await axios.post('http://localhost:3000/api/user/createUser', user);
         return books;
     },
+
+
+    userStatus: async () => {
+        const userStatus = await axios.get('http://localhost:3000/api/internalPortal/formStatus/investor/5c9d8481cf00d53f74c3737c')
+        console.log(userStatus)
+        return userStatus
+    },
+    LRundecidedForms: async () => {
+        const LRundecidedForms = await axios.get('http://localhost:3000/api/internalPortal/undecidedForms/lawyer')
+        console.log(LRundecidedForms)
+        return LRundecidedForms
+    }
+
     
     getLawyers: async () => {
         const getLawyers = await axios.get('http://localhost:3000/api/admin/getLawyer')
