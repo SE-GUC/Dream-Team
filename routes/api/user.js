@@ -7,7 +7,8 @@ const validator = require('../../validations/userValidations')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 const typesEnum = require ('../../enums/accountType')
-
+const passport=require('passport');
+const keys = require('jsonwebtoken');
 //yomna
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -55,7 +56,7 @@ router.get("/", async (req, res) => {
 
 //3.7-As an admin I should be able to view all reviewers
 
-router.get('/reviewer', async (req, res) => {
+router.get('/reviewer',async (req, res) => {
     const users = await User.find({"accountType": "reviewer"})
     res.json({
         data: users
@@ -263,7 +264,7 @@ router.delete("/:id", async (req, res) => {
             msg: error.message
         });
     }
-})
+});
 router.put('/sendRejectionmsg/:id', async (req,res) => {
     try {
      const id = req.params.id
@@ -277,6 +278,9 @@ router.put('/sendRejectionmsg/:id', async (req,res) => {
         console.log(error)
     }
  
-  })
-
+  });
+  
+  
+  
+  
 module.exports = router
