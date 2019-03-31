@@ -23,7 +23,6 @@ router.use(bodyParser.urlencoded({
     extended: false
 }))
 
-<<<<<<< HEAD
 //view all users
 router.get("/getUsers", async (req, res) => {
     const users = await User.find();
@@ -85,8 +84,7 @@ router.get("/getUsers/:id", async (req, res) => {
     }
 });
 
-=======
->>>>>>> Dev
+
 // create user (reviewer/investor/admin/lawyer)
 router.post('/createUser', async (req,res) => {
     const {name, accountType , gender, nationality, typeID, numberID, dateOfBirth, address, phoneNumber,
