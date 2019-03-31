@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "index": "nodemon index.js"
+    "index": "nodemon index.js",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
@@ -28,6 +30,9 @@
     "nodemon": "^1.18.10"
   },
   "engines": {
-    "node": "10.x"
+    "node": "10.15.1"
+  },
+  "jest": {
+    "testURL": "http://localhost:3000/api/user/getUsers"
   }
 }
