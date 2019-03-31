@@ -2,7 +2,6 @@ var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
-const User = require('../../models/User')
 const userValidator = require('../../validations/userValidations')
 const formValidator = require('../../validations/formValidations')
 const bcrypt = require('bcryptjs')
