@@ -5,7 +5,7 @@ module.exports = {
         const createSchema = {
             companyName: Joi.string().min(3).max(500).required(),
             companyNameEnglish: Joi.string().min(3).max(500),
-            companyType:Joi.string(),
+            companyType:Joi.string().required(),
             headquarters:{
                 governorate:Joi.string().min(1).max(6).required(),
                 city:Joi.string().min(3).max(500).required(),
@@ -15,7 +15,7 @@ module.exports = {
             },
             financialInfo:{
               currency:Joi.string().min(3).max(300).required(),
-              capital:Joi.when(request.formType,
+              capital:Joi.when(request.companyType,
                 {is : 'SSC',
                 then: Joi.number().min(50000).required(),
                 otherwise :Joi.number().min(100000)
@@ -25,13 +25,13 @@ module.exports = {
             regulatedLaw:Joi.string().required(),
                 //  otherwise : Joi.number().min(10000)})},
             lawyerDecision:Joi.number(),
-            reviwerComment:Joi.string().min(4).max(100),
-            reviwerDecision:Joi.number(),
+            reviewerComment:Joi.string().min(4).max(100),
+            reviewerDecision:Joi.number(),
             dateOfApproval:Joi.date(),
             amountOfPayment:Joi.number(),
             DateOfPayment:Joi.string().min(3).max(100),
             PaymentId:Joi.number().min(0).max(100000),
-            formType:Joi.string().required()
+            
         }
        
         return Joi.validate(request, createSchema)
