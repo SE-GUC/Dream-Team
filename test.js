@@ -65,32 +65,45 @@ afterEach(() => {
 //     expect(response.data.data.length).toBe(11)
 //   });
 
-let user1 = {
-  accountType: "admin",
-  name: "Schroeder",
-  gender: "female",
-  nationality: "mangenese",
-  typeID: "other id",
-  numberID: 847372204,
-  dateOfBirth: "Tue Jul 10 1979 10:43:17 GMT+0000 (UTC)",
-  address: "115 Varick Street, Talpa, Tennessee, 2087",
-  phoneNumber: "15",
-  faxNumber: "15",
-  email: "schrogggerg@undefined.me",
-  password: "Racdkjbhael",
-  capital: 6369,
-  capitalCurrency: "USD",
-  accountStatus:"true",
-  investorType: "SSC"
-};
-  it(`User's name should be vegerger`,async () => {
-    // // expect.assertions(1)
+
+  test('view all employess',async() => {
+
+    expect.assertions(1)
+    const employees = await funcs.getAllEmployess()
+    //console.log(employees.data.data[0].email)
+   expect(employees.data.data[0].email).toEqual('schroeder@undefined.me')
+   });
+
+   test('user should be accepted ',async() => {
+
+   // expect.assertions(1)
+    const accept = await funcs.acceptAccount()
+    expect(accept.data.msg).toEqual('account have been approved')
+  
+   //expect(employees.data.data[0].email).toEqual('schroeder@undefined.me')
+   });
+
+   test('user should be rejected ',async() => {
+
+    // expect.assertions(1)
+     const reject = await funcs.rejectAccount()
+     expect(reject.data.msg).toEqual('account have been disapproved')
    
-    const user =  await funcs.insert(user1)
-    // const user1= user.bodyParser;
-    expect(user.data.data.name).toEqual('Schroeder')
-    // expect(user.data.data.length).toBeGreaterThan(0)
-  });
+    //expect(employees.data.data[0].email).toEqual('schroeder@undefined.me')
+    });
+ 
+
+  //  test('user should be accepted ',async() => {
+
+  //   expect.assertions(1)
+  //   const employees = await funcs.getAllEmployess()
+  //   console.log(employees.data.data[0].email)
+  //  expect(employees.data.data[0].email).toEqual('schroeder@undefined.me')
+  //  })
+
+
+
+
   // test(`User's name should be vegerger`,async () => {
   //   expect.assertions(2)
   //   const user =  await funcs.getUser()
