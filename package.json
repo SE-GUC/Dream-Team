@@ -29,14 +29,12 @@
   },
   "devDependencies": {
     "jest": "^24.5.0",
-    "mongodb-memory-server": "^4.2.1",
     "nodemon": "^1.18.10"
   },
   "engines": {
     "node": "10.15.1"
   },
   "jest": {
-
     "setupTestFrameworkScriptFile": "./Test/setup.js",
     "testURL": "http://localhost:3000/api/user/getUsers"
   },
@@ -47,13 +45,6 @@
   "bugs": {
     "url": "https://github.com/SE-GUC/Dream-Team/issues"
   },
-
-
-  "homepage": "https://github.com/SE-GUC/Dream-Team#readme" ,
-
-
-
-    "testURL": "http://localhost:3000/api/user/getUsers"
-  }
-
+  "homepage": "https://github.com/SE-GUC/Dream-Team#readme",
+  "testURL": "http://localhost:3000/api/user/getUsers"
 }

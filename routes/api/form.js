@@ -90,6 +90,9 @@ router.put("/:id", async (req, res) => {
       // We will be handling the error later
       console.log(error);
     }
+  }
+);
+
 router.get('/search',async (req,res) =>{
  
     const search = await Form.find(req.body)
