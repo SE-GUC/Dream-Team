@@ -59,8 +59,28 @@ router.use(bodyParser.urlencoded({
 
 })  
 
+
+ router.put('/reviewer/assign/:id/:rev',async(req,res)=>{
+  const id = req.params.id
+  const reviewer = req.params.rev
+      const form = await Form.findById(id)
+      if(!form)
+          return res.status(404).send({error: 'Form does not exist'})
+          const rev = await User.findById(reviewer)
+      if(!rev)
+          return res.status(404).send({error: 'Reviewer does not exist'})
+      if(form.lawyer){
+        res.json({msg: 'Form is already taken'})
+      }
+      else{
+      await Form.findByIdAndUpdate(id,{"reviewer":reviewer})
+      await Form.findByIdAndUpdate(id,{"reviewerDecision":0})
+      res.json({msg: 'Form status is updated successfully'})
+      }
+})
 //As a reviewer I should view all forms that I have approved/rejected
-router.get('/:type/AR/:id', async (req, res) => 
+
+router.get("/reviewer/:type/AR/:id", async (req, res) => 
 {
    const type = req.params.type
    const id = req.params.id
@@ -72,14 +92,13 @@ router.get('/:type/AR/:id', async (req, res) =>
     const dec = await Form.find(({"reviewerDecision": 1 } || {"reviewerDecision": -1 }));       
    if(type===typesEnum.accountTypes.REVIEWER && dec){
      
-   const form = await Form.find({"reviewer": id }&& ({"reviewerDecision": 1 } || {"reviewerDecision": -1 }));
-
-   res.json({ data: form });}
+   const form1 = await Form.find({"reviewer": id } ,{"reviewerDecision": 1 } );
+   const form2 = await Form.find({"reviewer": id } ,{"reviewerDecision": -1 } );
+   res.json({ data: form1 ,data2:form2 })}
    else res.json({ msg: "No Forms for this reviewer "});
    
    
  });
-
 
 
 module.exports = router

@@ -82,6 +82,49 @@ router.get('/trackRequest/:id', async (req, res) => {
    
     try {
       const investorId = req.params.id
+      var nation = await User.findById(investorId)
+
+   const company = await Form.findOne({ companyName: req.body.companyName });
+   if (company)
+     return res.status(400).json({ error: "Company Name already exists" });
+   const invssc = await Form.findOne({
+     "investor": investorId,
+     "companyType": "SSC"
+   });
+
+   if (invssc&&req.body.companyType=="SSC")
+     return res
+       .status(400)
+       .json({ error: "you cannot Establish multiple SSC Companies" });
+   if (
+     (req.body.board !== undefined  )&&
+     req.body.companyType == "SPC"
+   ){
+   console.log(req.body.board)
+     return res
+       .status(400)
+       .json({ error: "investors establishing SPC cannot have board" });}
+
+   const flag = 0;
+   if (req.body.board !== undefined) {
+     const b = req.body.board;
+
+     for (i = 0; i < b.length; i++) {
+       if (!(b[i].nationality == "egyptian")) {
+         flag = 1;
+       }
+     }
+   }
+   // const egy = await req.body.board.findOne({"nationality":"egyptian"})
+   if (
+     (req.body.board == undefined || req.body.board == null) &&
+     req.body.companyType === "SSC" &&
+     flag == 0
+   )
+     return res.status(400).json({
+       error:
+         "investors establishing SSC must have at least one egyptian manager"
+     });
         var isValidated = formValidator.createValidation(req.body)
           if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
           const reqBody=req.body

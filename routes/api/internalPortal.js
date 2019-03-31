@@ -193,5 +193,64 @@ const forms= await Form.find({investor:id, formStatus:formEnum.formStatus.APPROV
 
 })
 
+//As a lawyer I can view which lawyer is working on a form
+
+router.get("/lawyerOfForm/:id", async (req, res) => 
+{
+   const id = req.params.id;
+   const form = await Form.findById(id);
+   const law = form.lawyer
+   //res.json({data:form.lawyer})
+   if(law) {
+   const use = await User.findById(form.lawyer)
+   res.json({data:use})
+   } else {
+     res.json({msg:`No Lawyer found with that ID`})
+   }
+   
+  // //const lawyerID = await form.('lawyer')
+  //   if (!form)
+  //          return res.status(404).send({
+  //              error: "This form does not exist"
+  //          })
+   // const zet = await Form.find({"_id":id},{"_id":0}&&{"lawyer":1})
+    
+    //   console.log(form.lawyer)
+    //   const lawyerid = form.lawyer
+
+    //   const user = User.findById(Objectid("lawyerid").toString())
+    //  res.json({ data: user })
+    
+});
+
+//As a lawyer i should be assigned to a case
+
+router.put('/lawyer/assign/:formId/:lawyerId',async(req,res)=>{
+  const formId = req.params.formId;
+  const lawyerId = req.params.lawyerId;
+  const form = await Form.findById(formId)
+  if (form.hasOwnProperty('lawyer')) {
+    return res.status(404).send({error: 'Form already set'})
+    // Do something
+}else{
+  await Form.findOneAndUpdate({_id: formId } ,{"lawyer": lawyerId , "lawyerDecision": 0});
+  
+  res.json({msg: 'Form status is updated successfully'})
+}
+      
+    
+          
+ 
+     
+})
+
+
+ //Search in all published Companies #1.1 sprint 3
+ router.get('/search',async (req,res) =>{
+  const search = await Form.find(req.body)
+res.json({
+  data: search
+})
+});
 
 module.exports = router

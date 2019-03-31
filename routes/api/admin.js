@@ -21,6 +21,7 @@ mongoose.set('useCreateIndex', true);
 router.use(bodyParser.urlencoded({
     extended: false
 }))
+
 //User Story 6.7 sprint 3, Calculating Fees calculation 
 router.put('/feesCalculation/:id', async (req,res) => {
     try {
@@ -74,6 +75,23 @@ router.put('/feesCalculation/:id', async (req,res) => {
     
   })
   
+
+// story 4.1 sprint 3 i can view all users that still pending and those who were accepted
+router.get('/admin/ViewPendingUsers', async (req, res) => {
+    const users= await User.find({"accountStatus":false})
+    res.json({ 
+        data: users
+    })
+ })
+
+ router.get('/admin/ViewAcceptedUsers', async (req, res) => {
+    const users= await User.find({"accountStatus":true})
+    res.json({ 
+        data: users
+    })
+ })
+
+
 //3.6-Admin view all lawyers  
 router.get('/getLawyer', async (req, res) => {
     const users = await User.find({"accountType": "lawyer"})
@@ -244,6 +262,16 @@ router.get('/lawyer/:id', async (req, res) =>
   
        res.json({ data: lawyers })
     
-})
+});
+
+//As an Admin i can Search a field according to a specific field
+router.get('/search',async (req,res) =>{
+
+    const search = await Form.find(req.body)
+ 
+  res.json({
+    data: search
+  })
+ });
 
 module.exports = router

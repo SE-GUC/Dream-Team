@@ -22,10 +22,14 @@ mongoose.set('useCreateIndex', true);
 router.use(bodyParser.urlencoded({
     extended: false
 }))
+
+//view all users
+
 router.get("/getUsers", async (req, res) => {
   const users = await user.find();
   res.json({ data: users });
 });
+
 // create user (reviewer/investor/admin/lawyer)
 router.post('/createUser', async (req,res) => {
     const {name, accountType , gender, nationality, typeID, numberID, dateOfBirth, address, phoneNumber,
@@ -35,6 +39,13 @@ router.post('/createUser', async (req,res) => {
     
     const salt = bcrypt.genSaltSync(10)
     const hashedPassword = bcrypt.hashSync(password,salt)
+    if (
+      req.body.nationality == "egyptian" &&
+      req.body.typeID != "national id"
+    )
+      return res
+        .status(400)
+        .json({ error: "egyptians must have their national id as type id" });
     if(req.body.accountType==='investor')
     var isValidated = userValidator.createInvestorValidation(req.body)
     else if(req.body.accountType==='lawyer')
@@ -63,7 +74,7 @@ router.post('/createUser', async (req,res) => {
         investorType,
         capital,
         capitalCurrency
-
+       
         })
     newUser
     .save()
@@ -82,6 +93,13 @@ router.put('/updateUser/:id', async (req, res) => {
         if (!law) return res.status(404).send({
             error: 'Admin does not exist'
         })
+        if (
+          law.nationality == "egyptian" &&
+          req.body.typeID != "national id"
+        )
+          return res
+            .status(400)
+            .json({ error: "egyptians must have their national id as type id" });
         if(req.body.accountType==='investor')
         var isValidated = userValidator.updateInvestorValidation(req.body)
         else if(req.body.accountType==='lawyer')
@@ -402,5 +420,14 @@ var SSC = [
   });
 
 
+
+  
+ //Search in all published Companies #1.1 sprint 3
+ router.get('/search',async (req,res) =>{
+  const search = await Form.find(req.body)
+res.json({
+  data: search
+})
+});
 
 module.exports = router
