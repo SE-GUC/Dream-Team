@@ -103,6 +103,29 @@ let user1 = {
   // });
 
 
+  test(`lawyer comment`  ,async () => {
+    expect.assertions(1)
+    const message =  await funcs.sendMsg()
+    expect(message.data.msg).toEqual('Form updated successfully')
+    });
+    test(`Reviewer Assign to this case`  ,async () => {
+      expect.assertions(1)
+      const message =  await funcs.assignReviewer()
+      expect(message.data.msg).toEqual('Form updated successfully')
+      });
+  test(`Should test all reviewer's decided forms `,async () => {
+    expect.assertions(1)
+     const reviewedForms =  await funcs.reviewerDecidedForms()
+ 
+    //  console.log(reviewedForms.data.data[0].reviewerDecision)
+    
+     expect(reviewedForms.data.data[0].reviewerDecision).toEqual(1)
+   });
+
+ 
+  
+
+
   
   test(`Should test all users form status `,async () => {
     expect.assertions(1)
@@ -121,6 +144,7 @@ test(`Should test undecided forms for L&R `,async () => {
      expect(undecided.data.data[0].lawyerDecision).toEqual(0),
      expect(undecided.data.data[0]._id).toEqual("5c969a230db5b65ab05b2637")
    });
+
 
   test(`get accepted users`,async () => {
     expect.assertions(1)

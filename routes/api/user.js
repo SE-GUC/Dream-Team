@@ -94,6 +94,13 @@ router.post('/createUser', async (req,res) => {
     
     const salt = bcrypt.genSaltSync(10)
     const hashedPassword = bcrypt.hashSync(password,salt)
+    if (
+      req.body.nationality == "egyptian" &&
+      req.body.typeID != "national id"
+    )
+      return res
+        .status(400)
+        .json({ error: "egyptians must have their national id as type id" });
     if(req.body.accountType==='investor')
     var isValidated = userValidator.createInvestorValidation(req.body)
     else if(req.body.accountType==='lawyer')
@@ -141,6 +148,13 @@ router.put('/updateUser/:id', async (req, res) => {
         if (!law) return res.status(404).send({
             error: 'Admin does not exist'
         })
+        if (
+          law.nationality == "egyptian" &&
+          req.body.typeID != "national id"
+        )
+          return res
+            .status(400)
+            .json({ error: "egyptians must have their national id as type id" });
         if(req.body.accountType==='investor')
         var isValidated = userValidator.updateInvestorValidation(req.body)
         else if(req.body.accountType==='lawyer')
