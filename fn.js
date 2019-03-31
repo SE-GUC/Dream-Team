@@ -22,7 +22,7 @@ const functions = {
     },
     //User Story 5.4 sprint 1
     getmyform: async () => {
-        const getform = await axios.get('http://localhost:3000/api/form/5c93bf2312c22705f4b0aab6')
+        const getform = await axios.get('http://localhost:3000/api/internalPortal/5c93bf2312c22705f4b0aab6')
         console.log(getform)
         return getform
     },
