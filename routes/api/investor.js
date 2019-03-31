@@ -37,6 +37,26 @@ router.put("/investor/:idform/:idInvestor", async (req, res) => {
   
   });
 
+  
+//As an investor , I should be notified with the amount and the due date (fees calculation)
+router.get("/investor/notifyAmountAndDueDate/:id", async (req, res) => {
+    const type = req.params.type
+    const id = req.params.id
+    const user = await User.findById(id);
+        if (!user)
+            return res.status(404).send({
+                error: "This User does not exist"
+            });    
+  
+      
+    const form = await Form.findOne({"investor": id }, {"dateOfPayment": 1 ,"amountOfPayment":1 ,_id:0})
+    
+    
+    res.json({ data: form });
+    
+    
+    })
+    
 //4.1-As an Investor I should be able to track request/case status
 router.get('/trackRequest/:id', async (req, res) => {
     try{ const id = req.params.id
