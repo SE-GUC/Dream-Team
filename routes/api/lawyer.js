@@ -21,6 +21,37 @@ mongoose.set('useCreateIndex', true);
 router.use(bodyParser.urlencoded({
     extended: false
 }))
+
+//
+//UPDATE FORM BY ID, updated by lawyer created it only 
+router.put('/:id', async (req,res) => {
+    try {
+     const id = req.params.id
+     const form = await Form.findById(id)
+     if(id==form.lawyer ){
+     if(!form) return res.status(404).send({error: 'Form does not exist'})
+     var isValidated = formValidator.updateValidation(req.body)
+     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+     const updatedForm = await Form.findByIdAndUpdate(id,req.body)
+     res.json({msg: 'Form updated successfully'})
+    }
+  }
+    catch(error) {
+        console.log(error)
+    }  
+    
+  })
+  
+  //Get Laws
+  router.get('/regulatedLaw', async (req,res) => {
+    const law =regulatedLaw.regulatedLaw
+    res.json({data: law})
+  })
+  router.post('/', async (req,res) => {
+    const user =req.body
+    res.json({data: user})
+  })
+
 //As A Lawyer I should be able to fill in a Form
 
 router.post('/:id/:INV', async (req,res) => {

@@ -21,6 +21,61 @@ mongoose.set('useCreateIndex', true);
 router.use(bodyParser.urlencoded({
     extended: false
 }))
+
+//User Story 6.7 sprint 3, Calculating Fees calculation 
+router.put('/feesCalculation/:id', async (req,res) => {
+    try {
+     const id = req.params.id
+     const form = await Form.findById(id)
+     if(form.reviewerDecision===1 ){
+      console.log("aya")
+        if((form.entityType=="GAFI") && (form.regulatedLaw=="LAW159") ){
+            var fees= form.financialInfo.capital
+            var actualFees= (fees/1000)
+            if(actualFees>1000)
+                actualFees=1000
+            if(actualFees<100)
+                actualFees=100
+            console.log(actualFees)
+              }
+         if(form.entityType=="NOTARYPUBLIC" && form.regulatedLaw=="LAW159" ){
+                var fees= form.financialInfo.capital
+                var actualFees= (fees*0.0025)
+                console.log(actualFees)
+                //var actualFees=Math.floor(fees/1000)
+                if(actualFees>1000)
+                  actualFees=1000
+                if(actualFees<10)
+                  actualFees=10
+          console.log(actualFees)
+      }
+      if((form.entityType=="COMMERCIALREGISTER") &&(form.regulatedLaw=="LAW159" )){
+        // console.log("ahhahahah")
+        var actualFees= 56  
+        console.log(actualFees)
+      }
+      if(form.entityType=="COMMERCIALREGISTER" && form.regulatedLaw=="LAW72" ){
+        var actualFees= 610
+      }
+    }
+      else{
+        actualFees=0
+      }
+        // console.log(actualFees)
+        if(!form) return res.status(404).send({error: 'Form does not exist'})
+     var isValidated = formValidator.updateValidation(req.body)
+         if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+     const updatedForm = await Form.findByIdAndUpdate(id,{feesCalculation:actualFees})
+     console.log(actualFees)
+     res.json({msg: 'Form updated successfully'})
+    }
+    catch(error) {
+        console.log(error)
+    }  
+    
+  })
+  
+
 // story 4.1 sprint 3 i can view all users that still pending and those who were accepted
 router.get('/admin/ViewPendingUsers', async (req, res) => {
     const users= await User.find({"accountStatus":false})
@@ -35,6 +90,7 @@ router.get('/admin/ViewPendingUsers', async (req, res) => {
         data: users
     })
  })
+
 
 //3.6-Admin view all lawyers  
 router.get('/getLawyer', async (req, res) => {
