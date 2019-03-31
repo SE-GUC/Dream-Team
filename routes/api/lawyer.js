@@ -28,6 +28,40 @@ router.post('/:id/:INV', async (req,res) => {
     try {
         const lawyerId = req.params.id
         const INV = req.params.INV
+        const company = await Form.findOne({ companyName: req.body.companyName });
+   if (company)
+     return res.status(400).json({ error: "Company Name already exists" });
+   const invssc = await Form.findOne({
+     investor: req.body.investor,
+     companyType: "SSC"
+   });
+   if (invssc)
+     return res.status(400).json({
+       error: "This investor cannot Establish multiple SSC Companies"
+     });
+   if (
+     req.body.board == undefined && req.body.board == null &&
+     req.body.companyType === "SSC" &&
+     !req.body.board.findOne(nationality == "egyptian")
+   )
+     return res.status(400).json({
+       error:
+         "investors establishing SSC must have at least one egyptian manager"
+     });
+   if (
+     (req.body.board !== undefined || req.body.board !== null) &&
+     req.companyType === "SPC"
+   )
+     return res
+       .status(400)
+       .json({ error: "investors establishing SPC cannot have board" });
+   if (
+     req.body.nationality === "egyptian" &&
+     req.body.typeId !== "national id"
+   )
+     return res
+       .status(400)
+       .json({ error: "egyptians must have their national id as type id" });
         var isValidated = formValidator.createValidation(req.body)
           if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
           const reqBody=req.body
@@ -130,5 +164,21 @@ router.put('/reject/:id',async(req,res)=>{
       await Form.findByIdAndUpdate(id,{lawyerDecision:-1})
       res.json({msg: 'Form status is updated successfully'})
 })
+
+router.get("/pendingCase/:id", async (req, res) => 
+{
+   const id = req.params.id;
+   const form = await Form.findOne({"lawyer": id},{"lawyerDecision": 0})
+   //;
+   //const form2 = await form.findOne( {"lawyerDecision": 0})
+    if (!form)
+           return res.status(404).send({
+               error: "This form does not exist"
+           })
+       
+  
+       res.json({ data: form })
+    
+});
 
 module.exports = router
