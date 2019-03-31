@@ -42,6 +42,25 @@ router.post('/:id', async (req,res) => {
         
  })
 
+ //As a Lawyer , I Can view all my Finalized cases . (after lawyer accepted) --tested
+router.get("/lawyer22/:id", async (req, res) => 
+{
+  const type = req.params.type
+   const id = req.params.id
+   const user = await User.findById(id);
+       if (!user)
+           return res.status(404).send({
+               error: "This User does not exist"
+           })
+
+   const lawyers = await Form.find({"lawyerDecision": 1 ,"lawyer": id})      
+    //if(type===typesEnum.accountTypes.LAWYER){
+       res.json({ data: lawyers })
+      
+      // else res.json({ msg: "No Forms for this lawyer "});
+    
+})
+
 // As a lawyer I should be able to add comment to Form after rejection
 router.put('/:idform/:idlawyer', async (req, res) => {
  
