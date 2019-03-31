@@ -55,7 +55,7 @@ const functions = {
         const response = await axios.get('http://localhost:3000/api/admin/getLawyer',message)
         console.log(response)
         return response;
-
+    },
     
     getLawyers: async () => {
         const getLawyers = await axios.get('http://localhost:3000/api/admin/getLawyer')
