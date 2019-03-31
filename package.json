@@ -26,6 +26,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "jest": "^24.5.0",
     "nodemon": "^1.18.10"
   },
   "engines": {
