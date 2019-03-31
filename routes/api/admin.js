@@ -192,6 +192,16 @@ router.get('/lawyer/:id', async (req, res) =>
   
        res.json({ data: lawyers })
     
-})
+});
+
+//As an Admin i can Search a field according to a specific field
+router.get('/search',async (req,res) =>{
+
+    const search = await Form.find(req.body)
+ 
+  res.json({
+    data: search
+  })
+ });
 
 module.exports = router
