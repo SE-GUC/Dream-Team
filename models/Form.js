@@ -77,6 +77,9 @@ const FormSchema = new Schema({
     ref: 'User'
    
   },
+  feesCalculation:{
+    type:String
+  },
   reviwerComment: {
     type: String
    
