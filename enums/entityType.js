@@ -1,8 +1,8 @@
 
 module.exports = Object.freeze({
-    entityTypes :{
+    entityType :{
     GAFI:"GAFI" ,
-    NOTARYPUBLIC:"Notary Public",
-    CPMMERCIALREGISTER:"Commercial Register"
+    NOTARYPUBLIC:"NOTARYPUBLIC",
+    COMMERCIALREGISTER:"COMMERCIALREGISTER"
 }
 });
