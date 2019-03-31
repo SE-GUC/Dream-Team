@@ -67,7 +67,11 @@ const functions = {
         //console.log(assignCaseToLawyer)
         return assignCaseToLawyer
     },
-
+    getFormBySpeceficField: async () => {
+        const form = await axios.get('http://localhost:3000/api/admin/search')
+        console.log(form)
+        return form
+    }
 
 };
 module.exports = functions;
