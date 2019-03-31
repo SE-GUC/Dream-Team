@@ -118,4 +118,12 @@ const forms= await Form.find({investor:id, formStatus:formEnum.formStatus.APPROV
 })
 
 
+ //Search in all published Companies #1.1 sprint 3
+ router.get('/search',async (req,res) =>{
+  const search = await Form.find(req.body)
+res.json({
+  data: search
+})
+});
+
 module.exports = router
