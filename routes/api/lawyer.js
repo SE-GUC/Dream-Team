@@ -22,14 +22,17 @@ router.use(bodyParser.urlencoded({
     extended: false
 }))
 //As A Lawyer I should be able to fill in a Form
-router.post('/:id', async (req,res) => {
+
+router.post('/:id/:INV', async (req,res) => {
    
     try {
         const lawyerId = req.params.id
+        const INV = req.params.INV
         var isValidated = formValidator.createValidation(req.body)
           if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
           const reqBody=req.body
           body: Object.assign(reqBody, {
+            investor: INV,
             lawyer:lawyerId,
             lawyerDecision:1,
             formStatus:formEnum.formStatus.REVIEWER
