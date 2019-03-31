@@ -6,65 +6,83 @@ const User = require('./models/User')
 // test('adds 1 + 2 to be 3', () => {
 //   expect(funcs.add(1, 2)).toBe(3);
 // });
-afterEach(() => {
+
+  test('view all employess',async() => {
+
+    expect.assertions(1)
+    const employees = await funcs.getAllEmployess()
+    //console.log(employees.data.data[0].email)
+   expect(employees.data.data[0].email).toEqual('schroeder@undefined.me')
+   });
+
+   test('user should be accepted ',async() => {
+
+   // expect.assertions(1)
+    const accept = await funcs.acceptAccount()
+    expect(accept.data.msg).toEqual('account have been approved')
   
-})
-// aftereach(()=>{
+   //expect(employees.data.data[0].email).toEqual('schroeder@undefined.me')
+   });
 
-// })
+   test('user should be rejected ',async() => {
 
-// //To be exact comparison, with objects use toEqual
-// test('object assignment', () => {
-//     const data = {one: 1};
-//     data['two'] = 2;
-//     expect(data).toEqual({one: 1, two: 2});
-//   });
+    // expect.assertions(1)
+     const reject = await funcs.rejectAccount()
+     expect(reject.data.msg).toEqual('account have been disapproved')
+   
+    //expect(employees.data.data[0].email).toEqual('schroeder@undefined.me')
+    });
+ 
 
-//   test('adding positive numbers is not zero', () => {
-//         const a = 1
-//         const b = 2
-//         expect(a + b).not.toBe(0);
-//   });
-
-//   test('adding floating point numbers', () => {
-//     const value = 0.1 + 0.2;
-//     //expect(value).toBe(0.3);           This won't work because of rounding error
-//     expect(value).toBeCloseTo(0.3); // This works.
-//   });
-
-//   test('there is no I in team', () => {
-//     expect('team').not.toMatch(/I/);
-//   });
   
-//   test('but there is a "stop" in Christoph', () => {
-//     expect('Christoph').toMatch(/stop/);
-//   });
 
-//   const people = [
-//     'Ammar',
-//     'Leo',
-//     'Barney',
-//     'Jaime',
-//     'Tywin',
-//   ];
+  test('Lawyer can show a from if the form has no lawyer assigned to it',async () => {
+       expect.assertions(1)
+       const lawyerOfForm =  await funcs.lawyerViewForm();
+
+
+        // console.log(lawyerOfForm.data.data._id)
+
+
+       expect(lawyerOfForm.data.data._id).toEqual("5ca11184911834593cc03510")
+     });
+
+     test('lawyer accepting form',async ()=>{
+      expect.assertions(1)
+      const response =await funcs.lawyerAcceptForm();
+      console.log(response);
+      expect(response.data.msg).toEqual( 'form updated successfully')
   
-//   test('The list of people has Ammar on it', () => {
-//     expect(people).toContain('Ammar');
-//   });
+    });
+  
+  
+    test('lawyer rejecting form',async ()=>{
+      expect.assertions(1)
+      const response =await funcs.lawyerRejectForm();
+      console.log(response);
+      expect(response.data.msg).toEqual( 'form updated successfully')
+  
+    });
+  
+  
+    test(`Should test if the lawyer's forms equals lawyer entered `,async () => {
+     // expect.assertions(1)
+        const lawyer =  await funcs.getLawyer()
+    
+         console.log(lawyer.data.data.lawyer)
+       
+        expect(lawyer.data.data.lawyer).toEqual("5ca10ccab7701f2158efbad1")
+    });
 
+    test(`Should test if the lawyer's forms equals lawyer entered `,async () => {
+      //expect.assertions(1)
+        const cases =  await funcs.getLawyerForm()
+    
+         console.log(cases)
+        
+        });
+  
 
-// //Working with async
-//   test('First book should be Crime and Punishment', async () => {
-//     expect.assertions(1)
-//     const response =  await funcs.getBooks()
-//     expect(response.data.data[0].title).toEqual('Crime and Puishment')
-//   });
-
-//   test('Number of books should be 11', async () => {
-//     expect.assertions(1)
-//     const response =  await funcs.getBooks()
-//     expect(response.data.data.length).toBe(11)
-//   });
 
 
 let user1 = {
@@ -144,6 +162,7 @@ test(`Should test undecided forms for L&R `,async () => {
      expect(undecided.data.data[0].lawyerDecision).toEqual(0),
      expect(undecided.data.data[0]._id).toEqual("5c969a230db5b65ab05b2637")
    });
+
 
 
   test(`get accepted users`,async () => {

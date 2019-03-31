@@ -164,6 +164,25 @@ router.put('/reject/:id',async(req,res)=>{
       await Form.findByIdAndUpdate(id,{lawyerDecision:-1})
       res.json({msg: 'Form status is updated successfully'})
 })
+router.get('/showForm/:formId/',async(req,res)=>{
+    const formId = req.params.formId;
+    // const lawyerId = req.params.lawyerId;
+    const form = await Form.findById(formId)
+    if(!form)
+    {
+        res.json({msg:'form not found'})
+    }
+    else{
+    if (form.hasOwnProperty('lawyer')) {
+      return res.status(404).send({error: 'Form already set'})
+      // Do something
+  }else{
+ 
+    res.json({data:form})
+  }
+}
+ })
+
 
 router.get("/pendingCase/:id", async (req, res) => 
 {
@@ -180,5 +199,6 @@ router.get("/pendingCase/:id", async (req, res) =>
        res.json({ data: form })
     
 });
+
 
 module.exports = router
