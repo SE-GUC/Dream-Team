@@ -53,6 +53,53 @@ investortrack: async () => {
     },
 
 
+
+    getAllEmployess: async()=>{
+        const employees =await axios.get('http://localhost:3000/api/admin/employee')
+        console.log(employees)
+        return employees
+    },
+
+    acceptAccount: async()=>{
+        const employees =await axios.put('http://localhost:3000/api/admin/approve/5ca0d6ae98b7982e943a3eea/')
+        console.log(employees)
+        return employees
+    },
+
+    rejectAccount: async()=>{
+        const employees =await axios.put('http://localhost:3000/api/admin/reject/5ca0d87a98b7982e943a3eeb/')
+        console.log(employees)
+        return employees
+    },
+    lawyerViewForm :async()=>{
+        const form = await axios.get('http://localhost:3000/api/lawyer/showForm/5ca11184911834593cc03510')
+        return form
+    },
+
+    lawyerAcceptForm: async (message)=>{
+        const response = await axios.put('http://localhost:3000/api/lawyer/5ca10ccab7701f2158efbad1/accept/5ca11184911834593cc03510',message)
+        console.log(response)
+        return response;
+    },
+    lawyerRejectForm: async (message)=>{
+        const response = await axios.put('http://localhost:3000/api/lawyer/5ca10ccab7701f2158efbad1/reject/5ca11184911834593cc03510',message)
+        console.log(response)
+        return response;
+    },
+
+    getLawyerForm: async ()=>{
+        const lawyer=await axios.get('http://localhost:3000/api/lawyer/5ca10ccab7701f2158efbad1')
+        console.log(lawyer)
+        return lawyer
+    },
+
+
+    getLawyer: async ()=>{
+        const response = await axios.get('http://localhost:3000/api/admin/getLawyer',message)
+        console.log(response)
+        return response;
+    },
+
     assignReviewer: async () => {
         const form = await axios.put('http://localhost:3000/api/reviewer/reviewer/assign//5ca111505f1a5e6ea047740f/5ca11edf911834593cc03514')
         console.log(form)
@@ -80,7 +127,7 @@ investortrack: async () => {
         const LRundecidedForms = await axios.get('http://localhost:3000/api/internalPortal/undecidedForms/lawyer')
         console.log(LRundecidedForms)
         return LRundecidedForms
-    }
+    },
 
 
 
@@ -184,6 +231,8 @@ investortrack: async () => {
         console.log(form)
         return form
     }
+    
+
 
 
 };
