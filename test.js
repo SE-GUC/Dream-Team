@@ -65,32 +65,8 @@ afterEach(() => {
 //     expect(response.data.data.length).toBe(11)
 //   });
 
-let user1 = {
-  accountType: "admin",
-  name: "Schroeder",
-  gender: "female",
-  nationality: "mangenese",
-  typeID: "other id",
-  numberID: 847372204,
-  dateOfBirth: "Tue Jul 10 1979 10:43:17 GMT+0000 (UTC)",
-  address: "115 Varick Street, Talpa, Tennessee, 2087",
-  phoneNumber: "15",
-  faxNumber: "15",
-  email: "schrogggerg@undefined.me",
-  password: "Racdkjbhael",
-  capital: 6369,
-  capitalCurrency: "USD",
-  accountStatus:"true",
-  investorType: "SSC"
-};
-  it(`User's name should be vegerger`,async () => {
-    // // expect.assertions(1)
-   
-    const user =  await funcs.insert(user1)
-    // const user1= user.bodyParser;
-    expect(user.data.data.name).toEqual('Schroeder')
-    // expect(user.data.data.length).toBeGreaterThan(0)
-  });
+
+ 
   // test(`User's name should be vegerger`,async () => {
   //   expect.assertions(2)
   //   const user =  await funcs.getUser()
@@ -98,3 +74,41 @@ let user1 = {
   //   expect(user.data.data[0].name).toEqual('Schroeder')
   //   expect(user.data.data.length).toBeGreaterThan(0)
   // });
+  test(`get accepted users`,async () => {
+    expect.assertions(1)
+      const getAcceptedUsers =  await funcs.getAcceptedUsers()
+      
+      expect(getAcceptedUsers.data.data[0].accountStatus).toEqual(true)
+  
+    });
+    test(`get pending users`,async () => {
+      expect.assertions(1)
+     //  expect.hasAssertions()
+        const getPendingUsers =  await funcs.getPendingUsers()
+    
+       //  console.log(reviewedForms.data.data[0].reviewerDecision)
+    
+        expect(getPendingUsers.data.data[0].accountStatus).toEqual(false)
+    
+      });
+      test(`Should get all lawyers`,async () => {
+        expect.assertions(1)
+      
+       const getLawyers =  await funcs.getLawyers()
+      expect(getLawyers.data.data[0].accountType).toEqual("lawyer")
+      
+        });
+        test(`Reviewer accept form`,async () => {
+          expect.assertions(1)
+        
+         const revAccepts =  await funcs.ReviewerAcceptForm()
+         expect(revAccepts.data.msg).toEqual('Form status is updated successfully')
+        
+          });
+          test(`Reviewer reject form`,async () => {
+            expect.assertions(1)
+          
+           const revAccepts =  await funcs.ReviewerAcceptForm()
+           expect(revAccepts.data.msg).toEqual('Form status is updated successfully')
+          
+            });

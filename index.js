@@ -12,7 +12,9 @@ const lawyer = require('./routes/api/lawyer')
 const profile = require('./routes/api/profile')
 const reviewer = require('./routes/api/reviewer')
 
-
+const login = require('./routes/api/login')
+const passport=require('passport')
+const cors = require('cors')
 const app = express()
 
 // DB Config
@@ -45,7 +47,7 @@ app.use('/api/investor',investor)
 app.use('/api/lawyer',lawyer)
 app.use('/api/profile',profile)
 app.use('/api/reviewer',reviewer)
-
+app.use('/api/login',login)
 app.use((req,res) => res.status(404).send(`<h1>Can not find what you're looking for</h1>`))
 
 let port = process.env.PORT;
