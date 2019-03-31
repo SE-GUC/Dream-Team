@@ -25,7 +25,12 @@ const functions = {
         const employees =await axios.put('http://localhost:3000/api/admin/reject/5ca0d87a98b7982e943a3eeb/')
         console.log(employees)
         return employees
+    },
+    lawyerViewForm :async()=>{
+        const form = await axios.get('http://localhost:3000/api/lawyer/showForm/5ca11184911834593cc03510')
+        return form
     }
+    
 
 
 };

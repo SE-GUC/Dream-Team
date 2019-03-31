@@ -134,6 +134,11 @@ router.get('/showForm/:formId/',async(req,res)=>{
     const formId = req.params.formId;
     // const lawyerId = req.params.lawyerId;
     const form = await Form.findById(formId)
+    if(!form)
+    {
+        res.json({msg:'form not found'})
+    }
+    else{
     if (form.hasOwnProperty('lawyer')) {
       return res.status(404).send({error: 'Form already set'})
       // Do something
@@ -141,5 +146,6 @@ router.get('/showForm/:formId/',async(req,res)=>{
  
     res.json({data:form})
   }
+}
  })
 module.exports = router
