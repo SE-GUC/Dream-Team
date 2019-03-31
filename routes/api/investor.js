@@ -22,8 +22,42 @@ router.use(bodyParser.urlencoded({
     extended: false
 }))
 
+//As an investor , I should be able to view rejected apps and update them
+router.put("/updateForm/:idform/:idInvestor", async (req, res) => {
+ 
+    const id = req.params.idform;
+    const idinv = req.params.idInvestor;
+    const form = await Form.findById(id);
+    if (!form) return res.status(404).send({ error: "Form does not exist" });
+    var forms = await Form.findOne({"lawyerDecision": 0 ,"investor": idinv ,"_id":id}) 
+    if(forms){
+    const updatedForm = await Form.findOneAndUpdate({"lawyerDecision": 0,"investor": idinv ,"_id":id } ,req.body)
+    res.json({ msg: "Form updated successfully", data: updatedForm })}
+    else res.json({ msg: "form not rejected "});
+  
+  });
 
-
+  
+  
+//As an investor , I should be notified with the amount and the due date (fees calculation)
+router.get("/notifyAmountAndDueDate/:id", async (req, res) => {
+    const type = req.params.type
+    const id = req.params.id
+    const user = await User.findById(id);
+        if (!user)
+            return res.status(404).send({
+                error: "This User does not exist"
+            });    
+  
+      
+    const form = await Form.findOne({"investor": id }, {"dateOfPayment": 1 ,"amountOfPayment":1 ,_id:0})
+    
+    
+    res.json({ data: form });
+    
+    
+    })
+    
 //4.1-As an Investor I should be able to track request/case status
 router.get('/trackRequest/:id', async (req, res) => {
     try{ const id = req.params.id
