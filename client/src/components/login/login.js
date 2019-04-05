@@ -1,31 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './login.css';
 
-class App extends Component {
+class Login extends Component {
   state = {
-    response: '',
-    post: {email:'',
-            password:''
-          },
           email:'',
-          password    :'',
+          password :'',
     responseToPost: '',
-  };
-
-  componentDidMount() {
-    this.callApi()
-      .then(res => this.setState({ response: res.data[1].name }))
-      .catch(err => console.log(err));
-  }
-
-  callApi = async () => {
-    const response = await fetch('/api/user/getUsers');
-    const body = await response.json();
-
-    if (response.status !== 200) throw Error(body.message);
-
-    return body;
   };
 
   handleSubmit = async e => {
@@ -41,21 +21,22 @@ class App extends Component {
 
     this.setState({ responseToPost: body });
   };
+
+  
   render() {
     return (
-      <div className="App">
-        <p>{this.state.response}</p>
+      <div className="Login">
         <form onSubmit={this.handleSubmit}>
           <p>
-            <strong>Post to Server:</strong>
+            <strong>Login to Server:</strong>
           </p>
-          email
+          Email:
           <input
             type="text"
             value={this.state.email}
             onChange={e => this.setState({ email:e.target.value })}
           />
-          password
+          Password:
           <input
             type="text"
             value={this.state.password}
@@ -69,4 +50,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Login;
