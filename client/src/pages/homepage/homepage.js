@@ -1,32 +1,34 @@
 import React, { Component } from 'react';
 import '../homepage/homepage.css';
 import Login from '../../components/login'
+import Table from '../../components/table'
 class HomePage extends Component {
-  state = {
+  // state = {
     
-  };
+  // };
 
-  componentDidMount() {
-    this.callApi()
-      .then(res => this.setState({ response: res.data[0].name }))
-      .catch(err => console.log(err));
-  }
+  // componentDidMount() {
+  //   this.callApi()
+  //     .then(res => this.setState({ response: res.data[0].name }))
+  //     .catch(err => console.log(err));
+  // }
 
-  callApi = async () => {
-    const response = await fetch('/api/user/getUsers');
-    const body = await response.json();
+  // callApi = async () => {
+  //   const response = await fetch('/api/user/getUsers');
+  //   const body = await response.json();
 
-    if (response.status !== 200) throw Error(body.message);
+  //   if (response.status !== 200) throw Error(body.message);
 
-    return body;
-  };
+  //   return body;
+  // };
  
   render() {
     return (
       <div className="HomePage">
-        <p>{this.state.response}</p>
+        {/* <p>{this.state.response}</p> */}
         IN HomePage.JS
         <Login/>
+        <Table/>
       </div>
     );
   }
