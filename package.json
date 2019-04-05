@@ -6,7 +6,10 @@
   "scripts": {
     "start": "node index.js",
     "index": "nodemon index.js",
-    "test": "jest"
+    "test": "jest",
+    "client": "cd client && npm start",
+    "server": "nodemon index.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run-script server\" \"npm run-script client\""
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +25,7 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "mongoose": "^5.4.16",
+    "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
