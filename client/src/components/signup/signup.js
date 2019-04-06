@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './signup.css';
+import {Form , Button,Col} from 'react-bootstrap'
 
-class Signup extends Component {
+class SignUp extends Component {
   state = {
           name: '',
           accountType: '',
@@ -18,8 +19,7 @@ class Signup extends Component {
           investorType: '',
           capital:'',
           capitalCurrency: '',
-
-    responseToPost: '',
+          responseToPost: ''
   };
 
   handleSubmit = async e => {
@@ -42,7 +42,7 @@ class Signup extends Component {
 
 
 render(){
-
+return (
 <Form>
 
  <Form.Row>
@@ -123,7 +123,7 @@ render(){
 
   <Form.Row>    
   <Form.Label>Date of Birth *</Form.Label>
-  <DatePicker/> 
+  {/* <DatePicker/>  */}
   </Form.Row>
 
 
@@ -158,4 +158,9 @@ render(){
   <Button variant="primary" type="submit">
     Submit
   </Button>
-</Form>}}
+</Form>
+)
+}
+}
+
+export default SignUp;

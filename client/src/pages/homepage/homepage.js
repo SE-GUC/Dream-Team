@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../homepage/homepage.css';
 import Login from '../../components/login'
+import SignUp from '../../components/signup';
 class HomePage extends Component {
   state = {
     
@@ -27,6 +28,7 @@ class HomePage extends Component {
         <p>{this.state.response}</p>
         IN HomePage.JS
         <Login/>
+        <SignUp/>
       </div>
     );
   }
