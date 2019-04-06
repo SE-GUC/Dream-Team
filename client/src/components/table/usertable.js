@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { Table } from 'reactstrap';
 
-
-class Table extends Component {
+class userTable extends Component {
  constructor(props){
    super(props)
    this.state = {
@@ -13,7 +13,7 @@ class Table extends Component {
 
  componentDidMount() {
 
-   fetch('api/user/getUsers')
+   fetch(this.props.ApiURl)
    .then(res=>res.json())
    .then(json=>{
      this.setState({
@@ -35,7 +35,7 @@ class Table extends Component {
    else{
      return(
       <div className="Table">
-      <table>
+      <Table dark hover bordered>
         <thead>
           <tr>
             <th> name </th>
@@ -80,7 +80,7 @@ class Table extends Component {
 
           )}
         </tbody>
-      </table>
+      </Table>
     </div>
      
      )
@@ -88,4 +88,4 @@ class Table extends Component {
 
 }}
 
-export default Table;
+export default userTable;
