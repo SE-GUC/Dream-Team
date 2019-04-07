@@ -231,6 +231,25 @@ router.get("/pendingCase/:id", async (req, res) =>
        res.json({ data: form })
     
 });
+router.get("/lawyer/:type/AR/:id", async (req, res) => 
+{
+   const type = req.params.type
+   const id = req.params.id
+   const user = await User.findById(id);
+       if (!user)
+           return res.status(404).send({
+               error: "This User does not exist"
+           });
+    const dec = await Form.find(({"lawyerDecision": 1 } || {"lawyerDecision": -1 }));       
+   if(type===typesEnum.accountTypes.LAWYER && dec){
+     
+   const form1 = await Form.find({"lawyer": id ,"lawyerDecision": 1 }  );
+   const form2 = await Form.find({"lawyer": id ,"lawyerDecision": -1 } );
+   res.json({ data: form1 ,data2:form2 })}
+   else res.json({ msg: "No Forms for this reviewer "});
+   
+   
+ });
 
 
 module.exports = router

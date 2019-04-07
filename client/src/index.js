@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -14,7 +15,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Case from './pages/LRspecificCase';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
-
 ReactDOM.render(
   <Router>
     <div>
@@ -25,7 +25,11 @@ ReactDOM.render(
       <Route path="/employeeTable" component={EmployeeTable} />
       <Route path="/formTable" component={FormTable} />
       <Route path="/userTable" component={UserTable} />
+      <Route path="/companyRules" component={ComRule} />
+      <Route path="/feesCalculation" component={CalcRule} />
     </div>
   </Router>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
+
+
