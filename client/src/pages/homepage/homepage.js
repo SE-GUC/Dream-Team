@@ -1,5 +1,13 @@
 import React, { Component } from "react";
 import "../homepage/homepage.css";
+import React, { Component } from 'react';
+import '../homepage/homepage.css';
+import Login from '../../components/login';
+import SignUp from '../../components/signup';
+import Table from '../../components/userTable/userTable';
+import Tableform from '../../components/formTable';
+import AuthHelperMethods from '../../components/AuthHelperMethods';
+import withAuth from '../../components/withAuth';
 
 class HomePage extends Component {
   state = {};
@@ -55,11 +63,67 @@ class HomePage extends Component {
             onClick={e => {
               this.viewInvestor();
             }}
+            >
+            </button>
+            </div>
+            
+        <div>
+          To Update Press here
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.update();
+            }}
           >
-            Click to view Pending and Approved companies
+            Click to Update
           </button>
         </div>
-      </div>
+
+        <div>
+          To SignUp press here
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.signUp();
+            }}
+          >
+            Click to signup
+          </button>
+        </div>
+        <div>
+          To view employee table
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.employeeTable();
+            }}
+          >
+            Click to view
+          </button>
+        </div>
+        <div>
+          To view form table
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.formTable();
+            }}
+          >
+            Click to view form
+          </button>
+        </div>
+        <div>
+          To view user table
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.userTable();
+            }}
+          >
+            Click to view user
+          </button>
+        </div>
+        </div>
     );
   }
 }

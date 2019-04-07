@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Table } from "reactstrap";
+import React, { Component } from 'react';
+import { Table } from 'reactstrap';
 
-class userTable extends Component {
+class employeeTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,7 +11,7 @@ class userTable extends Component {
   }
 
   componentDidMount() {
-    fetch("api/user/getUsers")
+    fetch('api/admin/employee')
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -28,7 +28,7 @@ class userTable extends Component {
     } else {
       return (
         <div className="Table">
-          <Table dark hover bordered>
+          <Table dark hover bordered striped size="sm">
             <thead>
               <tr>
                 <th> name </th>
@@ -78,4 +78,4 @@ class userTable extends Component {
   }
 }
 
-export default userTable;
+export default employeeTable;
