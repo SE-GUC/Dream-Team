@@ -8,40 +8,40 @@ const userschema = new Schema({
   },
   accountType: {
     type: String
-    // required: true
+     ,required: true
   },
   gender: {
     type: String
-    // required: true
+     ,required: true
   },
   nationality: {
     type: String
-    // required: true
+     ,required: true
   },
   typeID: {
-    type: String
-    //  required: true
+    type: String,
+      required: true
   },
   numberID: {
-    type: Number
-    //  required: true
+    type: Number,
+     required: true
   },
   dateOfBirth: {
-    type: Date
-    //  required: true
+    type: Date,
+    required: true
   },
 
   address: {
-    type: String
-    // required: true
+    type: String,
+    required: true
   },
   phoneNumber: {
-    type: Number
-    // required: true
+    type: Number,
+    required: true
   },
   faxNumber: {
-    type: Number
-    // required: true
+    type: Number,
+     required: true
   },
   accountStatus: {
     type: Boolean,
@@ -50,11 +50,11 @@ const userschema = new Schema({
 
   email: {
     type: String
-    // required: true
+    , required: true
   },
   password: {
     type: String
-    // required: true
+    , required: true
   },
   rejectionMessage: {
     type: String,
@@ -62,15 +62,15 @@ const userschema = new Schema({
   },
   investorType: {
     type: String
-    // require: true
+    , require: true
   },
   capital: {
     type: Number
-    //  require:true
+    ,  require:true
   },
   capitalCurrency: {
     type: String
-    // require: true
+    , require: true
   }
 });
 
