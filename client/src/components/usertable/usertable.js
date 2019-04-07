@@ -13,7 +13,7 @@ class userTable extends Component {
 
  componentDidMount() {
 
-   fetch(this.props.ApiURl)
+   fetch(this.props.ApiURL)
    .then(res=>res.json())
    .then(json=>{
      this.setState({

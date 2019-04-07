@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import './login.css';
 import { Button,Form } from 'react-bootstrap';
+import Popup from "reactjs-popup";
 
 class Login extends Component {
+  
   state = {
           email:'',
           password :'',
     responseToPost: '',
   };
-
+  
+  
   handleSubmit = async e => {
     e.preventDefault();
     const response = await fetch('/api/login', {
@@ -31,23 +34,23 @@ class Login extends Component {
   <Form.Group controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
     <Form.Control type="email" placeholder="Enter email"  value={this.state.email} onChange={e => this.setState({ email:e.target.value }) } />
-    <Form.Text className="text-muted">
-      We'll share your email with anyone else.
-    </Form.Text>
+   
   </Form.Group>
 
   <Form.Group controlId="formBasicPassword">
     <Form.Label>Password</Form.Label>
     <Form.Control type="password" placeholder="Password"  value={this.state.password}  onChange={e => this.setState({ password:e.target.value })}/>
   </Form.Group>
-  <Form.Group controlId="formBasicChecbox">
-    <Form.Check type="checkbox" label="Check me out" />
-  </Form.Group>
-  <Button variant="primary" type="submit">
+ 
+ 
+  <Popup trigger={ <Button variant="primary" type="submit" >
     Submit
-  </Button>
-  <p>{this.state.responseToPost}</p>
-</Form>;
+  </Button>} position="bottom center">
+    <div>{this.state.responseToPost}</div>
+  </Popup>
+  
+  
+</Form>
       </div>
     );
   }
