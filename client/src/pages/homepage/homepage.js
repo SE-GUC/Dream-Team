@@ -42,7 +42,7 @@ class HomePage extends Component {
 
   render() {
     return (
-<<<<<<< HEAD
+
       <div className="HomePage">
        
         {/* IN HomePage.JS */}
@@ -51,7 +51,7 @@ class HomePage extends Component {
         <Tableform/>
         {/* <LawyerCase/> */}
         {/* <ReviewerCase/> */}
-=======
+
       <div className="App">
         <div className="App-header">
           <h2>Welcome Home</h2>
@@ -123,7 +123,7 @@ class HomePage extends Component {
             Click to view user
           </button>
         </div>
->>>>>>> Dev
+
       </div>
     );
   }
