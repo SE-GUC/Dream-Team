@@ -38,6 +38,7 @@ class HomePage extends Component {
     return (
       <div className="App">
         <div className="App-header">
+        <Table/>
           <h2>Welcome Home</h2>
         </div>
         <div>
