@@ -74,36 +74,7 @@ class formTable extends Component {
               <td>{x.fax}</td>
               <td>{x.currency}</td>
               <td>{x.capital}</td> */}
-<<<<<<< HEAD
-              <td>{x.entityType}</td>
-              <td>{x.regulatedLaw}</td>
-              <td>{x.investor}</td>
-              <td>{x.lawyer}</td>
-              <td>{x.lawyerComment}</td>
-              <td>{x.lawyerDecision}</td>
-              <td>{x.reviewer}</td>
-              <td>{x.feesCalculation}</td>
-              <td>{x.reviwerComment}</td>
-              <td>{x.reviewerDecision}</td>
-              <td>{x.dateOfApproval}</td>
-              <td>{x.amountOfPayment}</td>
-              <td>{x.dateOfPayment                                                                                                                                        }</td>
-              <td>{x.paymentId}</td>
-              <td>{x.formStatus}</td>
-              {/* <td>{x.board}</td> */}
-              </tr>
-              
-          )}
-        
-        </tbody>
-      </Table>
-    </div>
-     
-     )
-   }
 
-}}
-=======
                   <td>{x.entityType}</td>
                   <td>{x.regulatedLaw}</td>
                   <td>{x.investor}</td>
@@ -129,6 +100,5 @@ class formTable extends Component {
     }
   }
 }
->>>>>>> Dev
 
 export default formTable;
