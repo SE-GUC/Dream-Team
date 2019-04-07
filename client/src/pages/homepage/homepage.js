@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import '../homepage/homepage.css';
 import Login from '../../components/login'
-// import Table from '../../components/userTable'
+import Tablee from '../../components/userTable'
 import Tableform from '../../components/formTable'
+import LawyerCase from '../../components/lawyerCase'
+import ReviewerCase from '../../components/reviewerCase'
 class HomePage extends Component {
   // state = {
     
@@ -27,10 +29,12 @@ class HomePage extends Component {
     return (
       <div className="HomePage">
        
-        IN HomePage.JS
-        <Login/>
-        {/* <Table/> */}
-        <Tableform/>
+        {/* IN HomePage.JS */}
+        {/* <Login/> */}
+        <Tablee/>
+        {/* <Tableform/> */}
+        {/* <LawyerCase/> */}
+        {/* <ReviewerCase/> */}
       </div>
     );
   }

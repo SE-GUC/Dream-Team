@@ -113,14 +113,14 @@ router.get('/:id', async (req, res) => {
         const form = await Form.findById(id);
         if (!form)
             return res.status(404).send({
-                error: "This Form does not exist"
+                msg: "This Form does not exist"
             });
         res.json({
             data: form
         });
     } catch (err) {
         res.json({
-            msg: err.message
+            msg:"This Form does not exist"
         });
     }
   })

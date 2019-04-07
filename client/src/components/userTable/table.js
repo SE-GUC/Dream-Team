@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 
-class Table extends Component {
+class Tablee extends Component {
  constructor(props){
    super(props)
    this.state = {
@@ -88,4 +88,4 @@ class Table extends Component {
 
 }}
 
-export default Table;
+export default Tablee;

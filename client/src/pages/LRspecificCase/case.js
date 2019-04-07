@@ -20,17 +20,24 @@ class Case extends Component {
       headers: {
         'Content-Type': 'application/json',
       },
-    //   body: JSON.stringify({ _id:this.state.formID })
+   
     });
-    const body = await response.json();
+   
+const body = await response.json();
+if(JSON.stringify(body).charAt(2)!=="m"){
 if(!(JSON.stringify(body.data.lawyer)))
 this.setState({Lres:"No lawyer for this form"})
+else this.setState({lawyer:JSON.stringify(body.data.lawyer)
+});
 if(!(JSON.stringify(body.data.reviewer)))
 this.setState({Lres:"No reviewer for this form"})
-
-this.setState({ responseToPost: JSON.stringify(body),lawyer:JSON.stringify(body.data.lawyer),reviewer:JSON.stringify(body.data.reviewer)
-    });
-
+else this.setState({reviewer:JSON.stringify(body.data.reviewer)
+});
+this.setState({ responseToPost: ''
+});
+}else
+  this.setState({ responseToPost: JSON.stringify(body.msg),lawyerName:'',reviewerName:'', Rres:'', Lres:'',lawyer:'',reviewer:''
+  });
 
     if(this.state.lawyer){
     var body50 =  JSON.parse(this.state.lawyer);
@@ -39,7 +46,7 @@ this.setState({ responseToPost: JSON.stringify(body),lawyer:JSON.stringify(body.
         headers: {
           'Content-Type': 'application/json',
         },
-      //   body: JSON.stringify({ _id:this.state.formID })
+  
       });
       const body1 = await response1.json();
       this.setState({
@@ -54,7 +61,7 @@ if(this.state.reviewer){
         headers: {
           'Content-Type': 'application/json',
         },
-      //   body: JSON.stringify({ _id:this.state.formID })
+
       });
       
       const body2 = await response2.json();
@@ -69,9 +76,8 @@ if(this.state.reviewer){
       <div className="Case">
         <form onSubmit={this.handleSubmit}>
           <p>
-            <strong>Get lawyer and reviewer working on a specific case</strong>
           </p>
-          Form ID:
+          Please insert Form ID:
           <input
             type="text"
             value={this.state.formID}
@@ -80,12 +86,12 @@ if(this.state.reviewer){
          
           <button type="submit">search</button>
         </form>
-        <p>{this.state.responseToPost}</p>
-        <p>{this.state.lawyer}</p>
-        <p>{this.state.reviewer}</p>
+        <p >{this.state.responseToPost}</p>
+       Lawyer:
         <p>{this.state.Lres}</p>
-        <p>{this.state.Rres}</p>
         <p>{this.state.lawyerName}</p>
+        Reviewer:
+        <p>{this.state.Rres}</p>
         <p>{this.state.reviewerName}</p>
     
       </div>
