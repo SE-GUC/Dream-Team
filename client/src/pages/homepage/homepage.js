@@ -31,8 +31,8 @@ class HomePage extends Component {
        
         {/* IN HomePage.JS */}
         {/* <Login/> */}
-        <Tablee/>
-        {/* <Tableform/> */}
+        {/* <Tablee/> */}
+        <Tableform/>
         {/* <LawyerCase/> */}
         {/* <ReviewerCase/> */}
       </div>
