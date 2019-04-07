@@ -1,37 +1,40 @@
-import React, { Component } from 'react';
-import '../homepage/homepage.css';
-import Login from '../../components/login';
-import SignUp from '../../components/signup';
-import Table from '../../components/userTable/userTable';
-import Tableform from '../../components/formTable';
-import AuthHelperMethods from '../../components/AuthHelperMethods';
-import withAuth from '../../components/withAuth';
+import React, { Component } from "react";
+import "../homepage/homepage.css";
+import Login from "../../components/login";
+import SignUp from "../../components/signup";
+import Table from "../../components/usertable";
+import Tableform from "../../components/formTable";
+import AuthHelperMethods from "../../components/AuthHelperMethods";
+import withAuth from "../../components/withAuth";
 
 class HomePage extends Component {
   state = {};
   update() {
-    this.props.history.push('/update');
+    this.props.history.push("/update");
   }
   login() {
-    this.props.history.push('/login');
+    this.props.history.push("/login");
   }
   signUp() {
-    this.props.history.push('/signup');
+    this.props.history.push("/signup");
   }
   userTable() {
-    this.props.history.push('/userTable');
+    this.props.history.push("/userTable");
   }
   employeeTable() {
-    this.props.history.push('/employeeTable');
+    this.props.history.push("/employeeTable");
+  }
+  viewRejectedForms() {
+    this.props.history.push("/viewRejectedForms");
   }
   formTable() {
-    this.props.history.push('/formTable');
+    this.props.history.push("/formTable");
   }
   Auth = new AuthHelperMethods();
 
   _handleLogout = () => {
     this.Auth.logout();
-    this.props.history.replace('/login');
+    this.props.history.replace("/login");
   };
 
   render() {
@@ -51,6 +54,19 @@ class HomePage extends Component {
             Click to login
           </button>
         </div>
+
+        <div>
+          Investor view Rejected form
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.viewRejectedForms();
+            }}
+          >
+            Click to view
+          </button>
+        </div>
+
         <div>
           To Update Press here
           <button
