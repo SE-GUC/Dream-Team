@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './signup.css';
 import {Form , Button,Col} from 'react-bootstrap'
+import Popup from 'reactjs-popup';
 
 class SignUp extends Component {
   state = {
@@ -31,11 +32,13 @@ class SignUp extends Component {
       },
       body: JSON.stringify({ name:this.state.name, accountType: this.state.accountType, gender: this.state.gender, nationality: this.state.nationality,  email:this.state.email , password:this.state.password,
     typeID:this.state.typeID, numberID: this.state.numberID, phoneNumber: this.state.phoneNumber, faxNumber: this.state.faxNumber, dateoOfBirth: this.state.dateOfBirth, address: this.state.address, investorType: this.state.investorType, capital: this.state.capital, capitalCurrency: this.state.capitalCurrency}),
+    }).catch(err => {
+      alert(err);
     });
     const body = await response.text();
     this.setState({ responseToPost: body });
-    this.props.history.replace("/login");
-    this.setState({ responseToPost: body });
+    // this.props.history.replace("/login");
+    // this.setState({ responseToPost: body });
   };
 
 
@@ -44,7 +47,9 @@ class SignUp extends Component {
 
 render(){
 return (
-<Form>
+  <div className="signup">
+
+<Form onSubmit={this.handleSubmit}>
 
  <Form.Row>
     <Form.Group as={Col} controlId="formGridName">
@@ -156,10 +161,18 @@ return (
     <Form.Check type="checkbox" label="Check me out" />
   </Form.Group>
 
-  <Button variant="primary" type="submit">
-    Submit
-  </Button>
+  <Popup
+            trigger={
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            }
+            position="bottom center"
+          >
+            <div>{this.state.responseToPost}</div>
+          </Popup>
 </Form>
+</div>
 )
 }
 }
