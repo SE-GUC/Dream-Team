@@ -205,7 +205,7 @@ router.get('/showForm/:formId/',async(req,res)=>{
     }
     else{
     if (form.hasOwnProperty('lawyer')) {
-      return res.status(404).send({error: 'Form already set'})
+      return eres.status(404).send({error: 'Form already set'})
       // Do something
   }else{
  
@@ -214,11 +214,11 @@ router.get('/showForm/:formId/',async(req,res)=>{
 }
  })
 
-
+// As a lawyer i should be able to view my working forms 
 router.get("/pendingCase/:id", async (req, res) => 
 {
    const id = req.params.id;
-   const form = await Form.findOne({"lawyer": id},{"lawyerDecision": 0})
+   const form = await Form.find({"lawyer": id,"lawyerDecision": 0})
    //;
    
    //const form2 = await form.findOne( {"lawyerDecision": 0})
