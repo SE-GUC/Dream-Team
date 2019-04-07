@@ -19,8 +19,6 @@ import AuthHelperMethods from '../../components/AuthHelperMethods';
 import withAuth from '../../components/withAuth';
 
 
-
-
 class HomePage extends Component {
   state = {};
   lawyerview(){
@@ -31,45 +29,49 @@ class HomePage extends Component {
     this.props.history.push('/reviewershowmyforms');
   }
   update() {
+
+    this.props.history.push('/update');
+
     this.props.history.push("/update");
 
   }
   viewInvestor() {
     this.props.history.push("/investor");
 
+
   }
   login() {
-    this.props.history.push("/login");
+    this.props.history.push('/login');
   }
   signUp() {
-    this.props.history.push("/signup");
+    this.props.history.push('/signup');
   }
   userTable() {
-    this.props.history.push("/userTable");
+    this.props.history.push('/userTable');
   }
   employeeTable() {
-    this.props.history.push("/employeeTable");
+    this.props.history.push('/employeeTable');
   }
   formTable() {
-    this.props.history.push("/formTable");
+    this.props.history.push('/formTable');
   }
 
   _handleLogout = () => {
     this.Auth.logout();
-    this.props.history.replace("/login");
+    this.props.history.replace('/login');
   };
 
   render() {
     return (
+      <div className="HomePage">
+        <div className="App">
+          <div className="App-header">
+            <Table />
 
-      <div className="App">
-        <div className="App-header">
+            <Layout />
 
-        <Table/>
-
-          <Layout />
-
-          <h2>Welcome Home</h2>
+            <h2>Welcome Home</h2>
+          </div>
         </div>
         <div>
           To Login Press here
@@ -172,10 +174,8 @@ class HomePage extends Component {
             Click to view user
           </button>
         </div>
-        </div>
 
-
-   
+      </div>
 
 
     );
