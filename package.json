@@ -4,7 +4,7 @@
   "description": "Software Engineering Project",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently --kill-others-on-fail \"npm run-script server\" \"npm run-script client\"",
+    "start": "node index.js",
     "index": "nodemon index.js",
     "test": "jest",
     "client": "cd client && npm start",
