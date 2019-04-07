@@ -96,7 +96,7 @@ class formTable extends Component {
               <td>{x.reviewerDecision}</td>
               <td>{x.dateOfApproval}</td>
               <td>{x.amountOfPayment}</td>
-              <td>{x.dateOfPayment}</td>
+              <td>{x.dateOfPayment                                                                                                                                        }</td>
               <td>{x.paymentId}</td>
               <td>{x.formStatus}</td>
               {/* <td>{x.board}</td> */}

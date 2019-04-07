@@ -35,7 +35,7 @@ class Tablee extends Component {
    else{
      return(
       <div className="Table">
-      <Table dark hover bordered>
+      <Table dark hover>
         <thead>
           <tr>
             <th> name </th>
