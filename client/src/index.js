@@ -51,7 +51,8 @@ ReactDOM.render(
       <Route path="/userTable" component={UserTable} />
       <Route path="/reviewershowmyforms" component={ReviewerViewhisForms} />
       <Route path="/Lawyershowmyforms" component={LawyerViewhisCases} />
-      
+      <Route path="/companyRules" component={ComRule} />
+      <Route path="/feesCalculation" component={CalcRule} />
     </div>
   </Router>,
   document.getElementById("root")
