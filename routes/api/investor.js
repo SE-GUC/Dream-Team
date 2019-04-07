@@ -21,6 +21,24 @@ mongoose.set('useCreateIndex', true);
 router.use(bodyParser.urlencoded({
     extended: false
 }))
+//As an investor , I should be able to view rejected apps
+router.get('/viewRejectedForms/:id', async (req, res) => {
+  try{ const id = req.params.id
+   const form = await Form.find({"lawyerDecision": 0,"investor": id})
+
+    if (!form)
+           return res.status(404).send({
+               error: "This form does not exist"
+           });
+       res.json({
+           data: form
+       });
+   } catch (err) {
+       res.json({
+           msg: err.message
+       });
+   }
+});
 
 //As an investor , I should be able to view rejected apps and update them
 router.put("/updateForm/:idform/:idInvestor", async (req, res) => {
