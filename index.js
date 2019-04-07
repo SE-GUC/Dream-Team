@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const morgan = require('morgan')
 //const router = express.Router()
 
 // Require Router Handlers
@@ -30,6 +31,7 @@ mongoose
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(cors())
+app.use(morgan('combined'))
 // initiallize passport
 app.use(passport.initialize())
 
@@ -52,7 +54,7 @@ app.use((req,res) => res.status(404).send(`<h1>Can not find what you're looking 
 
 let port = process.env.PORT;
 if (port == null || port == "") {
-  port = 3000;
+  port = 5000;
 }
 app.listen(port);
 //Collapse
