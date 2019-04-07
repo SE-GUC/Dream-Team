@@ -52,8 +52,8 @@ class userTable extends Component {
             <th> investorType </th>
             <th> capital </th>
             <th> capitalCurrency </th>
-            <th> accountStatus </th>
-            <th> rejectionMessage </th>
+            {/* <th> accountStatus </th> */}
+            {/* <th> rejectionMessage </th> */}
             
           </tr>
         </thead>
@@ -74,8 +74,8 @@ class userTable extends Component {
               <td>{x.investorType}</td>
               <td>{x.capital}</td>
               <td>{x.capitalCurrency}</td>
-              <td>{x.accountStatus}</td>
-              <td>{x.rejectionMessage}</td>
+              {/* <td>{x.accountStatus}</td> */}
+              {/* <td>{x.rejectionMessage}</td> */}
               </tr>
 
           )}
