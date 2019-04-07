@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 
-class employeeTable extends Component {
+class userTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,7 +11,7 @@ class employeeTable extends Component {
   }
 
   componentDidMount() {
-    fetch('api/admin/employee')
+    fetch('api/user/getUsers')
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -28,7 +28,7 @@ class employeeTable extends Component {
     } else {
       return (
         <div className="Table">
-          <Table dark hover bordered striped size="sm">
+          <Table dark hover bordered>
             <thead>
               <tr>
                 <th> name </th>
@@ -45,8 +45,8 @@ class employeeTable extends Component {
                 <th> investorType </th>
                 <th> capital </th>
                 <th> capitalCurrency </th>
-                <th> accountStatus </th>
-                <th> rejectionMessage </th>
+                {/* <th> accountStatus </th> */}
+                {/* <th> rejectionMessage </th> */}
               </tr>
             </thead>
             <tbody>
@@ -66,8 +66,8 @@ class employeeTable extends Component {
                   <td>{x.investorType}</td>
                   <td>{x.capital}</td>
                   <td>{x.capitalCurrency}</td>
-                  <td>{x.accountStatus}</td>
-                  <td>{x.rejectionMessage}</td>
+                  {/* <td>{x.accountStatus}</td> */}
+                  {/* <td>{x.rejectionMessage}</td> */}
                 </tr>
               ))}
             </tbody>
@@ -78,4 +78,4 @@ class employeeTable extends Component {
   }
 }
 
-export default employeeTable;
+export default userTable;
