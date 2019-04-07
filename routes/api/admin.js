@@ -174,7 +174,7 @@ router.put('/reject/:id', async (req, res) => {
             return res.status(404).send({
                 error: "This User does not exist"
             });
-        const approve={
+        const approve = {
             accountStatus: false
         }
         const approvedacc = await User.findByIdAndUpdate(id,approve);

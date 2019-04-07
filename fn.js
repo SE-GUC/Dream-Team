@@ -40,7 +40,7 @@ investortrack: async () => {
             finializedCases: async () => {
                 const getlawyer =await axios.get('http://localhost:3000/api/lawyer/5ca10eadb7701f2158efbad2')
                 return getlawyer
-            }
+            },
 
 
     getUser: async () => {

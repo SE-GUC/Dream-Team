@@ -11,6 +11,9 @@ import Lawyerview from '../../components/LawyerViewhisCases'
 import formTable from '../../components/formTable';
 import SignUp from '../../components/signup';
 import Table from '../../components/userTable/userTable';
+// import Tableform from '../../components/formTable';
+import searchBar from '../../components/searchBar';
+// import AuthHelperMethods from '../../components/AuthHelperMethods';
 import withAuth from '../../components/withAuth';
 
 
@@ -51,6 +54,10 @@ class HomePage extends Component {
   formTable() {
     this.props.history.push('/formTable');
   }
+  searchBar(){
+    this.props.history.push("/searchBar")
+  }
+  Auth = new AuthHelperMethods();
   caseRe() {
     this.props.history.push('/case');
   }
@@ -195,10 +202,20 @@ class HomePage extends Component {
           </button>
           </div>
         </div>
-
+        <div>
+       To search
+       <button
+         className="btn btn-primary width-150"
+         onClick={e => {
+           this.searchBar();
+         }}
+       >
+         Click to search
+       </button>
+     </div>
       </div>
-
-
+       
+  
     );
   }
 }
