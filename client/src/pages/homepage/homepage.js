@@ -1,4 +1,7 @@
 
+import React, { Component } from "react";
+import "../homepage/homepage.css";
+
 import React, { Component } from 'react';
 import '../homepage/homepage.css';
 <<<<<<< HEAD
@@ -53,6 +56,11 @@ class HomePage extends Component {
   }
   update() {
     this.props.history.push("/update");
+
+  }
+  viewInvestor() {
+    this.props.history.push("/investor");
+
   }
   login() {
     this.props.history.push("/login");
@@ -69,7 +77,6 @@ class HomePage extends Component {
   formTable() {
     this.props.history.push("/formTable");
   }
-  Auth = new AuthHelperMethods();
 
   _handleLogout = () => {
     this.Auth.logout();
@@ -84,7 +91,11 @@ class HomePage extends Component {
 >>>>>>> Dev
       <div className="App">
         <div className="App-header">
+
+        <Table/>
+
           <Layout />
+
           <h2>Welcome Home</h2>
         </div>
         <div>
@@ -98,6 +109,18 @@ class HomePage extends Component {
             Click to login
           </button>
         </div>
+
+        <div>
+          To view Pending and Approved companies
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.viewInvestor();
+            }}
+            >
+            </button>
+            </div>
+            
         <div>
         To view lawyer form push here
         <button
@@ -177,10 +200,18 @@ class HomePage extends Component {
           </button>
         </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> Dev
       </div>
+=======
+        </div>
+
+
+   
+
+>>>>>>> Dev
     );
   }
 }

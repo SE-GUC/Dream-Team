@@ -1,4 +1,14 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import HomePage from "./pages/homepage";
+import Login from "./components/login";
+import UpdateTest from "./components/updateTest";
+import EmployeeTable from "./components/employeeTable";
+import SignUp from "./components/signup";
+import FormTable from "./components/formTable";
 
+<<<<<<< HEAD
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -16,11 +26,24 @@ import Case from './pages/LRspecificCase';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import ReviewerViewhisForms from './components/ReviewerViewhisForms'
+=======
+import UserTable from "./components/userTable/userTable";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Case from "./pages/LRspecificCase";
+import * as serviceWorker from "./serviceWorker";
+import "bootstrap/dist/css/bootstrap.css";
+import Investor from "./components/investor";
+import ComRule from "./components/comRule";
+import CalcRule from "./components/calcRule";
+
+>>>>>>> Dev
 ReactDOM.render(
   <Router>
     <div>
-      <Route exact path="/" component={HomePage} />
       <Route path="/login" component={Login} />
+
+      <Route path="/investor" component={Investor} />
       <Route path="/signup" component={SignUp} />
       <Route path="/update" component={UpdateTest} />
       <Route path="/employeeTable" component={EmployeeTable} />
@@ -33,5 +56,3 @@ ReactDOM.render(
   </Router>,
   document.getElementById("root")
 );
-
-
