@@ -335,10 +335,13 @@
 
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
+var _ = require('lodash');
+// var filter = require('lodash.filter');
+const bodyParser=require('body-parser');
 class searchBar extends React.Component {
   state = {
     query: "",
-    data: [],
+    orgData: [],
     filteredData: []
   };
 
@@ -346,29 +349,29 @@ class searchBar extends React.Component {
     const query = event.target.value;
     // console.log("hena")
     this.setState(prevState => {
-      const filteredData = prevState.data.filter(element => {
-        return element.name.toLowerCase().includes(query.toLowerCase());
-      });
+         const filteredData = _.filter(prevState.orgData,element => {
+          return element.some((v)=> v===query);
+        });
     //  console.log("hena")
 
       return {
-        query,
-        filteredData
+        query: query,
+        filteredData: filteredData
       };
     });
   };
 
   getData = () => {
-    fetch(`api/form/search`)
+     fetch(`api/form/search`)
       .then(response => response.json())
-      .then(data => {
+      .then(response => {
         const { query } = this.state;
-        const filteredData = data.filter(element => {
-          return element.name.toLowerCase().includes(query.toLowerCase());
+        const filteredData = _.filter(response,element => {
+          return element.some((v)=> v===query);
         });
 
         this.setState({
-          data: data,
+           orgData : response,
           filteredData: filteredData
         });
       });
@@ -383,12 +386,12 @@ class searchBar extends React.Component {
       <div className="searchForm">
         <form>
           <input
-            placeholder="Search for..."
+            placeholder="Search for..."S
             value={this.state.query}
             onChange={this.handleInputChange}
           />
         </form>
-        <div>{this.state.data.map(i => <p>{i.name}</p>)}</div>
+        <div>{this.state.filteredData.map(i => <p>{i.name}</p>)}</div>
       </div>
     );
   }
