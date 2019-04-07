@@ -8,15 +8,16 @@ import Tableform from '../../components/formTable'
 import AuthHelperMethods from './components/AuthHelperMethods';
 import withAuth from './components/withAuth';
 
+
+
+
+
+
 class HomePage extends Component {
   state = {
     
   };
 
-
-
-
-class HomePage extends Component {
   Auth = new AuthHelperMethods();
 
   _handleLogout = () => {
