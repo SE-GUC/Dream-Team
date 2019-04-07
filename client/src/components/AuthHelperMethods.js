@@ -24,6 +24,7 @@ export default class AuthHelperMethods {
       })
     }).then(res => {
       this.setToken(res.token); // Setting the token in localStorage
+      console.log(res.token)
       return Promise.resolve(res);
     });
   };

@@ -12,13 +12,13 @@ class formTable extends Component {
    };
    }
 
-   _handleLogout = () => {
+  //  _handleLogout = () => {
 
-    this.Auth.logout()
+  //   this.Auth.logout()
     
-    this.props.history.replace('/');
+  //   this.props.history.replace('/');
     
-    }
+  //   }
 
  componentDidMount() {
 
