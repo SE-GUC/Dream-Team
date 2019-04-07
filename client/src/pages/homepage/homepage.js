@@ -1,40 +1,16 @@
 
 import React, { Component } from "react";
 import "../homepage/homepage.css";
-
 import React, { Component } from 'react';
 import '../homepage/homepage.css';
-<<<<<<< HEAD
 import X from '../../components/ReviewerViewhisForms/ReviewerViewhisForms'
-
-=======
->>>>>>> Dev
 import Login from '../../components/login'
 import Tableuser from '../../components/userTable/table'
 import Tableform from '../../components/formTable'
 import LawyerCase from '../../components/lawyerCase'
 import ReviewerCase from '../../components/reviewerCase'
-<<<<<<< HEAD
 import Lawyerview from '../../components/LawyerViewhisCases'
 import formTable from '../../components/formTable';
-
-
-
-
- 
- 
-//   render() {
-//     return (
-//       <div className="HomePage">
-       
-//         {/* IN HomePage.JS */}
-         
-//         <X/>
-//         <Tableform/>
-//         {/* <LawyerCase/> */}
-//         {/* <ReviewerCase/> */}
-// ';
-=======
 import Login from '../../components/login';
 import SignUp from '../../components/signup';
 import Table from '../../components/userTable/userTable';
@@ -43,7 +19,7 @@ import AuthHelperMethods from '../../components/AuthHelperMethods';
 import withAuth from '../../components/withAuth';
 
 
->>>>>>> Dev
+
 
 class HomePage extends Component {
   state = {};
@@ -85,10 +61,7 @@ class HomePage extends Component {
 
   render() {
     return (
-<<<<<<< HEAD
-=======
 
->>>>>>> Dev
       <div className="App">
         <div className="App-header">
 
@@ -199,19 +172,12 @@ class HomePage extends Component {
             Click to view user
           </button>
         </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> Dev
-      </div>
-=======
         </div>
 
 
    
 
->>>>>>> Dev
+
     );
   }
 }
