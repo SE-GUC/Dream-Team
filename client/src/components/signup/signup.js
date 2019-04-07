@@ -34,11 +34,12 @@ class SignUp extends Component {
     typeID:this.state.typeID, numberID: this.state.numberID, phoneNumber: this.state.phoneNumber, faxNumber: this.state.faxNumber, dateoOfBirth: this.state.dateOfBirth, address: this.state.address, investorType: this.state.investorType, capital: this.state.capital, capitalCurrency: this.state.capitalCurrency}),
     }).catch(err => {
       alert(err);
+      
     });
     const body = await response.text();
     this.setState({ responseToPost: body });
-    // this.props.history.replace("/login");
-    // this.setState({ responseToPost: body });
+    this.props.history.replace("/login");
+   
   };
 
 
