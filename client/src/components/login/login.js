@@ -38,7 +38,7 @@ class Login extends Component {
           />
           Password:
           <input
-            type="text"
+            type="password"
             value={this.state.password}
             onChange={e => this.setState({ password:e.target.value })}
           />

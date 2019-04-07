@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Table } from 'reactstrap';
 
 class Table extends Component {
  constructor(props){
@@ -35,7 +35,7 @@ class Table extends Component {
    else{
      return(
       <div className="Table">
-      <table>
+      <Table dark hover bordered>
         <thead>
           <tr>
             <th> name </th>
@@ -80,7 +80,7 @@ class Table extends Component {
 
           )}
         </tbody>
-      </table>
+      </Table>
     </div>
      
      )
