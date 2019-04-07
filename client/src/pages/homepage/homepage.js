@@ -1,10 +1,16 @@
 
-
+import React, { Component } from "react";
+import "../homepage/homepage.css";
 import React, { Component } from 'react';
 import '../homepage/homepage.css';
-import Tablee from '../../components/userTable';
-import LawyerCase from '../../components/lawyerCase';
-import ReviewerCase from '../../components/reviewerCase';
+import X from '../../components/ReviewerViewhisForms/ReviewerViewhisForms'
+import Login from '../../components/login'
+import Tableuser from '../../components/userTable/table'
+import Tableform from '../../components/formTable'
+import LawyerCase from '../../components/lawyerCase'
+import ReviewerCase from '../../components/reviewerCase'
+import Lawyerview from '../../components/LawyerViewhisCases'
+import formTable from '../../components/formTable';
 import Login from '../../components/login';
 import SignUp from '../../components/signup';
 import Table from '../../components/userTable/userTable';
@@ -12,8 +18,16 @@ import Tableform from '../../components/formTable';
 import AuthHelperMethods from '../../components/AuthHelperMethods';
 import withAuth from '../../components/withAuth';
 
+
 class HomePage extends Component {
   state = {};
+  lawyerview(){
+    this.props.history.push('/Lawyershowmyforms');
+
+  }
+  reviewrview(){
+    this.props.history.push('/reviewershowmyforms');
+  }
   update() {
 
     this.props.history.push('/update');
@@ -83,6 +97,28 @@ class HomePage extends Component {
             </div>
             
         <div>
+        To view lawyer form push here
+        <button
+          className="btn btn-primary width-150"
+          onClick={e => {
+            this.lawyerview();
+          }}
+        >
+          Click to show
+        </button>
+        </div>
+        <div>
+        To view reviewr form Press here
+        <button
+          className="btn btn-primary width-150"
+          onClick={e => {
+            this.reviewrview();
+          }}
+        >
+          Click to view
+        </button>
+        </div>
+        <div>
           To Update Press here
           <button
             className="btn btn-primary width-150"
@@ -140,6 +176,7 @@ class HomePage extends Component {
         </div>
 
       </div>
+
 
     );
   }
