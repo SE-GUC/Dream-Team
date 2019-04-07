@@ -7,24 +7,12 @@ import UpdateTest from './components/updateTest';
 import EmployeeTable from './components/employeeTable';
 import SignUp from './components/signup';
 import FormTable from './components/formTable';
-
 import UserTable from './components/userTable/userTable';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Case from './pages/LRspecificCase';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
-
-<<<<<<< HEAD
-
-ReactDOM.render(<HomePage />, document.getElementById('root'));
-ReactDOM.render(<Case />, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
-=======
 ReactDOM.render(
   <Router>
     <div>
@@ -39,4 +27,4 @@ ReactDOM.render(
   </Router>,
   document.getElementById('root')
 );
->>>>>>> Dev
+
