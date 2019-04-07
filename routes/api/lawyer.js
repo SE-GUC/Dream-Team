@@ -205,7 +205,7 @@ router.get('/showForm/:formId/',async(req,res)=>{
     }
     else{
     if (form.hasOwnProperty('lawyer')) {
-      return res.status(404).send({error: 'Form already set'})
+      return eres.status(404).send({error: 'Form already set'})
       // Do something
   }else{
  
