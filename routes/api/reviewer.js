@@ -92,8 +92,8 @@ router.get("/reviewer/:type/AR/:id", async (req, res) =>
     const dec = await Form.find(({"reviewerDecision": 1 } || {"reviewerDecision": -1 }));       
    if(type===typesEnum.accountTypes.REVIEWER && dec){
      
-   const form1 = await Form.find({"reviewer": id } ,{"reviewerDecision": 1 } );
-   const form2 = await Form.find({"reviewer": id } ,{"reviewerDecision": -1 } );
+   const form1 = await Form.find({"reviewer": id ,"reviewerDecision": 1 }  );
+   const form2 = await Form.find({"reviewer": id , "reviewerDecision": -1 } );
    res.json({ data: form1 ,data2:form2 })}
    else res.json({ msg: "No Forms for this reviewer "});
    
