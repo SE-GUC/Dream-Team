@@ -1,12 +1,19 @@
-import React, { Component } from "react";
-import "../homepage/homepage.css";
-import Login from "../../components/login";
-import SignUp from "../../components/signup";
-import Table from "../../components/userTable/userTable";
-import Layout from "../../components/layout/layout";
-import Tableform from "../../components/formTable";
-import AuthHelperMethods from "../../components/AuthHelperMethods";
-import withAuth from "../../components/withAuth";
+
+import React, { Component } from 'react';
+import '../homepage/homepage.css';
+import Login from '../../components/login'
+import Tablee from '../../components/userTable'
+import Tableform from '../../components/formTable'
+import LawyerCase from '../../components/lawyerCase'
+import ReviewerCase from '../../components/reviewerCase'
+import Login from '../../components/login';
+import SignUp from '../../components/signup';
+import Table from '../../components/userTable/userTable';
+import Tableform from '../../components/formTable';
+import AuthHelperMethods from '../../components/AuthHelperMethods';
+import withAuth from '../../components/withAuth';
+
+
 
 class HomePage extends Component {
   state = {};
@@ -37,6 +44,16 @@ class HomePage extends Component {
 
   render() {
     return (
+
+      <div className="HomePage">
+       
+        {/* IN HomePage.JS */}
+        {/* <Login/> */}
+        {/* <Tablee/> */}
+        <Tableform/>
+        {/* <LawyerCase/> */}
+        {/* <ReviewerCase/> */}
+
       <div className="App">
         <div className="App-header">
           <Layout />
@@ -109,6 +126,7 @@ class HomePage extends Component {
             Click to view user
           </button>
         </div>
+
       </div>
     );
   }
