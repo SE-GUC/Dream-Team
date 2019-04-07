@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import './login.css';
+import { Button,Form } from 'react-bootstrap';
+import Popup from "reactjs-popup";
 
 class Login extends Component {
+  
   state = {
           email:'',
           password :'',
     responseToPost: '',
   };
-
+  
+  
   handleSubmit = async e => {
     e.preventDefault();
     const response = await fetch('/api/login', {
@@ -26,25 +30,29 @@ class Login extends Component {
   render() {
     return (
       <div className="Login">
-        <form onSubmit={this.handleSubmit}>
-          <p>
-            <strong>Login to Server:</strong>
-          </p>
-          Email:
-          <input
-            type="text"
-            value={this.state.email}
-            onChange={e => this.setState({ email:e.target.value })}
-          />
-          Password:
-          <input
-            type="password"
-            value={this.state.password}
-            onChange={e => this.setState({ password:e.target.value })}
-          />
-          <button type="submit">log in</button>
-        </form>
-        <p>{this.state.responseToPost}</p>
+
+      <Form  onSubmit={this.handleSubmit}>
+  <Form.Group controlId="formBasicEmail">
+    <Form.Label>Email address</Form.Label>
+    <Form.Control type="email" placeholder="Enter email"  value={this.state.email} onChange={e => this.setState({ email:e.target.value }) } />
+   
+  </Form.Group>
+
+  <Form.Group controlId="formBasicPassword">
+    <Form.Label>Password</Form.Label>
+    <Form.Control type="password" placeholder="Password"  value={this.state.password}  onChange={e => this.setState({ password:e.target.value })}/>
+  </Form.Group>
+ 
+ 
+  <Popup trigger={ <Button variant="primary" type="submit" >
+    Submit
+  </Button>} position="bottom center">
+    <div>{this.state.responseToPost}</div>
+  </Popup>
+  
+  
+</Form>
+
       </div>
     );
   }
