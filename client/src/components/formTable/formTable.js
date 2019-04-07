@@ -12,14 +12,6 @@ class formTable extends Component {
    };
    }
 
-  //  _handleLogout = () => {
-
-  //   this.Auth.logout()
-    
-  //   this.props.history.replace('/');
-    
-  //   }
-
  componentDidMount() {
 
    fetch('api/form/search')
