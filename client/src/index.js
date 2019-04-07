@@ -7,6 +7,7 @@ import UpdateTest from './components/updateTest';
 import EmployeeTable from './components/employeeTable';
 import SignUp from './components/signup';
 import FormTable from './components/formTable';
+import searchBar from './components/searchBar';
 
 import UserTable from './components/userTable/userTable';
 import './index.css';
@@ -25,6 +26,7 @@ ReactDOM.render(
       <Route path="/employeeTable" component={EmployeeTable} />
       <Route path="/formTable" component={FormTable} />
       <Route path="/userTable" component={UserTable} />
+      <Route path="/searchBar" component={searchBar} />
     </div>
   </Router>,
   document.getElementById('root')

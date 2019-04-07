@@ -4,6 +4,7 @@ import Login from '../../components/login';
 import SignUp from '../../components/signup';
 import Table from '../../components/userTable/userTable';
 import Tableform from '../../components/formTable';
+import searchBar from '../../components/searchBar';
 import AuthHelperMethods from '../../components/AuthHelperMethods';
 import withAuth from '../../components/withAuth';
 
@@ -26,6 +27,9 @@ class HomePage extends Component {
   }
   formTable() {
     this.props.history.push('/formTable');
+  }
+  searchBar(){
+    this.props.history.push("/searchBar")
   }
   Auth = new AuthHelperMethods();
 
@@ -107,7 +111,20 @@ class HomePage extends Component {
             Click to view user
           </button>
         </div>
+        <div>
+       To search
+       <button
+         className="btn btn-primary width-150"
+         onClick={e => {
+           this.searchBar();
+         }}
+       >
+         Click to search
+       </button>
+     </div>
       </div>
+       
+  
     );
   }
 }
