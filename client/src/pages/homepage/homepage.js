@@ -70,6 +70,19 @@ class HomePage extends Component {
     this.props.history.replace('/login');
     
     }
+    constructor(props) {
+      super(props);
+      this.state = {}
+      this.connecToServer = this.connecToServer.bind(this);
+    }
+  
+    connecToServer() {
+      fetch('/');
+    }
+  
+    componentDidMount() {
+      this.connecToServer();
+    }
 
   render() {
     return (
