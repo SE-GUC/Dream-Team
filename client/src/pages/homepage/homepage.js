@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import '../homepage/homepage.css';
-
+import AuthHelperMethods from  '../../components/AuthHelperMethods';
 
 
 class HomePage extends Component {
+  Auth = new AuthHelperMethods();
   state = {};
   update() {
     this.props.history.push('/update');
@@ -24,6 +25,13 @@ class HomePage extends Component {
     this.props.history.push('/formTable');
   }
   
+  _handleLogout = () => {
+
+    this.Auth.logout()
+    
+    this.props.history.replace('/login');
+    
+    }
 
   render() {
     return (
@@ -97,6 +105,16 @@ class HomePage extends Component {
           >
             Click to view user
           </button>
+          <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this._handleLogout();
+            }}
+          >
+            LogOut
+          </button>
+          </div>
         </div>
       </div>
     );
