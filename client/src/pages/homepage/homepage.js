@@ -1,23 +1,16 @@
 
 import React, { Component } from "react";
-import "../homepage/homepage.css";
-import React, { Component } from 'react';
 import '../homepage/homepage.css';
 import AuthHelperMethods from  '../../components/AuthHelperMethods';
-
 import X from '../../components/ReviewerViewhisForms/ReviewerViewhisForms'
 import Login from '../../components/login'
-import Tableuser from '../../components/userTable/table'
 import Tableform from '../../components/formTable'
 import LawyerCase from '../../components/lawyerCase'
 import ReviewerCase from '../../components/reviewerCase'
 import Lawyerview from '../../components/LawyerViewhisCases'
 import formTable from '../../components/formTable';
-import Login from '../../components/login';
 import SignUp from '../../components/signup';
 import Table from '../../components/userTable/userTable';
-import Tableform from '../../components/formTable';
-import AuthHelperMethods from '../../components/AuthHelperMethods';
 import withAuth from '../../components/withAuth';
 
 
@@ -58,6 +51,9 @@ class HomePage extends Component {
   formTable() {
     this.props.history.push('/formTable');
   }
+  caseRe() {
+    this.props.history.push('/case');
+  }
   
 
   _handleLogout = () => {
@@ -73,9 +69,7 @@ class HomePage extends Component {
       <div className="HomePage">
         <div className="App">
           <div className="App-header">
-            <Table />
-
-            <Layout />
+          
 
             <h2>Welcome Home</h2>
           </div>
@@ -188,6 +182,16 @@ class HomePage extends Component {
             }}
           >
             LogOut
+          </button>
+          </div>
+          <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.caseRe();
+            }}
+          >
+            Case
           </button>
           </div>
         </div>
