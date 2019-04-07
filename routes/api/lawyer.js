@@ -220,6 +220,7 @@ router.get("/pendingCase/:id", async (req, res) =>
    const id = req.params.id;
    const form = await Form.findOne({"lawyer": id},{"lawyerDecision": 0})
    //;
+   
    //const form2 = await form.findOne( {"lawyerDecision": 0})
     if (!form)
            return res.status(404).send({

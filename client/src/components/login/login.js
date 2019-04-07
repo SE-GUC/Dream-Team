@@ -30,6 +30,7 @@ class Login extends Component {
   render() {
     return (
       <div className="Login">
+
       <Form  onSubmit={this.handleSubmit}>
   <Form.Group controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
@@ -51,6 +52,7 @@ class Login extends Component {
   
   
 </Form>
+
       </div>
     );
   }
