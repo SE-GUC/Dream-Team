@@ -14,16 +14,27 @@ class Login extends Component {
   
   handleSubmit = async e => {
     e.preventDefault();
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email:this.state.email , password:this.state.password}),
+    // const response = await fetch('/api/login', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ email:this.state.email , password:this.state.password}),
+    // });
+    // const body = await response.text();
+    this.Auth.login(this.state.email, this.state.password)
+    .then(res => {
+      if (res === false) {
+        return alert("Sorry those credentials don't exist!");
+      }
+      this.props.history.replace("/");
+    })
+    .catch(err => {
+      alert(err);
+      this.setState({ responseToPost: body });
     });
-    const body = await response.text();
 
-    this.setState({ responseToPost: body });
+   
   };
 
   
