@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Table } from 'reactstrap';
 
 class formTable extends Component {
  constructor(props){
@@ -36,7 +36,7 @@ class formTable extends Component {
    else{
      return(
       <div className="formTable">
-      <table >
+      <Table dark hover bordered >
         <thead>
           <tr>
           <th> ID</th>
@@ -105,7 +105,7 @@ class formTable extends Component {
           )}
         
         </tbody>
-      </table>
+      </Table>
     </div>
      
      )

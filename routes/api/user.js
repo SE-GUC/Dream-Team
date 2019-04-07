@@ -30,6 +30,25 @@ router.get("/getUsers", async (req, res) => {
   res.json({ data: users });
 });
 
+// get user by id
+router.get('/user/getUser/:id', async (req, res) => {
+  try {
+      const id = req.params.id
+      const user = await User.findById(id);
+      if (!user)
+          return res.status(404).send({
+              error: "This User does not exist"
+          });
+      res.json({
+          data: user
+      });
+  } catch (err) {
+      res.json({
+          msg: err.message
+      });
+  }
+})
+
 // create user (reviewer/investor/admin/lawyer)
 router.post('/createUser', async (req,res) => {
     const {name, accountType , gender, nationality, typeID, numberID, dateOfBirth, address, phoneNumber,
