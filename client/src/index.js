@@ -5,6 +5,11 @@ import HomePage from "./pages/homepage";
 import Login from "./components/login";
 import UpdateTest from "./components/updateTest";
 import "./index.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import HomePage from './pages/homepage';
+import Case from './pages/LRspecificCase';
+import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
   <Router>
