@@ -1,9 +1,7 @@
-<<<<<<< HEAD
+
 import React, { Component } from "react";
 import "../homepage/homepage.css";
-=======
 
->>>>>>> Dev
 import React, { Component } from 'react';
 import '../homepage/homepage.css';
 import Login from '../../components/login'
@@ -24,12 +22,11 @@ class HomePage extends Component {
   state = {};
   update() {
     this.props.history.push("/update");
-<<<<<<< HEAD
+
   }
   viewInvestor() {
     this.props.history.push("/investor");
-=======
->>>>>>> Dev
+
   }
   login() {
     this.props.history.push("/login");
@@ -143,12 +140,11 @@ class HomePage extends Component {
             Click to view user
           </button>
         </div>
-<<<<<<< HEAD
         </div>
-=======
 
-      </div>
->>>>>>> Dev
+
+   
+
     );
   }
 }
