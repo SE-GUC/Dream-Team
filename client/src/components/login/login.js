@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-
-=======
 import './login.css';
 import { Button,Form } from 'react-bootstrap';
 import Popup from "reactjs-popup";
->>>>>>> M
 
 class Login extends Component {
   

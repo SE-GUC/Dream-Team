@@ -25,7 +25,7 @@ login(){
 
     this.Auth.logout()
     
-    this.props.history.replace('/api/login');
+    this.props.history.replace('/login');
     
     }
 
