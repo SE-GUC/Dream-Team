@@ -1,36 +1,33 @@
-import React, { Component } from 'react';
-import '../homepage/homepage.css';
-import Login from '../../components/login'
-// import Table from '../../components/userTable'
-import Tableform from '../../components/formTable'
+import React, { Component } from "react";
+import "../homepage/homepage.css";
+import Login from "../../components/login";
+
+// import SignUp from "../../components/signup";
+// import Table from "../../components/userTable";
+// import Tableform from "../../components/formTable";
+// import AuthHelperMethods from "./components/AuthHelperMethods";
+// import withAuth from "./components/withAuth";
+import Investorr from "../../components/investor";
 class HomePage extends Component {
-  // state = {
-    
-  // };
+  state = {};
 
-  // componentDidMount() {
-  //   this.callApi()
-  //     .then(res => this.setState({ response: res.data[0].name }))
-  //     .catch(err => console.log(err));
-  // }
+  // Auth = new AuthHelperMethods();
 
-  // callApi = async () => {
-  //   const response = await fetch('/api/user/getUsers');
-  //   const body = await response.json();
+  _handleLogout = () => {
+    this.Auth.logout();
 
-  //   if (response.status !== 200) throw Error(body.message);
+    this.props.history.replace("/api/login");
+  };
 
-  //   return body;
-  // };
- 
   render() {
     return (
       <div className="HomePage">
-       
         IN HomePage.JS
-        <Login/>
-        {/* <Table/> */}
-        <Tableform/>
+        <Login />
+        <h1>Investorr</h1>
+        <Investorr />
+        {/* <Table ApiURL="api/user/getUsers" /> */}
+        {/* <Tableform /> */}
       </div>
     );
   }

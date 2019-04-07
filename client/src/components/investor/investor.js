@@ -1,34 +1,96 @@
 import React, { Component } from "react";
-import { Table } from "reactstrap";
+import "./investor.css";
+class investor extends Component {
+  //   state = {
+  //   };
 
-class formTable extends Component {
+  //   viewRunning = async e => {
+  //     const array = await fetch('api/running/:id', {
+  //         method: 'GET',
+  //         // headers: {
+  //         //   'Content-Type': 'application/json',
+  //         // },
+  //         // body: JSON.stringify({ email:this.state.email , password:this.state.password}),
+  //       });
+
+  //         for(let i = 0; i < this.props.items.length; i++) {
+  //           array.push(
+  //             <this.Item key={i} item={this.props.items[i]} />
+  //           );
+  //         }
+  //   };
+
+  //   render() {
+  //     return (
+  //       <div >
+  //        <viewRunning/>
+  //       </div>
+  //     );
+  //   }
+  // }
+
   constructor(props) {
     super(props);
     this.state = {
       response: [],
-      isLoaded: false
+      isLoaded: false,
+      id: ""
     };
   }
 
   componentDidMount() {
-    fetch("api/form/search")
+    fetch("api/investor/running/" + this.state.id + "/")
       .then(res => res.json())
       .then(json => {
         this.setState({
           isLoaded: true,
-          response: json
+          response: json,
+          id: this.state.id
         });
       });
   }
-
+  componentDidMountPending() {
+    fetch("api/investor/pending/" + this.state.id + "/")
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          isLoaded: true,
+          response: json,
+          id: this.state.id
+        });
+      });
+  }
   render() {
     var { response, isLoaded } = this.state;
     if (!isLoaded) {
-      return <div>Loading...</div>;
+      return (
+        <div>
+          id:
+          <input
+            type="text"
+            value={this.state.id}
+            onChange={e => this.setState({ id: e.target.value })}
+          />
+          <button onClick={y => this.componentDidMount()}>Search</button>
+          <button onClick={y => this.componentDidMountPending()}>
+            SearchForPending
+          </button>
+        </div>
+      );
     } else {
       return (
         <div className="formTable">
-          <Table dark hover bordered>
+          <button onClick={y => this.componentDidMount()}>Search</button>
+          <button onClick={y => this.componentDidMountPending()}>
+            SearchForPending
+          </button>
+          id:
+          <input
+            type="text"
+            value={this.state.id}
+            onChange={e => this.setState({ id: e.target.value })}
+          />
+          <table>
             <thead>
               <tr>
                 <th> ID</th>
@@ -37,11 +99,11 @@ class formTable extends Component {
                 <th> companyType </th>
                 {/* <th> governorate  </th> */}
                 {/* <th> city </th>
-            <th> address </th>
-            <th> telephone </th>
-            <th> fax </th>
-            <th> currency </th>
-            <th> capital </th> */}
+             <th> address </th>
+             <th> telephone </th>
+             <th> fax </th>
+             <th> currency </th>
+             <th> capital </th> */}
                 <th> entityType </th>
                 <th> regulatedLaw </th>
                 <th> investor </th>
@@ -61,19 +123,19 @@ class formTable extends Component {
               </tr>
             </thead>
             <tbody>
-              {response.data.map((x, key) => (
+              {response.data.map(x => (
                 <tr>
-                  <td> {(key = x._id)}</td>
+                  <td> {x._id}</td>
                   <td>{x.companyName}</td>
                   <td>{x.companyNameEng}</td>
                   <td>{x.companyType}</td>
                   {/* <td>{x.headquarters}</td> */}
                   {/* <td>{x.city}</td>
-              <td>{x.address}</td>
-              <td>{x.telephone}</td>
-              <td>{x.fax}</td>
-              <td>{x.currency}</td>
-              <td>{x.capital}</td> */}
+               <td>{x.address}</td>
+               <td>{x.telephone}</td>
+               <td>{x.fax}</td>
+               <td>{x.currency}</td>
+               <td>{x.capital}</td> */}
                   <td>{x.entityType}</td>
                   <td>{x.regulatedLaw}</td>
                   <td>{x.investor}</td>
@@ -93,11 +155,11 @@ class formTable extends Component {
                 </tr>
               ))}
             </tbody>
-          </Table>
+          </table>
         </div>
       );
     }
   }
 }
 
-export default formTable;
+export default investor;

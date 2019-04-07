@@ -17,6 +17,7 @@
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "bootstrap": "^4.3.1",
     "concurrently": "^4.1.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
@@ -29,6 +30,9 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "reactstrap": "^8.0.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
