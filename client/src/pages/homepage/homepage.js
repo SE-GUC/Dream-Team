@@ -42,6 +42,7 @@ class HomePage extends Component {
 
   render() {
     return (
+
       <div className="App">
         <div className="App-header">
           <h2>Welcome Home</h2>
@@ -113,6 +114,7 @@ class HomePage extends Component {
             Click to view user
           </button>
         </div>
+
       </div>
     );
   }

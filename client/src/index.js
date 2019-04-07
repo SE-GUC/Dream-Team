@@ -14,7 +14,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Case from './pages/LRspecificCase';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
-
 ReactDOM.render(
   <Router>
     <div>
@@ -29,3 +28,5 @@ ReactDOM.render(
   </Router>,
   document.getElementById('root')
 );
+
+
