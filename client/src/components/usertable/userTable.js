@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Table } from 'reactstrap';
+import React, { Component } from "react";
+import { Table } from "reactstrap";
 
 class userTable extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class userTable extends Component {
   }
 
   componentDidMount() {
-    fetch('api/user/getUsers')
+    fetch("api/user/getUsers")
       .then(res => res.json())
       .then(json => {
         this.setState({

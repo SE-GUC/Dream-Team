@@ -8,14 +8,6 @@ export default class AuthHelperMethods {
   }
   login = (email, password) => {
     // Get a token from api server using the fetch api
-       // const response = await fetch('/api/login', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({ email:this.state.email , password:this.state.password}),
-      // });
-      // const body = await response.text();
     return this.fetch(`/api/login`, {
       method: "POST",
       body: JSON.stringify({
@@ -24,6 +16,7 @@ export default class AuthHelperMethods {
       })
     }).then(res => {
       this.setToken(res.token); // Setting the token in localStorage
+      console.log(res.token)
       return Promise.resolve(res);
     });
   };
