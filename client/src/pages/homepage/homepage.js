@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import '../homepage/homepage.css';
 import Login from '../../components/login'
@@ -13,31 +14,32 @@ import AuthHelperMethods from '../../components/AuthHelperMethods';
 import withAuth from '../../components/withAuth';
 
 
+
 class HomePage extends Component {
   state = {};
   update() {
-    this.props.history.push('/update');
+    this.props.history.push("/update");
   }
   login() {
-    this.props.history.push('/login');
+    this.props.history.push("/login");
   }
   signUp() {
-    this.props.history.push('/signup');
+    this.props.history.push("/signup");
   }
   userTable() {
-    this.props.history.push('/userTable');
+    this.props.history.push("/userTable");
   }
   employeeTable() {
-    this.props.history.push('/employeeTable');
+    this.props.history.push("/employeeTable");
   }
   formTable() {
-    this.props.history.push('/formTable');
+    this.props.history.push("/formTable");
   }
   Auth = new AuthHelperMethods();
 
   _handleLogout = () => {
     this.Auth.logout();
-    this.props.history.replace('/login');
+    this.props.history.replace("/login");
   };
 
   render() {
@@ -45,6 +47,7 @@ class HomePage extends Component {
 
       <div className="App">
         <div className="App-header">
+          <Layout />
           <h2>Welcome Home</h2>
         </div>
         <div>
