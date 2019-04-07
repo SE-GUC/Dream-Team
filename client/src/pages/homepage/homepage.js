@@ -1,13 +1,47 @@
+
+import React, { Component } from "react";
+import "../homepage/homepage.css";
 import React, { Component } from 'react';
 import '../homepage/homepage.css';
 import AuthHelperMethods from  '../../components/AuthHelperMethods';
+
+import X from '../../components/ReviewerViewhisForms/ReviewerViewhisForms'
+import Login from '../../components/login'
+import Tableuser from '../../components/userTable/table'
+import Tableform from '../../components/formTable'
+import LawyerCase from '../../components/lawyerCase'
+import ReviewerCase from '../../components/reviewerCase'
+import Lawyerview from '../../components/LawyerViewhisCases'
+import formTable from '../../components/formTable';
+import Login from '../../components/login';
+import SignUp from '../../components/signup';
+import Table from '../../components/userTable/userTable';
+import Tableform from '../../components/formTable';
+import AuthHelperMethods from '../../components/AuthHelperMethods';
+import withAuth from '../../components/withAuth';
 
 
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
   state = {};
+  lawyerview(){
+    this.props.history.push('/Lawyershowmyforms');
+
+  }
+  reviewrview(){
+    this.props.history.push('/reviewershowmyforms');
+  }
   update() {
+
     this.props.history.push('/update');
+
+    this.props.history.push("/update");
+
+  }
+  viewInvestor() {
+    this.props.history.push("/investor");
+
+
   }
   login() {
     this.props.history.push('/login');
@@ -25,6 +59,7 @@ class HomePage extends Component {
     this.props.history.push('/formTable');
   }
   
+
   _handleLogout = () => {
 
     this.Auth.logout()
@@ -35,9 +70,15 @@ class HomePage extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Welcome Home</h2>
+      <div className="HomePage">
+        <div className="App">
+          <div className="App-header">
+            <Table />
+
+            <Layout />
+
+            <h2>Welcome Home</h2>
+          </div>
         </div>
         <div>
           To Login Press here
@@ -49,6 +90,40 @@ class HomePage extends Component {
           >
             Click to login
           </button>
+        </div>
+
+        <div>
+          To view Pending and Approved companies
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.viewInvestor();
+            }}
+            >
+            </button>
+            </div>
+            
+        <div>
+        To view lawyer form push here
+        <button
+          className="btn btn-primary width-150"
+          onClick={e => {
+            this.lawyerview();
+          }}
+        >
+          Click to show
+        </button>
+        </div>
+        <div>
+        To view reviewr form Press here
+        <button
+          className="btn btn-primary width-150"
+          onClick={e => {
+            this.reviewrview();
+          }}
+        >
+          Click to view
+        </button>
         </div>
         <div>
           To Update Press here
@@ -116,7 +191,10 @@ class HomePage extends Component {
           </button>
           </div>
         </div>
+
       </div>
+
+
     );
   }
 }
