@@ -5,11 +5,11 @@ import { Button,Form } from 'react-bootstrap';
 import Popup from "reactjs-popup";
 // import withAuth from './components/withAuth';
 class Login extends Component {
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     // this.handleChange = this.handleChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
-    // Auth = new AuthHelperMethods();
     this.state = {
       email: '',
       password: '',
