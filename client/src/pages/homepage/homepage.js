@@ -47,11 +47,11 @@ class HomePage extends Component {
 
       <div className="App">
         <div className="App-header">
-<<<<<<< HEAD
+
         <Table/>
-=======
+
           <Layout />
->>>>>>> Dev
+
           <h2>Welcome Home</h2>
         </div>
         <div>
