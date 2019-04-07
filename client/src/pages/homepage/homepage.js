@@ -43,15 +43,6 @@ class HomePage extends Component {
   render() {
     return (
 
-      <div className="HomePage">
-       
-        {/* IN HomePage.JS */}
-        {/* <Login/> */}
-        {/* <Tablee/> */}
-        <Tableform/>
-        {/* <LawyerCase/> */}
-        {/* <ReviewerCase/> */}
-
       <div className="App">
         <div className="App-header">
           <h2>Welcome Home</h2>
