@@ -10,20 +10,21 @@ class UpdateTest extends Component {
     Currency: "",
     Capital: "",
     companyName: "",
-    companyNameEng: ""
+    companyNameEng: "",
+    formID: "",
+    inID: ""
   };
-  handleSubmit = async e => {
-    e.preventDefault();
+  board = async e => {
+    // e.preventDefault();
     const response = await fetch(
-      "/api/investor/updateForm/:idform/:idInvestor",
+      "/api/investor/updateForm/" + this.state.formID + "/" + this.state.inID,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          email: this.state.email,
-          password: this.state.password
+          board: this.state.board
         })
       }
     );
@@ -31,70 +32,111 @@ class UpdateTest extends Component {
 
     this.setState({ responseToPost: body });
   };
+  companyNameEng = async e => {
+    // e.preventDefault();
+    const response = await fetch(
+      "/api/investor/updateForm/" + this.state.formID + "/" + this.state.inID,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          companyNameEng: this.state.companyNameEng
+        })
+      }
+    );
+    const body = await response.text();
 
+    this.setState({ responseToPost: body });
+  };
+  companyName = async e => {
+    // var body5 = JSON.parse(this.state.formID);
+    // var body6 = JSON.parse(this.state.inID);
+    const response = await fetch(
+      "/api/investor/updateForm/" + this.state.formID + "/" + this.state.inID,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          companyName: this.state.companyName
+        })
+      }
+    );
+    const body = await response.text();
+
+    this.setState({ responseToPost: body });
+  };
   render() {
     return (
       <div className="Home">
-        <form onSubmit={this.handleSubmit}>
-          <p>
-            <strong>Investor Update Form:</strong>
-          </p>
-          governorate:
-          <input
-            type="text"
-            value={this.state.governorate}
-            onChange={e => this.setState({ governorate: e.target.value })}
-          />
-          city:
-          <input
-            type="text"
-            value={this.state.city}
-            onChange={e => this.setState({ city: e.target.value })}
-          />
-          address:
-          <input
-            type="text"
-            value={this.state.address}
-            onChange={e => this.setState({ address: e.target.value })}
-          />
-          telephone:
-          <input
-            type="text"
-            value={this.state.telephone}
-            onChange={e => this.setState({ telephone: e.target.value })}
-          />
-          fax:
-          <input
-            type="text"
-            value={this.state.fax}
-            onChange={e => this.setState({ fax: e.target.value })}
-          />
-          Currency:
-          <input
-            type="text"
-            value={this.state.Currency}
-            onChange={e => this.setState({ Currency: e.target.value })}
-          />
-          Capital:
-          <input
-            type="text"
-            value={this.state.Capital}
-            onChange={e => this.setState({ Capital: e.target.value })}
-          />
+        <p>
+          <strong>Investor Update Form:</strong>
+        </p>
+        Please insert investor ID:
+        <input
+          type="text"
+          value={this.state.inID}
+          onChange={e => this.setState({ inID: e.target.value })}
+        />
+        Please insert Form ID:
+        <input
+          type="text"
+          value={this.state.formID}
+          onChange={e => this.setState({ formID: e.target.value })}
+        />
+        <p>{this.state.inID}</p>
+        <dev>
           companyName:
           <input
             type="text"
             value={this.state.companyName}
             onChange={e => this.setState({ companyName: e.target.value })}
           />
+          <button
+            type="submit"
+            onClick={e => {
+              this.companyName();
+            }}
+          >
+            UPDATE company Name
+          </button>
+        </dev>
+        <dev>
           companyNameEng:
           <input
             type="text"
             value={this.state.companyNameEng}
             onChange={e => this.setState({ companyNameEng: e.target.value })}
           />
-          <button type="submit">UPDATE</button>
-        </form>
+          <button
+            type="submit"
+            onClick={e => {
+              this.companyNameEng();
+            }}
+          >
+            UPDATE company Name Eng
+          </button>
+        </dev>
+        <dev>
+          <p>{this.state.responseToPost}</p>
+          board:
+          <input
+            type="text"
+            value={this.state.board}
+            onChange={e => this.setState({ board: e.target.value })}
+          />
+          <button
+            type="submit"
+            onClick={e => {
+              this.board();
+            }}
+          >
+            UPDATE
+          </button>
+        </dev>
         <p>{this.state.responseToPost}</p>
       </div>
     );
