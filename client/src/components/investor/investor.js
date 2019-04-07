@@ -71,7 +71,9 @@ class investor extends Component {
             value={this.state.id}
             onChange={e => this.setState({ id: e.target.value })}
           />
-          <button onClick={y => this.componentDidMount()}>Search</button>
+          <button onClick={y => this.componentDidMount()}>
+            SearchForAccepted
+          </button>
           <button onClick={y => this.componentDidMountPending()}>
             SearchForPending
           </button>

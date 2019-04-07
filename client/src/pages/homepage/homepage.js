@@ -24,7 +24,7 @@ class HomePage extends Component {
       <div className="HomePage">
         IN HomePage.JS
         <Login />
-        <h1>Investorr</h1>
+        <h1>Investorr Only(add your ID to check cases)</h1>
         <Investorr />
         {/* <Table ApiURL="api/user/getUsers" /> */}
         {/* <Tableform /> */}
