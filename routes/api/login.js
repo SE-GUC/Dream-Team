@@ -25,10 +25,10 @@ router.post('/', async (req, res) => {
                 id: user.id,
                 name: user.name,
                 email: user.email,
-                 type:user.accountType
+                type:user.accountType
             }
-            const token = jwt.sign(payload, tokenKey, { expiresIn: '1h' })
-            res.json({data: `Bearer ${token}`})
+            const token = jwt.sign(payload, tokenKey, { expiresIn: '5h' })
+            res.json({token: `Bearer ${token}`})
             return res
         }
 		else return res.status(400).send({ password: 'Wrong password' });

@@ -1,14 +1,21 @@
-import React, { Component } from 'react';
-import './login.css';
-import { Button, Form } from 'react-bootstrap';
-import Popup from 'reactjs-popup';
-
+import React, { Component } from "react";
+import "./login.css";
+import AuthHelperMethods from '../AuthHelperMethods'
+import { Button,Form } from 'react-bootstrap';
+import Popup from "reactjs-popup";
+// import withAuth from './components/withAuth';
 class Login extends Component {
-  state = {
-    email: '',
-    password: '',
-    responseToPost: ''
-  };
+  Auth = new AuthHelperMethods();
+  constructor(props) {
+    super(props);
+    // this.handleChange = this.handleChange.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      email: '',
+      password: '',
+      responseToPost: ''
+    }
+  }
 
   handleSubmit = async e => {
     e.preventDefault();
@@ -25,7 +32,7 @@ class Login extends Component {
         if (res === false) {
           return alert("Sorry those credentials don't exist!");
         }
-        this.props.history.replace('/');
+        this.props.history.replace("/");
       })
       .catch(err => {
         alert(err);
@@ -70,6 +77,8 @@ class Login extends Component {
       </div>
     );
   }
+
+
 }
 
 export default Login;

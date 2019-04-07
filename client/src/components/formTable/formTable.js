@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Table } from "reactstrap";
+import AuthHelperMethods from  '../AuthHelperMethods';
+import withAuth from '../withAuth';
 
+  
 class formTable extends Component {
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = {
@@ -101,4 +105,4 @@ class formTable extends Component {
   }
 }
 
-export default formTable;
+export default withAuth(formTable);

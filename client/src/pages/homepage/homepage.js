@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import "../homepage/homepage.css";
 import React, { Component } from 'react';
 import '../homepage/homepage.css';
+import AuthHelperMethods from  '../../components/AuthHelperMethods';
+
 import X from '../../components/ReviewerViewhisForms/ReviewerViewhisForms'
 import Login from '../../components/login'
 import Tableuser from '../../components/userTable/table'
@@ -20,6 +22,7 @@ import withAuth from '../../components/withAuth';
 
 
 class HomePage extends Component {
+  Auth = new AuthHelperMethods();
   state = {};
   lawyerview(){
     this.props.history.push('/Lawyershowmyforms');
@@ -55,11 +58,15 @@ class HomePage extends Component {
   formTable() {
     this.props.history.push('/formTable');
   }
+  
 
   _handleLogout = () => {
-    this.Auth.logout();
+
+    this.Auth.logout()
+    
     this.props.history.replace('/login');
-  };
+    
+    }
 
   render() {
     return (
@@ -173,6 +180,16 @@ class HomePage extends Component {
           >
             Click to view user
           </button>
+          <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this._handleLogout();
+            }}
+          >
+            LogOut
+          </button>
+          </div>
         </div>
 
       </div>
