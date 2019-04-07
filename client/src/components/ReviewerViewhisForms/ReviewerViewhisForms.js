@@ -15,7 +15,6 @@ class review extends Component {
       headers: {
         'Content-Type': 'application/json',
       },
-    //   body: JSON.stringify({ _id:this.state.formID })
     })
    
    
