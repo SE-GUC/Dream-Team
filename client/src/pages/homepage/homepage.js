@@ -1,32 +1,37 @@
 import React, { Component } from 'react';
-import '../homepage/homepage.css';
-import Login from '../../components/login'
+
+
 class HomePage extends Component {
-  state = {
-    
-  };
 
-  componentDidMount() {
-    this.callApi()
-      .then(res => this.setState({ response: res.data[0].name }))
-      .catch(err => console.log(err));
-  }
 
-  callApi = async () => {
-    const response = await fetch('/api/user/getUsers');
-    const body = await response.json();
-
-    if (response.status !== 200) throw Error(body.message);
-
-    return body;
-  };
- 
+  
+    update(){
+        this.props.history.push('/update');
+        
+        }
+    login(){
+      this.props.history.push('/login'); 
+      }
   render() {
     return (
-      <div className="HomePage">
-        <p>{this.state.response}</p>
-        IN HomePage.JS
-        <Login/>
+      <div className="App">
+        <div className="App-header">
+        
+          <h2>Welcome Home</h2>
+        </div>
+        <p className="App-intro">
+        <div>
+       To Login Press here
+       <button  className ="btn btn-primary width-150" onClick={(e) => { this.login()} }>Click to login</button>
+       
+       </div>
+       <div>
+       To Update Press here
+       <button  className ="btn btn-primary width-150" onClick={(e) => { this.update()} }>Click to Update</button>
+
+        </div>
+
+        </p>
       </div>
     );
   }
