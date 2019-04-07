@@ -1,4 +1,7 @@
 
+import React, { Component } from "react";
+import "../homepage/homepage.css";
+
 import React, { Component } from 'react';
 import '../homepage/homepage.css';
 import Login from '../../components/login'
@@ -19,6 +22,11 @@ class HomePage extends Component {
   state = {};
   update() {
     this.props.history.push("/update");
+
+  }
+  viewInvestor() {
+    this.props.history.push("/investor");
+
   }
   login() {
     this.props.history.push("/login");
@@ -35,7 +43,6 @@ class HomePage extends Component {
   formTable() {
     this.props.history.push("/formTable");
   }
-  Auth = new AuthHelperMethods();
 
   _handleLogout = () => {
     this.Auth.logout();
@@ -65,6 +72,18 @@ class HomePage extends Component {
             Click to login
           </button>
         </div>
+
+        <div>
+          To view Pending and Approved companies
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.viewInvestor();
+            }}
+            >
+            </button>
+            </div>
+            
         <div>
           To Update Press here
           <button
@@ -121,8 +140,11 @@ class HomePage extends Component {
             Click to view user
           </button>
         </div>
+        </div>
 
-      </div>
+
+   
+
     );
   }
 }
