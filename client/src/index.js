@@ -7,7 +7,6 @@ import UpdateTest from './components/updateTest';
 import EmployeeTable from './components/employeeTable';
 import SignUp from './components/signup';
 import FormTable from './components/formTable';
-
 import UserTable from './components/userTable';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
