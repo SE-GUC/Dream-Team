@@ -11,8 +11,7 @@
     "client": "cd client && npm start",
     "server": "nodemon index.js",
     "dev": "concurrently  \"npm run server\" \"npm run client\"",
-    "heroku-postbuild":
-      "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
   "license": "ISC",
@@ -66,6 +65,5 @@
   "bugs": {
     "url": "https://github.com/SE-GUC/Dream-Team/issues"
   },
-  "homepage": "https://github.com/SE-GUC/Dream-Team#readme",
-  "testURL": "http://localhost:3000/api/user/getUsers"
+  "homepage": "https://github.com/SE-GUC/Dream-Team#readme"
 }
