@@ -10,10 +10,12 @@ const typesEnum = require ('../../enums/accountType');
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
-const passport = require('passport');
 const tokenKey = require('../../config/key').secretOrKey
+const passport = require('passport');
 //here we login
 router.post('/', async (req, res) => {
+    
+    //
 	try {
 		const { email, password } = req.body;
 		const user = await User.findOne({ email });
@@ -27,7 +29,7 @@ router.post('/', async (req, res) => {
                 email: user.email,
                 type:user.accountType
             }
-            const token = jwt.sign(payload, tokenKey, { expiresIn: '5h' })
+            const token = jwt.sign(payload, tokenKey, { expiresIn: '2h' })
             res.json({token: `Bearer ${token}`})
             return res
         }
