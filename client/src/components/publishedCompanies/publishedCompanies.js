@@ -37,7 +37,7 @@ class publishedCompanies extends Component {
       );
     } else {
       return (
-        <div className="formTable">
+        <div className="table">
           {/* <button onClick={y => this.componentDidMount()}>Search</button> */}
           <table>
             <thead>
