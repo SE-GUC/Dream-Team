@@ -446,7 +446,10 @@ router.get("/information/feesCalculationRules", (request, response) => {
 
 //As a User I should be able to view all published companies
 router.get("/companies/publishedcompanies", async (req, res) => {
-  const form = await Form.find({ formStatus: { $nin: [false] } });
+  // const form = await Form.find({ formStatus: { $nin: [false] } });4
+  const form = await Form.find({
+    formStatus: formEnum.formStatus.APPROVED
+  });
   res.json({
     data: form
   });

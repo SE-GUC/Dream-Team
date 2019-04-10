@@ -1,96 +1,88 @@
-
 import React, { Component } from "react";
-import '../homepage/homepage.css';
-import AuthHelperMethods from  '../../components/AuthHelperMethods';
-import X from '../../components/ReviewerViewhisForms/ReviewerViewhisForms'
-import Login from '../../components/login'
-import Tableform from '../../components/formTable'
-import LawyerCase from '../../components/lawyerCase'
-import ReviewerCase from '../../components/reviewerCase'
-import Lawyerview from '../../components/LawyerViewhisCases'
-import formTable from '../../components/formTable';
-import SignUp from '../../components/signup';
-import Table from '../../components/userTable/userTable';
+import "../homepage/homepage.css";
+import AuthHelperMethods from "../../components/AuthHelperMethods";
+import X from "../../components/ReviewerViewhisForms/ReviewerViewhisForms";
+import Login from "../../components/login";
+import Tableform from "../../components/formTable";
+import LawyerCase from "../../components/lawyerCase";
+import ReviewerCase from "../../components/reviewerCase";
+import Lawyerview from "../../components/LawyerViewhisCases";
+import formTable from "../../components/formTable";
+import SignUp from "../../components/signup";
+import Table from "../../components/userTable/userTable";
 // import Tableform from '../../components/formTable';
-import searchBar from '../../components/searchBar';
+import searchBar from "../../components/searchBar";
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
-import withAuth from '../../components/withAuth';
-
+import withAuth from "../../components/withAuth";
+import publishedCompanies from "../../components/publishedCompanies";
 
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
   state = {};
-  lawyerview(){
-    this.props.history.push('/Lawyershowmyforms');
-
+  lawyerview() {
+    this.props.history.push("/Lawyershowmyforms");
   }
-  reviewrview(){
-    this.props.history.push('/reviewershowmyforms');
+  publishedCompanies() {
+    this.props.history.push("/publishedCompanies");
+  }
+  reviewrview() {
+    this.props.history.push("/reviewershowmyforms");
   }
   update() {
-
-    this.props.history.push('/update');
-
     this.props.history.push("/update");
 
+    this.props.history.push("/update");
   }
   viewInvestor() {
     this.props.history.push("/investor");
-
-
   }
   login() {
-    this.props.history.push('/login');
+    this.props.history.push("/login");
   }
   signUp() {
-    this.props.history.push('/signup');
+    this.props.history.push("/signup");
   }
   userTable() {
-    this.props.history.push('/userTable');
+    this.props.history.push("/userTable");
   }
   employeeTable() {
-    this.props.history.push('/employeeTable');
+    this.props.history.push("/employeeTable");
   }
   formTable() {
-    this.props.history.push('/formTable');
+    this.props.history.push("/formTable");
   }
-  searchBar(){
-    this.props.history.push("/searchBar")
+  searchBar() {
+    this.props.history.push("/searchBar");
   }
   Auth = new AuthHelperMethods();
   caseRe() {
-    this.props.history.push('/case');
+    this.props.history.push("/case");
   }
-  
 
   _handleLogout = () => {
+    this.Auth.logout();
 
-    this.Auth.logout()
-    
-    this.props.history.replace('/login');
-    
-    }
-    constructor(props) {
-      super(props);
-      this.state = {}
-      this.connecToServer = this.connecToServer.bind(this);
-    }
-  
-    connecToServer() {
-      fetch('/');
-    }
-  
-    componentDidMount() {
-      this.connecToServer();
-    }
+    this.props.history.replace("/login");
+  };
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.connecToServer = this.connecToServer.bind(this);
+  }
+
+  connecToServer() {
+    fetch("/");
+  }
+
+  componentDidMount() {
+    this.connecToServer();
+  }
 
   render() {
     return (
       <div className="HomePage">
         <div className="App">
           <div className="App-header">
-          
-
             <h2>Welcome Home</h2>
           </div>
         </div>
@@ -113,31 +105,30 @@ class HomePage extends Component {
             onClick={e => {
               this.viewInvestor();
             }}
-            >
-            </button>
-            </div>
-            
+          />
+        </div>
+
         <div>
-        To view lawyer form push here
-        <button
-          className="btn btn-primary width-150"
-          onClick={e => {
-            this.lawyerview();
-          }}
-        >
-          Click to show
-        </button>
+          To view lawyer form push here
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.lawyerview();
+            }}
+          >
+            Click to show
+          </button>
         </div>
         <div>
-        To view reviewr form Press here
-        <button
-          className="btn btn-primary width-150"
-          onClick={e => {
-            this.reviewrview();
-          }}
-        >
-          Click to view
-        </button>
+          To view reviewr form Press here
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.reviewrview();
+            }}
+          >
+            Click to view
+          </button>
         </div>
         <div>
           To Update Press here
@@ -195,40 +186,49 @@ class HomePage extends Component {
             Click to view user
           </button>
           <div>
-          <button
-            className="btn btn-primary width-150"
-            onClick={e => {
-              this._handleLogout();
-            }}
-          >
-            LogOut
-          </button>
+            <button
+              className="btn btn-primary width-150"
+              onClick={e => {
+                this._handleLogout();
+              }}
+            >
+              LogOut
+            </button>
           </div>
           <div>
-          <button
-            className="btn btn-primary width-150"
-            onClick={e => {
-              this.caseRe();
-            }}
-          >
-            Case
-          </button>
+            <button
+              className="btn btn-primary width-150"
+              onClick={e => {
+                this.caseRe();
+              }}
+            >
+              Case
+            </button>
           </div>
         </div>
         <div>
-       To search
-       <button
-         className="btn btn-primary width-150"
-         onClick={e => {
-           this.searchBar();
-         }}
-       >
-         Click to search
-       </button>
-     </div>
+          To search
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.searchBar();
+            }}
+          >
+            Click to search
+          </button>
+        </div>
+        <div>
+          To view publishedCompanies click here
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.publishedCompanies();
+            }}
+          >
+            Click to view
+          </button>
+        </div>
       </div>
-       
-  
     );
   }
 }
