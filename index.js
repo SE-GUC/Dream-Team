@@ -4,7 +4,6 @@ const morgan = require('morgan');
 //const router = express.Router()
 
 // Require Router Handlers
-const form = require('./routes/api/form');
 const user = require('./routes/api/user');
 const admin = require('./routes/api/admin');
 const internalPortal = require('./routes/api/internalPortal');
@@ -41,7 +40,6 @@ app.get('/', (req, res) => res.send(`<h1>Person</h1>`));
 
 // Direct to Route Handlers
 app.use('/api/user', user);
-app.use('/api/form', form);
 app.use('/api/admin', admin);
 app.use('/api/internalPortal', internalPortal);
 app.use('/api/investor', investor);

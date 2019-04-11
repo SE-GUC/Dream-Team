@@ -1,10 +1,10 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const BoardofdirectorsSchema= require('../models/Boardofdirectors');
-const regulatedLaw= require('../enums/regulatedLaw')
-const entityType= require('../enums/entityType')
-const formStatus=require('../enums/formStatus')
-const formType=require('../enums/formType')
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const BoardofdirectorsSchema = require('../models/Boardofdirectors');
+const regulatedLaw = require('../enums/regulatedLaw');
+const entityType = require('../enums/entityType');
+const formStatus = require('../enums/formStatus');
+const formType = require('../enums/formType');
 const FormSchema = new Schema({
   companyName: {
     type: String,
@@ -16,7 +16,7 @@ const FormSchema = new Schema({
   },
   companyType: {
     type: formType.formTypes
-   // required: false
+    // required: false
   },
   headquarters: {
     governorate: {
@@ -37,12 +37,12 @@ const FormSchema = new Schema({
     },
     fax: {
       type: String
-     // required: true
+      // required: true
     }
   },
   financialInfo: {
     currency: {
-      type: String ,
+      type: String,
       required: true
     },
     capital: {
@@ -51,14 +51,14 @@ const FormSchema = new Schema({
     }
   },
   entityType: {
-    type: entityType.entityType ,
+    type: entityType.entityType,
     required: true
   },
   regulatedLaw: {
-    type: regulatedLaw.regulatedLaw ,
+    type: regulatedLaw.regulatedLaw,
     required: true
   },
- investor: {
+  investor: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
@@ -71,7 +71,6 @@ const FormSchema = new Schema({
     type: String
     //required: false
   },
-
   lawyerDecision: {
     type: Number
     //required: false
@@ -79,26 +78,21 @@ const FormSchema = new Schema({
   reviewer: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
-   
-  },
-  feesCalculation:{
-    type:String
   },
   reviwerComment: {
     type: String
-   
   },
   reviewerDecision: {
     type: Number
-   
+  },
+  feesCalculation: {
+    type: String
   },
   dateOfApproval: {
     type: Date
-   
   },
   amountOfPayment: {
     type: Number
-   
   },
   dateOfPayment: {
     type: String
@@ -109,7 +103,10 @@ const FormSchema = new Schema({
   formStatus: {
     type: formStatus.formStatus
   },
-
-  board:[BoardofdirectorsSchema]
-})
+  createdByLawyer: {
+    type: Boolean,
+    default: false
+  },
+  board: [BoardofdirectorsSchema]
+});
 module.exports = Form = mongoose.model('Form', FormSchema);
