@@ -12,11 +12,12 @@ const investor = require("./routes/api/investor");
 const lawyer = require("./routes/api/lawyer");
 const profile = require("./routes/api/profile");
 const reviewer = require("./routes/api/reviewer");
-
+const typesEnum = require("./enums/accountType").accountTypes;
 const login = require("./routes/api/login");
 const passport = require("passport");
 const cors = require("cors");
 const getPayload = require("./middleware/getPayload");
+const AuthFor = require("./middleware/AuthFor");
 const app = express();
 
 // DB Config
@@ -34,6 +35,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(morgan("combined"));
 app.use(getPayload);
+
 // initiallize passport
 app.use(passport.initialize());
 
@@ -45,30 +47,46 @@ app.get("/", (req, res) => res.send(`<h1>Person</h1>`));
 // Direct to Route Handlers
 app.use("/api/user", passport.authenticate("jwt", { session: false }), user);
 app.use("/api/form", passport.authenticate("jwt", { session: false }), form);
-app.use("/api/admin", passport.authenticate("jwt", { session: false }), admin);
+app.use(
+  "/api/admin",
+  passport.authenticate("jwt", { session: false }),
+  AuthFor(typesEnum.ADMIN),
+  admin
+);
 app.use(
   "/api/internalPortal",
   passport.authenticate("jwt", { session: false }),
+  AuthFor(typesEnum.REVIEWER, typesEnum.LAWYER, typesEnum.ADMIN),
   internalPortal
 );
 app.use(
   "/api/investor",
   passport.authenticate("jwt", { session: false }),
+  AuthFor(typesEnum.INVESTOR),
   investor
 );
 app.use(
   "/api/lawyer",
   passport.authenticate("jwt", { session: false }),
+  AuthFor(typesEnum.LAWYER),
   lawyer
 );
 app.use(
   "/api/profile",
   passport.authenticate("jwt", { session: false }),
+  AuthFor(
+    typesEnum.ADMIN,
+    typesEnum.INVESTOR,
+    typesEnum.LAWYER,
+    typesEnum.REVIEWER
+  ),
   profile
 );
 app.use(
   "/api/reviewer",
   passport.authenticate("jwt", { session: false }),
+
+  AuthFor(typesEnum.REVIEWER),
   reviewer
 );
 app.use("/api/login", login);
