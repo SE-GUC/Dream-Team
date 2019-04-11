@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./login.css";
-import AuthHelperMethods from '../AuthHelperMethods'
-import { Button,Form } from 'react-bootstrap';
+import AuthHelperMethods from "../AuthHelperMethods";
+import { Button, Form } from "react-bootstrap";
 import Popup from "reactjs-popup";
 // import withAuth from './components/withAuth';
 class Login extends Component {
@@ -11,22 +11,14 @@ class Login extends Component {
     // this.handleChange = this.handleChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
-      email: '',
-      password: '',
-      responseToPost: ''
-    }
+      email: "",
+      password: "",
+      responseToPost: ""
+    };
   }
 
   handleSubmit = async e => {
     e.preventDefault();
-    // const response = await fetch('/api/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ email:this.state.email , password:this.state.password}),
-    // });
-    // const body = await response.text();
     this.Auth.login(this.state.email, this.state.password)
       .then(res => {
         if (res === false) {
@@ -77,8 +69,6 @@ class Login extends Component {
       </div>
     );
   }
-
-
 }
 
 export default Login;

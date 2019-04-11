@@ -42,13 +42,33 @@ app.get("/", (req, res) => res.send(`<h1>Person</h1>`));
 
 // Direct to Route Handlers
 app.use("/api/user", passport.authenticate("jwt", { session: false }), user);
-app.use("/api/form", form);
-app.use("/api/admin", admin);
-app.use("/api/internalPortal", internalPortal);
-app.use("/api/investor", investor);
-app.use("/api/lawyer", lawyer);
-app.use("/api/profile", profile);
-app.use("/api/reviewer", reviewer);
+app.use("/api/form", passport.authenticate("jwt", { session: false }), form);
+app.use("/api/admin", passport.authenticate("jwt", { session: false }), admin);
+app.use(
+  "/api/internalPortal",
+  passport.authenticate("jwt", { session: false }),
+  internalPortal
+);
+app.use(
+  "/api/investor",
+  passport.authenticate("jwt", { session: false }),
+  investor
+);
+app.use(
+  "/api/lawyer",
+  passport.authenticate("jwt", { session: false }),
+  lawyer
+);
+app.use(
+  "/api/profile",
+  passport.authenticate("jwt", { session: false }),
+  profile
+);
+app.use(
+  "/api/reviewer",
+  passport.authenticate("jwt", { session: false }),
+  reviewer
+);
 app.use("/api/login", login);
 app.use((req, res) =>
   res.status(404).send(`<h1>Can not find what you're looking for</h1>`)
