@@ -1,0 +1,8 @@
+1: SSC Minimum Capital Limit is 50,000 EGP
+2: SSC Must have at least One Egyptian Manager, In case Founder/Investor is from Foreign Country
+3: SPC Minimum Capital Limit will be 100,000 EGP in case of Foreign Investor Only,Otherwise there is No Capital Limit
+4: SSC and SPC can Only have One Investor as their Founder
+5: SPC doesn't have any Managers
+6: SSC can't have the same investor founder to Multiple SSC Companies
+7: A Contract will be Generated for SSC Companies after Lawyer Fills Form. 
+8:A Decision will be Generated for SPC Companies after Lawyer Fills Form.
