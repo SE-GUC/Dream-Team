@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import "./investor.css";
-class investor extends Component {
+import "./lawyerFinalizedCases.css";
+const axios = require("axios");
+
+class lawyerFinalizedCases extends Component {
   //   state = {
   //   };
 
@@ -37,29 +39,19 @@ class investor extends Component {
       id: ""
     };
   }
+  //textbox, user ydkhl feeh ID
 
   componentDidMount() {
-    fetch("api/investor/running/" + this.state.id + "/")
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          isLoaded: true,
-          response: json,
-          id: this.state.id
-        });
+    axios
+      .get("http://localhost:5000/api/lawyer/" + this.state.id)
+      .then(res => {
+        this.setState({ response: res.data, isLoaded: true });
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
-  componentDidMountPending() {
-    fetch("api/investor/pending/" + this.state.id + "/")
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          isLoaded: true,
-          response: json,
-          id: this.state.id
-        });
-      });
-  }
+
   render() {
     var { response, isLoaded } = this.state;
     if (!isLoaded) {
@@ -72,19 +64,15 @@ class investor extends Component {
             onChange={e => this.setState({ id: e.target.value })}
           />
           <button onClick={y => this.componentDidMount()}>
-            SearchForAccepted
-          </button>
-          <button onClick={y => this.componentDidMountPending()}>
-            SearchForPending
+            Get Finalized Cases
           </button>
         </div>
       );
     } else {
       return (
-        <div className="formTable">
-          <button onClick={y => this.componentDidMount()}>Search</button>
-          <button onClick={y => this.componentDidMountPending()}>
-            SearchForPending
+        <div className="Case">
+          <button onClick={y => this.componentDidMount()}>
+            Get Finalized Cases
           </button>
           id:
           <input
@@ -127,7 +115,7 @@ class investor extends Component {
             <tbody>
               {response.data.map(x => (
                 <tr>
-                  {/* <td> {x._id}</td> */}
+                  <td> {x._id}</td>
                   <td>{x.companyName}</td>
                   <td>{x.companyNameEng}</td>
                   <td>{x.companyType}</td>
@@ -164,4 +152,4 @@ class investor extends Component {
   }
 }
 
-export default investor;
+export default lawyerFinalizedCases;
