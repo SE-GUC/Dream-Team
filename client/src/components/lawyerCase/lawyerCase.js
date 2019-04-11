@@ -20,11 +20,8 @@ class Case extends Component {
 
 this.setState({ responseToPost:body
     });
-
-
   ;}
 
-  
   render() {
     return (
       <div className="LawyerCase">
