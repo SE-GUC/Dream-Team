@@ -13,8 +13,8 @@ import HomePage from './pages/homepage';
 // import SignUp from './components/signup';
 // import FormTable from './components/formTable';
 import searchBar from './components/searchBar';
-
-import UserTable from './components/userTable/userTable';
+import UpdateUser from './components/updateUser/updateUser';
+import UserTable from './components/usertable/userTable';
 import LawyerViewhisCases from './components/LawyerViewhisCases'
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,6 +26,8 @@ import * as serviceWorker from "./serviceWorker";
 import Investor from "./components/investor";
 import ComRule from "./components/comRule/comRule"
 import CalcRule from "./components/calcRule/calcRule";
+import GetUser from "./components/getUser/getUser";
+import AssignRev from "./components/assignRev/assignRev";
 
 
 ReactDOM.render(
@@ -45,6 +47,9 @@ ReactDOM.render(
       <Route path="/companyRules" component={ComRule} />
       <Route path="/feesCalculation" component={CalcRule} />
       <Route path="/case" component={Case} />
+      <Route path="/updateUser" component={UpdateUser} />
+      <Route path="/getUser" component={GetUser} />
+      <Route path="/assignRev" component={AssignRev} />
     </div>
   </Router>,
   document.getElementById("root")

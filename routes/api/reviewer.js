@@ -65,11 +65,11 @@ router.use(bodyParser.urlencoded({
   const reviewer = req.params.rev
       const form = await Form.findById(id)
       if(!form)
-          return res.status(404).send({error: 'Form does not exist'})
+          return res.status(404).send({msg: 'Form does not exist'})
           const rev = await User.findById(reviewer)
       if(!rev)
-          return res.status(404).send({error: 'Reviewer does not exist'})
-      if(form.lawyer){
+          return res.status(404).send({msg: 'Reviewer does not exist'})
+      if(form.reviewer){
         res.json({msg: 'Form is already taken'})
       }
       else{

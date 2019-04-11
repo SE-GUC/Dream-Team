@@ -10,7 +10,7 @@ import ReviewerCase from '../../components/reviewerCase'
 import Lawyerview from '../../components/LawyerViewhisCases'
 import formTable from '../../components/formTable';
 import SignUp from '../../components/signup';
-import Table from '../../components/userTable/userTable';
+import Table from '../../components/usertable/userTable';
 // import Tableform from '../../components/formTable';
 import searchBar from '../../components/searchBar';
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
@@ -61,6 +61,18 @@ class HomePage extends Component {
   caseRe() {
     this.props.history.push('/case');
   }
+
+  updateUser() {
+    this.props.history.push('/updateUser');
+  }
+  
+  getUser() {
+    this.props.history.push('/getUser');
+  }
+  
+  assignRev() {
+    this.props.history.push('/assignRev');
+  }
   
 
   _handleLogout = () => {
@@ -73,6 +85,7 @@ class HomePage extends Component {
     constructor(props) {
       super(props);
       this.state = {}
+    
       this.connecToServer = this.connecToServer.bind(this);
     }
   
@@ -226,6 +239,43 @@ class HomePage extends Component {
          Click to search
        </button>
      </div>
+
+     <div>
+       To update user
+       <button
+         className="btn btn-primary width-150"
+         onClick={e => {
+           this.updateUser();
+         }}
+       >
+         Click to update
+       </button>
+     </div>
+
+     <div>
+       To get user
+       <button
+         className="btn btn-primary width-150"
+         onClick={e => {
+           this.getUser();
+         }}
+       >
+         Click to get
+       </button>
+     </div>
+
+     <div>
+       To assign Reviewer
+       <button
+         className="btn btn-primary width-150"
+         onClick={e => {
+           this.assignRev();
+         }}
+       >
+         Click to get
+       </button>
+     </div>
+
       </div>
        
   

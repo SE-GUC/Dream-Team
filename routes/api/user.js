@@ -45,7 +45,7 @@ router.get("/user/getUser/:id", async (req, res) => {
     });
   } catch (err) {
     res.json({
-      msg: err.message
+      error: "This User does not exist"
     });
   }
 });
@@ -122,25 +122,27 @@ router.post("/createUser", async (req, res) => {
 router.put("/updateUser/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const law = await User.find({
-      id
-    });
+    const law = await User.findById(id);
     if (!law)
       return res.status(404).send({
-        error: "Admin does not exist"
+        error: "User does not exist"
       });
     if (law.nationality == "egyptian" && req.body.typeID != "national id")
       return res
         .status(400)
         .json({ error: "egyptians must have their national id as type id" });
-    if (req.body.accountType === "investor")
+    if (law.accountType === "investor")
       var isValidated = userValidator.updateInvestorValidation(req.body);
-    else if (req.body.accountType === "lawyer")
+    else if (law.accountType === "lawyer")
       var isValidated = userValidator.updateLawyerValidation(req.body);
-    else if (req.body.accountType === "reviewer")
+    else if (law.accountType === "reviewer")
       var isValidated = userValidator.updateReviewerValidation(req.body);
-    else if (req.body.accountType === "admin")
+    else if (law.accountType === "admin")
       var isValidated = userValidator.updateAdminValidation(req.body);
+      if (isValidated.error)
+      return res
+        .status(400)
+        .send({ error: isValidated.error.details[0].message });
     const updatedUser = await User.findByIdAndUpdate(id, req.body);
     res.json({
       msg: "User updated successfully"
