@@ -16,6 +16,7 @@ const reviewer = require("./routes/api/reviewer");
 const login = require("./routes/api/login");
 const passport = require("passport");
 const cors = require("cors");
+const getPayload = require("./middleware/getPayload");
 const app = express();
 
 // DB Config
@@ -32,6 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(morgan("combined"));
+app.use(getPayload);
 // initiallize passport
 app.use(passport.initialize());
 

@@ -12,6 +12,8 @@ const formEnum = require("../../enums/formStatus");
 const entity = require("../../enums/entityType");
 const formType = require("../../enums/formType");
 const regulatedLaw = require("../../enums/regulatedLaw");
+const jwt = require("jsonwebtoken");
+const tokenKey = require("../../config/key").secretOrKey;
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
