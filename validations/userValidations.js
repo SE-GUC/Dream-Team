@@ -128,8 +128,8 @@ module.exports = {
             //enum gender
             // gender: Joi.string().required(),
             // nationality: Joi.string().min(4).max(20),
-            typeID: Joi.string().required(),
-            numberID: Joi.number().required(),
+            typeID: Joi.string(),
+            numberID: Joi.number(),
             // dateOfBirth: Joi.date().required(),
             address: Joi.string().min(10).max(50),
             phoneNumber: Joi.string().min(7).max(20),
@@ -176,8 +176,8 @@ module.exports = {
             //enum gender
             // gender: Joi.string().required(),
             // nationality: Joi.string().min(4).max(20),
-            typeID: Joi.string().required(),
-            numberID: Joi.number().required(),
+            typeID: Joi.string(),
+            numberID: Joi.number(),
             // dateOfBirth: Joi.date().required(),
             address: Joi.string().min(10).max(50),
             phoneNumber: Joi.string().min(7).max(20),
@@ -197,8 +197,8 @@ module.exports = {
             //enum gender
             // gender: Joi.string().required(),
             // nationality: Joi.string().min(4).max(20),
-            typeID: Joi.string().required(),
-            numberID: Joi.number().required(),
+            typeID: Joi.string(),
+            numberID: Joi.number(),
             // dateOfBirth: Joi.date().required(),
             address: Joi.string().min(10).max(50),
             phoneNumber: Joi.string().min(7).max(20),

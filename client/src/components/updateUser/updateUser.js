@@ -7,23 +7,80 @@ class Update extends Component {
   state = {
     name: "",
     accountType: "",
-    // accountStatus: "",
-    // gender: "",
-    // nationality: "",
+    accountStatus: "",
+    gender: "",
+    nationality: "",
     email: "",
     password: "",
     typeID: "",
     numberID: "",
     phoneNumber: "",
     faxNumber: "",
-    // dateOfBirth: "",
+    dateOfBirth: "",
     address: "",
-    // investorType: "",
-    // capital: "",
-    // capitalCurrency: "",
+    investorType: "",
+    capital: "",
+    capitalCurrency: "",
     responseToPost: ""
   };
+  
+  componentDidMount = async e => {
+    // e.preventDefault();
+  
+   
+    // var body50 =  JSON.parse(this.state.userID);
+    const response1 = await fetch('/api/user/user/getUser/5ca0c7ac6a36eb47ec6db2a3/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+  
+      }).catch(err => { 
+        alert(err)  
+   })
 
+   const body1 = await response1.json();
+  
+   if(JSON.stringify(body1).charAt(2)!=="e"){
+   this.setState({
+     name:JSON.stringify(body1.data.name).replace(/"([^"]+(?="))"/g, '$1'),
+     email:JSON.stringify(body1.data.email).replace(/"([^"]+(?="))"/g, '$1'),
+     accountType:JSON.stringify(body1.data.accountType).replace(/"([^"]+(?="))"/g, '$1'),
+     gender:JSON.stringify(body1.data.gender).replace(/"([^"]+(?="))"/g, '$1'),
+     nationality:JSON.stringify(body1.data.nationality).replace(/"([^"]+(?="))"/g, '$1'),
+     typeID:JSON.stringify(body1.data.typeID).replace(/"([^"]+(?="))"/g, '$1'),
+     numberID:JSON.stringify(body1.data.numberID).replace(/"([^"]+(?="))"/g, '$1'),
+     dateOfBirth:JSON.stringify(body1.data.dateOfBirth).replace(/"([^"]+(?="))"/g, '$1'),
+     address:JSON.stringify(body1.data.address).replace(/"([^"]+(?="))"/g, '$1'),
+     phoneNumber:JSON.stringify(body1.data.phoneNumber).replace(/"([^"]+(?="))"/g, '$1'),
+     faxNumber:JSON.stringify(body1.data.faxNumber).replace(/"([^"]+(?="))"/g, '$1'),
+     accountStatus:JSON.stringify(body1.data.accountStatus).replace(/"([^"]+(?="))"/g, '$1'),
+     rejectionMessage:JSON.stringify(body1.data.rejectionMessage).replace(/"([^"]+(?="))"/g, '$1'),
+    investorType: JSON.stringify(body1.data.investorType).replace(/"([^"]+(?="))"/g, '$1'),
+    capital: JSON.stringify(body1.data.capital).replace(/"([^"]+(?="))"/g, '$1'),
+    capitalCurrency:JSON.stringify(body1.data.capitalCurrency).replace(/"([^"]+(?="))"/g, '$1'),
+  })
+   }else{
+    this.setState({ responseToPost: JSON.stringify(body1), name: "",
+    accountType: "",
+    accountStatus: "",
+    gender: "",
+    nationality: "",
+    email: "",
+    password: "",
+    typeID: "",
+    numberID: "",
+    phoneNumber: "",
+    faxNumber: "",
+    dateOfBirth: "",
+    address: "",
+    investorType: "",
+    capital: "",
+    capitalCurrency: ""});
+   }
+
+  
+  }
   handleSubmit = async e => {
     e.preventDefault();
     const data = {
@@ -44,7 +101,9 @@ class Update extends Component {
     //   capital: this.state.capital,
     //   capitalCurrency: this.state.capitalCurrency
     };
-    const response = await fetch("api/user/updateUser/5ca0724a1b92a9227067c756", {
+
+    
+    const response = await fetch("api/user/updateUser/5ca0c7ac6a36eb47ec6db2a3", {
       method: "PUT",
      body: JSON.stringify(data),
       headers: {
@@ -62,11 +121,13 @@ class Update extends Component {
     });
     const body = await response.text();
     this.setState({ responseToPost: body });
-    this.props.history.replace("/updateUser");
-   
+    // this.props.history.replace("/");
+    // this.props.history.replace("/updateUser");
+
   };
 
   render() {
+   
     return (
       <div className="UpdateUser">
         <Form onSubmit={this.handleSubmit}>
@@ -110,7 +171,7 @@ class Update extends Component {
               <Form.Label>Nationality *</Form.Label>
               <Form.Control
                 type="nationality"
-                value="brazillian"
+                value={this.state.nationality}
                 onChange={e => this.setState({ nationality: e.target.value })}
                 readOnly
               />

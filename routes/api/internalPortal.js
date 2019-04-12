@@ -125,18 +125,18 @@ router.get('/:id', async (req, res) => {
     }
   })
   
-  //I should be able to get undecided forms for lawyer or reviwer
-router.get('/undecidedForms/:loggedintype', async (req, res) => {
+  //I should be able to get unassigned forms for lawyer or reviwer
+router.get('/unassignedForms/:loggedintype', async (req, res) => {
     const loggedintype = req.params.loggedintype
    
     if(loggedintype===typesEnum.accountTypes.LAWYER){
-      var forms = await Form.find({"lawyerDecision": 0 })
+      var forms = await Form.find({"lawyer": null })
       res.json({
         data: forms
       })
     }
     else if(loggedintype===typesEnum.accountTypes.REVIEWER){
-      var forms = await Form.find({"reviewerDecision": 0 })
+      var forms = await Form.find({"reviewer": null })
       res.json({
         data: forms
       })
