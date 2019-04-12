@@ -9,11 +9,11 @@ router.put('/updateForm/:formid', async (req, res) => {
     const form = await Form.findById(formid);
     if (!form) return res.status(404).send({ error: 'Form does not exist' });
     //AUTHORIZATION
-    FIXME: if (
+    if (
       (req.get('type') == 'lawyer' &&
-        form.createdByLawyer == false &&
-        form.lawyer == userID) ||
-      (req.get('type') !== 'investor' && form.investor == userID)
+        (form.createdByLawyer == false || form.lawyer != userID)) ||
+      req.get('type') == 'reviewer' ||
+      form.investor != userID
     ) {
       return res.status(404).send({ error: 'You have no authorization' });
     }
@@ -161,6 +161,7 @@ router.post('/', async (req, res) => {
     console.log(error);
   }
 });
+
 //As A Lawyer I should be able to fill in a Form
 router.post('/:id/:INV', async (req, res) => {
   try {
@@ -449,8 +450,4 @@ TODO: router.put('/feesCalculation/:id', async (req, res) => {
 router.get('/regulatedLaw', async (req, res) => {
   const law = regulatedLaw.regulatedLaw;
   res.json({ data: law });
-});
-router.post('/', async (req, res) => {
-  const user = req.body;
-  res.json({ data: user });
 });

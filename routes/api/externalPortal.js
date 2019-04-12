@@ -4,14 +4,9 @@ const express = require('express');
 const router = express.Router();
 const User = require('../../models/User');
 const userValidator = require('../../validations/userValidations');
-const formValidator = require('../../validations/formValidations');
 const bcrypt = require('bcryptjs');
 const Form = require('../../models/Form');
-const typesEnum = require('../../enums/accountType');
 const formEnum = require('../../enums/formStatus');
-const entity = require('../../enums/entityType');
-const formType = require('../../enums/formType');
-const regulatedLaw = require('../../enums/regulatedLaw');
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -34,29 +29,11 @@ router.get('/companies/publishedcompanies', async (req, res) => {
 
 //Create user (reviewer/investor/lawyer) - Public
 router.post('/createUser', async (req, res) => {
-  const {
-    name,
-    accountType,
-    gender,
-    nationality,
-    typeID,
-    numberID,
-    dateOfBirth,
-    address,
-    phoneNumber,
-    faxNumber,
-    accountStatus,
-    email,
-    password,
-    investorType,
-    capital,
-    capitalCurrency
-  } = req.body;
-  const user = await User.findOne({ email });
-  if (user) return res.status(400).json({ error: 'Email already exists' });
-
+  const user = req.body;
+  const userFound = await User.findOne({ email: req.body.email });
+  if (userFound) return res.status(400).json({ error: 'Email already exists' });
   const salt = bcrypt.genSaltSync(10);
-  const hashedPassword = bcrypt.hashSync(password, salt);
+  const hashedPassword = bcrypt.hashSync(req.body.password, salt);
   if (req.body.nationality == 'egyptian' && req.body.typeID != 'national id')
     return res
       .status(400)
@@ -72,24 +49,8 @@ router.post('/createUser', async (req, res) => {
     return res
       .status(400)
       .send({ error: isValidated.error.details[0].message });
-  const newUser = new User({
-    name,
-    accountType,
-    gender,
-    nationality,
-    typeID,
-    numberID,
-    dateOfBirth,
-    address,
-    phoneNumber,
-    faxNumber,
-    accountStatus,
-    email,
-    password: hashedPassword,
-    investorType,
-    capital,
-    capitalCurrency
-  });
+  user.password = hashedPassword;
+  const newUser = new User(user);
   newUser
     .save()
     .then(user => res.json({ data: user }))
@@ -97,10 +58,10 @@ router.post('/createUser', async (req, res) => {
 });
 
 //Update user
-router.put('/updateUser/:id', async (req, res) => {
+router.put('/updateUser', async (req, res) => {
   try {
-    const id = req.params.id;
-    const user = await User.find({
+    const id = req.get('_id');
+    const user = await User.findById({
       id
     });
     if (!user)
@@ -122,9 +83,13 @@ router.put('/updateUser/:id', async (req, res) => {
         .status(404)
         .send({ msg: 'The data you entered is not correct' });
     const dataBody = req.body;
+    if (dataBody.password) {
+      const salt = bcrypt.genSaltSync(10);
+      const hashedPassword = bcrypt.hashSync(password, salt);
+      dataBody.password = hashedPassword;
+    }
     if (user.accountStatus == false) dataBody.$unset = { accountStatus: 1 };
-
-    const updatedUser = await User.findByIdAndUpdate(id, req.body);
+    const updatedUser = await User.findByIdAndUpdate(id, dataBody);
     res.json({
       msg: 'User updated successfully',
       data: updatedUser

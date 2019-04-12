@@ -4,12 +4,11 @@ const morgan = require('morgan');
 //const router = express.Router()
 
 // Require Router Handlers
-const user = require('./routes/api/user');
+const user = require('./routes/api/externalPortal');
 const admin = require('./routes/api/admin');
 const internalPortal = require('./routes/api/internalPortal');
 const investor = require('./routes/api/investor');
 const lawyer = require('./routes/api/lawyer');
-const profile = require('./routes/api/profile');
 const reviewer = require('./routes/api/reviewer');
 
 const login = require('./routes/api/login');
@@ -44,7 +43,6 @@ app.use('/api/admin', admin);
 app.use('/api/internalPortal', internalPortal);
 app.use('/api/investor', investor);
 app.use('/api/lawyer', lawyer);
-app.use('/api/profile', profile);
 app.use('/api/reviewer', reviewer);
 app.use('/api/login', login);
 app.use((req, res) =>

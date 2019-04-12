@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-// const accountType=require('')
-const typesEnum = require('../../enums/accountType');
+const typesEnum = require('../enums/accountType');
 const userschema = new Schema({
   name: {
     type: String,
