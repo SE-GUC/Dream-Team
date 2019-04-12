@@ -59,7 +59,7 @@ router.get('/viewinvestor', async (req, res) => {
   });
 });
 
-//View all Reviewers - Admin
+//View all reviewers - Admin
 router.get('/getReviewer', async (req, res) => {
   const users = await User.find({
     accountType: typesEnum.accountTypes.REVIEWER
@@ -97,11 +97,10 @@ router.put('/approve/:id', async (req, res) => {
     const approve = {
       accountStatus: true
     };
-    await User.findByIdAndUpdate(id, approve);
-    const acc = await User.findById(id);
+    const updated = await User.findByIdAndUpdate(id, approve);
     res.json({
       msg: 'account have been approved',
-      data: acc
+      data: updated
     });
   } catch (err) {
     res.json({
@@ -114,7 +113,7 @@ router.put('/approve/:id', async (req, res) => {
 router.put('/sendRejectionMsg/:id', async (req, res) => {
   try {
     const id = req.params.id;
-    const user = await User.find({ _id: id });
+    const user = await User.findById(id);
     if (!user) return res.status(404).send({ error: 'user does not exist' });
     const reject = req.body;
     reject.approveStatus = false;
@@ -169,21 +168,6 @@ router.get('/getUsers/:id', async (req, res) => {
       msg: err.message
     });
   }
-});
-
-//[REPEATED]As a Lawyer I should view all forms that I have approved/rejected
-FIXME: router.get('/lawyer/:id', async (req, res) => {
-  const id = req.params.id;
-  const user = await User.findById(id);
-  if (!user)
-    return res.status(404).send({
-      error: 'This User does not exist'
-    });
-  // const lawyerForm1 = await Form.findById(id,{"lawyerDecision": 1})
-  // const lawyerForm2 = await Form.findById(id, {"lawyerDecision": -1 })
-  const lawyers = await Form.find({ lawyer: id });
-
-  res.json({ data: lawyers });
 });
 
 module.exports = router;

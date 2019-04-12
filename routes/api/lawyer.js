@@ -68,8 +68,22 @@ router.put('/:idform/:idlawyer', async (req, res) => {
 });
 
 //As a Lawyer I should view all forms that I have approved/rejected
-//has to be my id
 router.get('/:id', async (req, res) => {
+  const id = req.params.id;
+  const user = await User.findById(id);
+  if (!user)
+    return res.status(404).send({
+      error: 'This User does not exist'
+    });
+  // const lawyerForm1 = await Form.findById(id,{"lawyerDecision": 1})
+  // const lawyerForm2 = await Form.findById(id, {"lawyerDecision": -1 })
+  const lawyers = await Form.find({ lawyer: id });
+
+  res.json({ data: lawyers });
+});
+
+//[REPEATED]As a Lawyer I should view all forms that I have approved/rejected
+FIXME: router.get('/lawyer/:id', async (req, res) => {
   const id = req.params.id;
   const user = await User.findById(id);
   if (!user)
