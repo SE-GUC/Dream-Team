@@ -14,7 +14,7 @@ import HomePage from './pages/homepage';
 // import FormTable from './components/formTable';
 import searchBar from './components/searchBar';
 
-import UserTable from './components/userTable/userTable';
+import UserTable from './components/usertable/userTable';
 import LawyerViewhisCases from './components/LawyerViewhisCases'
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
