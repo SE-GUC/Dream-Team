@@ -1,13 +1,12 @@
 const Joi = require("joi");
-
 module.exports = {
   createInvestorValidation: request => {
     const createSchema = {
       name: Joi.string()
-        .min(3)
+        .alphanum()
+        .min(2)
         .max(50)
         .required(),
-      //enum account type
       accountType: Joi.string()
         .min(5)
         .max(8)
@@ -49,9 +48,11 @@ module.exports = {
   createLawyerValidation: request => {
     const createSchema = {
       name: Joi.string()
-        .min(3)
+        .alphanum()
+        .min(2)
         .max(50)
         .required(),
+
       //enum account type
       accountType: Joi.string()
         .min(5)
@@ -90,6 +91,7 @@ module.exports = {
   createReviewerValidation: request => {
     const createSchema = {
       name: Joi.string()
+        .alphanum()
         .min(2)
         .max(50)
         .required(),
@@ -110,14 +112,8 @@ module.exports = {
       address: Joi.string()
         .min(100)
         .required(),
-      phoneNumber: Joi.number()
-        .min(7)
-        .max(20)
-        .required(),
-      faxNumber: Joi.number()
-        .min(3)
-        .max(20)
-        .required(),
+      phoneNumber: Joi.phoneNumber().required(),
+      faxNumber: Joi.phoneNumber().required(),
       accountStatus: Joi.boolean().required(),
       email: Joi.string()
         .email()
@@ -137,6 +133,7 @@ module.exports = {
   createAdminValidation: request => {
     const createSchema = {
       name: Joi.string()
+        .alphanum()
         .min(2)
         .max(50)
         .required(),
@@ -178,6 +175,7 @@ module.exports = {
   updateAdminValidation: request => {
     const AdminupdateSchema = {
       name: Joi.string()
+        .alphanum()
         .min(2)
         .max(50),
       //enum account type
@@ -210,6 +208,7 @@ module.exports = {
   updateInvestorValidation: request => {
     const InvestorupdateSchema = {
       name: Joi.string()
+        .alphanum()
         .min(2)
         .max(50),
       //enum account type
@@ -243,6 +242,7 @@ module.exports = {
   updateLawyerValidation: request => {
     const LawyerupdateSchema = {
       name: Joi.string()
+        .alphanum()
         .min(2)
         .max(50),
       //enum account type
@@ -276,6 +276,7 @@ module.exports = {
   updateReviewerValidation: request => {
     const ReviewerupdateSchema = {
       name: Joi.string()
+        .alphanum()
         .min(2)
         .max(50),
       //enum account type

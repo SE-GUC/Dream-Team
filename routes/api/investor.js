@@ -4,7 +4,6 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
 
-const userValidator = require('../../validations/userValidations');
 const formValidator = require('../../validations/formValidations');
 const User = require('../../models/User');
 const Form = require('../../models/Form');
@@ -47,22 +46,165 @@ router.get('/viewRejectedForms', async (req, res) => {
   }
 });
 
-//Update Rejected forms
-FIXME: router.put('/updateForm/:idform', async (req, res) => {
-  const formID = req.params.idform;
-  const investorID = req.get('_id');
-  var forms = await Form.findOne({
-    formStatus: formEnum.formStatus.investor,
-    investor: investorID,
-    _id: formID
-  });
-  if (forms) {
-    const updatedForm = await Form.findOneAndUpdate(
-      { lawyerDecision: 0, investor: idinv, _id: id },
-      req.body
-    );
-    res.json({ msg: 'Form updated successfully', data: updatedForm });
-  } else res.json({ msg: 'form not rejected ' });
+//Create Form - Investor, Lawyer
+router.post('/form', async (req, res) => {
+  try {
+    const investorID = 0;
+    const lawyerID = 0;
+    if (req.get('type') == typesEnum.accountTypes.lawyer) {
+      lawyerID = req.get('_id');
+      investorID = req.body.investor;
+    } else investorID = req.get('_id');
+
+    if (req.body.companyName) {
+      const company = await Form.findOne({
+        companyName: req.body.companyName
+      });
+      if (company)
+        return res.status(400).json({ error: 'Company Name already exists' });
+    }
+    //SSC Conditions
+    if (req.body.companyName == 'SSC') {
+      const invssc = await Form.findOne({
+        investor: investorID,
+        companyType: 'SSC'
+      });
+
+      if (invssc)
+        return res.status(400).json({
+          error: 'The investor cannot Establish multiple SSC Companies'
+        });
+      const inv = await User.findById(form.investor);
+      const flag = 0;
+      if (inv.nationality != 'Egyptian') {
+        const b = req.body.board;
+        for (i = 0; i < b.length; i++) {
+          if (!(b[i].nationality == 'egyptian')) {
+            flag = 1;
+          }
+        }
+      }
+      if (flag == 0)
+        return res.status(400).json({
+          error:
+            'investors establishing SSC must have at least one egyptian manager'
+        });
+    }
+
+    //SPC Conditions
+    if (req.body.board && req.body.companyType == 'SPC') {
+      console.log(req.body.board);
+      return res
+        .status(400)
+        .json({ error: 'investors establishing SPC cannot have board' });
+    }
+
+    var isValidated = formValidator.createValidation(req.body);
+    if (isValidated.error)
+      return res
+        .status(400)
+        .send({ error: isValidated.error.details[0].message });
+    var formBody = req.body;
+    if (req.get('type') == 'lawyer') {
+      (formBody.createdByLawyer = true),
+        (formBody.lawyer = lawyerID),
+        (formBody.lawyerDecision = true),
+        (formBody.formStatus = formEnum.formStatus.REVIEWER);
+    } else {
+      formBody.formStatus = formEnum.formStatus.LAWYER;
+      formBody.investor = investorId;
+    }
+    const newForm = await Form.create(formBody);
+    res.json({ msg: 'Form was created successfully ', data: newForm });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//Update Form - Investor, Lawyer
+router.put('/form/:formid', async (req, res) => {
+  try {
+    const userID = req.get(_id);
+    const formid = req.params.formid;
+    const form = await Form.findById(formid);
+    if (!form) return res.status(404).send({ error: 'Form does not exist' });
+    //AUTHORIZATION
+    if (
+      (req.get('type') == 'lawyer' &&
+        (form.createdByLawyer == false || form.lawyer != userID)) ||
+      req.get('type') == 'reviewer' ||
+      form.investor != userID
+    ) {
+      return res.status(404).send({ error: 'You have no authorization' });
+    }
+    if (req.body.companyName) {
+      const company = await Form.findOne({
+        companyName: req.body.companyName
+      });
+      if (company)
+        return res.status(400).json({ error: 'Company Name already exists' });
+    }
+    //SSC Conditions
+    if (req.body.companyName == 'SSC' || form.companyType == 'SSC') {
+      const invssc = await Form.findOne({
+        investor: form.investor,
+        companyType: 'SSC'
+      });
+
+      if (invssc)
+        return res.status(400).json({
+          error: 'The investor cannot Establish multiple SSC Companies'
+        });
+      const inv = await User.findById(form.investor);
+      const flag = 0;
+      if (inv.nationality != 'Egyptian') {
+        const b = req.body.board;
+        for (i = 0; i < b.length; i++) {
+          if (!(b[i].nationality == 'egyptian')) {
+            flag = 1;
+          }
+        }
+      }
+      if (flag == 0)
+        return res.status(400).json({
+          error:
+            'investors establishing SSC must have at least one egyptian manager'
+        });
+    }
+
+    //SPC Conditions
+    if (req.body.board && req.body.companyType == 'SPC') {
+      console.log(req.body.board);
+      return res
+        .status(400)
+        .json({ error: 'investors establishing SPC cannot have board' });
+    }
+
+    //Validations and Insertion
+    var isValidated = Formvalidator.updateValidation(req.body);
+    if (isValidated.error)
+      return res
+        .status(400)
+        .send({ error: isValidated.error.details[0].message });
+    var formBody = req.body;
+    if (
+      (form.formStatus =
+        formEnum.formStatus.INVESTOR && form.lawyerDecision == -1)
+    ) {
+      formBody.formStatus = formEnum.formStatus.LAWYER;
+      formBody.$unset = { lawyerDecision: 1, lawyer: 1 };
+    } else if (
+      (form.formStatus =
+        formEnum.formStatus.LAWYER && form.reviewerDecision == -1)
+    ) {
+      formBody.formStatus = formEnum.formStatus.REVIEWER;
+      formBody.$unset = { reviewerDecision: 1, reviewer: 1 };
+    }
+    await Form.findByIdAndUpdate(id, formBody);
+    res.json({ msg: 'Form updated successfully' });
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 //As an investor , I should be notified with the amount and the due date (fees calculation)
@@ -81,87 +223,6 @@ FIXME: router.get('/notifyAmountAndDueDate/:id', async (req, res) => {
   );
 
   res.json({ data: form });
-});
-
-//Create From
-FIXME: router.post('/:id', async (req, res) => {
-  try {
-    const investorId = req.params.id;
-    var nation = await User.findById(investorId);
-
-    const company = await Form.findOne({ companyName: req.body.companyName });
-    if (company)
-      return res.status(400).json({ error: 'Company Name already exists' });
-    const invssc = await Form.findOne({
-      investor: investorId,
-      companyType: 'SSC'
-    });
-
-    if (invssc && req.body.companyType == 'SSC')
-      return res
-        .status(400)
-        .json({ error: 'you cannot Establish multiple SSC Companies' });
-    if (req.body.board !== undefined && req.body.companyType == 'SPC') {
-      console.log(req.body.board);
-      return res
-        .status(400)
-        .json({ error: 'investors establishing SPC cannot have board' });
-    }
-
-    const flag = 0;
-    if (req.body.board !== undefined) {
-      const b = req.body.board;
-
-      for (i = 0; i < b.length; i++) {
-        if (!(b[i].nationality == 'egyptian')) {
-          flag = 1;
-        }
-      }
-    }
-    // const egy = await req.body.board.findOne({"nationality":"egyptian"})
-    if (
-      (req.body.board == undefined || req.body.board == null) &&
-      req.body.companyType === 'SSC' &&
-      flag == 0
-    )
-      return res.status(400).json({
-        error:
-          'investors establishing SSC must have at least one egyptian manager'
-      });
-    var isValidated = formValidator.createValidation(req.body);
-    if (isValidated.error)
-      return res
-        .status(400)
-        .send({ error: isValidated.error.details[0].message });
-    const reqBody = req.body;
-    body: Object.assign(reqBody, {
-      investor: investorId,
-      formStatus: formEnum.formStatus.LAWYER
-    });
-    const newForm = await Form.create(req.body);
-    res.json({ msg: 'Form was created successfully ', data: newForm });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-//I should be able to update a Form has to be my form to update the form and not update all fields
-FIXME: router.put('/:id', async (req, res) => {
-  try {
-    const id = req.params.id;
-    const form = await Form.findById(id);
-    if (!form) return res.status(404).send({ error: 'Form does not exist' });
-    var isValidated = formValidator.updateValidation(req.body);
-    if (isValidated.error)
-      return res
-        .status(400)
-        .send({ error: isValidated.error.details[0].message });
-    const updatedForm = await Form.findByIdAndUpdate(id, req.body);
-    res.json({ msg: 'Form updated successfully' });
-  } catch (error) {
-    // We will be handling the error later
-    console.log(error);
-  }
 });
 
 //Delete a form -Investor

@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
+const typesEnum = require('../enums/accountType');
 const userschema = new Schema({
   name: {
     type: String,
     required: true
   },
   accountType: {
-    type: String,
+    type: typesEnum.accountTypes,
     required: true
   },
   gender: {
@@ -35,11 +35,11 @@ const userschema = new Schema({
     required: true
   },
   phoneNumber: {
-    type: Number,
+    type: String,
     required: true
   },
   faxNumber: {
-    type: Number,
+    type: String,
     required: true
   },
   accountStatus: {
