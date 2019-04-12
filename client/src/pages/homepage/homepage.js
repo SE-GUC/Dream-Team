@@ -10,7 +10,7 @@ import ReviewerCase from '../../components/reviewerCase'
 import Lawyerview from '../../components/LawyerViewhisCases'
 import formTable from '../../components/formTable';
 import SignUp from '../../components/signup';
-import Table from '../../components/userTable/userTable';
+// import Table from '../../components/userTable/userTable';
 // import Tableform from '../../components/formTable';
 import searchBar from '../../components/searchBar';
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
@@ -60,6 +60,10 @@ class HomePage extends Component {
   Auth = new AuthHelperMethods();
   caseRe() {
     this.props.history.push('/case');
+  }
+
+  adminARC() {
+    this.props.history.push('/adminARC');
   }
   
 
@@ -224,6 +228,18 @@ class HomePage extends Component {
          }}
        >
          Click to search
+       </button>
+     </div>
+
+     <div>
+       To approve/reject form as an admin
+       <button
+         className="btn btn-primary width-150"
+         onClick={e => {
+           this.adminARC();
+         }}
+       >
+         Click to decide
        </button>
      </div>
       </div>

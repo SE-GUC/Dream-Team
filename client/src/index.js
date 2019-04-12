@@ -26,6 +26,7 @@ import * as serviceWorker from "./serviceWorker";
 import Investor from "./components/investor";
 import ComRule from "./components/comRule/comRule"
 import CalcRule from "./components/calcRule/calcRule";
+import AdminARC from "./components/adminARC/adminARC";
 
 
 ReactDOM.render(
@@ -45,6 +46,7 @@ ReactDOM.render(
       <Route path="/companyRules" component={ComRule} />
       <Route path="/feesCalculation" component={CalcRule} />
       <Route path="/case" component={Case} />
+      <Route path="/adminARC" component={AdminARC} />
     </div>
   </Router>,
   document.getElementById("root")

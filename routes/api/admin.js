@@ -210,9 +210,9 @@ router.delete('/:id', async (req, res) => {
 router.put('/sendRejectionMsg/:id', async (req,res) => {
     try {
      const id = req.params.id
-     const user = await User.find({accountStatus:false},{_id:id} );
-     if(!user) return res.status(404).send({error: 'user does not exist'})
-     const updateduser = await User.findByIdAndUpdate(id,req.body)
+     const user = await User.find({accountStatus:false ,_id:id} );
+     if(!user) return res.status(404).send({error: 'user does not exist or account is approved'})
+     const updateduser = await User.findByIdAndUpdate(id,{"rejectionMessage":req.body.rejectionMessage})
      res.json({msg: 'user updated successfully'})
     }
     catch(error) {
