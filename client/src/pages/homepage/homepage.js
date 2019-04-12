@@ -19,6 +19,11 @@ import withAuth from "../../components/withAuth";
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
   state = {};
+  constructor(props) {
+    super(props);
+    this.state = {};
+    // this.connecToServer = this.connecToServer.bind(this);
+  }
   lawyerview() {
     this.props.history.push("/Lawyershowmyforms");
   }
@@ -33,9 +38,7 @@ class HomePage extends Component {
   viewInvestor() {
     this.props.history.push("/investor");
   }
-  login() {
-    this.props.history.push("/login");
-  }
+
   signUp() {
     this.props.history.push("/signup");
   }
@@ -51,7 +54,6 @@ class HomePage extends Component {
   searchBar() {
     this.props.history.push("/searchBar");
   }
-  Auth = new AuthHelperMethods();
   caseRe() {
     this.props.history.push("/case");
   }
@@ -61,41 +63,20 @@ class HomePage extends Component {
 
     this.props.history.replace("/login");
   };
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.connecToServer = this.connecToServer.bind(this);
-  }
 
-  connecToServer() {
-    fetch("/");
-  }
+  // connecToServer() {
+  //   fetch("/");
+  // }
 
-  componentDidMount() {
-    this.connecToServer();
-  }
+  // componentDidMount() {
+  //   this.connecToServer();
+  // }
 
   render() {
     return (
       <div className="HomePage">
-        <div className="App">
-          <div>
-            <Layout />
-          </div>
-          <div className="App-header">
-            <h2>Welcome Home</h2>
-          </div>
-        </div>
-        <div>
-          To Login Press here
-          <button
-            className="btn btn-primary width-150"
-            onClick={e => {
-              this.login();
-            }}
-          >
-            Click to login
-          </button>
+        <div className="App-header">
+          <h2>Welcome Home</h2>
         </div>
 
         <div>
@@ -142,17 +123,6 @@ class HomePage extends Component {
           </button>
         </div>
 
-        <div>
-          To SignUp press here
-          <button
-            className="btn btn-primary width-150"
-            onClick={e => {
-              this.signUp();
-            }}
-          >
-            Click to signup
-          </button>
-        </div>
         <div>
           To view employee table
           <button
