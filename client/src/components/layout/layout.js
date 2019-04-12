@@ -7,12 +7,12 @@ class Layout extends Component {
     return (
       <div>
         <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="/">Navbar</Navbar.Brand>
+          <Navbar.Brand href="/">Sumerge</Navbar.Brand>
           <Nav className="layout">
-            <Nav.Link href="#home" to="/">
+            <Nav.Link href="/" to="/">
               Home
             </Nav.Link>
-            <Nav.Link href="#companies">Companies</Nav.Link>
+            <Nav.Link href="/companies">Companies</Nav.Link>
             <Nav.Link href="/companyRules" to="/companyRules">
               Companies Rules
             </Nav.Link>
