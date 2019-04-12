@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const BoardofdirectorsSchema = require('../models/Boardofdirectors');
-const regulatedLaw = require('../enums/regulatedLaw');
-const entityType = require('../enums/entityType');
-const formStatus = require('../enums/formStatus');
-const formType = require('../enums/formType');
+const BoardofdirectorsSchema = require("../models/Boardofdirectors");
+const regulatedLaw = require("../enums/regulatedLaw");
+const entityType = require("../enums/entityType");
+const formStatus = require("../enums/formStatus");
+const formType = require("../enums/formType");
 const FormSchema = new Schema({
   companyName: {
     type: String,
@@ -60,12 +60,12 @@ const FormSchema = new Schema({
   },
   investor: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true
   },
   lawyer: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: "User"
   },
   lawyerComment: {
     type: String
@@ -77,7 +77,7 @@ const FormSchema = new Schema({
   },
   reviewer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: "User"
   },
   reviwerComment: {
     type: String
@@ -95,10 +95,10 @@ const FormSchema = new Schema({
     type: Number
   },
   dateOfPayment: {
-    type: String
+    type: Date
   },
   paymentId: {
-    type: Number
+    type: String
   },
   formStatus: {
     type: formStatus.formStatus
@@ -109,4 +109,4 @@ const FormSchema = new Schema({
   },
   board: [BoardofdirectorsSchema]
 });
-module.exports = Form = mongoose.model('Form', FormSchema);
+module.exports = Form = mongoose.model("Form", FormSchema);
