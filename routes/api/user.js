@@ -153,8 +153,9 @@ router.put("/updateUser/:id", async (req, res) => {
 //get companies rules
 router.get("/companyRules", (request, response) => {
   var fs = require("fs");
-  fs.readFile("../../rules/companyRule.txt", "utf8", function(err, data) {
-    response.send(data);
+  fs.readFile("rules/companyRule.txt", "utf8", function(err, data) {
+    if (err) console.log(err);
+    response.json({ data });
   });
 });
 
