@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Table } from "reactstrap";
-import AuthHelperMethods from  '../AuthHelperMethods';
-import withAuth from '../withAuth';
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+function buttonFormatter(cell, row) {
+  return '<BootstrapButton type="submit"></BootstrapButton>';
+}
 
-  
 class formTable extends Component {
   Auth = new AuthHelperMethods();
   constructor(props) {
@@ -18,6 +21,9 @@ class formTable extends Component {
     fetch("api/form/search")
       .then(res => res.json())
       .then(json => {
+        delete json.data.password;
+        delete json.data._id;
+        console.log(json);
         this.setState({
           isLoaded: true,
           response: json
@@ -30,79 +36,127 @@ class formTable extends Component {
     if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
-      return (
-        <div className="formTable">
-          <Table dark hover bordered>
-            <thead>
-              <tr>
-                <th> ID</th>
-                <th> companyName </th>
-                <th> companyNameEng </th>
-                <th> companyType </th>
-                {/* <th> governorate  </th> */}
-                {/* <th> city </th>
-            <th> address </th>
-            <th> telephone </th>
-            <th> fax </th>
-            <th> currency </th>
-            <th> capital </th> */}
-                <th> entityType </th>
-                <th> regulatedLaw </th>
-                <th> investor </th>
-                <th> lawyer </th>
-                <th> lawyerComment </th>
-                <th> lawyerDecision </th>
-                <th> reviewer </th>
-                <th> feesCalculation </th>
-                <th> reviwerComment </th>
-                <th> reviewerDecision </th>
-                <th> dateOfApproval </th>
-                <th> amountOfPayment </th>
-                <th> dateOfPayment </th>
-                <th> paymentId </th>
-                <th> formStatus </th>
-                {/* <th> board </th> */}
-              </tr>
-            </thead>
-            <tbody>
-              {response.data.map((x, key) => (
-                <tr>
-                  <td> {(key = x._id)}</td>
-                  <td>{x.companyName}</td>
-                  <td>{x.companyNameEng}</td>
-                  <td>{x.companyType}</td>
-                  {/* <td>{x.headquarters}</td> */}
-                  {/* <td>{x.city}</td>
-              <td>{x.address}</td>
-              <td>{x.telephone}</td>
-              <td>{x.fax}</td>
-              <td>{x.currency}</td>
-              <td>{x.capital}</td> */}
+      // return (
 
-                  <td>{x.entityType}</td>
-                  <td>{x.regulatedLaw}</td>
-                  <td>{x.investor}</td>
-                  <td>{x.lawyer}</td>
-                  <td>{x.lawyerComment}</td>
-                  <td>{x.lawyerDecision}</td>
-                  <td>{x.reviewer}</td>
-                  <td>{x.feesCalculation}</td>
-                  <td>{x.reviwerComment}</td>
-                  <td>{x.reviewerDecision}</td>
-                  <td>{x.dateOfApproval}</td>
-                  <td>{x.amountOfPayment}</td>
-                  <td>{x.dateOfPayment}</td>
-                  <td>{x.paymentId}</td>
-                  <td>{x.formStatus}</td>
-                  {/* <td>{x.board}</td> */}
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
+      // <div className="formTable">
+      //   <Table dark hover bordered>
+      //     <thead>
+      //       <tr>
+      //         <th> ID</th>
+      //         <th> companyName </th>
+      //         <th> companyNameEng </th>
+      //         <th> companyType </th>
+      //         {/* <th> governorate  </th> */}
+      //         {/* <th> city </th>
+      //     <th> address </th>
+      //     <th> telephone </th>
+      //     <th> fax </th>
+      //     <th> currency </th>
+      //     <th> capital </th> */}
+      //         <th> entityType </th>
+      //         <th> regulatedLaw </th>
+      //         <th> investor </th>
+      //         <th> lawyer </th>
+      //         <th> lawyerComment </th>
+      //         <th> lawyerDecision </th>
+      //         <th> reviewer </th>
+      //         <th> feesCalculation </th>
+      //         <th> reviwerComment </th>
+      //         <th> reviewerDecision </th>
+      //         <th> dateOfApproval </th>
+      //         <th> amountOfPayment </th>
+      //         <th> dateOfPayment </th>
+      //         <th> paymentId </th>
+      //         <th> formStatus </th>
+      //         {/* <th> board </th> */}
+      //       </tr>
+      //     </thead>
+      //     <tbody>
+      //       {response.data.map((x, key) => (
+      //         <tr>
+      //           <td> {(key = x._id)}</td>
+      //           <td>{x.companyName}</td>
+      //           <td>{x.companyNameEng}</td>
+      //           <td>{x.companyType}</td>
+      //           {/* <td>{x.headquarters}</td> */}
+      //           {/* <td>{x.city}</td>
+      //       <td>{x.address}</td>
+      //       <td>{x.telephone}</td>
+      //       <td>{x.fax}</td>
+      //       <td>{x.currency}</td>
+      //       <td>{x.capital}</td> */}
+
+      //           <td>{x.entityType}</td>
+      //           <td>{x.regulatedLaw}</td>
+      //           <td>{x.investor}</td>
+      //           <td>{x.lawyer}</td>
+      //           <td>{x.lawyerComment}</td>
+      //           <td>{x.lawyerDecision}</td>
+      //           <td>{x.reviewer}</td>
+      //           <td>{x.feesCalculation}</td>
+      //           <td>{x.reviwerComment}</td>
+      //           <td>{x.reviewerDecision}</td>
+      //           <td>{x.dateOfApproval}</td>
+      //           <td>{x.amountOfPayment}</td>
+      //           <td>{x.dateOfPayment}</td>
+      //           <td>{x.paymentId}</td>
+      //           <td>{x.formStatus}</td>
+      //           {/* <td>{x.board}</td> */}
+      //         </tr>
+      //       ))}
+      //     </tbody>
+      //   </Table>
+      // </div>
+      // );
+
+      // var hasOwn = Object.prototype.hasOwnProperty;
+      // Object.keys = Object_keys;
+      // function Object_keys(obj) {
+      //   var keys = [],
+      //     name;
+      //   for (name in obj) {
+      //     if (hasOwn.call(obj, name)) {
+      //       keys.push(name);
+      //     }
+      //   }
+      //   return keys;
+      // }
+
+      const columns = Object.keys(response.data[55]);
+      console.log(columns);
+      columns.splice(2, 2);
+      console.log(columns);
+      // .map((key, id) => {
+      //   return {
+      //     Header: key,
+      //     accessor: key
+      //   };
+      // });
+
+      // return <ReactTable data={response.data} columns={columns  } />;
+      return (
+        <BootstrapTable
+          className="formTable"
+          data={response.data}
+          keyField="id"
+        >
+          {columns.map(column => (
+            <TableHeaderColumn className="formTable" dataField={column}>
+              {" "}
+              {column}{" "}
+            </TableHeaderColumn>
+          ))}
+          <TableHeaderColumn
+            dataField="button"
+            // data={column}
+            dataFormat={buttonFormatter}
+          >
+            Buttons
+          </TableHeaderColumn>
+        </BootstrapTable>
       );
     }
   }
 }
-
-export default withAuth(formTable);
+export default formTable;
+// export default withAuth(formTable);

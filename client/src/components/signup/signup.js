@@ -48,18 +48,31 @@ class SignUp extends Component {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ name:this.state.name, accountType: this.state.accountType, gender: this.state.gender, nationality: this.state.nationality,  email:this.state.email , password:this.state.password,
-    typeID:this.state.typeID, numberID: this.state.numberID, phoneNumber: this.state.phoneNumber, faxNumber: this.state.faxNumber, dateoOfBirth: this.state.dateOfBirth, address: this.state.address, investorType: this.state.investorType, capital: this.state.capital, capitalCurrency: this.state.capitalCurrency}),
+      body: JSON.stringify({
+        name: this.state.name,
+        accountType: this.state.accountType,
+        gender: this.state.gender,
+        nationality: this.state.nationality,
+        email: this.state.email,
+        password: this.state.password,
+        typeID: this.state.typeID,
+        numberID: this.state.numberID,
+        phoneNumber: this.state.phoneNumber,
+        faxNumber: this.state.faxNumber,
+        dateoOfBirth: this.state.dateOfBirth,
+        address: this.state.address,
+        investorType: this.state.investorType,
+        capital: this.state.capital,
+        capitalCurrency: this.state.capitalCurrency
+      })
     }).catch(err => {
       alert(err);
-      
     });
     const body = await response.text();
     this.setState({ responseToPost: body });
     this.props.history.replace("/login");
-   
   };
 
   render() {
