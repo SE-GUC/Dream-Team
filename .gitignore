@@ -1,8 +1,8 @@
 node_modules
 client/node_modules
 HelloWorld.js
-routes/api/draft.js
-routes/api/commonFuncs.js
+routes/api/dra.js
+routes/api/commonFunc.js
 Sprint2_3_Backlog_Template.xlsx
 ~$Sprint2_3_Backlog_Template.xlsx
 ~$Sprint2_Backlog_Template.xlsx

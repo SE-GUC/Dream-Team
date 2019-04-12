@@ -30,13 +30,13 @@ router.get('/regulatedLaw', async (req, res) => {
   res.json({ data: law });
 });
 
-//Read all Forms - Internal Portal
+//View all Forms - Internal Portal
 router.get('/', async (req, res) => {
   const form = await Form.find();
   res.json({ data: form });
 });
 
-//Read forms by ID - Internal Portal
+//View forms by ID - Internal Portal
 router.get('/:id', async (req, res) => {
   try {
     const id = req.params.id;
@@ -55,7 +55,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-//Undecided forms - Internal Portal (Except Admin)
+//View Undecided forms - Internal Portal (Except Admin)
 router.get('/undecidedForms', async (req, res) => {
   const userType = req.get('type');
   const userID = req.get('_id');
@@ -81,8 +81,8 @@ router.get('/undecidedForms', async (req, res) => {
     });
 });
 
-//Track Forms of specific investor -  Internal Portal
-TODO: router.get('/formStatus/:id', async (req, res) => {
+//View Forms of specific investor -  Internal Portal
+router.get('/formStatus/:id', async (req, res) => {
   const investorID = req.params.id;
   var forms = await Form.find({ investor: investorID });
   res.json({
