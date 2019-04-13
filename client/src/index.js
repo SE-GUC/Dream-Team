@@ -22,7 +22,7 @@ import Case from './pages/LRspecificCase';
 import 'bootstrap/dist/css/bootstrap.css';
 import ReviewerViewhisForms from './components/ReviewerViewhisForms'
 // import UserTable from "./components/userTable/userTable";
-import * as serviceWorker from "./serviceWorker";
+// import * as serviceWorker from "./serviceWorker";
 import Investor from "./components/investor";
 import ComRule from "./components/comRule/comRule"
 import CalcRule from "./components/calcRule/calcRule";
