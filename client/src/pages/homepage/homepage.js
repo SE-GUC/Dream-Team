@@ -15,6 +15,7 @@ import Layout from "../../components/layout/layout";
 import searchBar from "../../components/searchBar";
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
 import withAuth from "../../components/withAuth";
+import viewAllLawyer from "../../components/viewAllLawyer/viewAllLawyer";
 
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
@@ -50,6 +51,9 @@ class HomePage extends Component {
   }
   searchBar() {
     this.props.history.push("/searchBar");
+  }
+  viewAllLawyer() {
+    this.props.history.push("/viewAllLawyer");
   }
   Auth = new AuthHelperMethods();
   caseRe() {
@@ -215,6 +219,17 @@ class HomePage extends Component {
             }}
           >
             Click to search
+          </button>
+        </div>
+        <div>
+          To get all lawyers
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.viewAllLawyer();
+            }}
+          >
+            View All Lawyers
           </button>
         </div>
       </div>
