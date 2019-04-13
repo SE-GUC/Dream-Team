@@ -12,7 +12,7 @@ class userTable extends Component {
   }
 
   componentDidMount() {
-    this.Auth.fetch("api/user/getUsers")
+    this.Auth.fetch("api/user/getUser")
       .then(res => res.json())
       .then(json => {
         this.setState({
