@@ -24,8 +24,8 @@ class Login extends Component {
         if (res === false) {
           return alert("Sorry those credentials don't exist!");
         }
-        // this.props.history.replace("/");
-        window.location.href = "/";
+        this.props.history.replace("/");
+        // window.location.href = "/";
       })
       .catch(err => {
         alert(err);
