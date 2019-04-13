@@ -2,15 +2,10 @@ var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
-const userValidator = require('../../validations/userValidations');
-const formValidator = require('../../validations/formValidations');
-const bcrypt = require('bcryptjs');
+
 const User = require('../../models/User');
 const Form = require('../../models/Form');
 const typesEnum = require('../../enums/accountType');
-const formEnum = require('../../enums/formStatus');
-const entity = require('../../enums/entityType');
-const formType = require('../../enums/formType');
 const regulatedLaw = require('../../enums/regulatedLaw');
 
 mongoose.set('useNewUrlParser', true);
@@ -67,7 +62,7 @@ router.get('/undecidedForms', async (req, res) => {
     res.json({
       data: forms
     });
-  } else if (loggedintype === typesEnum.accountTypes.REVIEWER) {
+  } else if (userType === typesEnum.accountTypes.REVIEWER) {
     var forms = await Form.find({
       reviewerDecision: { $exists: false },
       reviewer: userID
@@ -88,6 +83,19 @@ router.get('/formStatus/:id', async (req, res) => {
   res.json({
     data: forms
   });
+});
+
+//View which lawyer is working on a form
+router.get('/lawyerOfForm/:id', async (req, res) => {
+  const formID = req.params.id;
+  const form = await Form.findById(formID);
+  const lawyerID = form.lawyer;
+  if (lawyerID) {
+    const lawyer = await User.findById(form.lawyer);
+    res.json({ data: lawyer });
+  } else {
+    res.json({ msg: `There is no lawyer assigned to this form` });
+  }
 });
 
 module.exports = router;

@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 const User = require('../../models/User');
-const Form = require('../../models/Form');
 const typesEnum = require('../../enums/accountType');
 
 mongoose.set('useNewUrlParser', true);

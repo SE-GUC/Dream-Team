@@ -18,7 +18,7 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
-// configuration option that tells the parser to use the classic encoding
+//Configuration option that tells the parser to use the classic encoding
 router.use(
   bodyParser.urlencoded({
     extended: false
@@ -29,18 +29,20 @@ router.use(
 router.put('/sendRejectionMsg/:id', async (req, res) => {
   try {
     const formID = req.params.id;
-    const reviewerID = rew.get('_id');
-    const form = await Form.find({ _id: formID });
+    const reviewerID = req.get('_id');
+    const form = await Form.findById(formID);
     if (!form) return res.status(404).send({ error: 'form does not exist' });
     if (form.reviewer != reviewerID)
       return res
         .status(404)
         .send({ error: 'This form does not belong to you' });
-    const reject = req.body;
-    reject.reviewerDecision = -1;
-    reject.formStatus = formEnum.formStatus.lawyer;
-    reject.$unset = { lawyer: 1, lawyerDecision: 1, lawyerComment: 1 };
-    await Form.findByIdAndUpdate(id, reject);
+    const reject = {
+      reviewerComment: req.body.reviewerComment,
+      reviewerDecision: -1,
+      formStatus: formEnum.formStatus.LAWYER,
+      $unset: { lawyer: 1, lawyerDecision: 1, lawyerComment: 1 }
+    };
+    await Form.findByIdAndUpdate(formID, reject);
     res.json({ msg: 'form updated successfully' });
   } catch (error) {
     console.log(error);
@@ -52,7 +54,7 @@ router.put('/accept/:id', async (req, res) => {
   try {
     const formID = req.params.id;
     const reviewerID = req.get('_id');
-    const form = Form.findById(formID);
+    const form = await Form.findById(formID);
     if (!form)
       return res.status(404).send({ error: 'This form does not exist' });
     if (form.reviewer != reviewerID)
@@ -61,7 +63,8 @@ router.put('/accept/:id', async (req, res) => {
         .send({ error: 'This form does not belong to you' });
     var approved = {
       reviewerDecision: 1,
-      formStatus: formEnum.formStatus.APPROVED
+      formStatus: formEnum.formStatus.PAYMENT,
+      dateOfApproval: new Date()
     };
     await Form.findByIdAndUpdate(formID, approved);
     res.json({ msg: 'Form accepted succesfully' });
@@ -76,10 +79,8 @@ router.put('/reviewer/assign/:id', async (req, res) => {
   const reviewerID = req.get('_id');
   const form = await Form.findById(formID);
   if (!form) return res.status(404).send({ error: 'Form does not exist' });
-  const rev = await User.findById(reviewer);
-  if (!rev) return res.status(404).send({ error: 'Reviewer does not exist' });
   if (form.formStatus == formEnum.formStatus.reviewer) {
-    await Form.findByIdAndUpdate(id, { reviewer: reviewerID });
+    await Form.findByIdAndUpdate(formID, { reviewer: reviewerID });
     res.json({ msg: 'Form status is updated successfully' });
   } else {
     res.status(400).send({ msg: 'this form is not avalaible at the moment' });
@@ -102,7 +103,7 @@ TODO: router.get('/reviewer/AR/', async (req, res) => {
   console.log(dec);
   if (type === typesEnum.accountTypes.REVIEWER && dec) {
     const forms = await Form.find({
-      reviewer: id,
+      reviewer: reviewerID,
       $or: [{ reviewerDecision: -1 }, { reviewerDecision: 1 }]
     });
     //Check condition
@@ -112,7 +113,7 @@ TODO: router.get('/reviewer/AR/', async (req, res) => {
 
 //Show pending cases(workpage) - Reviewer
 router.get('/pendingCase', async (req, res) => {
-  const id = rew.get(_id);
+  const id = req.get('_id');
   const form = await Form.find({
     reviewer: id,
     reviewerDecision: { $exists: false }

@@ -1,17 +1,16 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
-var bodyParser = require('body-parser');
 const User = require('../../models/User');
-const validator = require('../../validations/userValidations');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const typesEnum = require('../../enums/accountType');
+const passport = require('passport');
+
+const tokenKey = require('../../config/key').secretOrKey;
+
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
-const passport = require('passport');
-const tokenKey = require('../../config/key').secretOrKey;
 
 //Login
 router.post('/', async (req, res) => {
@@ -21,7 +20,7 @@ router.post('/', async (req, res) => {
     if (!user) return res.status(404).json({ email: 'Email does not exist' });
     const match = bcrypt.compareSync(password, user.password);
     if (user.accountStatus == false) {
-        //What to do ??????
+      //What to do ??????
     }
     if (match) {
       const payload = {

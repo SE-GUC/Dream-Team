@@ -38,11 +38,11 @@ router.post('/createUser', async (req, res) => {
     return res
       .status(400)
       .json({ error: 'egyptians must have their national id as type id' });
-  if (req.body.accountType === 'investor')
+  if (req.body.accountType == 'investor')
     var isValidated = userValidator.createInvestorValidation(req.body);
-  else if (req.body.accountType === 'lawyer')
+  else if (req.body.accountType == 'lawyer')
     var isValidated = userValidator.createLawyerValidation(req.body);
-  else if (req.body.accountType === 'reviewer')
+  else if (req.body.accountType == 'reviewer')
     var isValidated = userValidator.createReviewerValidation(req.body);
 
   if (isValidated.error)
@@ -72,11 +72,11 @@ router.put('/updateUser', async (req, res) => {
       return res
         .status(400)
         .json({ error: 'egyptians must have their national id as type id' });
-    if (req.body.accountType === 'investor')
+    if (req.body.accountType == 'investor')
       var isValidated = userValidator.updateInvestorValidation(req.body);
-    else if (req.body.accountType === 'lawyer')
+    else if (req.body.accountType == 'lawyer')
       var isValidated = userValidator.updateLawyerValidation(req.body);
-    else if (req.body.accountType === 'reviewer')
+    else if (req.body.accountType == 'reviewer')
       var isValidated = userValidator.updateReviewerValidation(req.body);
     if (!isValidated)
       return res
@@ -85,7 +85,7 @@ router.put('/updateUser', async (req, res) => {
     const dataBody = req.body;
     if (dataBody.password) {
       const salt = bcrypt.genSaltSync(10);
-      const hashedPassword = bcrypt.hashSync(password, salt);
+      const hashedPassword = bcrypt.hashSync(dataBody.password, salt);
       dataBody.password = hashedPassword;
     }
     if (user.accountStatus == false) dataBody.$unset = { accountStatus: 1 };
@@ -139,6 +139,7 @@ var SSC = [
   ['', '', '', '', 'المستثمر'],
   ['', '', 'نعم', 'نص', 'الاسم'],
   ['', 'شخص', '', 'قائمة', 'نوع المستثمر'][
+    // @ts-ignore
     ('یظهر في حالة أن نوع المستثمر:- شخص',
     'یتم عرضها من قاعدة البیانات',
     'یتم عرضها من قاعدة البیانات',
@@ -177,6 +178,7 @@ var SSC = [
   ['یظهر في كل الحالات', '', 'نعم', 'نص', 'عنوان الإقامة'],
   ['یظهر في كل الحالات', '-', 'لا', 'نص', 'التلیفون'],
   ['یظهر في كل الحالات', '', 'لا', 'نص', 'الفاكس'][
+    // @ts-ignore
     ('یظهر في حالة أن نوع الشریك: - شخص - یمثل',
     '',
     'لا',
@@ -262,6 +264,7 @@ var SPC = [
   ['', '', '', '', 'المستثمر'],
   ['', '', 'نعم', 'نص', 'الاسم'],
   ['', 'شخص', '', 'قائمة', 'نوع المستثمر'][
+    // @ts-ignore
     ('یظهر في حالة أن نوع المستثمر:- شخص',
     'یتم عرضها من قاعدة البیانات',
     'یتم عرضها من قاعدة البیانات',
@@ -300,12 +303,14 @@ var SPC = [
   ['یظهر في كل الحالات', '', 'نعم', 'نص', 'عنوان الإقامة'],
   ['یظهر في كل الحالات', '-', 'لا', 'نص', 'التلیفون'],
   ['یظهر في كل الحالات', '', 'لا', 'نص', 'الفاكس'][
+    // @ts-ignore
     ('یظهر في حالة أن نوع الشریك: - شخص - یمثل',
     '',
     'لا',
     'نص',
     'البرید الإلكتروني')
   ],
+  // @ts-ignore
   [('', '', 'نعم', 'نص', 'عنوان الإقامة')]
 ];
 router.get('/information/SPC', (request, response) => {

@@ -1,7 +1,6 @@
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const express = require('express');
-const bcrypt = require('bcryptjs');
 const router = express.Router();
 
 const formValidator = require('../../validations/formValidations');
@@ -9,15 +8,13 @@ const User = require('../../models/User');
 const Form = require('../../models/Form');
 const typesEnum = require('../../enums/accountType');
 const formEnum = require('../../enums/formStatus');
-const entity = require('../../enums/entityType');
-const formType = require('../../enums/formType');
-const regulatedLaw = require('../../enums/regulatedLaw');
+const userEnum = require('../../enums/accountType');
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
-// configuration option that tells the parser to use the classic encoding
+// Configuration option that tells the parser to use the classic encoding
 router.use(
   bodyParser.urlencoded({
     extended: false
@@ -49,8 +46,8 @@ router.get('/viewRejectedForms', async (req, res) => {
 //Create Form - Investor, Lawyer
 router.post('/form', async (req, res) => {
   try {
-    const investorID = 0;
-    const lawyerID = 0;
+    var investorID = '';
+    var lawyerID = '';
     if (req.get('type') == typesEnum.accountTypes.lawyer) {
       lawyerID = req.get('_id');
       investorID = req.body.investor;
@@ -74,17 +71,17 @@ router.post('/form', async (req, res) => {
         return res.status(400).json({
           error: 'The investor cannot Establish multiple SSC Companies'
         });
-      const inv = await User.findById(form.investor);
-      const flag = 0;
+      const inv = await User.findById(investorID);
+      var flag = false;
       if (inv.nationality != 'Egyptian') {
         const b = req.body.board;
-        for (i = 0; i < b.length; i++) {
+        for (var i = 0; i < b.length; i++) {
           if (!(b[i].nationality == 'egyptian')) {
-            flag = 1;
+            flag = true;
           }
         }
       }
-      if (flag == 0)
+      if (flag)
         return res.status(400).json({
           error:
             'investors establishing SSC must have at least one egyptian manager'
@@ -112,7 +109,7 @@ router.post('/form', async (req, res) => {
         (formBody.formStatus = formEnum.formStatus.REVIEWER);
     } else {
       formBody.formStatus = formEnum.formStatus.LAWYER;
-      formBody.investor = investorId;
+      formBody.investor = investorID;
     }
     const newForm = await Form.create(formBody);
     res.json({ msg: 'Form was created successfully ', data: newForm });
@@ -122,18 +119,21 @@ router.post('/form', async (req, res) => {
 });
 
 //Update Form - Investor, Lawyer
-router.put('/form/:formid', async (req, res) => {
+router.put('/form/:formId', async (req, res) => {
   try {
-    const userID = req.get(_id);
-    const formid = req.params.formid;
-    const form = await Form.findById(formid);
+    const userID = req.get('_id');
+    const formId = req.params.formId;
+    const form = await Form.findById(formId);
     if (!form) return res.status(404).send({ error: 'Form does not exist' });
     //AUTHORIZATION
     if (
-      (req.get('type') == 'lawyer' &&
-        (form.createdByLawyer == false || form.lawyer != userID)) ||
-      req.get('type') == 'reviewer' ||
-      form.investor != userID
+      (req.get('type') == userEnum.accountTypes.LAWYER &&
+        (form.createdByLawyer == false ||
+          form.lawyer != userID ||
+          form.formStatus != formEnum.formStatus.LAWYER)) ||
+      (req.get('type') == userEnum.accountTypes.INVESTOR &&
+        (form.investor != userID ||
+          form.formStatus != formEnum.formStatus.INVESTOR))
     ) {
       return res.status(404).send({ error: 'You have no authorization' });
     }
@@ -156,16 +156,17 @@ router.put('/form/:formid', async (req, res) => {
           error: 'The investor cannot Establish multiple SSC Companies'
         });
       const inv = await User.findById(form.investor);
-      const flag = 0;
+      var flag = true;
       if (inv.nationality != 'Egyptian') {
         const b = req.body.board;
-        for (i = 0; i < b.length; i++) {
-          if (!(b[i].nationality == 'egyptian')) {
-            flag = 1;
+        flag = false;
+        for (var i = 0; i < b.length; i++) {
+          if (b[i].nationality == 'Egyptian') {
+            flag = true;
           }
         }
       }
-      if (flag == 0)
+      if (!flag)
         return res.status(400).json({
           error:
             'investors establishing SSC must have at least one egyptian manager'
@@ -181,7 +182,7 @@ router.put('/form/:formid', async (req, res) => {
     }
 
     //Validations and Insertion
-    var isValidated = Formvalidator.updateValidation(req.body);
+    var isValidated = formValidator.updateValidation(req.body);
     if (isValidated.error)
       return res
         .status(400)
@@ -200,7 +201,7 @@ router.put('/form/:formid', async (req, res) => {
       formBody.formStatus = formEnum.formStatus.REVIEWER;
       formBody.$unset = { reviewerDecision: 1, reviewer: 1 };
     }
-    await Form.findByIdAndUpdate(id, formBody);
+    await Form.findByIdAndUpdate(formId, formBody);
     res.json({ msg: 'Form updated successfully' });
   } catch (e) {
     console.log(e);

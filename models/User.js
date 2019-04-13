@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const typesEnum = require('../enums/accountType');
 const userschema = new Schema({
@@ -71,4 +71,4 @@ const userschema = new Schema({
   }
 });
 
-module.exports = user = mongoose.model("User", userschema);
+module.exports = mongoose.model('User', userschema);

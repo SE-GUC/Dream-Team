@@ -1,4 +1,6 @@
-const Joi = require("joi");
+const Joi = require('joi');
+const joiPhone = Joi.extend(require('joi-phone-number'));
+
 module.exports = {
   createInvestorValidation: request => {
     const createSchema = {
@@ -12,7 +14,7 @@ module.exports = {
         .max(8)
         .required(),
       //enum gender
-      gender: joi.string().valid("Male", "Female"),
+      gender: Joi.string().valid('Male', 'Female'),
       nationality: Joi.string()
         .min(4)
         .max(20)
@@ -25,8 +27,8 @@ module.exports = {
       address: Joi.string()
         .min(100)
         .required(),
-      phoneNumber: Joi.string().phoneNumber(),
-      faxNumber: Joi.string().phoneNumber(),
+      phoneNumber: joiPhone.string().phoneNumber(),
+      faxNumber: joiPhone.string().phoneNumber(),
       accountStatus: Joi.boolean().required(),
       email: Joi.string()
         .email()
@@ -38,7 +40,7 @@ module.exports = {
       investorType: Joi.string().required(),
       capital: Joi.number().required(),
       capitalCurrency: Joi.string()
-        .currency()
+        // .currency()
         .required()
     };
 
@@ -59,7 +61,7 @@ module.exports = {
         .max(8)
         .required(),
       //enum gender
-      gender: joi.string().valid("Male", "Female"),
+      gender: Joi.string().valid('Male', 'Female'),
       nationality: Joi.string()
         .min(4)
         .max(20)
@@ -70,8 +72,14 @@ module.exports = {
       address: Joi.string()
         .min(100)
         .required(),
-      phoneNumber: Joi.phoneNumber().required(),
-      faxNumber: Joi.phoneNumber().required(),
+      phoneNumber: joiPhone
+        .string()
+        .phoneNumber()
+        .required(),
+      faxNumber: joiPhone
+        .string()
+        .phoneNumber()
+        .required(),
       accountStatus: Joi.boolean().required(),
       email: Joi.string()
         .email()
@@ -101,7 +109,7 @@ module.exports = {
         .max(8)
         .required(),
       //enum gender
-      gender: joi.string().valid("Male", "Female"),
+      gender: Joi.string().valid('Male', 'Female'),
       nationality: Joi.string()
         .min(4)
         .max(20)
@@ -112,8 +120,14 @@ module.exports = {
       address: Joi.string()
         .min(100)
         .required(),
-      phoneNumber: Joi.phoneNumber().required(),
-      faxNumber: Joi.phoneNumber().required(),
+      phoneNumber: joiPhone
+        .string()
+        .phoneNumber()
+        .required(),
+      faxNumber: joiPhone
+        .string()
+        .phoneNumber()
+        .required(),
       accountStatus: Joi.boolean().required(),
       email: Joi.string()
         .email()
@@ -143,7 +157,7 @@ module.exports = {
         .max(8)
         .required(),
       //enum gender
-      gender: joi.string().valid("Male", "Female"),
+      gender: Joi.string().valid('Male', 'Female'),
       nationality: Joi.string()
         .min(4)
         .max(20)
@@ -154,8 +168,14 @@ module.exports = {
       address: Joi.string()
         .min(100)
         .required(),
-      phoneNumber: Joi.phoneNumber().required(),
-      faxNumber: Joi.phoneNumber().required(),
+      phoneNumber: joiPhone
+        .string()
+        .phoneNumber()
+        .required(),
+      faxNumber: joiPhone
+        .string()
+        .phoneNumber()
+        .required(),
       accountStatus: Joi.boolean().required(),
       email: Joi.string()
         .email()
@@ -183,7 +203,7 @@ module.exports = {
         .min(5)
         .max(8),
       //enum gender
-      gender: joi.string().valid("Male", "Female"),
+      gender: Joi.string().valid('Male', 'Female'),
       nationality: Joi.string()
         .min(4)
         .max(20),
@@ -191,8 +211,8 @@ module.exports = {
       numberID: Joi.string(),
       dateOfBirth: Joi.date(),
       address: Joi.string().min(100),
-      phoneNumber: Joi.phoneNumber(),
-      faxNumber: Joi.phoneNumber(),
+      phoneNumber: joiPhone.string().phoneNumber(),
+      faxNumber: joiPhone.string().phoneNumber(),
       accountStatus: Joi.boolean(),
       email: Joi.string().email(),
       password: Joi.string().min(8),
@@ -202,7 +222,7 @@ module.exports = {
       capitalCurrency: null
     };
 
-    return Joi.validate(request, updateSchema);
+    return Joi.validate(request, AdminupdateSchema);
   },
 
   updateInvestorValidation: request => {
@@ -216,7 +236,7 @@ module.exports = {
         .min(5)
         .max(8),
       //enum gender
-      gender: joi.string().valid("Male", "Female"),
+      gender: Joi.string().valid('Male', 'Female'),
       nationality: Joi.string()
         .min(4)
         .max(20),
@@ -224,19 +244,18 @@ module.exports = {
       numberID: Joi.string(),
       dateOfBirth: Joi.date(),
       address: Joi.string().min(100),
-      phoneNumber: Joi.phoneNumber(),
-      faxNumber: Joi.phoneNumber(),
+      phoneNumber: joiPhone.string().phoneNumber(),
+      faxNumber: joiPhone.string().phoneNumber(),
       accountStatus: Joi.boolean(),
       email: Joi.string().email(),
       password: Joi.string().min(8),
       //enum investor type
-      investorType: joi.string(),
-      capital: joi.number(),
-      capitalCurrency: joi.currency(),
-      accountStatus: Joi.boolean(),
+      investorType: Joi.string(),
+      capital: Joi.number(),
+      capitalCurrency: Joi.string(),
       rejectionMessage: Joi.string()
     };
-    return Joi.validate(request, updateSchema);
+    return Joi.validate(request, InvestorupdateSchema);
   },
 
   updateLawyerValidation: request => {
@@ -250,7 +269,7 @@ module.exports = {
         .min(5)
         .max(8),
       //enum gender
-      gender: joi.string().valid("Male", "Female"),
+      gender: Joi.string().valid('Male', 'Female'),
       nationality: Joi.string()
         .min(4)
         .max(20),
@@ -258,8 +277,8 @@ module.exports = {
       numberID: Joi.string(),
       dateOfBirth: Joi.date(),
       address: Joi.string().min(100),
-      phoneNumber: Joi.phoneNumber(),
-      faxNumber: Joi.phoneNumber(),
+      phoneNumber: joiPhone.string().phoneNumber(),
+      faxNumber: joiPhone.string().phoneNumber(),
       accountStatus: Joi.boolean(),
       email: Joi.string().email(),
       password: Joi.string().min(8),
@@ -267,10 +286,9 @@ module.exports = {
       investorType: null,
       capital: null,
       capitalCurrency: null,
-      accountStatus: Joi.boolean(),
       rejectionMessage: Joi.string()
     };
-    return Joi.validate(request, updateSchema);
+    return Joi.validate(request, LawyerupdateSchema);
   },
 
   updateReviewerValidation: request => {
@@ -284,7 +302,7 @@ module.exports = {
         .min(5)
         .max(8),
       //enum gender
-      gender: joi.string().valid("Male", "Female"),
+      gender: Joi.string().valid('Male', 'Female'),
       nationality: Joi.string()
         .min(4)
         .max(20),
@@ -292,8 +310,8 @@ module.exports = {
       numberID: Joi.string(),
       dateOfBirth: Joi.date(),
       address: Joi.string().min(100),
-      phoneNumber: Joi.phoneNumber(),
-      faxNumber: Joi.phoneNumber(),
+      phoneNumber: joiPhone.string().phoneNumber(),
+      faxNumber: joiPhone.string().phoneNumber(),
       accountStatus: Joi.boolean(),
       email: Joi.string().email(),
       password: Joi.string().min(8),
@@ -301,9 +319,8 @@ module.exports = {
       investorType: null,
       capital: null,
       capitalCurrency: null,
-      accountStatus: Joi.boolean(),
       rejectionMessage: Joi.string()
     };
-    return Joi.validate(request, updateSchema);
+    return Joi.validate(request, ReviewerupdateSchema);
   }
 };
