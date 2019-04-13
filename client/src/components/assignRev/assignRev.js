@@ -67,11 +67,11 @@ this.setState({ responseToPost:body})
       return <div>Loading...</div>;
     } else {
       return (
-        <div className="formTable">
+        <div className="AssignRev">
           <Table dark hover bordered id="myTable">
             <thead>
               <tr>
-                <th> ID</th>
+                <th  className="hide"> ID</th>
                 <th> companyName </th>
                 <th> companyNameEng </th>
                 <th> companyType </th>
@@ -104,7 +104,7 @@ this.setState({ responseToPost:body})
             <tbody>
               {response.data.map((x, key) => (
                 <tr>
-                  <td> {(key = x._id)}</td>
+                  <td className="hide"> {(key = x._id)}</td>
                   <td>{x.companyName}</td>
                   <td>{x.companyNameEng}</td>
                   <td>{x.companyType}</td>
