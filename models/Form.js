@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const BoardofdirectorsSchema = require('../models/Boardofdirectors');
 const regulatedLaw = require('../enums/regulatedLaw');
-const entityType = require('../enums/entityType');
 const formStatus = require('../enums/formStatus');
 const formType = require('../enums/formType');
 const FormSchema = new Schema({
   companyName: {
     type: String,
     required: true
+    
   },
   companyNameEng: {
     type: String
