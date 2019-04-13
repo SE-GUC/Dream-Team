@@ -1,13 +1,13 @@
-var bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const express = require('express');
+var bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const express = require("express");
 const router = express.Router();
-const User = require('../../models/User');
-const typesEnum = require('../../enums/accountType');
+const User = require("../../models/User");
+const typesEnum = require("../../enums/accountType");
 
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
+mongoose.set("useNewUrlParser", true);
+mongoose.set("useFindAndModify", false);
+mongoose.set("useCreateIndex", true);
 
 //configuration option that tells the parser to use the classic encoding
 router.use(
@@ -17,7 +17,7 @@ router.use(
 );
 
 //View pending users waiting for approval - Admin
-router.get('/admin/ViewPendingUsers', async (req, res) => {
+router.get("/admin/ViewPendingUsers", async (req, res) => {
   const users = await User.find({ accountStatus: { $exists: false } });
   res.json({
     data: users
@@ -25,7 +25,7 @@ router.get('/admin/ViewPendingUsers', async (req, res) => {
 });
 
 //View Accepted (Active) Users - Admin
-router.get('/admin/ViewAcceptedUsers', async (req, res) => {
+router.get("/admin/ViewAcceptedUsers", async (req, res) => {
   const users = await User.find({ accountStatus: true });
   res.json({
     data: users
@@ -33,7 +33,7 @@ router.get('/admin/ViewAcceptedUsers', async (req, res) => {
 });
 
 //View Rejected Users (who needs to be updated) - Admin
-router.get('/admin/ViewAcceptedUsers', async (req, res) => {
+router.get("/admin/viewRejectedUsers", async (req, res) => {
   const users = await User.find({ accountStatus: false });
   res.json({
     data: users
@@ -41,7 +41,7 @@ router.get('/admin/ViewAcceptedUsers', async (req, res) => {
 });
 
 //View all lawyers - Admin
-router.get('/getLawyer', async (req, res) => {
+router.get("/getLawyer", async (req, res) => {
   const users = await User.find({ accountType: typesEnum.accountTypes.LAWYER });
   res.json({
     data: users
@@ -49,7 +49,7 @@ router.get('/getLawyer', async (req, res) => {
 });
 
 //View all investors - Admin
-router.get('/viewinvestor', async (req, res) => {
+router.get("/viewinvestor", async (req, res) => {
   const users = await User.find({
     accountType: typesEnum.accountTypes.INVESTOR
   });
@@ -59,7 +59,7 @@ router.get('/viewinvestor', async (req, res) => {
 });
 
 //View all reviewers - Admin
-router.get('/getReviewer', async (req, res) => {
+router.get("/getReviewer", async (req, res) => {
   const users = await User.find({
     accountType: typesEnum.accountTypes.REVIEWER
   });
@@ -69,7 +69,7 @@ router.get('/getReviewer', async (req, res) => {
 });
 
 //Viewing all entity employees - Admin
-router.get('/employee', async (req, res) => {
+router.get("/employee", async (req, res) => {
   try {
     const users = await User.find({
       accountType: { $ne: typesEnum.accountTypes.INVESTOR }
@@ -85,20 +85,20 @@ router.get('/employee', async (req, res) => {
 });
 
 //Approving a user account - Admin
-router.put('/approve/:id', async (req, res) => {
+router.put("/approve/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const user = await User.findById(id);
     if (!user)
       return res.status(404).send({
-        error: 'This User does not exist'
+        error: "This User does not exist"
       });
     const approve = {
       accountStatus: true
     };
     const updated = await User.findByIdAndUpdate(id, approve);
     res.json({
-      msg: 'account have been approved',
+      msg: "account have been approved",
       data: updated
     });
   } catch (err) {
@@ -109,32 +109,32 @@ router.put('/approve/:id', async (req, res) => {
 });
 
 //Reject and send a comment - Admin
-router.put('/sendRejectionMsg/:id', async (req, res) => {
+router.put("/sendRejectionMsg/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const user = await User.findById(id);
-    if (!user) return res.status(404).send({ error: 'user does not exist' });
+    if (!user) return res.status(404).send({ error: "user does not exist" });
     const reject = req.body;
     reject.approveStatus = false;
     await User.findByIdAndUpdate(id, reject);
-    res.json({ msg: 'user updated successfully' });
+    res.json({ msg: "user updated successfully" });
   } catch (error) {
     console.log(error);
   }
 });
 
 //Delete Users - Admin
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const user = await User.findById(id);
     if (user.accountStatus == true)
       return res.status(404).send({
-        error: 'This User cannot be deleted'
+        error: "This User cannot be deleted"
       });
     const deletedUser = await User.findByIdAndDelete(id);
     res.json({
-      msg: 'The User has been deleted successfully',
+      msg: "The User has been deleted successfully",
       data: deletedUser
     });
   } catch (error) {
@@ -145,19 +145,19 @@ router.delete('/:id', async (req, res) => {
 });
 
 //View all users - Admin
-router.get('/getUsers', async (req, res) => {
+router.get("/getUsers", async (req, res) => {
   const users = await User.find();
   res.json({ data: users });
 });
 
-//Get user by id - Admin
-router.get('/getUsers/:id', async (req, res) => {
+//right//Get user by id - Admin
+router.get("/getUsers/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const user = await User.findById(id);
     if (!user)
       return res.status(404).send({
-        error: 'This User does not exist'
+        error: "This User does not exist"
       });
     res.json({
       data: user

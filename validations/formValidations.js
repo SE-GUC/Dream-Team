@@ -1,6 +1,6 @@
-const Joi = require('joi');
-const joiPhone = Joi.extend(require('joi-phone-number'));
-const joiCurr = require('joi-currency');
+const Joi = require("joi");
+const joiPhone = Joi.extend(require("joi-phone-number"));
+const joiCurr = require("joi-currency");
 
 module.exports = {
   createValidation: request => {
@@ -23,7 +23,7 @@ module.exports = {
           .max(500)
           .required(),
         address: Joi.string()
-          .min(100)
+          .min(10)
           .max(500)
           .required(),
         telephone: joiPhone.string().phoneNumber(),
@@ -35,30 +35,13 @@ module.exports = {
           .currency()
           .required(),
         capital: Joi.when(request.companyType, {
-          is: 'SSC',
+          is: "SSC",
           then: Joi.number()
             .min(50000)
             .required(),
           otherwise: Joi.number().min(100000)
         })
-      },
-      regulatedLaw: Joi.string().required(),
-      //  otherwise : Joi.number().min(10000)})},
-      lawyerDecision: Joi.number()
-        .valid(0, 1, -1)
-        .required(),
-      reviewerComment: Joi.string()
-        .min(4)
-        .max(100),
-      reviewerDecision: Joi.number()
-        .valid(0, 1, -1)
-        .required(),
-      dateOfApproval: Joi.date(),
-      amountOfPayment: Joi.number(),
-      DateOfPayment: Joi.date(),
-      PaymentId: Joi.string()
-        .min(1)
-        .max(100000)
+      }
     };
 
     return Joi.validate(request, createSchema);
@@ -80,33 +63,21 @@ module.exports = {
           .min(3)
           .max(500),
         address: Joi.string()
-          .min(100)
-          .max(500),
+          .min(10)
+          .max(100),
         telephone: joiPhone.string().phoneNumber(),
         fax: joiPhone.string().phoneNumber()
       },
       financialInfo: {
-        currency: joiCurr.string().currency(),
-        capital: Joi.when(request.companyType, {
-          is: 'SSC',
-          then: Joi.number().min(50000),
-          otherwise: Joi.number().min(100000)
-        })
+        currency: joiCurr.string().currency()
+        // capital: Joi.when(request.companyType, {
+        //   is: "SSC",
+        //   then: Joi.number().min(50000),
+        //   otherwise: Joi.number().min(100000)
+        // })
       },
-      entityType: Joi.string(),
-      regulatedLaw: Joi.string(),
-      //  otherwise : Joi.number().min(10000)})},
-      lawyerDecision: Joi.number().valid(0, 1, -1),
-      reviewerComment: Joi.string()
-        .min(4)
-        .max(100),
-      reviewerDecision: Joi.number().valid(0, 1, -1),
-      dateOfApproval: Joi.date(),
-      amountOfPayment: Joi.number(),
-      DateOfPayment: Joi.date(),
-      PaymentId: Joi.string()
-        .min(1)
-        .max(100000)
+      // entityType: Joi.string(),
+      regulatedLaw: Joi.string()
     };
     return Joi.validate(request, updateSchema);
   }
