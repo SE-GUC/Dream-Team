@@ -38,9 +38,9 @@
     "stripe": "^6.28.0"
   },
   "devDependencies": {
+    "concurrently": "^4.1.0",
     "jest": "23.6.0",
-    "nodemon": "^1.18.10",
-    "concurrently": "^4.1.0"
+    "nodemon": "^1.18.10"
   },
   "engines": {
     "node": "10.15.1"
