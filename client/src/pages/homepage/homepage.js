@@ -15,11 +15,17 @@ import Table from '../../components/usertable/userTable';
 import searchBar from '../../components/searchBar';
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
 import withAuth from '../../components/withAuth';
-
-
+//import filter from '../../components/filterCase';
+import LawyerFillForm from '../../components/LawyerFillForm';
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
   state = {};
+  filter(){
+    this.props.history.push('/filter');
+  }
+  LawyerFillForm(){
+    this.props.history.push('/LawyerFillForm');
+  }
   lawyerview(){
     this.props.history.push('/Lawyershowmyforms');
 
@@ -31,7 +37,6 @@ class HomePage extends Component {
 
     this.props.history.push('/update');
 
-    this.props.history.push("/update");
 
   }
   viewInvestor() {
@@ -57,11 +62,13 @@ class HomePage extends Component {
   searchBar(){
     this.props.history.push("/searchBar")
   }
-  Auth = new AuthHelperMethods();
+ // Auth = new AuthHelperMethods();
   caseRe() {
     this.props.history.push('/case');
   }
-  
+  lawyerfilter(){
+    this.props.histroy.push("/filterCase");
+  }
 
   _handleLogout = () => {
 
@@ -84,6 +91,7 @@ class HomePage extends Component {
       this.connecToServer();
     }
 
+
   render() {
     return (
       <div className="HomePage">
@@ -102,7 +110,30 @@ class HomePage extends Component {
               this.login();
             }}
           >
-            Click to login
+            login
+          </button>
+        </div>
+        <div>
+          lawyer fill form
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.LawyerFillForm();
+            }}
+          >
+
+        lawyer fill form
+          </button>
+        </div>
+        <div>
+          filter case
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.filter();
+            }}
+          >
+            to filter
           </button>
         </div>
 

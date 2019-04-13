@@ -13,6 +13,7 @@ import HomePage from './pages/homepage';
 // import SignUp from './components/signup';
 // import FormTable from './components/formTable';
 import searchBar from './components/searchBar';
+import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 
 import UserTable from './components/usertable/userTable';
 import LawyerViewhisCases from './components/LawyerViewhisCases'
@@ -26,14 +27,16 @@ import * as serviceWorker from "./serviceWorker";
 import Investor from "./components/investor";
 import ComRule from "./components/comRule/comRule"
 import CalcRule from "./components/calcRule/calcRule";
-
-
+import LawyerFillForm from "./components/LawyerFillForm"
+import filtercase from "./components/filterCase/filterCase"
 ReactDOM.render(
   <Router>
     <div>
     <Route exactpath="/" component={HomePage} />
+    <Route path="/filter" component={filtercase} />
       <Route path="/login" component={Login} />
       <Route path="/investor" component={Investor} />
+      <Route path="/LawyerFillForm" component={LawyerFillForm} />
       <Route path="/signup" component={SignUp} />
       <Route path="/update" component={UpdateTest} />
       <Route path="/employeeTable" component={EmployeeTable} />

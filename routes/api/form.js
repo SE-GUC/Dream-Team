@@ -95,7 +95,8 @@ router.put("/:id", async (req, res) => {
 
 router.get('/search',async (req,res) =>{
  
-    const search = await Form.find(req.body)
+    const search = await Form.find(req.body);
+   // const filtered = await search.find({ companyName: { $exists: false } });
 
   res.json({
     data: search
