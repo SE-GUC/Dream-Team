@@ -27,6 +27,7 @@ import Investor from "./components/investor";
 import ComRule from "./components/comRule/comRule"
 import CalcRule from "./components/calcRule/calcRule";
 import AdminARC from "./components/adminARC/adminARC";
+import assignLaw from "./components/assignLaw/assignLaw";
 
 
 ReactDOM.render(
@@ -47,6 +48,7 @@ ReactDOM.render(
       <Route path="/feesCalculation" component={CalcRule} />
       <Route path="/case" component={Case} />
       <Route path="/adminARC" component={AdminARC} />
+      <Route path="/assignLaw" component={assignLaw} />
     </div>
   </Router>,
   document.getElementById("root")
