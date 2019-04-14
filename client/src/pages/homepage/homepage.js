@@ -9,10 +9,15 @@ import ReviewerCase from "../../components/reviewerCase";
 import Lawyerview from "../../components/LawyerViewhisCases";
 import formTable from "../../components/formTable";
 import SignUp from "../../components/signup";
+<<<<<<< HEAD
 import Table from "../../components/usertable/userTable";
 import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
 import formsOfLawyer from "../../components/formsOfLawyer/formsOfLawyer";
 import lawyerFinalizedCases from "../../components/lawyerFinalizedCases/lawyerFinalizedCases";
+=======
+import Table from "../../components/userTable/userTable";
+import Layout from "../../components/layout/layout";
+>>>>>>> updateReact
 // import Tableform from '../../components/formTable';
 import searchBar from "../../components/searchBar";
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
@@ -21,6 +26,7 @@ import withAuth from "../../components/withAuth";
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
   state = {};
+<<<<<<< HEAD
   lawyerFinalizedCases() {
     this.props.history.push("/lawyerFinalizedCases");
   }
@@ -33,6 +39,16 @@ class HomePage extends Component {
   lawyerview() {
     this.props.history.push("/Lawyershowmyforms");
   }
+=======
+  constructor(props) {
+    super(props);
+    this.state = {};
+    // this.connecToServer = this.connecToServer.bind(this);
+  }
+  lawyerview() {
+    this.props.history.push("/Lawyershowmyforms");
+  }
+>>>>>>> updateReact
   reviewrview() {
     this.props.history.push("/reviewershowmyforms");
   }
@@ -43,10 +59,14 @@ class HomePage extends Component {
   }
   viewInvestor() {
     this.props.history.push("/investor");
+<<<<<<< HEAD
   }
   login() {
     this.props.history.push("/login");
+=======
+>>>>>>> updateReact
   }
+
   signUp() {
     this.props.history.push("/signup");
   }
@@ -62,7 +82,6 @@ class HomePage extends Component {
   searchBar() {
     this.props.history.push("/searchBar");
   }
-  Auth = new AuthHelperMethods();
   caseRe() {
     this.props.history.push("/case");
   }
@@ -71,39 +90,21 @@ class HomePage extends Component {
     this.Auth.logout();
 
     this.props.history.replace("/login");
-  };
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.connecToServer = this.connecToServer.bind(this);
   }
 
-  connecToServer() {
-    fetch("/");
-  }
+  // connecToServer() {
+  //   fetch("/");
+  // }
 
-  componentDidMount() {
-    this.connecToServer();
-  }
+  // componentDidMount() {
+  //   this.connecToServer();
+  // }
 
   render() {
     return (
       <div className="HomePage">
-        <div className="App">
-          <div className="App-header">
-            <h2>Welcome Home</h2>
-          </div>
-        </div>
-        <div>
-          To Login Press here
-          <button
-            className="btn btn-primary width-150"
-            onClick={e => {
-              this.login();
-            }}
-          >
-            Click to login
-          </button>
+        <div className="App-header">
+          <h2>Welcome Home</h2>
         </div>
 
         <div>
@@ -150,17 +151,6 @@ class HomePage extends Component {
           </button>
         </div>
 
-        <div>
-          To SignUp press here
-          <button
-            className="btn btn-primary width-150"
-            onClick={e => {
-              this.signUp();
-            }}
-          >
-            Click to signup
-          </button>
-        </div>
         <div>
           To view employee table
           <button
@@ -258,7 +248,16 @@ class HomePage extends Component {
             View Lawyers Finalized Cases
           </button>
         </div>
-      </div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.searchBar();
+            }}
+          >
+            Click to search
+          </button>
+        </div>
+      
     );
   }
 }

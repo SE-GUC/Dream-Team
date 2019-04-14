@@ -7,14 +7,8 @@ import EmployeeTable from "./components/employeeTable";
 import SignUp from "./components/signup";
 import FormTable from "./components/formTable";
 import HomePage from "./pages/homepage";
-// import Login from './components/login';
-// import UpdateTest from './components/updateTest';
-// import EmployeeTable from './components/employeeTable';
-// import SignUp from './components/signup';
-// import FormTable from './components/formTable';
 import searchBar from "./components/searchBar";
-
-import UserTable from "./components/usertable/userTable";
+import UserTable from "./components/userTable/userTable";
 import LawyerViewhisCases from "./components/LawyerViewhisCases";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -29,6 +23,7 @@ import CalcRule from "./components/calcRule/calcRule";
 import viewAllInvestors from "./components/viewAllInvestors/viewAllInvestors";
 import formsOfLawyer from "./components/formsOfLawyer/formsOfLawyer";
 import lawyerFinalizedCases from "./components/lawyerFinalizedCases/lawyerFinalizedCases";
+import NavBar from "./components/layout/layout";
 ReactDOM.render(
   <Router>
     <div>
@@ -43,7 +38,11 @@ ReactDOM.render(
       <Route path="/searchBar" component={searchBar} />
       <Route path="/reviewershowmyforms" component={ReviewerViewhisForms} />
       <Route path="/Lawyershowmyforms" component={LawyerViewhisCases} />
-      <Route path="/companyRules" component={ComRule} />
+      <Route
+        path="/companyRules"
+        // @ts-ignore
+        component={ComRule}
+      />
       <Route path="/feesCalculation" component={CalcRule} />
       <Route path="/case" component={Case} />
       <Route path="/viewAllInvestors" component={viewAllInvestors} />
@@ -53,3 +52,4 @@ ReactDOM.render(
   </Router>,
   document.getElementById("root")
 );
+ReactDOM.render(<NavBar />, document.getElementById("Nav"));

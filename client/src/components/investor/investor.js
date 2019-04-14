@@ -1,62 +1,31 @@
-import React, { Component } from "react";
-import "./investor.css";
+import React, { Component } from 'react';
+import './investor.css';
 class investor extends Component {
-  //   state = {
-  //   };
-
-  //   viewRunning = async e => {
-  //     const array = await fetch('api/running/:id', {
-  //         method: 'GET',
-  //         // headers: {
-  //         //   'Content-Type': 'application/json',
-  //         // },
-  //         // body: JSON.stringify({ email:this.state.email , password:this.state.password}),
-  //       });
-
-  //         for(let i = 0; i < this.props.items.length; i++) {
-  //           array.push(
-  //             <this.Item key={i} item={this.props.items[i]} />
-  //           );
-  //         }
-  //   };
-
-  //   render() {
-  //     return (
-  //       <div >
-  //        <viewRunning/>
-  //       </div>
-  //     );
-  //   }
-  // }
-
   constructor(props) {
     super(props);
     this.state = {
       response: [],
-      isLoaded: false,
-      id: ""
+      isLoaded: false
     };
   }
 
   componentDidMount() {
-    fetch("api/investor/running/" + this.state.id + "/")
+    fetch('api/investor/running')
       .then(res => res.json())
       .then(json => {
         this.setState({
           isLoaded: true,
-          response: json,
-          id: this.state.id
+          response: json
         });
       });
   }
   componentDidMountPending() {
-    fetch("api/investor/pending/" + this.state.id + "/")
+    fetch('api/investor/pending')
       .then(res => res.json())
       .then(json => {
         this.setState({
           isLoaded: true,
-          response: json,
-          id: this.state.id
+          response: json
         });
       });
   }
@@ -65,12 +34,6 @@ class investor extends Component {
     if (!isLoaded) {
       return (
         <div>
-          id:
-          <input
-            type="text"
-            value={this.state.id}
-            onChange={e => this.setState({ id: e.target.value })}
-          />
           <button onClick={y => this.componentDidMount()}>
             SearchForAccepted
           </button>
@@ -82,16 +45,13 @@ class investor extends Component {
     } else {
       return (
         <div className="formTable">
-          <button onClick={y => this.componentDidMount()}>Search</button>
+          <button onClick={y => this.componentDidMount()}>
+            Search for Running
+          </button>
           <button onClick={y => this.componentDidMountPending()}>
             SearchForPending
           </button>
-          id:
-          <input
-            type="text"
-            value={this.state.id}
-            onChange={e => this.setState({ id: e.target.value })}
-          />
+
           <table>
             <thead>
               <tr>

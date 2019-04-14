@@ -1,51 +1,44 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class UpdateTest extends Component {
   state = {
-    governorate: "",
-    city: "",
-    address: "",
-    telephone: "",
-    fax: "",
-    Currency: "",
-    Capital: "",
-    companyName: "",
-    companyNameEng: "",
-    formID: "",
-    inID: ""
+    governorate: '',
+    city: '',
+    address: '',
+    telephone: '',
+    fax: '',
+    Currency: '',
+    Capital: '',
+    companyName: '',
+    companyNameEng: '',
+    formID: ''
   };
   board = async e => {
     // e.preventDefault();
-    const response = await fetch(
-      "/api/investor/updateForm/" + this.state.formID + "/" + this.state.inID,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          board: this.state.board
-        })
-      }
-    );
+    const response = await fetch('/api/investor/form/' + this.state.formID, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        board: this.state.board
+      })
+    });
     const body = await response.text();
 
     this.setState({ responseToPost: body });
   };
   companyNameEng = async e => {
     // e.preventDefault();
-    const response = await fetch(
-      "/api/investor/updateForm/" + this.state.formID + "/" + this.state.inID,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          companyNameEng: this.state.companyNameEng
-        })
-      }
-    );
+    const response = await fetch('/api/investor/form/' + this.state.formID, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        companyNameEng: this.state.companyNameEng
+      })
+    });
     const body = await response.text();
 
     this.setState({ responseToPost: body });
@@ -53,18 +46,15 @@ class UpdateTest extends Component {
   companyName = async e => {
     // var body5 = JSON.parse(this.state.formID);
     // var body6 = JSON.parse(this.state.inID);
-    const response = await fetch(
-      "/api/investor/updateForm/" + this.state.formID + "/" + this.state.inID,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          companyName: this.state.companyName
-        })
-      }
-    );
+    const response = await fetch('/api/investor/form/' + this.state.formID, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        companyName: this.state.companyName
+      })
+    });
     const body = await response.text();
 
     this.setState({ responseToPost: body });
@@ -75,12 +65,6 @@ class UpdateTest extends Component {
         <p>
           <strong>Investor Update Form:</strong>
         </p>
-        Please insert investor ID:
-        <input
-          type="text"
-          value={this.state.inID}
-          onChange={e => this.setState({ inID: e.target.value })}
-        />
         Please insert Form ID:
         <input
           type="text"
@@ -88,7 +72,7 @@ class UpdateTest extends Component {
           onChange={e => this.setState({ formID: e.target.value })}
         />
         <p>{this.state.inID}</p>
-        <dev>
+        <div>
           companyName:
           <input
             type="text"
@@ -103,8 +87,8 @@ class UpdateTest extends Component {
           >
             UPDATE company Name
           </button>
-        </dev>
-        <dev>
+        </div>
+        <div>
           companyNameEng:
           <input
             type="text"
@@ -119,8 +103,8 @@ class UpdateTest extends Component {
           >
             UPDATE company Name Eng
           </button>
-        </dev>
-        <dev>
+        </div>
+        <div>
           <p>{this.state.responseToPost}</p>
           board:
           <input
@@ -136,7 +120,7 @@ class UpdateTest extends Component {
           >
             UPDATE
           </button>
-        </dev>
+        </div>
         <p>{this.state.responseToPost}</p>
       </div>
     );

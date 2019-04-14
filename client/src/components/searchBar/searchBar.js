@@ -17,12 +17,12 @@ class searchBar extends React.Component {
 
   handleInputChange = event => {
     const query = event.target.value;
-    // console.log("hena")
+    
     this.setState(prevState => {
          const filteredData = _.filter(prevState.orgData,element => {
           return element.some((v)=> v===query);
         });
-    //  console.log("hena")
+    
 
       return {
         query: query,
