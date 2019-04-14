@@ -6,6 +6,7 @@ import UpdateTest from "./components/updateTest";
 import EmployeeTable from "./components/employeeTable";
 import SignUp from "./components/signup";
 import FormTable from "./components/formTable";
+<<<<<<< HEAD
 import HomePage from './pages/homepage';
 // import Login from './components/login';
 // import UpdateTest from './components/updateTest';
@@ -22,11 +23,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Case from './pages/LRspecificCase';
 import 'bootstrap/dist/css/bootstrap.css';
 import ReviewerViewhisForms from './components/ReviewerViewhisForms'
+=======
+import HomePage from "./pages/homepage";
+import searchBar from "./components/searchBar";
+import UserTable from "./components/userTable/userTable";
+import LawyerViewhisCases from "./components/LawyerViewhisCases";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Case from "./pages/LRspecificCase";
+import "bootstrap/dist/css/bootstrap.css";
+import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
+>>>>>>> backEnd
 // import UserTable from "./components/userTable/userTable";
 import * as serviceWorker from "./serviceWorker";
 import Investor from "./components/investor";
-import ComRule from "./components/comRule/comRule"
+import ComRule from "./components/comRule/comRule";
 import CalcRule from "./components/calcRule/calcRule";
+<<<<<<< HEAD
 import LawyerFillForm from "./components/LawyerFillForm"
 import filtercase from "./components/filterCase/filterCase"
 ReactDOM.render(
@@ -34,6 +47,13 @@ ReactDOM.render(
     <div>
     <Route exactpath="/" component={HomePage} />
     <Route path="/filter" component={filtercase} />
+=======
+import NavBar from "./components/layout/layout";
+ReactDOM.render(
+  <Router>
+    <div>
+      <Route exact path="/" component={HomePage} />
+>>>>>>> backEnd
       <Route path="/login" component={Login} />
       <Route path="/investor" component={Investor} />
       <Route path="/LawyerFillForm" component={LawyerFillForm} />
@@ -52,3 +72,4 @@ ReactDOM.render(
   </Router>,
   document.getElementById("root")
 );
+ReactDOM.render(<NavBar />, document.getElementById("Nav"));
