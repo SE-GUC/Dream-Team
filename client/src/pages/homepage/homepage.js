@@ -1,45 +1,65 @@
 import React, { Component } from "react";
-import "../homepage/homepage.css";
 import AuthHelperMethods from "../../components/AuthHelperMethods";
-import X from "../../components/ReviewerViewhisForms/ReviewerViewhisForms";
-import Login from "../../components/login";
-import Tableform from "../../components/formTable";
-import LawyerCase from "../../components/lawyerCase";
-import ReviewerCase from "../../components/reviewerCase";
-import Lawyerview from "../../components/LawyerViewhisCases";
-import formTable from "../../components/formTable";
-import SignUp from "../../components/signup";
-import Table from "../../components/userTable/userTable";
-import Layout from "../../components/layout/layout";
-// import Tableform from '../../components/formTable';
-import searchBar from "../../components/searchBar";
-// import AuthHelperMethods from '../../components/AuthHelperMethods';
-import withAuth from '../../components/withAuth';
-//import filter from '../../components/filterCase';
-import LawyerFillForm from '../../components/LawyerFillForm';
+import "../homepage/homepage.css";
+
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
   state = {};
-  filter(){
-    this.props.history.push('/filter');
+  publishedCompanies() {
+    this.props.history.push("/publishedCompanies");
   }
-  LawyerFillForm(){
-    this.props.history.push('/LawyerFillForm');
-  }
-  lawyerview(){
-    this.props.history.push('/Lawyershowmyforms');
 
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {};
+  //   // this.connecToServer = this.connecToServer.bind(this);
+  // }
+  viewAllForms() {
+    this.props.history.push("/viewAllForms");
   }
+  filter() {
+    this.props.history.push("/filter");
+  }
+  LawyerFillForm() {
+    this.props.history.push("/LawyerFillForm");
+  }
+
+  lawyerFinalizedCases() {
+    this.props.history.push("/lawyerFinalizedCases");
+  }
+  viewAllInvestors() {
+    this.props.history.push("/viewAllInvestors");
+  }
+  formsOfLawyer() {
+    this.props.history.push("/formsOfLawyer");
+  }
+  lawyerview() {
+    this.props.history.push("/Lawyershowmyforms");
+  }
+  constructor(props) {
+    super(props);
+    this.state = {};
+    // this.connecToServer = this.connecToServer.bind(this);
+  }
+
   reviewrview() {
     this.props.history.push("/reviewershowmyforms");
   }
   update() {
-
-    this.props.history.push('/update');
-
+    this.props.history.push("/update");
   }
   viewInvestor() {
     this.props.history.push("/investor");
+  }
+  viewReviewers() {
+    this.props.history.push("/reviewers");
+  }
+  invUpdate() {
+    this.props.history.push("/invUpdate");
+  }
+
+  login() {
+    this.props.history.push("/login");
   }
 
   signUp() {
@@ -60,14 +80,17 @@ class HomePage extends Component {
   caseRe() {
     this.props.history.push("/case");
   }
-  lawyerfilter(){
+  lawyerfilter() {
     this.props.histroy.push("/filterCase");
+  }
+  lawUp() {
+    this.props.history.push("/lawyerUpdate");
   }
 
   _handleLogout = () => {
     this.Auth.logout();
 
-    this.props.history.replace("/login");
+    this.props.history.replace("/");
   };
 
   // connecToServer() {
@@ -77,7 +100,6 @@ class HomePage extends Component {
   // componentDidMount() {
   //   this.connecToServer();
   // }
-
 
   render() {
     return (
@@ -105,8 +127,7 @@ class HomePage extends Component {
               this.LawyerFillForm();
             }}
           >
-
-        lawyer fill form
+            lawyer fill form
           </button>
         </div>
         <div>
