@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Table } from "reactstrap";
-import AuthHelperMethods from  '../AuthHelperMethods';
-import withAuth from '../withAuth';
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 
-  
 class formTable extends Component {
   // Auth = new AuthHelperMethods();
   constructor(props) {
@@ -39,13 +38,13 @@ class formTable extends Component {
                 <th> companyName </th>
                 <th> companyNameEng </th>
                 <th> companyType </th>
-                {/* <th> governorate  </th> */}
-                {/* <th> city </th>
-            <th> address </th>
-            <th> telephone </th>
-            <th> fax </th>
-            <th> currency </th>
-            <th> capital </th> */}
+                <th> governorate </th>
+                <th> city </th>
+                <th> address </th>
+                <th> telephone </th>
+                <th> fax </th>
+                <th> currency </th>
+                <th> capital </th>
                 <th> entityType </th>
                 <th> regulatedLaw </th>
                 <th> investor </th>
@@ -69,16 +68,41 @@ class formTable extends Component {
                 <tr>
                   <td> {(key = x._id)}</td>
                   <td>{x.companyName}</td>
+
                   <td>{x.companyNameEng}</td>
                   <td>{x.companyType}</td>
-                  {/* <td>{x.headquarters}</td> */}
-                  {/* <td>{x.city}</td>
-              <td>{x.address}</td>
-              <td>{x.telephone}</td>
-              <td>{x.fax}</td>
-              <td>{x.currency}</td>
-              <td>{x.capital}</td> */}
+                  <td>
+                    {x.headquarters != undefined
+                      ? x.headquarters.governorate
+                      : null}
+                  </td>
+                  <td>
+                    {x.headquarters != undefined ? x.headquarters.city : null}
+                  </td>
+                  <td>
+                    {x.headquarters != undefined
+                      ? x.headquarters.address
+                      : null}
+                  </td>
+                  <td>
+                    {x.headquarters != undefined
+                      ? x.headquarters.telephone
+                      : null}
+                  </td>
+                  <td>
+                    {x.headquarters != undefined ? x.headquarters.fax : null}
+                  </td>
 
+                  <td>
+                    {x.financialInfo != undefined
+                      ? x.financialInfo.currency
+                      : null}
+                  </td>
+                  <td>
+                    {x.financialInfo != undefined
+                      ? x.financialInfo.capital
+                      : null}
+                  </td>
                   <td>{x.entityType}</td>
                   <td>{x.regulatedLaw}</td>
                   <td>{x.investor}</td>
