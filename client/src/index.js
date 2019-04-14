@@ -22,7 +22,7 @@ import Case from "./pages/LRspecificCase";
 import "bootstrap/dist/css/bootstrap.css";
 import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
 // import UserTable from "./components/userTable/userTable";
-// import * as serviceWorker from "./serviceWorker";
+import * as serviceWorker from "./serviceWorker";
 import Investor from "./components/investor";
 import ComRule from "./components/comRule/comRule";
 import CalcRule from "./components/calcRule/calcRule";
@@ -48,3 +48,8 @@ ReactDOM.render(
   </Router>,
   document.getElementById("root")
 );
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
