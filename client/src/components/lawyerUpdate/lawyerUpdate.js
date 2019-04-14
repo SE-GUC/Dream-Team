@@ -1,9 +1,12 @@
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 import React, { Component } from "react";
 import { Table } from "reactstrap";
 import LawyerUpdateForm from "../lawyerUpdateForm/lawyerUpdateForm";
 const axios = require("axios");
 
 class LawyerUpdate extends Component {
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = {
@@ -14,7 +17,7 @@ class LawyerUpdate extends Component {
     };
   }
   componentDillMount() {
-    fetch("api/lawyer/rejectedForms")
+    this.Auth.fetch("api/lawyer/rejectedForms")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -183,4 +186,4 @@ class LawyerUpdate extends Component {
   }
 }
 
-export default LawyerUpdate;
+export default withAuth(LawyerUpdate);

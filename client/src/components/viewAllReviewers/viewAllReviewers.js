@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Table } from "reactstrap";
-import axios from "axios";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
+
 class viewAllReviewers extends Component {
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = {
@@ -11,10 +14,13 @@ class viewAllReviewers extends Component {
     };
   }
   componentDidMount() {
-    fetch("api/admin/reviewer")
+    this.Auth.fetch("/api/admin/reviewer")
       .then(response => response.json())
-      .then(data => {
-        console.log(data); // Prints result from `response.json()` in getRequest
+      .then(json => {
+        this.setState({
+          isLoaded: true,
+          response: json
+        });
       })
       .catch(error => console.error(error));
   }
@@ -92,4 +98,4 @@ class viewAllReviewers extends Component {
   }
 }
 
-export default viewAllReviewers;
+export default withAuth(viewAllReviewers);

@@ -1,9 +1,12 @@
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 import React, { Component } from "react";
 import { Table } from "reactstrap";
 import UpdateTest from "../updateTest/updateTest";
 const axios = require("axios");
 
 class InvestorUpdateRejected extends Component {
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = {
@@ -15,11 +18,15 @@ class InvestorUpdateRejected extends Component {
   }
 
   componentDidMount() {
-    fetch("api/investor/rejectedForms")
+    this.Auth.fetch("api/investor/rejectedForms")
       .then(response => response.json())
-      .then(data => {
-        console.log(data); // Prints result from `response.json()` in getRequest
+      .then(json => {
+        this.setState({
+          isLoaded: true,
+          response: json
+        });
       })
+
       .catch(error => console.error(error));
   }
   // componentDidMount() {
@@ -182,4 +189,4 @@ class InvestorUpdateRejected extends Component {
   }
 }
 
-export default InvestorUpdateRejected;
+export default withAuth(InvestorUpdateRejected);

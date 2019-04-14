@@ -1,9 +1,12 @@
+import withAuth from "../withAuth";
 import React, { Component } from "react";
 import { Table } from "reactstrap";
-const axios = require("axios");
+import AuthHelperMethods from "../AuthHelperMethods";
+
 //As a reviewer, I should get all my forms and approve/reject and add comments on each form
 //one specific ID
 class viewRejectedForms extends Component {
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = {
@@ -13,48 +16,41 @@ class viewRejectedForms extends Component {
     };
   }
 
-
-
-
   reject(x) {
-  const response = await fetch(
-    "api/reviewer/sendRejectionMsg/" + x,
-    {
+    const response = this.Auth.fetch("api/reviewer/sendRejectionMsg/" + x, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
-      }}
-     
-  ).catch(err => {
-    this.state({ responseToPost: err });
-  });
-  const body = await response.text();
-  this.setState({ responseToPost: body });
-};
-accept(x) {
-  const response = await fetch(
-    "api/reviewer/accept/" + x,
-    {
+      }
+    }).catch(err => {
+      this.state({ responseToPost: err });
+    });
+    const body = response.text();
+    this.setState({ responseToPost: body });
+  }
+  accept(x) {
+    const response = this.Auth.fetch("api/reviewer/accept/" + x, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
-      }}
-     
-  ).catch(err => {
-    this.state({ responseToPost: err });
-  });
-  const body = await response.text();
-  this.setState({ responseToPost: body });
-};
+      }
+    }).catch(err => {
+      this.state({ responseToPost: err });
+    });
+    const body = response.text();
+    this.setState({ responseToPost: body });
+  }
   componentDidMount() {
-      fetch('api/reviewer/pendingCase')
+    this.Auth.fetch("api/reviewer/pendingCase")
       .then(response => response.json())
-      .then(data => {
-        console.log(data) // Prints result from `response.json()` in getRequest
+      .then(json => {
+        this.setState({
+          isLoaded: true,
+          response: json
+        });
       })
-      .catch(error => console.error(error))
-    };
-
+      .catch(error => console.error(error));
+  }
 
   update(formId, investorId) {
     this.props.history.push("/update");
@@ -146,6 +142,8 @@ accept(x) {
                       </button>
                     }
                   </td>
+                  <p>{this.state.responseToPost}</p>
+
                   <td>
                     {
                       <button
@@ -156,7 +154,6 @@ accept(x) {
                       >
                         Click to reject
                       </button>
-                        <p>{this.state.responseToPost}</p>
                     }
                   </td>
                 </tr>
@@ -170,4 +167,4 @@ accept(x) {
   }
 }
 
-export default viewRejectedForms;
+export default withAuth(viewRejectedForms);

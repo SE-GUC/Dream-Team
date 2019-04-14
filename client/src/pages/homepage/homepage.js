@@ -9,13 +9,8 @@ import ReviewerCase from "../../components/reviewerCase";
 import Lawyerview from "../../components/LawyerViewhisCases";
 import formTable from "../../components/formTable";
 import SignUp from "../../components/signup";
-<<<<<<< HEAD
 import Table from "../../components/usertable/userTable";
-
-=======
-import Table from "../../components/userTable/userTable";
 import Layout from "../../components/layout/layout";
->>>>>>> backEnd
 // import Tableform from '../../components/formTable';
 import searchBar from "../../components/searchBar";
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
@@ -24,21 +19,30 @@ import withAuth from "../../components/withAuth";
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
   state = {};
-<<<<<<< HEAD
-  lawyerview() {
-    this.props.history.push("/Lawyershowmyforms");
-  }
-  viewAllForms() {
-    this.props.history.push("/viewAllForms");
-=======
+
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {};
+  //   // this.connecToServer = this.connecToServer.bind(this);
+  // }
   constructor(props) {
     super(props);
     this.state = {};
-    // this.connecToServer = this.connecToServer.bind(this);
+    this.connecToServer = this.connecToServer.bind(this);
+  }
+
+  componentDidMount() {
+    this.connecToServer();
+  }
+  connecToServer() {
+    fetch("/");
+  }
+
+  viewAllForms() {
+    this.props.history.push("/viewAllForms");
   }
   lawyerview() {
     this.props.history.push("/Lawyershowmyforms");
->>>>>>> backEnd
   }
   reviewrview() {
     this.props.history.push("/reviewershowmyforms");
@@ -50,7 +54,6 @@ class HomePage extends Component {
   }
   viewInvestor() {
     this.props.history.push("/investor");
-<<<<<<< HEAD
   }
   viewReviewers() {
     this.props.history.push("/reviewers");
@@ -60,8 +63,6 @@ class HomePage extends Component {
   }
   login() {
     this.props.history.push("/login");
-=======
->>>>>>> backEnd
   }
 
   signUp() {
@@ -81,13 +82,10 @@ class HomePage extends Component {
   }
   caseRe() {
     this.props.history.push("/case");
-<<<<<<< HEAD
   }
 
   lawUp() {
     this.props.history.push("/lawyerUpdate");
-=======
->>>>>>> backEnd
   }
 
   _handleLogout = () => {
@@ -95,43 +93,12 @@ class HomePage extends Component {
 
     this.props.history.replace("/login");
   };
-<<<<<<< HEAD
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.connecToServer = this.connecToServer.bind(this);
-  }
-
-  connecToServer() {
-    fetch("/");
-  }
-
-  componentDidMount() {
-    this.connecToServer();
-  }
-=======
-
-  // connecToServer() {
-  //   fetch("/");
-  // }
-
-  // componentDidMount() {
-  //   this.connecToServer();
-  // }
->>>>>>> backEnd
 
   render() {
     return (
       <div className="HomePage">
-<<<<<<< HEAD
-        <div className="App">
-          <div className="App-header">
-            <h2>Welcome Home</h2>
-          </div>
-=======
         <div className="App-header">
           <h2>Welcome Home</h2>
->>>>>>> backEnd
         </div>
 
         <div>
@@ -151,7 +118,6 @@ class HomePage extends Component {
             onClick={e => {
               this.lawyerview();
             }}
-<<<<<<< HEAD
           />
         </div>
 
@@ -176,11 +142,6 @@ class HomePage extends Component {
           >
             Click to view
           </button>
-=======
-          >
-            Click to show
-          </button>
->>>>>>> backEnd
         </div>
         <div>
           To view reviewr form Press here
@@ -260,7 +221,6 @@ class HomePage extends Component {
         </div>
         <div>
           To search
-<<<<<<< HEAD
           <button
             className="btn btn-primary width-150"
             onClick={e => {
@@ -317,17 +277,12 @@ class HomePage extends Component {
             Click to Update
           </button>
         </dev>
-=======
-          <button
-            className="btn btn-primary width-150"
-            onClick={e => {
-              this.searchBar();
-            }}
-          >
-            Click to search
-          </button>
-        </div>
->>>>>>> backEnd
+        <button
+          className="btn btn-primary width-150"
+          onClick={e => {
+            this.searchBar();
+          }}
+        />
       </div>
     );
   }

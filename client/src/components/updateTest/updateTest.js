@@ -1,9 +1,13 @@
+import withAuth from "../withAuth";
+import AuthHelperMethods from "../AuthHelperMethods";
 import React, { Component } from "react";
 import { Form, Button, Col } from "react-bootstrap";
 import Popup from "reactjs-popup";
 const axios = require("axios");
+
 //investor Update Form
 class UpdateTest extends Component {
+  Auth = new AuthHelperMethods();
   state = {
     governorate: this.props.governorate,
     city: this.props.city,
@@ -22,7 +26,7 @@ class UpdateTest extends Component {
 
   updateAll = async e => {
     e.preventDefault();
-    const response = await fetch(
+    const response = await this.Auth.fetch(
       "api/investor/form/" + this.state.formID + "/",
       {
         method: "PUT",
@@ -148,4 +152,4 @@ class UpdateTest extends Component {
     );
   }
 }
-export default UpdateTest;
+export default withAuth(UpdateTest);

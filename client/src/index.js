@@ -7,19 +7,8 @@ import EmployeeTable from "./components/employeeTable";
 import SignUp from "./components/signup";
 import FormTable from "./components/formTable";
 import HomePage from "./pages/homepage";
-<<<<<<< HEAD
-// import Login from './components/login';
-// import UpdateTest from './components/updateTest';
-// import EmployeeTable from './components/employeeTable';
-// import SignUp from './components/signup';
-// import FormTable from './components/formTable';
 import searchBar from "./components/searchBar";
-
 import UserTable from "./components/usertable/userTable";
-=======
-import searchBar from "./components/searchBar";
-import UserTable from "./components/userTable/userTable";
->>>>>>> backEnd
 import LawyerViewhisCases from "./components/LawyerViewhisCases";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -31,24 +20,17 @@ import * as serviceWorker from "./serviceWorker";
 import Investor from "./components/investor";
 import ComRule from "./components/comRule/comRule";
 import CalcRule from "./components/calcRule/calcRule";
-<<<<<<< HEAD
 import Reviewers from "./components/viewAllReviewers/viewAllReviewers";
 import InvUpdate from "./components/investorUpdate/investorUpdate";
 import ViewAllForms from "./components/viewAllForms/viewAllForms";
 import LawyerUpdateForm from "./components/lawyerUpdateForm/lawyerUpdateForm";
 import LawUpForm from "./components/lawyerUpdate/lawyerUpdate";
+import NavBar from "./components/layout/layout";
 
 ReactDOM.render(
   <Router>
     <div>
-      <Route exactpath="/" component={HomePage} />
-=======
-import NavBar from "./components/layout/layout";
-ReactDOM.render(
-  <Router>
-    <div>
       <Route exact path="/" component={HomePage} />
->>>>>>> backEnd
       <Route path="/login" component={Login} />
       <Route path="/investor" component={Investor} />
       <Route path="/signup" component={SignUp} />
