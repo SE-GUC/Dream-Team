@@ -158,15 +158,19 @@ router.put("/updateUser/:id", async (req, res) => {
 });
 //get companies rules
 router.get("/companyRules", (request, response) => {
-  fs.readFile("rules/companyRule.txt", "utf8", function(err, data) {
-    if (err) console.log(err);
-    response.json({ data });
+  const a = fs.readFile("rules/companyRule.txt", "utf8", function(err, data) {
+    response.json({ data: JSON.parse(data) });
   });
 });
 
 //As a User I should be able to view fees Calculation Rules
 router.get("/CalculationRules", function(request, response) {
-  response.sendFile(path.join("rules/calculationRule.html"));
+  const a = fs.readFile("rules/calculationRule.txt", "utf8", function(
+    err,
+    data
+  ) {
+    response.json({ data: JSON.parse(data) });
+  });
 });
 // var html = fs.readFileSync("rules/calculationRule.html", "utf8");
 //   response.sendfile(path.join(__dirname + "calculationRule.html"));
