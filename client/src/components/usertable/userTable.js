@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Table } from "reactstrap";
-import AuthHelperMethods from "../AuthHelperMethods";
+import React, { Component } from 'react';
+import { Table } from 'reactstrap';
+import AuthHelperMethods from '../AuthHelperMethods';
 class userTable extends Component {
   Auth = new AuthHelperMethods();
   constructor(props) {
@@ -12,7 +12,7 @@ class userTable extends Component {
   }
 
   componentDidMount() {
-    this.Auth.fetch("api/user/getUser")
+    this.Auth.fetch('api/admin/users')
       .then(res => res.json())
       .then(json => {
         this.setState({

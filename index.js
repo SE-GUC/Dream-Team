@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 //const router = express.Router()
+var path = require("path");
 
 // Require Router Handlers
 const user = require("./routes/api/externalPortal");
@@ -52,11 +53,7 @@ app.get("/", (req, res) => res.send(`<h1>Person</h1>`));
 // app.use("/api/investor", investor);
 // app.use("/api/lawyer", lawyer);
 // app.use("/api/reviewer", reviewer);
-app.use(
-  "/api/externalPortal",
-  // passport.authenticate("jwt", { session: false }),
-  externalPortal
-);
+app.use("/api/externalPortal", externalPortal);
 
 app.use(
   "/api/admin",

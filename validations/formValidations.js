@@ -41,7 +41,8 @@ module.exports = {
             .required(),
           otherwise: Joi.number().min(100000)
         })
-      }
+      },
+      regulatedLaw: Joi.string()
     };
 
     return Joi.validate(request, createSchema);
