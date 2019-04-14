@@ -68,7 +68,6 @@ class formTable extends Component {
                 <tr>
                   <td> {(key = x._id)}</td>
                   <td>{x.companyName}</td>
-
                   <td>{x.companyNameEng}</td>
                   <td>{x.companyType}</td>
                   <td>
