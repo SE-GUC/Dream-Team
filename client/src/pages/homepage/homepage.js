@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../homepage/homepage.css";
 import AuthHelperMethods from "../../components/AuthHelperMethods";
+import "../homepage/homepage.css";
 import X from "../../components/ReviewerViewhisForms/ReviewerViewhisForms";
 import Login from "../../components/login";
 import Tableform from "../../components/formTable";
@@ -36,9 +37,13 @@ class HomePage extends Component {
   viewAllForms() {
     this.props.history.push("/viewAllForms");
   }
-  lawyerview() {
-    this.props.history.push("/Lawyershowmyforms");
+  filter() {
+    this.props.history.push("/filter");
   }
+  LawyerFillForm() {
+    this.props.history.push("/LawyerFillForm");
+  }
+
   lawyerFinalizedCases() {
     this.props.history.push("/lawyerFinalizedCases");
   }
@@ -48,12 +53,19 @@ class HomePage extends Component {
   formsOfLawyer() {
     this.props.history.push("/formsOfLawyer");
   }
+  lawyerview() {
+    this.props.history.push("/Lawyershowmyforms");
+  }
+  constructor(props) {
+    super(props);
+    this.state = {};
+    // this.connecToServer = this.connecToServer.bind(this);
+  }
+
   reviewrview() {
     this.props.history.push("/reviewershowmyforms");
   }
   update() {
-    this.props.history.push("/update");
-
     this.props.history.push("/update");
   }
   viewInvestor() {
@@ -65,6 +77,7 @@ class HomePage extends Component {
   invUpdate() {
     this.props.history.push("/invUpdate");
   }
+
   login() {
     this.props.history.push("/login");
   }
@@ -88,6 +101,15 @@ class HomePage extends Component {
     this.props.history.push("/case");
   }
 
+  adminARC() {
+    this.props.history.push("/adminARC");
+  }
+  assignLaw() {
+    this.props.history.push("/assignLaw");
+  }
+  lawyerfilter() {
+    this.props.histroy.push("/filterCase");
+  }
   lawUp() {
     this.props.history.push("/lawyerUpdate");
   }
@@ -97,21 +119,14 @@ class HomePage extends Component {
   _handleLogout = () => {
     this.Auth.logout();
 
-    this.props.history.replace("/login");
+    this.props.history.replace("/");
   };
-  constructor(props) {
-    super(props);
-    this.state = {};
-    // this.connecToServer = this.connecToServer.bind(this);
-  }
 
   render() {
     return (
       <div className="HomePage">
-        <div className="App">
-          <div className="App-header">
-            <h2>Welcome Home</h2>
-          </div>
+        <div className="App-header">
+          <h2>Welcome Home</h2>
         </div>
 
         <div>
@@ -121,17 +136,31 @@ class HomePage extends Component {
             onClick={e => {
               this.viewInvestor();
             }}
-          />
+          >
+            login
+          </button>
         </div>
-
         <div>
-          To view lawyer form push here
+          lawyer fill form
           <button
             className="btn btn-primary width-150"
             onClick={e => {
-              this.lawyerview();
+              this.LawyerFillForm();
             }}
-          />
+          >
+            lawyer fill form
+          </button>
+        </div>
+        <div>
+          filter case
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.filter();
+            }}
+          >
+            to filter
+          </button>
         </div>
 
         <div>
@@ -143,17 +172,6 @@ class HomePage extends Component {
             }}
           >
             Click to show
-          </button>
-        </div>
-        <div>
-          To view reviewr form Press here
-          <button
-            className="btn btn-primary width-150"
-            onClick={e => {
-              this.reviewrview();
-            }}
-          >
-            Click to view
           </button>
         </div>
         <div>
@@ -232,7 +250,8 @@ class HomePage extends Component {
             Case
           </button>
         </div>
-
+        {/* </div> */}
+        <div>To search</div>
         <div>
           To search
           <button
@@ -244,7 +263,41 @@ class HomePage extends Component {
             Click to search
           </button>
         </div>
+
         <div>
+          To approve/reject form as an admin
+          <div>
+            <button
+              className="btn btn-primary width-150"
+              onClick={e => {
+                this.adminARC();
+              }}
+            >
+              Click to decide
+            </button>
+          </div>
+          <div>
+            To search
+            <button
+              className="btn btn-primary width-150"
+              onClick={e => {
+                this.searchBar();
+              }}
+            >
+              Click to search
+            </button>
+          </div>
+          <div>
+            assign a lawyer
+            <button
+              className="btn btn-primary width-150"
+              onClick={e => {
+                this.assignLaw();
+              }}
+            >
+              Click to assign
+            </button>
+          </div>
           To view publishedCompanies click here
           <button
             className="btn btn-primary width-150"

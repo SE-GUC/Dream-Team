@@ -1,23 +1,25 @@
-import React, { Component } from "react";
-import { Table } from "reactstrap";
-import axios from "axios";
+import AuthHelperMethods from '../AuthHelperMethods';
+import withAuth from '../withAuth';
+import React, { Component } from 'react';
+import { Table } from 'reactstrap';
+import axios from 'axios';
 // const axios = require("axios");
 
 class formsOfLawyer extends Component {
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = {
       response: [],
       isLoaded: false,
-      id: ""
+      id: ''
     };
   }
   handleSubmit() {
-    axios
-      .get("http://localhost:5000/api/admin/lawyer/" + this.state.id + "/")
-      .then(res => {
-        console.log("HEYYYY");
-        this.setState({ response: res.data, isLoaded: true });
+    this.Auth.fetch('api/admin/lawyer/' + this.state.id + '/')
+      .then(res => res.json())
+      .then(json => {
+        this.setState({ response: json, isLoaded: true });
       });
   }
 
@@ -115,4 +117,4 @@ class formsOfLawyer extends Component {
     }
   }
 }
-export default formsOfLawyer;
+export default withAuth(formsOfLawyer);
