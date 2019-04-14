@@ -116,6 +116,19 @@ class HomePage extends Component {
   feesCalc() {
     this.props.history.push("/feesCalc");
   }
+
+  updateUser() {
+    this.props.history.push("/updateUser");
+  }
+
+  getUser() {
+    this.props.history.push("/getUser");
+  }
+
+  assignRev() {
+    this.props.history.push("/assignRev");
+  }
+
   _handleLogout = () => {
     this.Auth.logout();
 
@@ -263,6 +276,55 @@ class HomePage extends Component {
             Click to search
           </button>
         </div>
+        <div>
+          To search
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.searchBar();
+            }}
+          >
+            Click to search
+          </button>
+        </div>
+
+        <div>
+          To update user
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.updateUser();
+            }}
+          >
+            Click to update
+          </button>
+        </div>
+
+        <div>
+          To get user
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.getUser();
+            }}
+          >
+            Click to get
+          </button>
+        </div>
+
+        <div>
+          To assign Reviewer
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.assignRev();
+            }}
+          >
+            Click to get
+          </button>
+        </div>
+
+        <div>
 
         <div>
           To approve/reject form as an admin
@@ -298,6 +360,7 @@ class HomePage extends Component {
               Click to assign
             </button>
           </div>
+
           To view publishedCompanies click here
           <button
             className="btn btn-primary width-150"
