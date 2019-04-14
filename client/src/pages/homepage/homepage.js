@@ -19,6 +19,7 @@ import lawyerFinalizedCases from "../../components/lawyerFinalizedCases/lawyerFi
 import searchBar from "../../components/searchBar";
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
 import withAuth from "../../components/withAuth";
+import viewAllLawyer from "../../components/viewAllLawyer/viewAllLawyer";
 import publishedCompanies from "../../components/publishedCompanies";
 import feesCalc from "../../components/feesCalc/feesCalc";
 
@@ -97,6 +98,13 @@ class HomePage extends Component {
   searchBar() {
     this.props.history.push("/searchBar");
   }
+  viewAllLawyer() {
+    this.props.history.push("/viewAllLawyer");
+  }
+  updateInvForm() {
+    this.props.history.push("/updateInvForm");
+  }
+
   caseRe() {
     this.props.history.push("/case");
   }
@@ -277,6 +285,28 @@ class HomePage extends Component {
           </button>
         </div>
         <div>
+          To get all lawyers
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.viewAllLawyer();
+            }}
+          >
+            View All Lawyers
+          </button>
+        </div>
+        <div>
+          for investor to update his form
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.updateInvForm();
+            }}
+          >
+            investor update form
+          </button>
+        </div>
+        <div>
           To search
           <button
             className="btn btn-primary width-150"
@@ -325,8 +355,6 @@ class HomePage extends Component {
         </div>
 
         <div>
-
-        <div>
           To approve/reject form as an admin
           <div>
             <button
@@ -360,7 +388,6 @@ class HomePage extends Component {
               Click to assign
             </button>
           </div>
-
           To view publishedCompanies click here
           <button
             className="btn btn-primary width-150"
