@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 import {
   CardElement,
   injectStripe,
@@ -10,6 +12,7 @@ import { Button, Col, Form } from "react-bootstrap";
 // const stripe = require("stripe");
 
 class CheckoutForm extends Component {
+  Auth = new AuthHelperMethods();
   state = {
     name: "",
     description: "",
@@ -36,7 +39,7 @@ class CheckoutForm extends Component {
     console.log(this.state.currency);
     console.log(this.state.amount);
 
-    let response = await fetch("api/investor/charge", {
+    let response = await this.Auth.fetch("api/investor/charge", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
@@ -105,4 +108,4 @@ class CheckoutForm extends Component {
   }
 }
 
-export default injectStripe(CheckoutForm);
+export default withAuth(injectStripe(CheckoutForm));

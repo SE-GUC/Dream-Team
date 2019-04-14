@@ -3,8 +3,11 @@ import { Table } from "reactstrap";
 import { Button } from "react-bootstrap";
 import { withRouter } from "react-router";
 import "./lawyerARC.css";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 
 class userTable extends Component {
+  Auth = new AuthHelperMethods();
   state = {
     response: [],
     isLoaded: false,
@@ -36,9 +39,7 @@ class userTable extends Component {
       }
     });
     const response = await fetch(
-      "/api/lawyer/5ca0c88e6a36eb47ec6db2a5/accept/" +
-        this.state.formID.trim() +
-        "/",
+      "/api/lawyer/accept/" + this.state.formID.trim() + "/",
       {
         method: "PUT",
         headers: {
@@ -50,8 +51,8 @@ class userTable extends Component {
       // this.props.history.replace("/adminARC")
       // window.location.reload()
     );
-    const response1 = await fetch(
-      "/api/lawyer/" + this.state.formID.trim() + "/5ca0c88e6a36eb47ec6db2a5/",
+    const response1 = await this.Auth.fetch(
+      "/api/lawyer/sendRejectionMsg/" + this.state.formID.trim() + "/",
       {
         method: "PUT",
         headers: {
@@ -85,8 +86,8 @@ class userTable extends Component {
         });
       }
     });
-    const response = await fetch(
-      "/api/lawyer/lawyer/lawyer/reject/" + this.state.formID.trim() + "/",
+    const response = await this.Auth.fetch(
+      "/api/lawyer/sendRejectionMsg/" + this.state.formID.trim() + "/",
       {
         method: "PUT",
         headers: {
@@ -114,7 +115,7 @@ class userTable extends Component {
       }
     });
     const response = await fetch(
-      "/api/lawyer/" + this.state.formID.trim() + "/5ca0c88e6a36eb47ec6db2a5/",
+      "/api/lawyer/sendRejectionMsg/" + this.state.formID.trim() + "/",
       {
         method: "PUT",
         headers: {
@@ -272,4 +273,4 @@ class userTable extends Component {
   }
 }
 
-export default withRouter(userTable);
+export default withAuth(userTable);
