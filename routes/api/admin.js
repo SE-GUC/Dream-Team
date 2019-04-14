@@ -25,7 +25,7 @@ router.post('/formType', async (req, res) => {
 });
 
 router.get('/lawyer/:id', async (req, res) => {
-  const type = req.params.type;
+//   const type = req.params.type;
   const id = req.params.id;
   const user = await User.findById(id);
   if (!user)
