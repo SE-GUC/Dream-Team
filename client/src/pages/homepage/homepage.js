@@ -1,96 +1,83 @@
-import React, { Component } from "react";
-import "../homepage/homepage.css";
-import AuthHelperMethods from "../../components/AuthHelperMethods";
-import X from "../../components/ReviewerViewhisForms/ReviewerViewhisForms";
-import Login from "../../components/login";
-import Tableform from "../../components/formTable";
-import LawyerCase from "../../components/lawyerCase";
-import ReviewerCase from "../../components/reviewerCase";
-import Lawyerview from "../../components/LawyerViewhisCases";
-import formTable from "../../components/formTable";
-import SignUp from "../../components/signup";
-<<<<<<< HEAD
-import Table from "../../components/usertable/userTable";
-import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
-import formsOfLawyer from "../../components/formsOfLawyer/formsOfLawyer";
-import lawyerFinalizedCases from "../../components/lawyerFinalizedCases/lawyerFinalizedCases";
-=======
-import Table from "../../components/userTable/userTable";
-import Layout from "../../components/layout/layout";
->>>>>>> updateReact
+import React, { Component } from 'react';
+import '../homepage/homepage.css';
+import AuthHelperMethods from '../../components/AuthHelperMethods';
+import X from '../../components/ReviewerViewhisForms/ReviewerViewhisForms';
+import Login from '../../components/login';
+import Tableform from '../../components/formTable';
+import LawyerCase from '../../components/lawyerCase';
+import ReviewerCase from '../../components/reviewerCase';
+import Lawyerview from '../../components/LawyerViewhisCases';
+import formTable from '../../components/formTable';
+import SignUp from '../../components/signup';
+import Table from '../../components/usertable/userTable';
+import viewAllInvestors from '../../components/viewAllInvestors/viewAllInvestors';
+import formsOfLawyer from '../../components/formsOfLawyer/formsOfLawyer';
+import lawyerFinalizedCases from '../../components/lawyerFinalizedCases/lawyerFinalizedCases';
+import Layout from '../../components/layout/layout';
 // import Tableform from '../../components/formTable';
-import searchBar from "../../components/searchBar";
+import searchBar from '../../components/searchBar';
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
-import withAuth from "../../components/withAuth";
+import withAuth from '../../components/withAuth';
 
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
   state = {};
-<<<<<<< HEAD
   lawyerFinalizedCases() {
-    this.props.history.push("/lawyerFinalizedCases");
+    this.props.history.push('/lawyerFinalizedCases');
   }
   viewAllInvestors() {
-    this.props.history.push("/viewAllInvestors");
+    this.props.history.push('/viewAllInvestors');
   }
   formsOfLawyer() {
-    this.props.history.push("/formsOfLawyer");
+    this.props.history.push('/formsOfLawyer');
   }
   lawyerview() {
-    this.props.history.push("/Lawyershowmyforms");
+    this.props.history.push('/Lawyershowmyforms');
   }
-=======
   constructor(props) {
     super(props);
     this.state = {};
     // this.connecToServer = this.connecToServer.bind(this);
   }
-  lawyerview() {
-    this.props.history.push("/Lawyershowmyforms");
-  }
->>>>>>> updateReact
+
   reviewrview() {
-    this.props.history.push("/reviewershowmyforms");
+    this.props.history.push('/reviewershowmyforms');
   }
   update() {
-    this.props.history.push("/update");
-
-    this.props.history.push("/update");
+    this.props.history.push('/update');
   }
   viewInvestor() {
-    this.props.history.push("/investor");
-<<<<<<< HEAD
+    this.props.history.push('/investor');
   }
+
   login() {
-    this.props.history.push("/login");
-=======
->>>>>>> updateReact
+    this.props.history.push('/login');
   }
 
   signUp() {
-    this.props.history.push("/signup");
+    this.props.history.push('/signup');
   }
   userTable() {
-    this.props.history.push("/userTable");
+    this.props.history.push('/userTable');
   }
   employeeTable() {
-    this.props.history.push("/employeeTable");
+    this.props.history.push('/employeeTable');
   }
   formTable() {
-    this.props.history.push("/formTable");
+    this.props.history.push('/formTable');
   }
   searchBar() {
-    this.props.history.push("/searchBar");
+    this.props.history.push('/searchBar');
   }
   caseRe() {
-    this.props.history.push("/case");
+    this.props.history.push('/case');
   }
 
   _handleLogout = () => {
     this.Auth.logout();
 
-    this.props.history.replace("/login");
-  }
+    this.props.history.replace('/login');
+  };
 
   // connecToServer() {
   //   fetch("/");
@@ -248,16 +235,15 @@ class HomePage extends Component {
             View Lawyers Finalized Cases
           </button>
         </div>
-          <button
-            className="btn btn-primary width-150"
-            onClick={e => {
-              this.searchBar();
-            }}
-          >
-            Click to search
-          </button>
-        </div>
-      
+        <button
+          className="btn btn-primary width-150"
+          onClick={e => {
+            this.searchBar();
+          }}
+        >
+          Click to search
+        </button>
+      </div>
     );
   }
 }

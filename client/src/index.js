@@ -1,29 +1,29 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Login from "./components/login";
-import UpdateTest from "./components/updateTest";
-import EmployeeTable from "./components/employeeTable";
-import SignUp from "./components/signup";
-import FormTable from "./components/formTable";
-import HomePage from "./pages/homepage";
-import searchBar from "./components/searchBar";
-import UserTable from "./components/userTable/userTable";
-import LawyerViewhisCases from "./components/LawyerViewhisCases";
-import "./index.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Case from "./pages/LRspecificCase";
-import "bootstrap/dist/css/bootstrap.css";
-import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Login from './components/login';
+import UpdateTest from './components/updateTest';
+import EmployeeTable from './components/employeeTable';
+import SignUp from './components/signup';
+import FormTable from './components/formTable';
+import HomePage from './pages/homepage';
+import searchBar from './components/searchBar';
+import UserTable from './components/usertable/userTable';
+import LawyerViewhisCases from './components/LawyerViewhisCases';
+import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Case from './pages/LRspecificCase';
+import 'bootstrap/dist/css/bootstrap.css';
+import ReviewerViewhisForms from './components/ReviewerViewhisForms';
 // import UserTable from "./components/userTable/userTable";
-import * as serviceWorker from "./serviceWorker";
-import Investor from "./components/investor";
-import ComRule from "./components/comRule/comRule";
-import CalcRule from "./components/calcRule/calcRule";
-import viewAllInvestors from "./components/viewAllInvestors/viewAllInvestors";
-import formsOfLawyer from "./components/formsOfLawyer/formsOfLawyer";
-import lawyerFinalizedCases from "./components/lawyerFinalizedCases/lawyerFinalizedCases";
-import NavBar from "./components/layout/layout";
+import * as serviceWorker from './serviceWorker';
+import Investor from './components/investor';
+import ComRule from './components/comRule/comRule';
+import CalcRule from './components/calcRule/calcRule';
+import viewAllInvestors from './components/viewAllInvestors/viewAllInvestors';
+import formsOfLawyer from './components/formsOfLawyer/formsOfLawyer';
+import lawyerFinalizedCases from './components/lawyerFinalizedCases/lawyerFinalizedCases';
+import NavBar from './components/layout/layout';
 ReactDOM.render(
   <Router>
     <div>
@@ -50,6 +50,6 @@ ReactDOM.render(
       <Route path="/lawyerFinalizedCases" component={lawyerFinalizedCases} />
     </div>
   </Router>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
-ReactDOM.render(<NavBar />, document.getElementById("Nav"));
+ReactDOM.render(<NavBar />, document.getElementById('Nav'));

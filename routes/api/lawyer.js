@@ -312,9 +312,9 @@ router.delete('/:id', async (req, res) => {
 });
 
 //View all my Finalized cases - Lawyer
-router.get('/:id', async (req, res) => {
+router.get('/', async (req, res) => {
   const type = req.params.type;
-  const id = req.params.id;
+  const id = req.payload.id;
   const user = await User.findById(id);
   if (!user)
     return res.status(404).send({
