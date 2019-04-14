@@ -1,57 +1,54 @@
-import React, { Component } from 'react';
-import './investor.css';
-class investor extends Component {
+import React, { Component } from "react";
+import { Table } from "reactstrap";
+import axios from "axios";
+// const axios = require("axios");
+
+class formsOfLawyer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       response: [],
-      isLoaded: false
+      isLoaded: false,
+      id: ""
     };
   }
+  handleSubmit() {
+    axios
+      .get("http://localhost:5000/api/admin/lawyer/" + this.state.id + "/")
+      .then(res => {
+        console.log("HEYYYY");
+        this.setState({ response: res.data, isLoaded: true });
+      });
+  }
 
-  componentDidMount() {
-    fetch('api/investor/running')
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          isLoaded: true,
-          response: json
-        });
-      });
-  }
-  componentDidMountPending() {
-    fetch('api/investor/pending')
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          isLoaded: true,
-          response: json
-        });
-      });
-  }
   render() {
     var { response, isLoaded } = this.state;
     if (!isLoaded) {
       return (
         <div>
-          <button onClick={y => this.componentDidMount()}>
-            SearchForAccepted
-          </button>
-          <button onClick={y => this.componentDidMountPending()}>
-            SearchForPending
-          </button>
+          <body className="formsOfLawyer">
+            Please insert Lawyer ID:
+            <input
+              type="text"
+              value={this.state.id}
+              onChange={e => this.setState({ id: e.target.value })}
+            />
+            <button onClick={y => this.handleSubmit()}>search</button>
+          </body>
         </div>
       );
     } else {
       return (
-        <div className="formTable">
-          <button onClick={y => this.componentDidMount()}>
-            Search for Running
-          </button>
-          <button onClick={y => this.componentDidMountPending()}>
-            SearchForPending
-          </button>
-
+        <body className="Case">
+          {/* <form onSubmit={this.handleSubmit}>
+            Please insert Form ID: */}
+          <button onClick={y => this.handleSubmit()}>search</button>
+          <input
+            type="text"
+            value={this.state.id}
+            onChange={e => this.setState({ id: e.target.value })}
+          />
+          {/* </form> */}
           <table>
             <thead>
               <tr>
@@ -59,13 +56,6 @@ class investor extends Component {
                 <th> companyName </th>
                 <th> companyNameEng </th>
                 <th> companyType </th>
-                {/* <th> governorate  </th> */}
-                {/* <th> city </th>
-             <th> address </th>
-             <th> telephone </th>
-             <th> fax </th>
-             <th> currency </th>
-             <th> capital </th> */}
                 <th> entityType </th>
                 <th> regulatedLaw </th>
                 <th> investor </th>
@@ -84,20 +74,22 @@ class investor extends Component {
                 {/* <th> board </th> */}
               </tr>
             </thead>
+
             <tbody>
               {response.data.map(x => (
                 <tr>
-                  {/* <td> {x._id}</td> */}
+                  <td> {x._id}</td>
                   <td>{x.companyName}</td>
                   <td>{x.companyNameEng}</td>
                   <td>{x.companyType}</td>
                   {/* <td>{x.headquarters}</td> */}
                   {/* <td>{x.city}</td>
-               <td>{x.address}</td>
-               <td>{x.telephone}</td>
-               <td>{x.fax}</td>
-               <td>{x.currency}</td>
-               <td>{x.capital}</td> */}
+              <td>{x.address}</td>
+              <td>{x.telephone}</td>
+              <td>{x.fax}</td>
+              <td>{x.currency}</td>
+              <td>{x.capital}</td> */}
+
                   <td>{x.entityType}</td>
                   <td>{x.regulatedLaw}</td>
                   <td>{x.investor}</td>
@@ -118,10 +110,9 @@ class investor extends Component {
               ))}
             </tbody>
           </table>
-        </div>
+        </body>
       );
     }
   }
 }
-
-export default investor;
+export default formsOfLawyer;

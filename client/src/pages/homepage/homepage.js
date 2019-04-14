@@ -11,6 +11,9 @@ import formTable from "../../components/formTable";
 import SignUp from "../../components/signup";
 import Table from "../../components/userTable/userTable";
 import Layout from "../../components/layout/layout";
+import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
+import formsOfLawyer from "../../components/formsOfLawyer/formsOfLawyer";
+import lawyerFinalizedCases from "../../components/lawyerFinalizedCases/lawyerFinalizedCases";
 // import Tableform from '../../components/formTable';
 import searchBar from "../../components/searchBar";
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
@@ -19,13 +22,18 @@ import withAuth from "../../components/withAuth";
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
   state = {};
-  constructor(props) {
-    super(props);
-    this.state = {};
-    // this.connecToServer = this.connecToServer.bind(this);
-  }
+
   lawyerview() {
     this.props.history.push("/Lawyershowmyforms");
+  }
+  lawyerFinalizedCases() {
+    this.props.history.push("/lawyerFinalizedCases");
+  }
+  viewAllInvestors() {
+    this.props.history.push("/viewAllInvestors");
+  }
+  formsOfLawyer() {
+    this.props.history.push("/formsOfLawyer");
   }
   reviewrview() {
     this.props.history.push("/reviewershowmyforms");
@@ -37,6 +45,9 @@ class HomePage extends Component {
   }
   viewInvestor() {
     this.props.history.push("/investor");
+  }
+  login() {
+    this.props.history.push("/login");
   }
 
   signUp() {
@@ -63,20 +74,27 @@ class HomePage extends Component {
 
     this.props.history.replace("/login");
   };
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.connecToServer = this.connecToServer.bind(this);
+  }
 
-  // connecToServer() {
-  //   fetch("/");
-  // }
+  connecToServer() {
+    fetch("/");
+  }
 
-  // componentDidMount() {
-  //   this.connecToServer();
-  // }
+  componentDidMount() {
+    this.connecToServer();
+  }
 
   render() {
     return (
       <div className="HomePage">
-        <div className="App-header">
-          <h2>Welcome Home</h2>
+        <div className="App">
+          <div className="App-header">
+            <h2>Welcome Home</h2>
+          </div>
         </div>
 
         <div>
@@ -96,8 +114,29 @@ class HomePage extends Component {
             onClick={e => {
               this.lawyerview();
             }}
+          />
+        </div>
+
+        <div>
+          To view lawyer form push here
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.lawyerview();
+            }}
           >
             Click to show
+          </button>
+        </div>
+        <div>
+          To view reviewr form Press here
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.reviewrview();
+            }}
+          >
+            Click to view
           </button>
         </div>
         <div>
@@ -185,6 +224,39 @@ class HomePage extends Component {
             }}
           >
             Click to search
+          </button>
+        </div>
+
+        <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.viewAllInvestors();
+            }}
+          >
+            View All Investors
+          </button>
+        </div>
+
+        <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.formsOfLawyer();
+            }}
+          >
+            View Forms of Lawyer
+          </button>
+        </div>
+
+        <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.lawyerFinalizedCases();
+            }}
+          >
+            View Lawyers Finalized Cases
           </button>
         </div>
       </div>
