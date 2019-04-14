@@ -10,11 +10,7 @@ import ReviewerCase from "../../components/reviewerCase";
 import Lawyerview from "../../components/LawyerViewhisCases";
 import formTable from "../../components/formTable";
 import SignUp from "../../components/signup";
-<<<<<<< HEAD
 import Table from "../../components/usertable/userTable";
-=======
-import Table from "../../components/userTable/userTable";
->>>>>>> backEnd
 import Layout from "../../components/layout/layout";
 import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
 import formsOfLawyer from "../../components/formsOfLawyer/formsOfLawyer";
@@ -25,10 +21,7 @@ import searchBar from "../../components/searchBar";
 import withAuth from "../../components/withAuth";
 import viewAllLawyer from "../../components/viewAllLawyer/viewAllLawyer";
 import publishedCompanies from "../../components/publishedCompanies";
-<<<<<<< HEAD
-=======
 import feesCalc from "../../components/feesCalc/feesCalc";
->>>>>>> backEnd
 
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
