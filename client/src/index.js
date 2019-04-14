@@ -37,6 +37,8 @@ import ComRule from "./components/comRule/comRule";
 import CalcRule from "./components/calcRule/calcRule";
 import GetUser from "./components/getUser/getUser";
 import AssignRev from "./components/assignRev/assignRev";
+import AdminARC from "./components/adminARC/adminARC";
+import assignLaw from "./components/assignLaw/assignLaw";
 import publishedCompanies from "./components/publishedCompanies/publishedCompanies";
 
 import viewAllInvestors from "./components/viewAllInvestors/viewAllInvestors";

@@ -144,6 +144,30 @@ router.put("/approve/:id", async (req, res) => {
   }
 });
 
+//Approving a user account - Admin
+router.put("/reject/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await User.findById(id);
+    if (!user)
+      return res.status(404).send({
+        error: "This User does not exist"
+      });
+    const reject = {
+      accountStatus: false
+    };
+    const updated = await User.findByIdAndUpdate(id, reject);
+    res.json({
+      msg: "account have been approved",
+      data: updated
+    });
+  } catch (err) {
+    res.json({
+      msg: err.message
+    });
+  }
+});
+
 //Reject and send a comment - Admin
 router.put("/sendRejectionMsg/:id", async (req, res) => {
   try {
@@ -151,7 +175,7 @@ router.put("/sendRejectionMsg/:id", async (req, res) => {
     const user = await User.findById(id);
     if (!user) return res.status(404).send({ error: "user does not exist" });
     const reject = req.body;
-    reject.approveStatus = false;
+    // reject.approveStatus = false;
     await User.findByIdAndUpdate(id, reject);
     res.json({ msg: "user updated successfully" });
   } catch (error) {

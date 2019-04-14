@@ -101,6 +101,13 @@ class HomePage extends Component {
   caseRe() {
     this.props.history.push("/case");
   }
+
+  adminARC() {
+    this.props.history.push("/adminARC");
+  }
+  assignLaw() {
+    this.props.history.push("/assignLaw");
+  }
   lawyerfilter() {
     this.props.histroy.push("/filterCase");
   }
@@ -254,6 +261,7 @@ class HomePage extends Component {
             </button>
           </div>
         </div>
+        <div>To search</div>
         <div>
           To search
           <button
@@ -314,6 +322,42 @@ class HomePage extends Component {
         </div>
 
         <div>
+
+        <div>
+          To approve/reject form as an admin
+          <div>
+            <button
+              className="btn btn-primary width-150"
+              onClick={e => {
+                this.adminARC();
+              }}
+            >
+              Click to decide
+            </button>
+          </div>
+          <div>
+            To search
+            <button
+              className="btn btn-primary width-150"
+              onClick={e => {
+                this.searchBar();
+              }}
+            >
+              Click to search
+            </button>
+          </div>
+          <div>
+            assign a lawyer
+            <button
+              className="btn btn-primary width-150"
+              onClick={e => {
+                this.assignLaw();
+              }}
+            >
+              Click to assign
+            </button>
+          </div>
+
           To view publishedCompanies click here
           <button
             className="btn btn-primary width-150"
