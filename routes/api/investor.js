@@ -1,6 +1,6 @@
-var bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const express = require("express");
+var bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const express = require('express');
 const router = express.Router();
 
 const formValidator = require('../../validations/formValidations');
@@ -12,9 +12,9 @@ const userEnum = require('../../enums/accountType');
 const FormTypes = require('../../models/FormTypes');
 const validations = require('./functions');
 
-mongoose.set("useNewUrlParser", true);
-mongoose.set("useFindAndModify", false);
-mongoose.set("useCreateIndex", true);
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 
 // Configuration option that tells the parser to use the classic encoding
 router.use(
@@ -24,7 +24,7 @@ router.use(
 );
 
 //View my rejected forms -Investor
-router.get("/viewRejectedForms", async (req, res) => {
+router.get('/viewRejectedForms', async (req, res) => {
   try {
     const id = req.payload.id;
     const form = await Form.find({
@@ -33,7 +33,7 @@ router.get("/viewRejectedForms", async (req, res) => {
     });
     if (!form)
       return res.status(404).send({
-        error: "This form does not exist"
+        error: 'This form does not exist'
       });
     res.json({
       data: form
@@ -46,7 +46,7 @@ router.get("/viewRejectedForms", async (req, res) => {
 });
 
 //Create Form - Investor, Lawyer
-router.post("/form", async (req, res) => {
+router.post('/form', async (req, res) => {
   try {
     var investorID = '';
     var lawyerID = '';
@@ -64,21 +64,21 @@ router.post("/form", async (req, res) => {
       }
     }
     //SSC Conditions
-    if (req.body.companyName == "SSC") {
+    if (req.body.companyName == 'SSC') {
       const invssc = await Form.findOne({
         investor: investorID,
-        companyType: "SSC"
+        companyType: 'SSC'
       });
       if (invssc)
         return res.status(400).json({
-          error: "The investor cannot Establish multiple SSC Companies"
+          error: 'The investor cannot Establish multiple SSC Companies'
         });
       const inv = await User.findById(investorID);
       var flag = false;
-      if (inv.nationality != "Egyptian") {
+      if (inv.nationality != 'Egyptian') {
         const b = req.body.board;
         for (var i = 0; i < b.length; i++) {
-          if (!(b[i].nationality == "egyptian")) {
+          if (!(b[i].nationality == 'egyptian')) {
             flag = true;
           }
         }
@@ -86,15 +86,15 @@ router.post("/form", async (req, res) => {
       if (flag)
         return res.status(400).json({
           error:
-            "investors establishing SSC must have at least one egyptian manager"
+            'investors establishing SSC must have at least one egyptian manager'
         });
     }
     //SPC Conditions
-    if (req.body.board && req.body.companyType == "SPC") {
+    if (req.body.board && req.body.companyType == 'SPC') {
       console.log(req.body.board);
       return res
         .status(400)
-        .json({ error: "investors establishing SPC cannot have board" });
+        .json({ error: 'investors establishing SPC cannot have board' });
     }
     if (req.body.companyType == 'SPC' || req.body.companyType == 'SSC') {
       var isValidated = formValidator.createValidation(req.body);
@@ -120,19 +120,19 @@ router.post("/form", async (req, res) => {
       formBody.investor = investorID;
     }
     const newForm = await Form.create(formBody);
-    res.json({ msg: "Form was created successfully ", data: newForm });
+    res.json({ msg: 'Form was created successfully ', data: newForm });
   } catch (error) {
     console.log(error);
   }
 });
 
 //Update Form - Investor, Lawyer
-router.put("/form/:formId", async (req, res) => {
+router.put('/form/:formId', async (req, res) => {
   try {
     const userID = req.payload.id;
     const formId = req.params.formId;
     const form = await Form.findById(formId);
-    if (!form) return res.status(404).send({ error: "Form does not exist" });
+    if (!form) return res.status(404).send({ error: 'Form does not exist' });
     //AUTHORIZATION
     if (
       req.payload.type == userEnum.accountTypes.LAWYER &&
@@ -143,33 +143,22 @@ router.put("/form/:formId", async (req, res) => {
         (form.investor != userID ||
           form.formStatus != formEnum.formStatus.INVESTOR))
     ) {
-      return res.status(404).send({ error: "You have no authorization" });
+      return res.status(404).send({ error: 'You have no authorization' });
     }
     if (req.body.companyName) {
       const company = await Form.findOne({
         companyName: req.body.companyName
       });
       if (company)
-        return res.status(400).json({ error: "Company Name already exists" });
+        return res.status(400).json({ error: 'Company Name already exists' });
     }
-    //SSC Conditions
-    // if (req.body.companyName == "SSC" || form.companyType == "SSC") {
-    //   const invssc = await Form.findOne({
-    //     investor: form.investor,
-    //     companyType: "SSC"
-    //   });
-
-    // if (invssc)
-    //   return res.status(400).json({
-    //     error: "The investor cannot Establish multiple SSC Companies"
-    //   });
     const inv = await User.findById(form.investor);
     var flag = true;
-    if (inv.nationality != "Egyptian") {
+    if (inv.nationality != 'Egyptian') {
       const b = req.body.board;
       flag = false;
       for (var i = 0; i < b.length; i++) {
-        if (b[i].nationality == "Egyptian") {
+        if (b[i].nationality == 'Egyptian') {
           flag = true;
         }
       }
@@ -177,16 +166,16 @@ router.put("/form/:formId", async (req, res) => {
     if (!flag)
       return res.status(400).json({
         error:
-          "investors establishing SSC must have at least one egyptian manager"
+          'investors establishing SSC must have at least one egyptian manager'
       });
     // }
 
     //SPC Conditions
-    if (req.body.board && req.body.companyType == "SPC") {
+    if (req.body.board && req.body.companyType == 'SPC') {
       console.log(req.body.board);
       return res
         .status(400)
-        .json({ error: "investors establishing SPC cannot have board" });
+        .json({ error: 'investors establishing SPC cannot have board' });
     }
 
     //Validations and Insertion
@@ -210,20 +199,20 @@ router.put("/form/:formId", async (req, res) => {
       formBody.$unset = { reviewerDecision: 1, reviewer: 1 };
     }
     await Form.findByIdAndUpdate(formId, formBody);
-    res.json({ msg: "Form updated successfully" });
+    res.json({ msg: 'Form updated successfully' });
   } catch (e) {
     console.log(e);
   }
 });
 
 //As an investor , I should be notified with the amount and the due date (fees calculation)
-FIXME: router.get("/notifyAmountAndDueDate/:id", async (req, res) => {
+FIXME: router.get('/notifyAmountAndDueDate/:id', async (req, res) => {
   const type = req.params.type;
   const id = req.params.id;
   const user = await User.findById(id);
   if (!user)
     return res.status(404).send({
-      error: "This User does not exist"
+      error: 'This User does not exist'
     });
 
   const form = await Form.findOne(
@@ -235,7 +224,7 @@ FIXME: router.get("/notifyAmountAndDueDate/:id", async (req, res) => {
 });
 
 //Delete a form -Investor
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const form = await Form.findById(id);
@@ -243,27 +232,27 @@ router.delete("/:id", async (req, res) => {
     if (investorID != form.investor)
       return res
         .status(400)
-        .json({ error: "You are not authorized to deal with this form" });
+        .json({ error: 'You are not authorized to deal with this form' });
     if (form.formStatus != formEnum.formStatus.INVESTOR)
       return res
         .status(400)
-        .json({ error: "This form is already in progress" });
+        .json({ error: 'This form is already in progress' });
     const deletedForm = await Form.findByIdAndRemove(id);
-    res.json({ msg: "Form was deleted successfully", data: deletedForm });
+    res.json({ msg: 'Form was deleted successfully', data: deletedForm });
   } catch (error) {
     console.log(error);
   }
 });
 
 //right//Track all my request/case status-Investor
-router.get("/trackRequest", async (req, res) => {
+router.get('/trackRequest', async (req, res) => {
   try {
     const id = req.payload.id;
     const form = await Form.find({ investor: id });
 
     if (!form)
       return res.status(404).send({
-        error: "This form does not exist"
+        error: 'This form does not exist'
       });
     res.json({
       data: form
@@ -276,7 +265,7 @@ router.get("/trackRequest", async (req, res) => {
 });
 
 //View my pending companies-Investor
-router.get("/pending", async (req, res) => {
+router.get('/pending', async (req, res) => {
   const id = req.payload.id;
   const forms = await Form.find({
     investor: id,
@@ -288,7 +277,7 @@ router.get("/pending", async (req, res) => {
 });
 
 //View my running companies-Investor
-router.get("/running", async (req, res) => {
+router.get('/running', async (req, res) => {
   const id = req.payload.id;
   const forms = await Form.find({
     investor: id,
