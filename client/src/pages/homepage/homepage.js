@@ -55,6 +55,9 @@ class HomePage extends Component {
   viewAllLawyer() {
     this.props.history.push("/viewAllLawyer");
   }
+  updateInvForm() {
+    this.props.history.push("/updateInvForm");
+  }
   Auth = new AuthHelperMethods();
   caseRe() {
     this.props.history.push("/case");
@@ -230,6 +233,17 @@ class HomePage extends Component {
             }}
           >
             View All Lawyers
+          </button>
+        </div>
+        <div>
+          for investor to update his form
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.updateInvForm();
+            }}
+          >
+            investor update form
           </button>
         </div>
       </div>
