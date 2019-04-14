@@ -4,6 +4,9 @@ const express = require('express');
 const router = express.Router();
 const User = require('../../models/User');
 const typesEnum = require('../../enums/accountType');
+const FormTypes = require('../../models/FormTypes');
+const Enjoi = require('enjoi');
+var Joi = require('joi');
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -15,6 +18,27 @@ router.use(
     extended: false
   })
 );
+//Create form type
+router.post('/formType', async (req, res) => {
+  await FormTypes.create(req.body);
+  console.log('Form Type created succesfully');
+});
+
+//Delete form type
+router.delete('/formType:id', async (req, res) => {
+  const formTypeId = req.params.id;
+  await FormTypes.deleteOne({ _id: formTypeId });
+  console.log('Form type deleted succesfully');
+});
+
+//View form types
+router.get('/formType', async (req, res) => {
+  const formType = await FormTypes.find();
+  if (!formType) res.status(400).send({ error: 'There is no form types' });
+  else res.json({ data: formType });
+});
+
+TODO://Update form type
 
 //View pending users waiting for approval - Admin
 router.get('/admin/ViewPendingUsers', async (req, res) => {
