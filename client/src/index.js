@@ -6,32 +6,36 @@ import UpdateTest from "./components/updateTest";
 import EmployeeTable from "./components/employeeTable";
 import SignUp from "./components/signup";
 import FormTable from "./components/formTable";
-import HomePage from './pages/homepage';
+import HomePage from "./pages/homepage";
 // import Login from './components/login';
 // import UpdateTest from './components/updateTest';
 // import EmployeeTable from './components/employeeTable';
 // import SignUp from './components/signup';
 // import FormTable from './components/formTable';
-import searchBar from './components/searchBar';
+import searchBar from "./components/searchBar";
 
-import UserTable from './components/userTable/userTable';
-import LawyerViewhisCases from './components/LawyerViewhisCases'
-import './index.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Case from './pages/LRspecificCase';
-import 'bootstrap/dist/css/bootstrap.css';
-import ReviewerViewhisForms from './components/ReviewerViewhisForms'
+import UserTable from "./components/usertable/userTable";
+import LawyerViewhisCases from "./components/LawyerViewhisCases";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Case from "./pages/LRspecificCase";
+import "bootstrap/dist/css/bootstrap.css";
+import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
 // import UserTable from "./components/userTable/userTable";
 import * as serviceWorker from "./serviceWorker";
 import Investor from "./components/investor";
-import ComRule from "./components/comRule/comRule"
+import ComRule from "./components/comRule/comRule";
 import CalcRule from "./components/calcRule/calcRule";
-
+import Reviewers from "./components/viewAllReviewers/viewAllReviewers";
+import InvUpdate from "./components/investorUpdate/investorUpdate";
+import ViewAllForms from "./components/viewAllForms/viewAllForms";
+import LawyerUpdateForm from "./components/lawyerUpdateForm/lawyerUpdateForm";
+import LawUpForm from "./components/lawyerUpdate/lawyerUpdate";
 
 ReactDOM.render(
   <Router>
     <div>
-    <Route exactpath="/" component={HomePage} />
+      <Route exactpath="/" component={HomePage} />
       <Route path="/login" component={Login} />
       <Route path="/investor" component={Investor} />
       <Route path="/signup" component={SignUp} />
@@ -45,6 +49,11 @@ ReactDOM.render(
       <Route path="/companyRules" component={ComRule} />
       <Route path="/feesCalculation" component={CalcRule} />
       <Route path="/case" component={Case} />
+      <Route path="/reviewers" component={Reviewers} />
+      <Route path="/invUpdate" component={InvUpdate} />
+      <Route path="/viewAllForms" component={ViewAllForms} />
+      <Route path="/lawyerUpdateForm" component={LawyerUpdateForm} />
+      <Route path="/lawyerUpdate" component={LawUpForm} />
     </div>
   </Router>,
   document.getElementById("root")
