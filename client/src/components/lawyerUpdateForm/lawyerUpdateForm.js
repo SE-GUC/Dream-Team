@@ -1,12 +1,13 @@
-import withAuth from "../withAuth";
 import AuthHelperMethods from "../AuthHelperMethods";
 import React, { Component } from "react";
 import { Form, Button, Col } from "react-bootstrap";
 import Popup from "reactjs-popup";
-const axios = require("axios");
 
+import withAuth from "../withAuth";
+
+const axios = require("axios");
 //investor Update Form
-class UpdateTest extends Component {
+class LawyerFinal extends Component {
   Auth = new AuthHelperMethods();
   state = {
     governorate: this.props.governorate,
@@ -21,13 +22,13 @@ class UpdateTest extends Component {
     companyName: this.props.companyName,
     companyNameEng: this.props.companyNameEng,
     formID: this.props.formId,
-    inID: this.props.investorId
-  };
 
+    lawyerId: this.props.lawyerId
+  };
   updateAll = async e => {
     e.preventDefault();
     const response = await this.Auth.fetch(
-      "api/investor/form/" + this.state.formID + "/",
+      "api/lawyer/form/" + this.state.formID,
       {
         method: "PUT",
         headers: {
@@ -56,6 +57,46 @@ class UpdateTest extends Component {
     const body = await response.text();
     this.setState({ responseToPost: body });
   };
+
+  // updateAll(e) {
+  //   e.preventDefault();
+  //   axios
+  //     .put(
+  //       "http://localhost:5000/api/lawyer/updateForm/" +
+  //         this.state.formID +
+  //         "/" +
+  //         this.state.lawyerId,
+  //       JSON.stringify({
+  //         companyName: this.state.companyName,
+  //         companyNameEng: this.state.companyNameEng,
+  //         financialInfo: {
+  //           currency: this.state.currency,
+  //           capital: this.state.capital
+  //         },
+  //         headquarters: {
+  //           city: this.state.city,
+  //           governorate: this.state.governorate,
+  //           address: this.state.address,
+  //           telephone: this.state.telephone,
+  //           fax: this.state.fax
+  //         },
+  //         board: this.state.board
+  //       }),
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json"
+  //         }
+  //       }
+  //     )
+  //     .then(response => {
+  //       const body = response.text();
+
+  //       this.setState({ responseToPost: body });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
 
   render() {
     return (
@@ -134,6 +175,7 @@ class UpdateTest extends Component {
                 value={this.state.board}
                 onChange={e => this.setState({ board: e.target.value })}
               />
+              <p>{this.state.responseToPost}</p>
 
               <Button
                 variant="primary"
@@ -144,7 +186,6 @@ class UpdateTest extends Component {
               >
                 UPDATE
               </Button>
-              <p>{this.state.responseToPost}</p>
             </Form.Group>
           </Form.Row>
         </Form>
@@ -152,4 +193,4 @@ class UpdateTest extends Component {
     );
   }
 }
-export default withAuth(UpdateTest);
+export default withAuth(LawyerFinal);
