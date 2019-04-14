@@ -3,34 +3,7 @@ import "./lawyerFinalizedCases.css";
 const axios = require("axios");
 
 class lawyerFinalizedCases extends Component {
-  //   state = {
-  //   };
-
-  //   viewRunning = async e => {
-  //     const array = await fetch('api/running/:id', {
-  //         method: 'GET',
-  //         // headers: {
-  //         //   'Content-Type': 'application/json',
-  //         // },
-  //         // body: JSON.stringify({ email:this.state.email , password:this.state.password}),
-  //       });
-
-  //         for(let i = 0; i < this.props.items.length; i++) {
-  //           array.push(
-  //             <this.Item key={i} item={this.props.items[i]} />
-  //           );
-  //         }
-  //   };
-
-  //   render() {
-  //     return (
-  //       <div >
-  //        <viewRunning/>
-  //       </div>
-  //     );
-  //   }
-  // }
-
+  
   constructor(props) {
     super(props);
     this.state = {
