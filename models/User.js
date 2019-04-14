@@ -1,77 +1,65 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
+const typesEnum = require("../enums/accountType");
 const userschema = new Schema({
   name: {
     type: String,
     required: true
   },
   accountType: {
-    type: String
-     ,required: true
+    type: typesEnum.accountTypes,
+    required: true
   },
   gender: {
-    type: String
-     ,required: true
+    type: String,
+    required: true
   },
   nationality: {
-    type: String
-     ,required: true
+    type: String,
+    required: true
   },
   typeID: {
     type: String,
-      required: true
+    required: true
   },
   numberID: {
-    type: Number,
-     required: true
+    type: String,
+    required: true
   },
   dateOfBirth: {
     type: Date,
     required: true
   },
-
   address: {
     type: String,
     required: true
   },
   phoneNumber: {
-    type: Number,
+    type: String,
     required: true
   },
   faxNumber: {
-    type: Number,
-     required: true
+    type: String,
+    required: true
   },
   accountStatus: {
-    type: Boolean,
-    default: false
+    type: Boolean
   },
-
   email: {
-    type: String
-    , required: true
+    type: String,
+    required: true
   },
   password: {
-    type: String
-    , required: true
+    type: String,
+    required: true
   },
   rejectionMessage: {
-    type: String,
-    default: false
+    type: String
   },
   investorType: {
-    type: String
-    , require: true
-  },
-  capital: {
-    type: Number
-    ,  require:true
-  },
-  capitalCurrency: {
-    type: String
-    , require: true
+    type: String,
+    require: true
   }
 });
 
-module.exports = user = mongoose.model("User", userschema);
+module.exports = mongoose.model("User", userschema);

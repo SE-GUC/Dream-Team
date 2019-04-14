@@ -11,14 +11,16 @@ export default class AuthHelperMethods {
     return this.fetch(`/api/login`, {
       method: "POST",
       body: JSON.stringify({
-        email : email,
-        password : password
+        email: email,
+        password: password
       })
-    }).then(res => {
-      this.setToken(res.token); // Setting the token in localStorage
-      console.log(res.token)
-      return Promise.resolve(res);
-    });
+    })
+      .then(res => res.json())
+      .then(json => {
+        this.setToken(json.token); // Setting the token in localStorage
+        console.log(json.token);
+        return Promise.resolve(json);
+      });
   };
 
   loggedIn = () => {
@@ -65,7 +67,6 @@ export default class AuthHelperMethods {
   fetch = (url, options) => {
     // performs api calls sending the required authentication headers
     const headers = {
-      Accept: "application/json",
       "Content-Type": "application/json"
     };
     // Setting Authorization header
@@ -77,9 +78,7 @@ export default class AuthHelperMethods {
     return fetch(url, {
       headers,
       ...options
-    })
-      .then(this._checkStatus)
-      .then(response => response.json());
+    }).then(this._checkStatus);
   };
 
   _checkStatus = response => {

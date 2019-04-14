@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Table } from "reactstrap";
-import AuthHelperMethods from  '../AuthHelperMethods';
-import withAuth from '../withAuth';
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 
-  
 class formTable extends Component {
   Auth = new AuthHelperMethods();
   constructor(props) {
@@ -15,7 +14,7 @@ class formTable extends Component {
   }
 
   componentDidMount() {
-    fetch("api/form/search")
+    this.Auth.fetch("api/internalPortal")
       .then(res => res.json())
       .then(json => {
         this.setState({
