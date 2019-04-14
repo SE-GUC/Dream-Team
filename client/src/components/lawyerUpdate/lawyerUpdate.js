@@ -13,20 +13,30 @@ class LawyerUpdate extends Component {
       componentCall: ""
     };
   }
-  componentDidMount() {
-    axios
-
-      .get("http://localhost:5000/api/lawyer/5ca0c1466a36eb47ec6db2a1")
-
-      .then(res => {
-        const response = res.data;
-        this.setState({ response: response });
-        this.setState({ isLoaded: true });
-      })
-      .catch(err => {
-        console.log(err);
+  componentDillMount() {
+    fetch("api/lawyer/rejectedForms")
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          isLoaded: true,
+          response: json
+        });
       });
   }
+  // componentDidMount() {
+  //   axios
+
+  //     .get("http://localhost:5000/api/lawyer/5ca0c1466a36eb47ec6db2a1")
+
+  //     .then(res => {
+  //       const response = res.data;
+  //       this.setState({ response: response });
+  //       this.setState({ isLoaded: true });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
 
   update(
     formId,

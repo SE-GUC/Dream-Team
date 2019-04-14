@@ -488,31 +488,28 @@ class LawyerFinal extends Component {
   };
   updateAll = async e => {
     e.preventDefault();
-    const response = await fetch(
-      "api/lawyer/updateForm/" + this.state.formID + "/" + this.state.lawyerId,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
+    const response = await fetch("api/lawyer/form/" + this.state.formID, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        companyName: this.state.companyName,
+        companyNameEng: this.state.companyNameEng,
+        financialInfo: {
+          currency: this.state.currency,
+          capital: this.state.capital
         },
-        body: JSON.stringify({
-          companyName: this.state.companyName,
-          companyNameEng: this.state.companyNameEng,
-          financialInfo: {
-            currency: this.state.currency,
-            capital: this.state.capital
-          },
-          headquarters: {
-            city: this.state.city,
-            governorate: this.state.governorate,
-            address: this.state.address,
-            telephone: this.state.telephone,
-            fax: this.state.fax
-          },
-          board: this.state.board
-        })
-      }
-    ).catch(err => {
+        headquarters: {
+          city: this.state.city,
+          governorate: this.state.governorate,
+          address: this.state.address,
+          telephone: this.state.telephone,
+          fax: this.state.fax
+        },
+        board: this.state.board
+      })
+    }).catch(err => {
       this.state({ responseToPost: err });
     });
     const body = await response.text();

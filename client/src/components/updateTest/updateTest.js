@@ -23,7 +23,7 @@ class UpdateTest extends Component {
   updateAll = async e => {
     e.preventDefault();
     const response = await fetch(
-      "api/investor/updateForm/" + this.state.formID + "/" + this.state.inID,
+      "api/investor/form/" + this.state.formID + "/",
       {
         method: "PUT",
         headers: {

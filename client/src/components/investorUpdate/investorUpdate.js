@@ -13,20 +13,29 @@ class InvestorUpdateRejected extends Component {
       componentCall: ""
     };
   }
+
   componentDidMount() {
-    axios
-      .get(
-        "http://localhost:5000/api/investor/viewRejectedForms/5c92a43acf0719e94d1907a5"
-      )
-      .then(res => {
-        const response = res.data;
-        this.setState({ response: response });
-        this.setState({ isLoaded: true });
+    fetch("api/investor/rejectedForms")
+      .then(response => response.json())
+      .then(data => {
+        console.log(data); // Prints result from `response.json()` in getRequest
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(error => console.error(error));
   }
+  // componentDidMount() {
+  //   axios
+  //     .get(
+  //       "http://localhost:5000/api/investor/rejectedForms"
+  //     )
+  //     .then(res => {
+  //       const response = res.data;
+  //       this.setState({ response: response });
+  //       this.setState({ isLoaded: true });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
 
   update(
     formId,

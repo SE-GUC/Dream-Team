@@ -12,48 +12,50 @@ class viewRejectedForms extends Component {
       update: true
     };
   }
-  reject(x, y) {
-    axios
-      .put("http://localhost:5000/api/reviewer/reject/" + x + "/" + y, {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      //   .then(response => {
-      //     const body = response.text();
 
-      //     this.setState({ responseToPost: body });
-      //   })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-  accept(x, y) {
-    axios
-      .put("http://localhost:5000/api/reviewer/accept/" + x + "/" + y, {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      //   .then(response => {
-      //     const body = response.text();
 
-      //     this.setState({ responseToPost: body });
-      //   })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+
+
+  reject(x) {
+  const response = await fetch(
+    "api/reviewer/sendRejectionMsg/" + x,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      }}
+     
+  ).catch(err => {
+    this.state({ responseToPost: err });
+  });
+  const body = await response.text();
+  this.setState({ responseToPost: body });
+};
+accept(x) {
+  const response = await fetch(
+    "api/reviewer/accept/" + x,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      }}
+     
+  ).catch(err => {
+    this.state({ responseToPost: err });
+  });
+  const body = await response.text();
+  this.setState({ responseToPost: body });
+};
   componentDidMount() {
-    fetch("api/reviewer/pendingCase/5ca0a9f26a36eb47ec6db295")
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          isLoaded: true,
-          response: json
-        });
-      });
-  }
+      fetch('api/reviewer/pendingCase')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data) // Prints result from `response.json()` in getRequest
+      })
+      .catch(error => console.error(error))
+    };
+
+
   update(formId, investorId) {
     this.props.history.push("/update");
   }
@@ -137,7 +139,7 @@ class viewRejectedForms extends Component {
                       <button
                         className="btn btn-primary width-150"
                         onClick={e => {
-                          this.accept(x._id, x.reviewer);
+                          this.accept(x._id);
                         }}
                       >
                         Click to accept
@@ -149,11 +151,12 @@ class viewRejectedForms extends Component {
                       <button
                         className="btn btn-primary width-150"
                         onClick={e => {
-                          this.reject(x._id, x.reviewer);
+                          this.reject(x._id);
                         }}
                       >
                         Click to reject
                       </button>
+                        <p>{this.state.responseToPost}</p>
                     }
                   </td>
                 </tr>

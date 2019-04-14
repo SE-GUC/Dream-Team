@@ -10,19 +10,27 @@ class viewAllReviewers extends Component {
       update: true
     };
   }
-
   componentDidMount() {
-    axios
-      .get("http://localhost:5000/api/admin/getReviewer")
-      .then(res => {
-        const response = res.data;
-        this.setState({ response: response });
-        this.setState({ isLoaded: true });
+    fetch("api/admin/reviewer")
+      .then(response => response.json())
+      .then(data => {
+        console.log(data); // Prints result from `response.json()` in getRequest
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(error => console.error(error));
   }
+
+  // componentDidMount() {
+  //   axios
+  //     .get("http://localhost:5000/api/admin/getReviewer")
+  //     .then(res => {
+  //       const response = res.data;
+  //       this.setState({ response: response });
+  //       this.setState({ isLoaded: true });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
   //   showUpdate() {
   render() {
     var { response, isLoaded } = this.state;
