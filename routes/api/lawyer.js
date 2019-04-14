@@ -311,6 +311,18 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+router.get('/lawyerForms', async (req, res) => {
+  const id = req.payload.id;
+  const user = await User.findById(id);
+  if (!user)
+    return res.status(404).send({
+      error: 'This User does not exist'
+    });
+
+  const lawyers = await Form.find({ createdByLawyer: 1, lawyer: id });
+  res.json({ data: lawyers });
+});
+
 //View all my Finalized cases - Lawyer
 router.get('/', async (req, res) => {
   const type = req.params.type;
