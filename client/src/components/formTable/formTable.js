@@ -14,7 +14,7 @@ class formTable extends Component {
   }
 
   componentDidMount() {
-    fetch("api/form/search")
+    this.Auth.fetch("api/internalPortal")
       .then(res => res.json())
       .then(json => {
         this.setState({

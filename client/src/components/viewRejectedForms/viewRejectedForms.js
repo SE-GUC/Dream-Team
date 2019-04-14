@@ -13,7 +13,7 @@ class viewRejectedForms extends Component {
   }
 
   componentDidMount() {
-    fetch("api/investor/viewRejectedForms/5c92a483cf0719e94d1907a6")
+    fetch("api/internalPortal/")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -48,6 +48,7 @@ class viewRejectedForms extends Component {
           <Table dark hover bordered>
             <thead>
               <tr>
+                <th>headquarters</th>
                 <th> ID</th>
                 <th> companyName </th>
                 <th> entityType </th>
