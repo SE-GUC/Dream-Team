@@ -13,6 +13,7 @@ import Table from "../../components/userTable/userTable";
 import Layout from "../../components/layout/layout";
 // import Tableform from '../../components/formTable';
 import searchBar from "../../components/searchBar";
+import CheckoutForm from "../../components/CheckoutForm/App";
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
 import withAuth from "../../components/withAuth";
 
@@ -53,6 +54,9 @@ class HomePage extends Component {
   }
   searchBar() {
     this.props.history.push("/searchBar");
+  }
+  CheckoutForm() {
+    this.props.history.push("/CheckoutForm");
   }
   caseRe() {
     this.props.history.push("/case");
@@ -185,6 +189,17 @@ class HomePage extends Component {
             }}
           >
             Click to search
+          </button>
+        </div>
+        <div>
+          Payment
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.CheckoutForm();
+            }}
+          >
+            Go to Payment
           </button>
         </div>
       </div>

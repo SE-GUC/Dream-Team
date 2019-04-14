@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Table } from 'reactstrap';
+import React, { Component } from "react";
+import { Table } from "reactstrap";
 
 class employeeTable extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class employeeTable extends Component {
   }
 
   componentDidMount() {
-    fetch('api/admin/employee')
+    fetch("api/admin/employee")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -22,6 +22,7 @@ class employeeTable extends Component {
   }
 
   render() {
+    console.log("hobbads");
     var { response, isLoaded } = this.state;
     if (!isLoaded) {
       return <div>Loading...</div>;

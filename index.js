@@ -64,8 +64,8 @@ app.use(
 );
 app.use(
   "/api/investor",
-  passport.authenticate("jwt", { session: false }),
-  AuthFor(typesEnum.INVESTOR),
+  // passport.authenticate("jwt", { session: false }),
+  // AuthFor(typesEnum.INVESTOR),
   investor
 );
 app.use(
