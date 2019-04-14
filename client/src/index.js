@@ -75,7 +75,17 @@ ReactDOM.render(
         component={ComRule}
       />
       <Route path="/feesCalculation" component={CalcRule} />
+          <Route path="/publishedCompanies" component={publishedCompanies} />
       <Route path="/case" component={Case} />
+      <Route path="/case" component={Case} />
+      <Route path="/viewAllInvestors" component={viewAllInvestors} />
+      <Route path="/formsOfLawyer" component={formsOfLawyer} />
+      <Route path="/lawyerFinalizedCases" component={lawyerFinalizedCases} />
+      <Route path="/reviewers" component={Reviewers} />
+      <Route path="/invUpdate" component={InvUpdate} />
+      <Route path="/viewAllForms" component={ViewAllForms} />
+      <Route path="/lawyerUpdateForm" component={LawyerUpdateForm} />
+      <Route path="/lawyerUpdate" component={LawUpForm} />
     </div>
   </Router>,
   document.getElementById("root")
