@@ -1,7 +1,7 @@
 var bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const express = require("express");
-
+const fs = require("fs");
 const User = require("../../models/User");
 const userValidator = require("../../validations/userValidations");
 const bcrypt = require("bcryptjs");
@@ -27,6 +27,22 @@ router.get("/companies/publishedcompanies", async (req, res) => {
   const form = await Form.find({ formStatus: formEnum.formStatus.APPROVED });
   res.json({
     data: form
+  });
+});
+
+router.get("/companyRules", (request, response) => {
+  const a = fs.readFile("rules/companyRule.txt", "utf8", function(err, data) {
+    response.json({ data: JSON.parse(data) });
+  });
+});
+
+//As a User I should be able to view fees Calculation Rules
+router.get("/CalculationRules", function(request, response) {
+  const a = fs.readFile("rules/calculationRule.txt", "utf8", function(
+    err,
+    data
+  ) {
+    response.json({ data: JSON.parse(data) });
   });
 });
 

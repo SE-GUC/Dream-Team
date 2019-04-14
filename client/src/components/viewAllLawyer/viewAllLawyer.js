@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Table } from "reactstrap";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 
-class employeeTable extends Component {
+class viewAllLawyer extends Component {
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = {
@@ -11,18 +14,20 @@ class employeeTable extends Component {
   }
 
   componentDidMount() {
-    fetch("api/admin/employee")
+    this.Auth.fetch("api/admin/lawyer")
       .then(res => res.json())
       .then(json => {
         this.setState({
           isLoaded: true,
           response: json
         });
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
 
   render() {
-    console.log("hobbads");
     var { response, isLoaded } = this.state;
     if (!isLoaded) {
       return <div>Loading...</div>;
@@ -79,4 +84,4 @@ class employeeTable extends Component {
   }
 }
 
-export default employeeTable;
+export default withAuth(viewAllLawyer);

@@ -1,5 +1,11 @@
-import React, { Component } from "react";
-import AuthHelperMethods from "../../components/AuthHelperMethods";
+import React from "react";
+import feesCalc from "../../components/feesCalc/feesCalc";
+import formsOfLawyer from "../../components/formsOfLawyer/formsOfLawyer";
+import formTable from "../../components/formTable";
+import lawyerFinalizedCases from "../../components/lawyerFinalizedCases/lawyerFinalizedCases";
+// import Tableform from '../../components/formTable';
+import searchBar from "../../components/searchBar";
+import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
 import "../homepage/homepage.css";
 
 class HomePage extends Component {
@@ -77,6 +83,16 @@ class HomePage extends Component {
   searchBar() {
     this.props.history.push("/searchBar");
   }
+  CheckoutForm() {
+    this.props.history.push("/CheckoutForm");
+  }
+  viewAllLawyer() {
+    this.props.history.push("/viewAllLawyer");
+  }
+  updateInvForm() {
+    this.props.history.push("/updateInvForm");
+  }
+
   caseRe() {
     this.props.history.push("/case");
   }
@@ -256,6 +272,28 @@ class HomePage extends Component {
           </button>
         </div>
         <div>
+          To get all lawyers
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.viewAllLawyer();
+            }}
+          >
+            View All Lawyers
+          </button>
+        </div>
+        <div>
+          for investor to update his form
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.updateInvForm();
+            }}
+          >
+            investor update form
+          </button>
+        </div>
+        <div>
           To search
           <button
             className="btn btn-primary width-150"
@@ -305,14 +343,27 @@ class HomePage extends Component {
 
         <div>
           To approve/reject form as an admin
-          <button
-            className="btn btn-primary width-150"
-            onClick={e => {
-              this.adminARC();
-            }}
-          >
-            Click to decide
-          </button>
+          <div>
+            <button
+              className="btn btn-primary width-150"
+              onClick={e => {
+                this.adminARC();
+              }}
+            >
+              Click to decide
+            </button>
+          </div>
+          <div>
+            To search
+            <button
+              className="btn btn-primary width-150"
+              onClick={e => {
+                this.searchBar();
+              }}
+            >
+              Click to search
+            </button>
+          </div>
         </div>
         <div>
           To search
@@ -326,17 +377,28 @@ class HomePage extends Component {
           </button>
         </div>
         <div>
-          assign a lawyer
+          Payment
           <button
             className="btn btn-primary width-150"
             onClick={e => {
-              this.assignLaw();
+              this.CheckoutForm();
             }}
           >
-            Click to assign
+            Go to Payment
           </button>
         </div>
         <div>
+          <div>
+            assign a lawyer
+            <button
+              className="btn btn-primary width-150"
+              onClick={e => {
+                this.assignLaw();
+              }}
+            >
+              Click to assign
+            </button>
+          </div>
           To view publishedCompanies click here
           <button
             className="btn btn-primary width-150"

@@ -1,0 +1,11 @@
+.UpdateInvForm {
+  text-align: center;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: table;
+}
