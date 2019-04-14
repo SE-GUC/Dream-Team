@@ -4,6 +4,7 @@ const morgan = require("morgan");
 //const router = express.Router()
 
 // Require Router Handlers
+const user = require("./routes/api/externalPortal");
 const externalPortal = require("./routes/api/externalPortal");
 const admin = require("./routes/api/admin");
 const internalPortal = require("./routes/api/internalPortal");
@@ -44,6 +45,13 @@ require("./auth/auth")(passport);
 app.get("/", (req, res) => res.send(`<h1>Person</h1>`));
 
 // Direct to Route Handlers
+// app.use("/api/user", user);
+// app.use("/api/admin", admin);
+// app.use("/api/externalPortal", externalPortal);
+// app.use("/api/internalPortal", internalPortal);
+// app.use("/api/investor", investor);
+// app.use("/api/lawyer", lawyer);
+// app.use("/api/reviewer", reviewer);
 app.use(
   "/api/externalPortal",
   passport.authenticate("jwt", { session: false }),
@@ -89,6 +97,7 @@ app.use((req, res) =>
 
 let port = process.env.PORT;
 if (port == null || port == "") {
+  // @ts-ignore
   port = 5000;
 }
 

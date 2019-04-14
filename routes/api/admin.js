@@ -38,9 +38,9 @@ router.get('/formType', async (req, res) => {
   else res.json({ data: formType });
 });
 
-TODO://Update form type
+//Update form type
 
-//View pending users waiting for approval - Admin
+TODO: //View pending users waiting for approval - Admin
 router.get('/admin/ViewPendingUsers', async (req, res) => {
   const users = await User.find({ accountStatus: { $exists: false } });
   res.json({
@@ -57,7 +57,7 @@ router.get('/admin/ViewAcceptedUsers', async (req, res) => {
 });
 
 //View Rejected Users (who needs to be updated) - Admin
-router.get('/admin/ViewAcceptedUsers', async (req, res) => {
+router.get('/admin/viewRejectedUsers', async (req, res) => {
   const users = await User.find({ accountStatus: false });
   res.json({
     data: users
@@ -174,7 +174,7 @@ router.get('/getUsers', async (req, res) => {
   res.json({ data: users });
 });
 
-//Get user by id - Admin
+//right//Get user by id - Admin
 router.get('/getUsers/:id', async (req, res) => {
   try {
     const id = req.params.id;
