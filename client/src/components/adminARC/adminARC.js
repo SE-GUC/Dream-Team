@@ -3,8 +3,11 @@ import { Table } from "reactstrap";
 import { Button } from "react-bootstrap";
 import { withRouter } from "react-router";
 import "./adminARC.css";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 
 class userTable extends Component {
+  Auth = new AuthHelperMethods();
   state = {
     response: [],
     isLoaded: false,
@@ -34,7 +37,7 @@ class userTable extends Component {
         });
       }
     });
-    const response = await fetch(
+    const response = await this.Auth.fetch(
       "/api/admin/approve/" + this.state.userID + "/",
       {
         method: "PUT",
@@ -47,7 +50,7 @@ class userTable extends Component {
       // this.props.history.replace("/adminARC")
       // window.location.reload()
     );
-    const response1 = await fetch(
+    const response1 = await this.Auth.fetch(
       "/api/admin/sendRejectionMsg/" + this.state.userID + "/",
       {
         method: "PUT",
@@ -83,7 +86,7 @@ class userTable extends Component {
         });
       }
     });
-    const response = await fetch(
+    const response = await this.Auth.fetch(
       "/api/admin/reject/" + this.state.userID + "/",
       {
         method: "PUT",
@@ -113,7 +116,7 @@ class userTable extends Component {
         this.setState({ userID: cells[0].textContent });
       }
     });
-    const response = await fetch(
+    const response = await this.Auth.fetch(
       "/api/admin/sendRejectionMsg/" + this.state.userID + "/",
       {
         method: "PUT",
@@ -129,7 +132,7 @@ class userTable extends Component {
     //    this.props.history.dispatch("/adminARC",null)
   };
   componentDidMount() {
-    fetch("api/user/getUsers")
+    this.Auth.fetch("api/admin/users")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -226,4 +229,4 @@ class userTable extends Component {
   }
 }
 
-export default withRouter(userTable);
+export default withAuth(userTable);

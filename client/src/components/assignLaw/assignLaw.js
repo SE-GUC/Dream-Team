@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import "./assignLaw.css";
 import { Table } from "reactstrap";
 import { Button } from "react-bootstrap";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 
 class assignLaw extends Component {
+  Auth = new AuthHelperMethods();
   state = {
     response: [],
     formID: "",
@@ -11,7 +14,7 @@ class assignLaw extends Component {
     isLoaded: false
   };
   componentDidMount() {
-    fetch("api/internalPortal/unassignedForms/lawyer")
+    this.Auth.fetch("api/lawyer/pendingCase/")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -35,16 +38,15 @@ class assignLaw extends Component {
       }
     });
 
-    const response = await fetch(
-      "/api/internalPortal/lawyer/assign/" +
+    const response = await this.Auth.fetch(
+      "/api/lawyer/assign/" +
         this.state.formID.trim() +
-        "/5ca0c88e6a36eb47ec6db2a5",
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          }
         }
-      }
     ).catch(err => {
       alert(JSON.stringify(err));
     });
@@ -203,4 +205,4 @@ class assignLaw extends Component {
   }
 }
 
-export default assignLaw;
+export default withAuth(assignLaw);
