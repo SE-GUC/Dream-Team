@@ -47,7 +47,7 @@ class Case extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    const response = await fetch('/api/internalPortal/'+this.state.formID+'/', {
+    const response = await fetch('/api/internalPortal/form/'+this.state.formID+'/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

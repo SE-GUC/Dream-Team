@@ -125,7 +125,7 @@ router.use(
 );
 
 //NEEDS MINIMIZATION-Create Form - Investor, Lawyer
-router.post("/form", async (req, res) => {
+router.post("/createForm", async (req, res) => {
   try {
     var investorID = "";
     var lawyerID = "";
@@ -311,6 +311,18 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+router.get("/lawyerForms", async (req, res) => {
+  const id = req.payload.id;
+  const user = await User.findById(id);
+  if (!user)
+    return res.status(404).send({
+      error: "This User does not exist"
+    });
+
+  const lawyers = await Form.find({ createdByLawyer: 1, lawyer: id });
+  res.json({ data: lawyers });
+});
+
 //View all my Finalized cases - Lawyer
 router.get("/:id", async (req, res) => {
   const type = req.params.type;
@@ -371,8 +383,8 @@ router.put("/accept/:id", async (req, res) => {
 });
 
 //Show my pending cases - Lawyer
-router.get("/pendingCase/:id", async (req, res) => {
-  const id = req.params.id;
+router.get("/pendingCase", async (req, res) => {
+  const id = req.payload.id;
   const form = await Form.find({
     lawyer: id,
     lawyerDecision: { $exists: false }
@@ -385,7 +397,7 @@ router.get("/pendingCase/:id", async (req, res) => {
 });
 
 //Assign me to review this form - Lawyer
-router.put("/lawyer/assign/:id", async (req, res) => {
+router.put("/assign/:id", async (req, res) => {
   const formID = req.params.id;
   const lawyerID = req.payload.id;
   const form = await Form.findById(formID);
@@ -419,6 +431,27 @@ router.put("/payment/:id", async (req, res) => {
     }
   };
   form = await Form.findByIdAndUpdate(formId, paid);
+});
+
+router.get("/AR", async (req, res) => {
+  const type = req.payload.type;
+  const lawyerID = req.payload.id;
+
+  const user = await User.findById(lawyerID);
+  if (!user)
+    return res.status(404).send({
+      error: "This User does not exist"
+    });
+  const dec = await Form.find({ lawyerDecision: 1 } || { lawyerDecision: -1 });
+  console.log(dec);
+  if (type === typesEnum.accountTypes.LAWYER && dec) {
+    const forms = await Form.find({
+      lawyer: lawyerID,
+      $or: [{ lawyerDecision: -1 }, { lawyerDecision: 1 }]
+    });
+    //Check condition
+    res.json({ data: dec });
+  } else res.json({ msg: "No Forms for this lawyer " });
 });
 
 module.exports = router;

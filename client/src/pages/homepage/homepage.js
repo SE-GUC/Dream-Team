@@ -9,7 +9,7 @@ import ReviewerCase from "../../components/reviewerCase";
 import Lawyerview from "../../components/LawyerViewhisCases";
 import formTable from "../../components/formTable";
 import SignUp from "../../components/signup";
-import Table from "../../components/userTable/userTable";
+import Table from "../../components/usertable/userTable";
 import Layout from "../../components/layout/layout";
 // import Tableform from '../../components/formTable';
 import searchBar from "../../components/searchBar";
@@ -20,11 +20,32 @@ import LawyerFillForm from "../../components/LawyerFillForm";
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
   state = {};
+
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {};
+  //   // this.connecToServer = this.connecToServer.bind(this);
+  // }
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.connecToServer = this.connecToServer.bind(this);
+  }
+
+  componentDidMount() {
+    this.connecToServer();
+  }
+  connecToServer() {
+    fetch("/");
+  }
   filter() {
     this.props.history.push("/filter");
   }
   LawyerFillForm() {
     this.props.history.push("/LawyerFillForm");
+  }
+  viewAllForms() {
+    this.props.history.push("/viewAllForms");
   }
   lawyerview() {
     this.props.history.push("/Lawyershowmyforms");
@@ -39,6 +60,15 @@ class HomePage extends Component {
   }
   viewInvestor() {
     this.props.history.push("/investor");
+  }
+  viewReviewers() {
+    this.props.history.push("/reviewers");
+  }
+  invUpdate() {
+    this.props.history.push("/invUpdate");
+  }
+  login() {
+    this.props.history.push("/login");
   }
 
   signUp() {
@@ -63,19 +93,15 @@ class HomePage extends Component {
     this.props.histroy.push("/filterCase");
   }
 
+  lawUp() {
+    this.props.history.push("/lawyerUpdate");
+  }
+
   _handleLogout = () => {
     this.Auth.logout();
 
     this.props.history.replace("/login");
   };
-
-  // connecToServer() {
-  //   fetch("/");
-  // }
-
-  // componentDidMount() {
-  //   this.connecToServer();
-  // }
 
   render() {
     return (
@@ -125,8 +151,29 @@ class HomePage extends Component {
             onClick={e => {
               this.lawyerview();
             }}
+          />
+        </div>
+
+        <div>
+          To view lawyer form push here
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.lawyerview();
+            }}
           >
             Click to show
+          </button>
+        </div>
+        <div>
+          To view reviewr form Press here
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.reviewrview();
+            }}
+          >
+            Click to view
           </button>
         </div>
         <div>
@@ -216,6 +263,59 @@ class HomePage extends Component {
             Click to search
           </button>
         </div>
+
+        <div>
+          investor Update Rejected Forms
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.invUpdate();
+            }}
+          >
+            Click to view
+          </button>
+        </div>
+
+        <div>
+          To view all Reviewers
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.viewReviewers();
+            }}
+          >
+            Click to view
+          </button>
+        </div>
+        <div>
+          To view all forms
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.viewAllForms();
+            }}
+          >
+            Click to view
+          </button>
+        </div>
+
+        <dev>
+          Lawyer Update Form
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.lawUp();
+            }}
+          >
+            Click to Update
+          </button>
+        </dev>
+        <button
+          className="btn btn-primary width-150"
+          onClick={e => {
+            this.searchBar();
+          }}
+        />
       </div>
     );
   }
