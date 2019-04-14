@@ -3,39 +3,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import AssignRev from "./components/assignRev/assignRev";
-import NavBar from "./components/layout/layout";
+import EmployeeTable from "./components/employeeTable";
+import filtercase from "./components/filterCase/filterCase";
+import FormTable from "./components/formTable";
+import LawyerFillForm from "./components/LawyerFillForm";
 import Login from "./components/login";
-// import Login from './components/login';
-// import UpdateTest from './components/updateTest';
-// import EmployeeTable from './components/employeeTable';
-// import SignUp from './components/signup';
-// import FormTable from './components/formTable';
-import GetUser from "./components/getUser/getUser";
-import Investor from "./components/investor";
-import InvUpdate from "./components/investorUpdate/investorUpdate";
-import Login from "./components/login";
-import publishedCompanies from "./components/publishedCompanies/publishedCompanies";
-import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
-import searchBar from "./components/searchBar";
-import LawyerViewhisCases from "./components/LawyerViewhisCases";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SignUp from "./components/signup";
 import UpdateTest from "./components/updateTest";
-import UserTable from "./components/userTable/userTable";
-import Case from "./pages/LRspecificCase";
 import "bootstrap/dist/css/bootstrap.css";
-import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
-// import UserTable from "./components/userTable/userTable";
 import * as serviceWorker from "./serviceWorker";
 import Investor from "./components/investor";
 import ComRule from "./components/comRule/comRule";
 import CalcRule from "./components/calcRule/calcRule";
+import publishedCompanies from "./components/publishedCompanies/publishedCompanies";
+import CheckoutForm from "./components/CheckoutForm/App";
+import GetUser from "./components/getUser/getUser";
+import AssignRev from "./components/assignRev/assignRev";
 import viewAllLawyer from "./components/viewAllLawyer/viewAllLawyer";
 import AdminARC from "./components/adminARC/adminARC";
 import assignLaw from "./components/assignLaw/assignLaw";
-import publishedCompanies from "./components/publishedCompanies/publishedCompanies";
 
 import UpdateUser from "./components/updateUser/updateUser";
 import UserTable from "./components/usertable/userTable";
@@ -43,9 +31,17 @@ import ViewAllForms from "./components/viewAllForms/viewAllForms";
 import viewAllInvestors from "./components/viewAllInvestors/viewAllInvestors";
 import Reviewers from "./components/viewAllReviewers/viewAllReviewers";
 import InvUpdate from "./components/investorUpdate/investorUpdate";
-import ViewAllForms from "./components/viewAllForms/viewAllForms";
 import LawyerUpdateForm from "./components/lawyerUpdateForm/lawyerUpdateForm";
 import LawUpForm from "./components/lawyerUpdate/lawyerUpdate";
+import NavBar from "./components/layout/layout";
+import LawyerViewhisCases from "./components/LawyerViewhisCases";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.css";
+import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
+import feesCalc from "./components/feesCalc/feesCalc";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/css/bootstrap.css";
@@ -76,6 +72,7 @@ ReactDOM.render(
       <Route path="/feesCalculation" component={CalcRule} />
       <Route path="/publishedCompanies" component={publishedCompanies} />
       <Route path="/case" component={Case} />
+      <Route path="/CheckoutForm" component={CheckoutForm} />
       <Route path="/viewAllLawyer" component={viewAllLawyer} />
       <Route path="/updateInvForm" component={UpdateInvForm} />
       <Route path="/adminARC" component={AdminARC} />

@@ -10,7 +10,7 @@ import ReviewerCase from "../../components/reviewerCase";
 import Lawyerview from "../../components/LawyerViewhisCases";
 import formTable from "../../components/formTable";
 import SignUp from "../../components/signup";
-import Table from "../../components/userTable/userTable";
+import Table from "../../components/usertable/userTable";
 import Layout from "../../components/layout/layout";
 import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
 import formsOfLawyer from "../../components/formsOfLawyer/formsOfLawyer";
@@ -97,6 +97,9 @@ class HomePage extends Component {
   }
   searchBar() {
     this.props.history.push("/searchBar");
+  }
+  CheckoutForm() {
+    this.props.history.push("/CheckoutForm");
   }
   viewAllLawyer() {
     this.props.history.push("/viewAllLawyer");
@@ -377,6 +380,30 @@ class HomePage extends Component {
               Click to search
             </button>
           </div>
+        </div>
+        <div>
+          To search
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.searchBar();
+            }}
+          >
+            Click to search
+          </button>
+        </div>
+        <div>
+          Payment
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.CheckoutForm();
+            }}
+          >
+            Go to Payment
+          </button>
+        </div>
+        <div>
           <div>
             assign a lawyer
             <button
