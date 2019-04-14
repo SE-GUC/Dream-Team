@@ -4,7 +4,7 @@ import AuthHelperMethods from "../AuthHelperMethods";
 import withAuth from "../withAuth";
 
 class formTable extends Component {
-  //Auth = new AuthHelperMethods();
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = {
@@ -104,4 +104,4 @@ class formTable extends Component {
   }
 }
 
-export default formTable;
+export default withAuth(formTable);
