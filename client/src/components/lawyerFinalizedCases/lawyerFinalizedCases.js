@@ -1,57 +1,85 @@
-import React, { Component } from 'react';
-import './investor.css';
-class investor extends Component {
+import React, { Component } from "react";
+import "./lawyerFinalizedCases.css";
+const axios = require("axios");
+
+class lawyerFinalizedCases extends Component {
+  //   state = {
+  //   };
+
+  //   viewRunning = async e => {
+  //     const array = await fetch('api/running/:id', {
+  //         method: 'GET',
+  //         // headers: {
+  //         //   'Content-Type': 'application/json',
+  //         // },
+  //         // body: JSON.stringify({ email:this.state.email , password:this.state.password}),
+  //       });
+
+  //         for(let i = 0; i < this.props.items.length; i++) {
+  //           array.push(
+  //             <this.Item key={i} item={this.props.items[i]} />
+  //           );
+  //         }
+  //   };
+
+  //   render() {
+  //     return (
+  //       <div >
+  //        <viewRunning/>
+  //       </div>
+  //     );
+  //   }
+  // }
+
   constructor(props) {
     super(props);
     this.state = {
       response: [],
-      isLoaded: false
+      isLoaded: false,
+      id: ""
     };
   }
+  //textbox, user ydkhl feeh ID
 
   componentDidMount() {
-    fetch('api/investor/running')
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          isLoaded: true,
-          response: json
-        });
+    axios
+      .get("http://localhost:5000/api/lawyer/" + this.state.id)
+      .then(res => {
+        this.setState({ response: res.data, isLoaded: true });
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
-  componentDidMountPending() {
-    fetch('api/investor/pending')
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          isLoaded: true,
-          response: json
-        });
-      });
-  }
+
   render() {
     var { response, isLoaded } = this.state;
     if (!isLoaded) {
       return (
         <div>
+          id:
+          <input
+            type="text"
+            value={this.state.id}
+            onChange={e => this.setState({ id: e.target.value })}
+          />
           <button onClick={y => this.componentDidMount()}>
-            SearchForAccepted
-          </button>
-          <button onClick={y => this.componentDidMountPending()}>
-            SearchForPending
+            Get Finalized Cases
           </button>
         </div>
       );
     } else {
       return (
-        <div className="formTable">
+        <div className="Case">
           <button onClick={y => this.componentDidMount()}>
-            Search for Running
+            Get Finalized Cases
           </button>
-          <button onClick={y => this.componentDidMountPending()}>
-            SearchForPending
-          </button>
-
+          id:
+          <input
+            type="text"
+            value={this.state.id}
+            onChange={e => this.setState({ id: e.target.value })}
+          />
           <table>
             <thead>
               <tr>
@@ -87,7 +115,7 @@ class investor extends Component {
             <tbody>
               {response.data.map(x => (
                 <tr>
-                  {/* <td> {x._id}</td> */}
+                  <td> {x._id}</td>
                   <td>{x.companyName}</td>
                   <td>{x.companyNameEng}</td>
                   <td>{x.companyType}</td>
@@ -124,4 +152,4 @@ class investor extends Component {
   }
 }
 
-export default investor;
+export default lawyerFinalizedCases;

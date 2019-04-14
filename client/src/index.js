@@ -28,6 +28,10 @@ import ComRule from "./components/comRule/comRule";
 import CalcRule from "./components/calcRule/calcRule";
 import publishedCompanies from "./components/publishedCompanies/publishedCompanies";
 
+import NavBar from "./components/layout/layout";
+import viewAllInvestors from "./components/viewAllInvestors/viewAllInvestors";
+import formsOfLawyer from "./components/formsOfLawyer/formsOfLawyer";
+import lawyerFinalizedCases from "./components/lawyerFinalizedCases/lawyerFinalizedCases";
 ReactDOM.render(
   <Router>
     <div>
@@ -46,7 +50,11 @@ ReactDOM.render(
       <Route path="/feesCalculation" component={CalcRule} />
       <Route path="/publishedCompanies" component={publishedCompanies} />
       <Route path="/case" component={Case} />
+      <Route path="/viewAllInvestors" component={viewAllInvestors} />
+      <Route path="/formsOfLawyer" component={formsOfLawyer} />
+      <Route path="/lawyerFinalizedCases" component={lawyerFinalizedCases} />
     </div>
   </Router>,
   document.getElementById("root")
 );
+ReactDOM.render(<NavBar />, document.getElementById("Nav"));
