@@ -1,17 +1,4 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
-import '../homepage/homepage.css';
-import AuthHelperMethods from  '../../components/AuthHelperMethods';
-import X from '../../components/ReviewerViewhisForms/ReviewerViewhisForms'
-import Login from '../../components/login'
-import Tableform from '../../components/formTable'
-import LawyerCase from '../../components/lawyerCase'
-import ReviewerCase from '../../components/reviewerCase'
-import Lawyerview from '../../components/LawyerViewhisCases'
-import formTable from '../../components/formTable';
-import SignUp from '../../components/signup';
-import Table from '../../components/usertable/userTable';
-=======
 import "../homepage/homepage.css";
 import AuthHelperMethods from "../../components/AuthHelperMethods";
 import X from "../../components/ReviewerViewhisForms/ReviewerViewhisForms";
@@ -24,52 +11,29 @@ import formTable from "../../components/formTable";
 import SignUp from "../../components/signup";
 import Table from "../../components/userTable/userTable";
 import Layout from "../../components/layout/layout";
->>>>>>> backEnd
 // import Tableform from '../../components/formTable';
 import searchBar from "../../components/searchBar";
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
-<<<<<<< HEAD
-import withAuth from '../../components/withAuth';
-//import filter from '../../components/filterCase';
-import LawyerFillForm from '../../components/LawyerFillForm';
-class HomePage extends Component {
-  Auth = new AuthHelperMethods();
-  state = {};
-  filter(){
-    this.props.history.push('/filter');
-  }
-  LawyerFillForm(){
-    this.props.history.push('/LawyerFillForm');
-  }
-  lawyerview(){
-    this.props.history.push('/Lawyershowmyforms');
-
-=======
 import withAuth from "../../components/withAuth";
-
+//import filter from '../../components/filterCase';
+import LawyerFillForm from "../../components/LawyerFillForm";
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
   state = {};
-  constructor(props) {
-    super(props);
-    this.state = {};
-    // this.connecToServer = this.connecToServer.bind(this);
+  filter() {
+    this.props.history.push("/filter");
+  }
+  LawyerFillForm() {
+    this.props.history.push("/LawyerFillForm");
   }
   lawyerview() {
     this.props.history.push("/Lawyershowmyforms");
->>>>>>> backEnd
   }
   reviewrview() {
     this.props.history.push("/reviewershowmyforms");
   }
   update() {
-<<<<<<< HEAD
-
-    this.props.history.push('/update');
-
-=======
     this.props.history.push("/update");
->>>>>>> backEnd
 
     this.props.history.push("/update");
   }
@@ -92,19 +56,12 @@ class HomePage extends Component {
   searchBar() {
     this.props.history.push("/searchBar");
   }
-<<<<<<< HEAD
- // Auth = new AuthHelperMethods();
-=======
->>>>>>> backEnd
   caseRe() {
     this.props.history.push("/case");
   }
-<<<<<<< HEAD
-  lawyerfilter(){
+  lawyerfilter() {
     this.props.histroy.push("/filterCase");
   }
-=======
->>>>>>> backEnd
 
   _handleLogout = () => {
     this.Auth.logout();
@@ -120,7 +77,6 @@ class HomePage extends Component {
   //   this.connecToServer();
   // }
 
-
   render() {
     return (
       <div className="HomePage">
@@ -135,7 +91,6 @@ class HomePage extends Component {
             onClick={e => {
               this.viewInvestor();
             }}
-<<<<<<< HEAD
           >
             login
           </button>
@@ -148,8 +103,7 @@ class HomePage extends Component {
               this.LawyerFillForm();
             }}
           >
-
-        lawyer fill form
+            lawyer fill form
           </button>
         </div>
         <div>
@@ -162,9 +116,6 @@ class HomePage extends Component {
           >
             to filter
           </button>
-=======
-          />
->>>>>>> backEnd
         </div>
 
         <div>
