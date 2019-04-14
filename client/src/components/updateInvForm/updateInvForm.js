@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import "./updateInvForm.css";
 import { Form, Button, Col } from "react-bootstrap";
-import Popup from "reactjs-popup";
 import { Table } from "reactstrap";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
+
 class UpdateInvForm extends Component {
+  Auth = new AuthHelperMethods();
   state = {
     companyName: "",
     companyNameEng: "",
@@ -39,15 +42,9 @@ class UpdateInvForm extends Component {
     // e.preventDefault();
 
     // var body50 =  JSON.parse(this.state.userID);
-    const response1 = await fetch(
-      "/api/internalPortal/formStatus/investor/5ca092419365050c72508d7f ",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-    ).catch(err => {
+    const response1 = await this.Auth.fetch("/api/investor/pending", {
+      method: "GET"
+    }).catch(err => {
       alert(err);
     });
 
@@ -105,14 +102,10 @@ class UpdateInvForm extends Component {
     // document.getElementById("myTable1").className = "show";
     // document.getElementById("for").className = "show";
 
-    const response = await fetch(
-      "api/investor/" + this.state.formID.trim() + "/",
+    const response = await this.Auth.fetch(
+      "api/investor/form" + this.state.formID.trim() + "/",
       {
         method: "PUT",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
         body: JSON.stringify({
           companyName: this.state.companyName,
           //   accountType: this.state.accountType, gender: this.state.gender, nationality: this.state.nationality,

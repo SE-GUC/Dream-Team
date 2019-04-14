@@ -9,7 +9,7 @@ class comRule extends Component {
     };
   }
   componentDidMount() {
-    fetch("api/user/companyRules")
+    fetch("api/externalPortal/companyRules")
       .then(res => res.json())
       .then(json => {
         this.setState({

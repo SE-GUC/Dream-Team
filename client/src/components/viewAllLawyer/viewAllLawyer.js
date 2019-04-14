@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Table } from "reactstrap";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 
 class viewAllLawyer extends Component {
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = {
@@ -11,7 +14,7 @@ class viewAllLawyer extends Component {
   }
 
   componentDidMount() {
-    fetch("api/admin/getLawyer")
+    this.Auth.fetch("api/admin/lawyer")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -81,4 +84,4 @@ class viewAllLawyer extends Component {
   }
 }
 
-export default viewAllLawyer;
+export default withAuth(viewAllLawyer);

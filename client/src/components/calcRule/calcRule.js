@@ -9,7 +9,7 @@ class calcRule extends Component {
     };
   }
   componentDidMount() {
-    fetch("api/user/CalculationRules")
+    fetch("api/externalPortal/CalculationRules")
       .then(res => res.json())
       .then(json => {
         this.setState({
