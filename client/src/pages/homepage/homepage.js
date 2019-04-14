@@ -1,17 +1,4 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
-import '../homepage/homepage.css';
-import AuthHelperMethods from  '../../components/AuthHelperMethods';
-import X from '../../components/ReviewerViewhisForms/ReviewerViewhisForms'
-import Login from '../../components/login'
-import Tableform from '../../components/formTable'
-import LawyerCase from '../../components/lawyerCase'
-import ReviewerCase from '../../components/reviewerCase'
-import Lawyerview from '../../components/LawyerViewhisCases'
-import formTable from '../../components/formTable';
-import SignUp from '../../components/signup';
-import Table from '../../components/usertable/userTable';
-=======
 import "../homepage/homepage.css";
 import AuthHelperMethods from "../../components/AuthHelperMethods";
 import X from "../../components/ReviewerViewhisForms/ReviewerViewhisForms";
@@ -24,35 +11,32 @@ import formTable from "../../components/formTable";
 import SignUp from "../../components/signup";
 import Table from "../../components/userTable/userTable";
 import Layout from "../../components/layout/layout";
->>>>>>> backEnd
 // import Tableform from '../../components/formTable';
 import searchBar from "../../components/searchBar";
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
-import withAuth from "../../components/withAuth";
-
+import withAuth from '../../components/withAuth';
+//import filter from '../../components/filterCase';
+import LawyerFillForm from '../../components/LawyerFillForm';
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
   state = {};
-  constructor(props) {
-    super(props);
-    this.state = {};
-    // this.connecToServer = this.connecToServer.bind(this);
-  }
-  lawyerview() {
-    this.props.history.push("/Lawyershowmyforms");
-  }
-  reviewrview() {
-    this.props.history.push("/reviewershowmyforms");
-  }
   filter(){
     this.props.history.push('/filter');
   }
   LawyerFillForm(){
     this.props.history.push('/LawyerFillForm');
   }
-    update() {
+  lawyerview(){
+    this.props.history.push('/Lawyershowmyforms');
 
-    this.props.history.push("/update");
+  }
+  reviewrview() {
+    this.props.history.push("/reviewershowmyforms");
+  }
+  update() {
+
+    this.props.history.push('/update');
+
   }
   viewInvestor() {
     this.props.history.push("/investor");

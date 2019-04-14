@@ -1,61 +1,58 @@
 import React, { Component } from "react";
-import "./investor.css";
-import AuthHelperMethods from "../AuthHelperMethods";
-import withAuth from "../withAuth";
+import "./lawyerFinalizedCases.css";
+const axios = require("axios");
 
-class investor extends Component {
-  Auth = new AuthHelperMethods();
+class lawyerFinalizedCases extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
       response: [],
-      isLoaded: false
+      isLoaded: false,
+      id: ""
     };
   }
+  //textbox, user ydkhl feeh ID
 
   componentDidMount() {
-    this.Auth.fetch("api/investor/running")
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          isLoaded: true,
-          response: json
-        });
+    axios
+      .get("http://localhost:5000/api/lawyer/" + this.state.id)
+      .then(res => {
+        this.setState({ response: res.data, isLoaded: true });
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
-  componentDidMountPending() {
-    this.Auth.fetch("api/investor/pending")
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          isLoaded: true,
-          response: json
-        });
-      });
-  }
+
   render() {
     var { response, isLoaded } = this.state;
     if (!isLoaded) {
       return (
         <div>
+          id:
+          <input
+            type="text"
+            value={this.state.id}
+            onChange={e => this.setState({ id: e.target.value })}
+          />
           <button onClick={y => this.componentDidMount()}>
-            SearchForAccepted
-          </button>
-          <button onClick={y => this.componentDidMountPending()}>
-            SearchForPending
+            Get Finalized Cases
           </button>
         </div>
       );
     } else {
       return (
-        <div className="formTable">
+        <div className="Case">
           <button onClick={y => this.componentDidMount()}>
-            Search for Running
+            Get Finalized Cases
           </button>
-          <button onClick={y => this.componentDidMountPending()}>
-            SearchForPending
-          </button>
-
+          id:
+          <input
+            type="text"
+            value={this.state.id}
+            onChange={e => this.setState({ id: e.target.value })}
+          />
           <table>
             <thead>
               <tr>
@@ -91,7 +88,7 @@ class investor extends Component {
             <tbody>
               {response.data.map(x => (
                 <tr>
-                  {/* <td> {x._id}</td> */}
+                  <td> {x._id}</td>
                   <td>{x.companyName}</td>
                   <td>{x.companyNameEng}</td>
                   <td>{x.companyType}</td>
@@ -128,4 +125,4 @@ class investor extends Component {
   }
 }
 
-export default withAuth(investor);
+export default lawyerFinalizedCases;

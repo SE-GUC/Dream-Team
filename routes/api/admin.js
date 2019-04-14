@@ -40,8 +40,8 @@ router.get('/formType', async (req, res) => {
 
 //Update form type
 
-TODO: //View pending users waiting for approval - Admin
-router.get('/admin/ViewPendingUsers', async (req, res) => {
+//View pending users waiting for approval - Admin
+TODO: router.get('/pendingUsers', async (req, res) => {
   const users = await User.find({ accountStatus: { $exists: false } });
   res.json({
     data: users
@@ -49,7 +49,7 @@ router.get('/admin/ViewPendingUsers', async (req, res) => {
 });
 
 //View Accepted (Active) Users - Admin
-router.get('/admin/ViewAcceptedUsers', async (req, res) => {
+router.get('/acceptedUsers', async (req, res) => {
   const users = await User.find({ accountStatus: true });
   res.json({
     data: users
@@ -57,7 +57,7 @@ router.get('/admin/ViewAcceptedUsers', async (req, res) => {
 });
 
 //View Rejected Users (who needs to be updated) - Admin
-router.get('/admin/viewRejectedUsers', async (req, res) => {
+router.get('/rejectedUsers', async (req, res) => {
   const users = await User.find({ accountStatus: false });
   res.json({
     data: users
@@ -65,7 +65,7 @@ router.get('/admin/viewRejectedUsers', async (req, res) => {
 });
 
 //View all lawyers - Admin
-router.get('/getLawyer', async (req, res) => {
+router.get('/lawyer', async (req, res) => {
   const users = await User.find({ accountType: typesEnum.accountTypes.LAWYER });
   res.json({
     data: users
@@ -73,7 +73,7 @@ router.get('/getLawyer', async (req, res) => {
 });
 
 //View all investors - Admin
-router.get('/viewinvestor', async (req, res) => {
+router.get('/investor', async (req, res) => {
   const users = await User.find({
     accountType: typesEnum.accountTypes.INVESTOR
   });
@@ -83,7 +83,7 @@ router.get('/viewinvestor', async (req, res) => {
 });
 
 //View all reviewers - Admin
-router.get('/getReviewer', async (req, res) => {
+router.get('/reviewer', async (req, res) => {
   const users = await User.find({
     accountType: typesEnum.accountTypes.REVIEWER
   });
@@ -169,13 +169,13 @@ router.delete('/:id', async (req, res) => {
 });
 
 //View all users - Admin
-router.get('/getUsers', async (req, res) => {
+router.get('/users', async (req, res) => {
   const users = await User.find();
   res.json({ data: users });
 });
 
 //right//Get user by id - Admin
-router.get('/getUsers/:id', async (req, res) => {
+router.get('/user/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const user = await User.findById(id);

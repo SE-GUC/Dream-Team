@@ -24,7 +24,7 @@ router.use(
 );
 
 //View my rejected forms -Investor
-router.get('/viewRejectedForms', async (req, res) => {
+router.get('/rejectedForms', async (req, res) => {
   try {
     const id = req.payload.id;
     const form = await Form.find({
@@ -46,7 +46,7 @@ router.get('/viewRejectedForms', async (req, res) => {
 });
 
 //Create Form - Investor, Lawyer
-router.post('/form', async (req, res) => {
+router.post('/createForm', async (req, res) => {
   try {
     var investorID = '';
     var lawyerID = '';
