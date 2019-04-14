@@ -64,7 +64,7 @@ class formTable extends Component {
               </tr>
             </thead>
             <tbody>
-              {response.map((x, key) => (
+              {response.data.map((x, key) => (
                 <tr>
                   <td> {(key = x._id)}</td>
                   <td>{x.companyName}</td>
