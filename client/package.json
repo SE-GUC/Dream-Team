@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "",
   "dependencies": {
     "babel-jest": "23.6.0",
     "bootstrap": "^4.3.1",
