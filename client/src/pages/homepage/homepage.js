@@ -9,7 +9,7 @@ import ReviewerCase from "../../components/reviewerCase";
 import Lawyerview from "../../components/LawyerViewhisCases";
 import formTable from "../../components/formTable";
 import SignUp from "../../components/signup";
-import Table from "../../components/usertable/userTable";
+import Table from "../../components/userTable/userTable";
 import Layout from "../../components/layout/layout";
 import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
 import formsOfLawyer from "../../components/formsOfLawyer/formsOfLawyer";
@@ -19,6 +19,7 @@ import searchBar from "../../components/searchBar";
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
 import withAuth from "../../components/withAuth";
 import publishedCompanies from "../../components/publishedCompanies";
+import feesCalc from "../../components/feesCalc/feesCalc";
 
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
@@ -90,7 +91,9 @@ class HomePage extends Component {
   lawUp() {
     this.props.history.push("/lawyerUpdate");
   }
-
+  feesCalc() {
+    this.props.history.push("/feesCalc");
+  }
   _handleLogout = () => {
     this.Auth.logout();
 
@@ -99,7 +102,7 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.connecToServer = this.connecToServer.bind(this);
+    // this.connecToServer = this.connecToServer.bind(this);
   }
 
   render() {
@@ -323,6 +326,17 @@ class HomePage extends Component {
             className="btn btn-primary width-150"
             onClick={e => {
               this.lawUp();
+            }}
+          >
+            Click to Update
+          </button>
+        </div>
+        <div>
+          Fees Calculation
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.feesCalc();
             }}
           >
             Click to Update

@@ -37,6 +37,7 @@ import ViewAllForms from "./components/viewAllForms/viewAllForms";
 import LawyerUpdateForm from "./components/lawyerUpdateForm/lawyerUpdateForm";
 import LawUpForm from "./components/lawyerUpdate/lawyerUpdate";
 import NavBar from "./components/layout/layout";
+import feesCalc from "./components/feesCalc/feesCalc";
 
 ReactDOM.render(
   <Router>
@@ -64,6 +65,7 @@ ReactDOM.render(
       <Route path="/viewAllForms" component={ViewAllForms} />
       <Route path="/lawyerUpdateForm" component={LawyerUpdateForm} />
       <Route path="/lawyerUpdate" component={LawUpForm} />
+      <Route path="/feesCalc" component={feesCalc} />
     </div>
   </Router>,
   document.getElementById("root")

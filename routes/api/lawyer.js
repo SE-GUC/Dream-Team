@@ -15,6 +15,12 @@ const router = express.Router();
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
+// configuration option that tells the parser to use the classic encoding
+router.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
 
 // router.put("/feesCalculation/:id", async (req, res) => {
 //   try {
@@ -117,78 +123,74 @@ router.put("/feesCalculation/:id", async (req, res) => {
   }
 });
 
-// configuration option that tells the parser to use the classic encoding
-router.use(
-  bodyParser.urlencoded({
-    extended: false
-  })
-);
-
 //NEEDS MINIMIZATION-Create Form - Investor, Lawyer
 router.post("/createForm", async (req, res) => {
   try {
     var investorID = "";
     var lawyerID = "";
-    if (req.payload.type == typesEnum.accountTypes.lawyer) {
+    if (req.payload.type == typesEnum.accountTypes.LAWYER) {
       lawyerID = req.payload.id;
       investorID = req.body.investor;
     } else investorID = req.payload.id;
+    console.log(req.payload.id);
+    if (req.body.companyName) {
+      const company = await Form.findOne({
+        companyName: req.body.companyName
+      });
+      if (company)
+        return res.status(400).json({ error: "Company Name already exists" });
+    }
+    //SSC Conditions
+    if (req.body.companyName == "SSC") {
+      const invssc = await Form.findOne({
+        investor: investorID,
+        companyType: "SSC"
+      });
 
-    // if (req.body.companyName) {
-    //   const company = await Form.findOne({
-    //     companyName: req.body.companyName
-    //   });
-    //   if (company)
-    //     return res.status(400).json({ error: 'Company Name already exists' });
-    // }
-    // //SSC Conditions
-    // if (req.body.companyName == 'SSC') {
-    //   const invssc = await Form.findOne({
-    //     investor: investorID,
-    //     companyType: 'SSC'
-    //   });
+      if (invssc)
+        return res.status(400).json({
+          error: "The investor cannot Establish multiple SSC Companies"
+        });
+      const inv = await User.findById(lawyerID);
+      var flag = true;
+      if (inv.nationality != "Egyptian") {
+        const b = req.body.board;
+        flag = false;
+        for (var i = 0; i < b.length; i++) {
+          if (b[i].nationality == "Egyptian") {
+            flag = true;
+          }
+        }
+      }
+      if (!flag)
+        return res.status(400).json({
+          error:
+            "investors establishing SSC must have at least one egyptian manager"
+        });
+    }
 
-    //   if (invssc)
-    //     return res.status(400).json({
-    //       error: 'The investor cannot Establish multiple SSC Companies'
-    //     });
-    //   const inv = await User.findById(lawyerID);
-    //   var flag = true;
-    //   if (inv.nationality != 'Egyptian') {
-    //     const b = req.body.board;
-    //     flag = false;
-    //     for (var i = 0; i < b.length; i++) {
-    //       if (b[i].nationality == 'Egyptian') {
-    //         flag = true;
-    //       }
-    //     }
-    //   }
-    //   if (!flag)
-    //     return res.status(400).json({
-    //       error:
-    //         'investors establishing SSC must have at least one egyptian manager'
-    //     });
-    // }
-
-    // //SPC Conditions
-    // if (req.body.board && req.body.companyType == 'SPC') {
-    //   console.log(req.body.board);
-    //   return res
-    //     .status(400)
-    //     .json({ error: 'investors establishing SPC cannot have board' });
-    // }
-
-    var isValidated = formValidator.createValidation(req.body);
+    //SPC Conditions
+    if (req.body.board && req.body.companyType == "SPC") {
+      console.log(req.body.board);
+      return res
+        .status(400)
+        .json({ error: "investors establishing SPC cannot have board" });
+    }
+    var isValidated = {};
+    if (req.payload.type == "lawyer")
+      isValidated = formValidator.createValidationLawyer(req.body);
+    else isValidated = formValidator.createValidationLawyer(req.body);
     if (isValidated.error)
       return res
         .status(400)
         .send({ error: isValidated.error.details[0].message });
     var formBody = req.body;
     if (req.payload.type == "lawyer") {
-      (formBody.createdByLawyer = true),
-        (formBody.lawyer = lawyerID),
-        (formBody.lawyerDecision = true),
-        (formBody.formStatus = formEnum.formStatus.REVIEWER);
+      formBody.createdByLawyer = true;
+      console.log(lawyerID);
+      formBody.lawyer = lawyerID;
+      formBody.lawyerDecision = true;
+      formBody.formStatus = formEnum.formStatus.REVIEWER;
     } else {
       formBody.formStatus = formEnum.formStatus.LAWYER;
       formBody.investor = investorID;
