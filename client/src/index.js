@@ -26,6 +26,21 @@ import UserTable from "./components/userTable/userTable";
 import "./index.css";
 import HomePage from "./pages/homepage";
 import Case from "./pages/LRspecificCase";
+import * as serviceWorker from './serviceWorker';
+import Investor from './components/investor';
+import ComRule from './components/comRule/comRule';
+import CalcRule from './components/calcRule/calcRule';
+import publishedCompanies from './components/publishedCompanies/publishedCompanies';
+
+import viewAllInvestors from './components/viewAllInvestors/viewAllInvestors';
+import formsOfLawyer from './components/formsOfLawyer/formsOfLawyer';
+import lawyerFinalizedCases from './components/lawyerFinalizedCases/lawyerFinalizedCases';
+import Reviewers from './components/viewAllReviewers/viewAllReviewers';
+import InvUpdate from './components/investorUpdate/investorUpdate';
+import ViewAllForms from './components/viewAllForms/viewAllForms';
+import LawyerUpdateForm from './components/lawyerUpdateForm/lawyerUpdateForm';
+import LawUpForm from './components/lawyerUpdate/lawyerUpdate';
+import NavBar from './components/layout/layout';
 
 ReactDOM.render(
   <Router>
