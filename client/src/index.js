@@ -30,7 +30,7 @@ import CalcRule from "./components/calcRule/calcRule";
 ReactDOM.render(
   <Router>
     <div>
-      <Route exactpath="/" component={HomePage} />
+      <Route exact path="/" component={HomePage} />
       <Route path="/login" component={Login} />
       <Route path="/investor" component={Investor} />
       <Route path="/signup" component={SignUp} />
