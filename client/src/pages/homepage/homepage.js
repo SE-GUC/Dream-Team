@@ -1,26 +1,6 @@
 import React, { Component } from "react";
-import "../homepage/homepage.css";
 import AuthHelperMethods from "../../components/AuthHelperMethods";
 import "../homepage/homepage.css";
-import X from "../../components/ReviewerViewhisForms/ReviewerViewhisForms";
-import Login from "../../components/login";
-import Tableform from "../../components/formTable";
-import LawyerCase from "../../components/lawyerCase";
-import ReviewerCase from "../../components/reviewerCase";
-import Lawyerview from "../../components/LawyerViewhisCases";
-import formTable from "../../components/formTable";
-import SignUp from "../../components/signup";
-import Table from "../../components/userTable/userTable";
-import Layout from "../../components/layout/layout";
-import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
-import formsOfLawyer from "../../components/formsOfLawyer/formsOfLawyer";
-import lawyerFinalizedCases from "../../components/lawyerFinalizedCases/lawyerFinalizedCases";
-// import Tableform from '../../components/formTable';
-import searchBar from "../../components/searchBar";
-// import AuthHelperMethods from '../../components/AuthHelperMethods';
-import withAuth from "../../components/withAuth";
-import publishedCompanies from "../../components/publishedCompanies";
-import feesCalc from "../../components/feesCalc/feesCalc";
 
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
@@ -263,8 +243,7 @@ class HomePage extends Component {
             Case
           </button>
         </div>
-        {/* </div> */}
-        <div>To search</div>
+
         <div>
           To search
           <button
@@ -325,42 +304,39 @@ class HomePage extends Component {
         </div>
 
         <div>
-
-        <div>
           To approve/reject form as an admin
-          <div>
-            <button
-              className="btn btn-primary width-150"
-              onClick={e => {
-                this.adminARC();
-              }}
-            >
-              Click to decide
-            </button>
-          </div>
-          <div>
-            To search
-            <button
-              className="btn btn-primary width-150"
-              onClick={e => {
-                this.searchBar();
-              }}
-            >
-              Click to search
-            </button>
-          </div>
-          <div>
-            assign a lawyer
-            <button
-              className="btn btn-primary width-150"
-              onClick={e => {
-                this.assignLaw();
-              }}
-            >
-              Click to assign
-            </button>
-          </div>
-
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.adminARC();
+            }}
+          >
+            Click to decide
+          </button>
+        </div>
+        <div>
+          To search
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.searchBar();
+            }}
+          >
+            Click to search
+          </button>
+        </div>
+        <div>
+          assign a lawyer
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.assignLaw();
+            }}
+          >
+            Click to assign
+          </button>
+        </div>
+        <div>
           To view publishedCompanies click here
           <button
             className="btn btn-primary width-150"
@@ -458,12 +434,14 @@ class HomePage extends Component {
             Click to Update
           </button>
         </div>
-        <button
-          className="btn btn-primary width-150"
-          onClick={e => {
-            this.searchBar();
-          }}
-        />
+        <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.searchBar();
+            }}
+          />
+        </div>
       </div>
     );
   }

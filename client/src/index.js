@@ -27,7 +27,7 @@ import searchBar from "./components/searchBar";
 import SignUp from "./components/signup";
 import UpdateTest from "./components/updateTest";
 import UpdateUser from "./components/updateUser/updateUser";
-import UserTable from "./components/usertable/userTable";
+import UserTable from "./components/userTable/userTable";
 import ViewAllForms from "./components/viewAllForms/viewAllForms";
 import viewAllInvestors from "./components/viewAllInvestors/viewAllInvestors";
 import Reviewers from "./components/viewAllReviewers/viewAllReviewers";
