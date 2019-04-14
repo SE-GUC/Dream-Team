@@ -63,7 +63,7 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.connecToServer = this.connecToServer.bind(this);
+    // this.connecToServer = this.connecToServer.bind(this);
   }
 
   // connecToServer() {
