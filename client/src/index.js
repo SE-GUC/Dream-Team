@@ -18,7 +18,7 @@ import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
 // import UserTable from "./components/userTable/userTable";
 import * as serviceWorker from "./serviceWorker";
 import Investor from "./components/investor";
-import ComRule from "./components/comRule/comRule";
+
 import CalcRule from "./components/calcRule/calcRule";
 import NavBar from "./components/layout/layout";
 import CheckoutForm from "./components/CheckoutForm/App";
@@ -36,7 +36,6 @@ ReactDOM.render(
       <Route path="/searchBar" component={searchBar} />
       <Route path="/reviewershowmyforms" component={ReviewerViewhisForms} />
       <Route path="/Lawyershowmyforms" component={LawyerViewhisCases} />
-      <Route path="/companyRules" component={ComRule} />
       <Route path="/feesCalculation" component={CalcRule} />
       <Route path="/case" component={Case} />
       <Route path="/CheckoutForm" component={CheckoutForm} />
