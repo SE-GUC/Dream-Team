@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import React, { Component } from "react";
 import "../homepage/homepage.css";
 import AuthHelperMethods from "../../components/AuthHelperMethods";
+import AuthHelperMethods from "../../components/AuthHelperMethods";
+import "../homepage/homepage.css";
 import X from "../../components/ReviewerViewhisForms/ReviewerViewhisForms";
 import Login from "../../components/login";
 import Tableform from "../../components/formTable";
@@ -35,9 +38,13 @@ class HomePage extends Component {
   viewAllForms() {
     this.props.history.push("/viewAllForms");
   }
-  lawyerview() {
-    this.props.history.push("/Lawyershowmyforms");
+  filter() {
+    this.props.history.push("/filter");
   }
+  LawyerFillForm() {
+    this.props.history.push("/LawyerFillForm");
+  }
+
   lawyerFinalizedCases() {
     this.props.history.push("/lawyerFinalizedCases");
   }
@@ -47,12 +54,19 @@ class HomePage extends Component {
   formsOfLawyer() {
     this.props.history.push("/formsOfLawyer");
   }
+  lawyerview() {
+    this.props.history.push("/Lawyershowmyforms");
+  }
+  constructor(props) {
+    super(props);
+    this.state = {};
+    // this.connecToServer = this.connecToServer.bind(this);
+  }
+
   reviewrview() {
     this.props.history.push("/reviewershowmyforms");
   }
   update() {
-    this.props.history.push("/update");
-
     this.props.history.push("/update");
   }
   viewInvestor() {
@@ -64,6 +78,7 @@ class HomePage extends Component {
   invUpdate() {
     this.props.history.push("/invUpdate");
   }
+
   login() {
     this.props.history.push("/login");
   }
@@ -93,6 +108,9 @@ class HomePage extends Component {
   assignLaw() {
     this.props.history.push("/assignLaw");
   }
+  lawyerfilter() {
+    this.props.histroy.push("/filterCase");
+  }
   lawUp() {
     this.props.history.push("/lawyerUpdate");
   }
@@ -106,10 +124,8 @@ class HomePage extends Component {
   render() {
     return (
       <div className="HomePage">
-        <div className="App">
-          <div className="App-header">
-            <h2>Welcome Home</h2>
-          </div>
+        <div className="App-header">
+          <h2>Welcome Home</h2>
         </div>
 
         <div>
@@ -119,17 +135,31 @@ class HomePage extends Component {
             onClick={e => {
               this.viewInvestor();
             }}
-          />
+          >
+            login
+          </button>
         </div>
-
         <div>
-          To view lawyer form push here
+          lawyer fill form
           <button
             className="btn btn-primary width-150"
             onClick={e => {
-              this.lawyerview();
+              this.LawyerFillForm();
             }}
-          />
+          >
+            lawyer fill form
+          </button>
+        </div>
+        <div>
+          filter case
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.filter();
+            }}
+          >
+            to filter
+          </button>
         </div>
 
         <div>
@@ -141,17 +171,6 @@ class HomePage extends Component {
             }}
           >
             Click to show
-          </button>
-        </div>
-        <div>
-          To view reviewr form Press here
-          <button
-            className="btn btn-primary width-150"
-            onClick={e => {
-              this.reviewrview();
-            }}
-          >
-            Click to view
           </button>
         </div>
         <div>
@@ -232,6 +251,7 @@ class HomePage extends Component {
         </div>
         <div>To search</div>
         <div>
+          To search
           <button
             className="btn btn-primary width-150"
             onClick={e => {

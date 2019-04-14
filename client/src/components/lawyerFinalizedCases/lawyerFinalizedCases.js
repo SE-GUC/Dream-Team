@@ -1,24 +1,25 @@
-import React, { Component } from "react";
-import "./lawyerFinalizedCases.css";
-const axios = require("axios");
+import AuthHelperMethods from '../AuthHelperMethods';
+import withAuth from '../withAuth';
+import React, { Component } from 'react';
+import './lawyerFinalizedCases.css';
+const axios = require('axios');
 
 class lawyerFinalizedCases extends Component {
-  
+  Auth = new AuthHelperMethods();
+
   constructor(props) {
     super(props);
     this.state = {
       response: [],
-      isLoaded: false,
-      id: ""
+      isLoaded: false
     };
   }
-  //textbox, user ydkhl feeh ID
 
   componentDidMount() {
-    axios
-      .get("http://localhost:5000/api/lawyer/" + this.state.id)
-      .then(res => {
-        this.setState({ response: res.data, isLoaded: true });
+    this.Auth.fetch('api/lawyer')
+      .then(res => res.json())
+      .then(json => {
+        this.setState({ response: json, isLoaded: true });
       })
       .catch(err => {
         console.log(err);
@@ -30,12 +31,6 @@ class lawyerFinalizedCases extends Component {
     if (!isLoaded) {
       return (
         <div>
-          id:
-          <input
-            type="text"
-            value={this.state.id}
-            onChange={e => this.setState({ id: e.target.value })}
-          />
           <button onClick={y => this.componentDidMount()}>
             Get Finalized Cases
           </button>
@@ -47,12 +42,7 @@ class lawyerFinalizedCases extends Component {
           <button onClick={y => this.componentDidMount()}>
             Get Finalized Cases
           </button>
-          id:
-          <input
-            type="text"
-            value={this.state.id}
-            onChange={e => this.setState({ id: e.target.value })}
-          />
+
           <table>
             <thead>
               <tr>
@@ -125,4 +115,4 @@ class lawyerFinalizedCases extends Component {
   }
 }
 
-export default lawyerFinalizedCases;
+export default withAuth(lawyerFinalizedCases);
