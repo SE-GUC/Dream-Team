@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
-import './investor.css';
+import React, { Component } from "react";
+import "./investor.css";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
+
 class investor extends Component {
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +14,7 @@ class investor extends Component {
   }
 
   componentDidMount() {
-    fetch('api/investor/running')
+    this.Auth.fetch("api/investor/running")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -20,7 +24,7 @@ class investor extends Component {
       });
   }
   componentDidMountPending() {
-    fetch('api/investor/pending')
+    this.Auth.fetch("api/investor/pending")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -87,7 +91,7 @@ class investor extends Component {
             <tbody>
               {response.data.map(x => (
                 <tr>
-                  <td> {x._id}</td>
+                  {/* <td> {x._id}</td> */}
                   <td>{x.companyName}</td>
                   <td>{x.companyNameEng}</td>
                   <td>{x.companyType}</td>
@@ -124,4 +128,4 @@ class investor extends Component {
   }
 }
 
-export default investor;
+export default withAuth(investor);

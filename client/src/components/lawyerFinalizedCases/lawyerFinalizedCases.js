@@ -1,37 +1,59 @@
 import React, { Component } from "react";
-import { Table } from "reactstrap";
-import AuthHelperMethods from "../AuthHelperMethods";
-import withAuth from "../withAuth";
+import "./lawyerFinalizedCases.css";
+const axios = require("axios");
 
-class formTable extends Component {
-  Auth = new AuthHelperMethods();
+class lawyerFinalizedCases extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
       response: [],
-      isLoaded: false
+      isLoaded: false,
+      id: ""
     };
   }
+  //textbox, user ydkhl feeh ID
 
   componentDidMount() {
-    this.Auth.fetch("api/internalPortal")
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          isLoaded: true,
-          response: json
-        });
+    axios
+      .get("http://localhost:5000/api/lawyer/" + this.state.id)
+      .then(res => {
+        this.setState({ response: res.data, isLoaded: true });
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
 
   render() {
     var { response, isLoaded } = this.state;
     if (!isLoaded) {
-      return <div>Loading...</div>;
+      return (
+        <div>
+          id:
+          <input
+            type="text"
+            value={this.state.id}
+            onChange={e => this.setState({ id: e.target.value })}
+          />
+          <button onClick={y => this.componentDidMount()}>
+            Get Finalized Cases
+          </button>
+        </div>
+      );
     } else {
       return (
-        <div className="formTable">
-          <Table dark hover bordered>
+        <div className="Case">
+          <button onClick={y => this.componentDidMount()}>
+            Get Finalized Cases
+          </button>
+          id:
+          <input
+            type="text"
+            value={this.state.id}
+            onChange={e => this.setState({ id: e.target.value })}
+          />
+          <table>
             <thead>
               <tr>
                 <th> ID</th>
@@ -40,11 +62,11 @@ class formTable extends Component {
                 <th> companyType </th>
                 {/* <th> governorate  </th> */}
                 {/* <th> city </th>
-            <th> address </th>
-            <th> telephone </th>
-            <th> fax </th>
-            <th> currency </th>
-            <th> capital </th> */}
+             <th> address </th>
+             <th> telephone </th>
+             <th> fax </th>
+             <th> currency </th>
+             <th> capital </th> */}
                 <th> entityType </th>
                 <th> regulatedLaw </th>
                 <th> investor </th>
@@ -64,20 +86,19 @@ class formTable extends Component {
               </tr>
             </thead>
             <tbody>
-              {response.data.map((x, key) => (
+              {response.data.map(x => (
                 <tr>
-                  <td> {(key = x._id)}</td>
+                  <td> {x._id}</td>
                   <td>{x.companyName}</td>
                   <td>{x.companyNameEng}</td>
                   <td>{x.companyType}</td>
                   {/* <td>{x.headquarters}</td> */}
                   {/* <td>{x.city}</td>
-              <td>{x.address}</td>
-              <td>{x.telephone}</td>
-              <td>{x.fax}</td>
-              <td>{x.currency}</td>
-              <td>{x.capital}</td> */}
-
+               <td>{x.address}</td>
+               <td>{x.telephone}</td>
+               <td>{x.fax}</td>
+               <td>{x.currency}</td>
+               <td>{x.capital}</td> */}
                   <td>{x.entityType}</td>
                   <td>{x.regulatedLaw}</td>
                   <td>{x.investor}</td>
@@ -97,11 +118,11 @@ class formTable extends Component {
                 </tr>
               ))}
             </tbody>
-          </Table>
+          </table>
         </div>
       );
     }
   }
 }
 
-export default withAuth(formTable);
+export default lawyerFinalizedCases;

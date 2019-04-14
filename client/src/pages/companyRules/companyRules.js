@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ComRule from "../../components/comRule/comRule";
 class CompanyRules extends Component {
-  renter() {
+  render() {
     return <ComRule />;
   }
 }
