@@ -8,12 +8,114 @@ const Form = require("../../models/Form");
 const formEnum = require("../../enums/formStatus");
 const userEnum = require("../../enums/accountType");
 const typesEnum = require("../../enums/accountType");
+const regulatedLaw = require("../../enums/regulatedLaw");
 const formValidator = require("../../validations/formValidations");
 
 const router = express.Router();
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
+
+// router.put("/feesCalculation/:id", async (req, res) => {
+//   try {
+//     const id = req.params.id;
+//     const form = await Form.findById(id);
+//     if (form.reviewerDecision === 1) {
+//       if (form.entityType == "GAFI" && form.regulatedLaw == "LAW159") {
+//         var fees = form.financialInfo.capital;
+//         var actualFees = fees / 1000;
+//         if (actualFees > 1000) actualFees = 1000;
+//         if (actualFees < 100) actualFees = 100;
+//         console.log(actualFees);
+//       }
+//       if (form.entityType == "NOTARYPUBLIC" && form.regulatedLaw == "LAW159") {
+//         var fees = form.financialInfo.capital;
+//         var actualFees = fees * 0.0025;
+//         console.log(actualFees);
+//         //var actualFees=Math.floor(fees/1000)
+//         if (actualFees > 1000) actualFees = 1000;
+//         if (actualFees < 10) actualFees = 10;
+//         console.log(actualFees);
+//       }
+//       if (
+//         form.entityType == "COMMERCIALREGISTER" &&
+//         form.regulatedLaw == "LAW159"
+//       ) {
+//         // console.log("ahhahahah")
+//         var actualFees = 56;
+//         console.log(actualFees);
+//       }
+//       if (
+//         form.entityType == "COMMERCIALREGISTER" &&
+//         form.regulatedLaw == "LAW72"
+//       ) {
+//         var actualFees = 610;
+//       }
+//     } else {
+//       actualFees = 0;
+//     }
+//     // console.log(actualFees)
+//     if (!form) return res.status(404).send({ error: "Form does not exist" });
+//     var isValidated = formValidator.updateValidation(req.body);
+//     if (isValidated.error)
+//       return res
+//         .status(400)
+//         .send({ error: isValidated.error.details[0].message });
+//     const updatedForm = await Form.findByIdAndUpdate(id, {
+//       feesCalculation: actualFees
+//     });
+//     console.log(actualFees);
+//     res.json({ msg: "Form updated successfully" });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
+router.put("/feesCalculation/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const form = await Form.findById(id);
+    console.log(form);
+    // var feesNotary;
+    var actualFeesNotary;
+    // var totalFsees;
+    var totalActualFees;
+    // if (form.reviewerDecision === 1) {
+    console.log("DALIA");
+    var fees = form.financialInfo.capital;
+    console.log(form.regulatedLaw);
+    if (form.regulatedLaw == regulatedLaw.regulatedLaw.LAW159) {
+      console.log("fees");
+
+      var actualFees = fees / 1000;
+      if (actualFees > 1000) actualFees = 1000;
+      if (actualFees < 100) actualFees = 100;
+      actualFeesNotary = fees * 0.0025;
+      if (actualFeesNotary > 1000) actualFeesNotary = 1000;
+      if (actualFeesNotary < 10) actualFeesNotary = 10;
+      var actualFeesCommercial = 56;
+      console.log(actualFees);
+      totalActualFees = actualFeesCommercial + actualFees + actualFeesNotary;
+    } else if (form.regulatedLaw == regulatedLaw.regulatedLaw.LAW72) {
+      totalActualFees = 610;
+    }
+    // }
+    // console.log(actualFees)
+    if (!form) return res.status(404).send({ error: "Form does not exist" });
+    var isValidated = formValidator.updateValidation(req.body);
+    if (isValidated.error)
+      return res
+        .status(400)
+        .send({ error: isValidated.error.details[0].message });
+    const updatedForm = await Form.findByIdAndUpdate(id, {
+      feesCalculation: totalActualFees
+    });
+    console.log(totalActualFees);
+    res.json({ msg: "Form updated successfully" });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // configuration option that tells the parser to use the classic encoding
 router.use(
@@ -27,10 +129,10 @@ router.post("/form", async (req, res) => {
   try {
     var investorID = "";
     var lawyerID = "";
-    if (req.header("type") == typesEnum.accountTypes.lawyer) {
-      lawyerID = req.header("_id");
+    if (req.payload.type == typesEnum.accountTypes.lawyer) {
+      lawyerID = req.payload.id;
       investorID = req.body.investor;
-    } else investorID = req.header("_id");
+    } else investorID = req.payload.id;
 
     // if (req.body.companyName) {
     //   const company = await Form.findOne({
@@ -82,7 +184,7 @@ router.post("/form", async (req, res) => {
         .status(400)
         .send({ error: isValidated.error.details[0].message });
     var formBody = req.body;
-    if (req.header("type") == "lawyer") {
+    if (req.payload.type == "lawyer") {
       (formBody.createdByLawyer = true),
         (formBody.lawyer = lawyerID),
         (formBody.lawyerDecision = true),
@@ -101,17 +203,17 @@ router.post("/form", async (req, res) => {
 //NEEDS MINIMIZATION-Update Form - Investor, Lawyer
 router.put("/form/:formid", async (req, res) => {
   try {
-    const userID = req.header("_id");
+    const userID = req.payload.id;
     const formid = req.params.formid;
     const form = await Form.findById(formid);
     if (!form) return res.status(404).send({ error: "Form does not exist" });
     //AUTHORIZATION
     if (
-      req.header("type") == userEnum.accountTypes.LAWYER &&
+      req.payload.type == userEnum.accountTypes.LAWYER &&
       (form.createdByLawyer == false ||
         form.lawyer != userID ||
         form.formStatus != formEnum.formStatus.LAWYER) &&
-      (req.header("type") == userEnum.accountTypes.INVESTOR &&
+      (req.payload.type == userEnum.accountTypes.INVESTOR &&
         (form.investor != userID ||
           form.formStatus != formEnum.formStatus.INVESTOR))
     ) {
@@ -193,7 +295,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const formId = req.params.id;
     const form = await Form.findById(formId);
-    const investorID = req.header("_id");
+    const investorID = req.payload.id;
     if (investorID != form.investor)
       return res
         .status(400)
@@ -226,7 +328,7 @@ router.get("/:id", async (req, res) => {
 router.put("/sendRejectionMsg/:id", async (req, res) => {
   try {
     const formID = req.params.id;
-    const lawyerID = req.header("_id");
+    const lawyerID = req.payload.id;
     const form = await Form.findById(formID);
     if (!form) return res.status(404).send({ error: "form does not exist" });
     if (form.lawyer != lawyerID)
@@ -249,7 +351,7 @@ router.put("/sendRejectionMsg/:id", async (req, res) => {
 router.put("/accept/:id", async (req, res) => {
   try {
     const formID = req.params.id;
-    const lawyerID = req.header("_id");
+    const lawyerID = req.payload.id;
     const form = await Form.findById(formID);
     if (!form)
       return res.status(404).send({ error: "This form does not exist" });
@@ -285,7 +387,7 @@ router.get("/pendingCase/:id", async (req, res) => {
 //Assign me to review this form - Lawyer
 router.put("/lawyer/assign/:id", async (req, res) => {
   const formID = req.params.id;
-  const lawyerID = req.header("_id");
+  const lawyerID = req.payload.id;
   const form = await Form.findById(formID);
   if (!form) return res.status(404).send({ error: "Form does not exist" });
   if (form.formStatus == formEnum.formStatus.LAWYER) {
@@ -299,7 +401,7 @@ router.put("/lawyer/assign/:id", async (req, res) => {
 //Mark payment as done (Cash)
 router.put("/payment/:id", async (req, res) => {
   const formId = req.params.id;
-  const lawyerId = req.header("_id");
+  const lawyerId = req.payload.id;
   var form = await Form.findById(formId);
   if (!form) res.status(404).send({ error: "This form is not found" });
   if (form.lawyer != lawyerId)

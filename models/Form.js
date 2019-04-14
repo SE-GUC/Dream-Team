@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const BoardofdirectorsSchema = require("../models/Boardofdirectors");
 const formStatus = require("../enums/formStatus");
 const formType = require("../enums/formType");
+const regulatedLaw = require("../enums/regulatedLaw");
 const FormSchema = new Schema({
   companyName: {
     type: String,
@@ -44,7 +45,10 @@ const FormSchema = new Schema({
       type: Number
     }
   },
-
+  regulatedLaw: {
+    type: regulatedLaw.regulatedLaw,
+    required: true
+  },
   investor: {
     type: Schema.Types.ObjectId,
     ref: "User",
