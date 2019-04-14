@@ -10,8 +10,7 @@
     "test": "jest",
     "client": "cd client && npm start",
     "server": "nodemon index.js",
-    "dev": "concurrently  \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "cd client && npm install "
+    "dev": "concurrently  \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
