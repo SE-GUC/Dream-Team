@@ -6,7 +6,7 @@ var getPayload = function(req, res, next) {
   if (usertoken) {
     const token = usertoken.split(" ");
     const decoded = jwt.verify(token[1], tokenKey);
-    req.body.payload = decoded;
+    req.payload = decoded;
   }
   next();
 };

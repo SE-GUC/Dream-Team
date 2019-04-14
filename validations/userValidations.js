@@ -38,10 +38,6 @@ module.exports = {
         .required(),
       //enum investor type
       investorType: Joi.string().required()
-      // capital: Joi.number().required(),
-      // capitalCurrency: Joi.string()
-      //   // .currency()
-      //   .required()
     };
 
     return Joi.validate(request, createSchema);
@@ -88,9 +84,7 @@ module.exports = {
         .required(),
       password: Joi.string()
         .min(8)
-        .required(),
-
-      investorType: null
+        .required()
     };
 
     return Joi.validate(request, createSchema);
@@ -136,9 +130,8 @@ module.exports = {
         .required(),
       password: Joi.string()
         .min(8)
-        .required(),
+        .required()
       //enum investor type
-      investorType: null
     };
 
     return Joi.validate(request, createSchema);
@@ -184,9 +177,8 @@ module.exports = {
         .required(),
       password: Joi.string()
         .min(8)
-        .required(),
+        .required()
       //enum investor type
-      investorType: null
     };
 
     return Joi.validate(request, createSchema);
@@ -216,8 +208,7 @@ module.exports = {
       phoneNumber: joiPhone.string().phoneNumber(),
       faxNumber: joiPhone.string().phoneNumber(),
       email: Joi.string().email(),
-      password: Joi.string().min(8),
-      investorType: null
+      password: Joi.string().min(8)
     };
 
     return Joi.validate(request, AdminupdateSchema);

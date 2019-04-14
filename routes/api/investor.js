@@ -24,7 +24,7 @@ router.use(
 //View my rejected forms -Investor
 router.get("/viewRejectedForms", async (req, res) => {
   try {
-    const id = req.header("_id");
+    const id = req.payload.id;
     const form = await Form.find({
       formStatus: formEnum.formStatus.investor,
       investor: id
@@ -48,10 +48,10 @@ router.post("/form", async (req, res) => {
   try {
     var investorID = "";
     var lawyerID = "";
-    if (req.header("type") == typesEnum.accountTypes.LAWYER) {
-      lawyerID = req.header("_id");
+    if (req.payload.type == typesEnum.accountTypes.LAWYER) {
+      lawyerID = req.payload.id;
       investorID = req.body.investor;
-    } else investorID = req.header("_id");
+    } else investorID = req.payload.id;
     if (req.body.companyName) {
       const company = await Form.findOne({
         companyName: req.body.companyName
@@ -98,7 +98,7 @@ router.post("/form", async (req, res) => {
         .status(400)
         .send({ error: isValidated.error.details[0].message });
     var formBody = req.body;
-    if (req.header("type") == "lawyer") {
+    if (req.payload.type == "lawyer") {
       (formBody.createdByLawyer = true),
         (formBody.lawyer = lawyerID),
         (formBody.lawyerDecision = true),
@@ -117,17 +117,17 @@ router.post("/form", async (req, res) => {
 //Update Form - Investor, Lawyer
 router.put("/form/:formId", async (req, res) => {
   try {
-    const userID = req.header("_id");
+    const userID = req.payload.id;
     const formId = req.params.formId;
     const form = await Form.findById(formId);
     if (!form) return res.status(404).send({ error: "Form does not exist" });
     //AUTHORIZATION
     if (
-      req.header("type") == userEnum.accountTypes.LAWYER &&
+      req.payload.type == userEnum.accountTypes.LAWYER &&
       (form.createdByLawyer == false ||
         form.lawyer != userID ||
         form.formStatus != formEnum.formStatus.LAWYER) &&
-      (req.header("type") == userEnum.accountTypes.INVESTOR &&
+      (req.payload.type == userEnum.accountTypes.INVESTOR &&
         (form.investor != userID ||
           form.formStatus != formEnum.formStatus.INVESTOR))
     ) {
@@ -227,7 +227,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const form = await Form.findById(id);
-    const investorID = req.header("_id");
+    const investorID = req.payload.id;
     if (investorID != form.investor)
       return res
         .status(400)
@@ -246,7 +246,7 @@ router.delete("/:id", async (req, res) => {
 //right//Track all my request/case status-Investor
 router.get("/trackRequest", async (req, res) => {
   try {
-    const id = req.header("_id");
+    const id = req.payload.id;
     const form = await Form.find({ investor: id });
 
     if (!form)
@@ -265,7 +265,7 @@ router.get("/trackRequest", async (req, res) => {
 
 //View my pending companies-Investor
 router.get("/pending", async (req, res) => {
-  const id = req.header("_id");
+  const id = req.payload.id;
   const forms = await Form.find({
     investor: id,
     formStatus: { $ne: formEnum.formStatus.APPROVED }
@@ -277,7 +277,7 @@ router.get("/pending", async (req, res) => {
 
 //View my running companies-Investor
 router.get("/running", async (req, res) => {
-  const id = req.header("_id");
+  const id = req.payload.id;
   const forms = await Form.find({
     investor: id,
     formStatus: formEnum.formStatus.APPROVED

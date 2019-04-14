@@ -1,30 +1,18 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-<<<<<<< HEAD
 const BoardofdirectorsSchema = require("../models/Boardofdirectors");
-const regulatedLaw = require("../enums/regulatedLaw");
-const entityType = require("../enums/entityType");
 const formStatus = require("../enums/formStatus");
 const formType = require("../enums/formType");
-=======
-const BoardofdirectorsSchema = require('../models/Boardofdirectors');
-const regulatedLaw = require('../enums/regulatedLaw');
-const formStatus = require('../enums/formStatus');
-const formType = require('../enums/formType');
->>>>>>> 4625ada477190ea06dab741215de2c57b0e6a925
 const FormSchema = new Schema({
   companyName: {
     type: String,
     required: true
-    
   },
   companyNameEnglish: {
     type: String
-    //required: false
   },
   companyType: {
     type: formType.formTypes
-    // required: false
   },
   headquarters: {
     governorate: {
@@ -45,7 +33,6 @@ const FormSchema = new Schema({
     },
     fax: {
       type: String
-      // required: true
     }
   },
   financialInfo: {
@@ -55,7 +42,6 @@ const FormSchema = new Schema({
     },
     capital: {
       type: Number
-      //required: true
     }
   },
 
@@ -70,11 +56,9 @@ const FormSchema = new Schema({
   },
   lawyerComment: {
     type: String
-    //required: false
   },
   lawyerDecision: {
     type: Number
-    //required: false
   },
   reviewer: {
     type: mongoose.Schema.Types.ObjectId,

@@ -107,10 +107,10 @@ router.put("/form/:formid", async (req, res) => {
     if (!form) return res.status(404).send({ error: "Form does not exist" });
     //AUTHORIZATION
     if (
-      (req.header("type") == userEnum.accountTypes.LAWYER &&
-        (form.createdByLawyer == false ||
-          form.lawyer != userID ||
-          form.formStatus != formEnum.formStatus.LAWYER)) ||
+      req.header("type") == userEnum.accountTypes.LAWYER &&
+      (form.createdByLawyer == false ||
+        form.lawyer != userID ||
+        form.formStatus != formEnum.formStatus.LAWYER) &&
       (req.header("type") == userEnum.accountTypes.INVESTOR &&
         (form.investor != userID ||
           form.formStatus != formEnum.formStatus.INVESTOR))
