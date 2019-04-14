@@ -229,4 +229,23 @@ router.get("/user/:id", async (req, res) => {
   }
 });
 
+//right//Get user by id - Admin
+router.get("/user/:id", async (req, res) => {
+  try {
+    const id = req.payload.id;
+    const user = await User.findById(id);
+    if (!user)
+      return res.status(404).send({
+        error: "This User does not exist"
+      });
+    res.json({
+      data: user
+    });
+  } catch (err) {
+    res.json({
+      msg: err.message
+    });
+  }
+});
+
 module.exports = router;

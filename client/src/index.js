@@ -20,9 +20,11 @@ import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
 // import SignUp from './components/signup';
 // import FormTable from './components/formTable';
 import searchBar from "./components/searchBar";
+import UpdateUser from "./components/updateUser/updateUser";
+import UserTable from "./components/usertable/userTable";
+import LawyerViewhisCases from "./components/LawyerViewhisCases";
 import SignUp from "./components/signup";
 import UpdateTest from "./components/updateTest";
-import UserTable from "./components/userTable/userTable";
 import "./index.css";
 import HomePage from "./pages/homepage";
 import Case from "./pages/LRspecificCase";
@@ -33,6 +35,8 @@ import * as serviceWorker from "./serviceWorker";
 import Investor from "./components/investor";
 import ComRule from "./components/comRule/comRule";
 import CalcRule from "./components/calcRule/calcRule";
+import GetUser from "./components/getUser/getUser";
+import AssignRev from "./components/assignRev/assignRev";
 import AdminARC from "./components/adminARC/adminARC";
 import assignLaw from "./components/assignLaw/assignLaw";
 import publishedCompanies from "./components/publishedCompanies/publishedCompanies";
@@ -83,8 +87,9 @@ ReactDOM.render(
       <Route path="/publishedCompanies" component={publishedCompanies} />
       <Route path="/case" component={Case} />
       <Route path="/case" component={Case} />
-      <Route path="/adminARC" component={AdminARC} />
-      <Route path="/assignLaw" component={assignLaw} />
+      <Route path="/updateUser" component={UpdateUser} />
+      <Route path="/getUser" component={GetUser} />
+      <Route path="/assignRev" component={AssignRev} />
       <Route path="/viewAllInvestors" component={viewAllInvestors} />
       <Route path="/formsOfLawyer" component={formsOfLawyer} />
       <Route path="/lawyerFinalizedCases" component={lawyerFinalizedCases} />
