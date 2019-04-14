@@ -1,20 +1,20 @@
 import React, { Component } from "react";
+import "./assignLaw.css";
 import { Table } from "reactstrap";
+import { Button } from "react-bootstrap";
 import AuthHelperMethods from "../AuthHelperMethods";
 import withAuth from "../withAuth";
 
-class formTable extends Component {
+class assignLaw extends Component {
   Auth = new AuthHelperMethods();
-  constructor(props) {
-    super(props);
-    this.state = {
-      response: [],
-      isLoaded: false
-    };
-  }
-
+  state = {
+    response: [],
+    formID: "",
+    responseToPost: "",
+    isLoaded: false
+  };
   componentDidMount() {
-    this.Auth.fetch("api/internalPortal")
+    this.Auth.fetch("api/lawyer/pendingCase/")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -24,6 +24,42 @@ class formTable extends Component {
       });
   }
 
+  handleSubmit = async e => {
+    e.preventDefault();
+
+    await document.getElementById("myTable").addEventListener("click", evt => {
+      var btn = evt.target;
+      console.log(btn.tagName);
+      if (btn.tagName === "BUTTON") {
+        var row = btn.parentNode.parentNode; //td than tr
+        var cells = row.getElementsByTagName("td"); //cells
+        console.log(cells[0].textContent, cells[1].textContent);
+        this.setState({ formID: cells[0].textContent });
+      }
+    });
+
+    const response = await this.Auth.fetch(
+      "/api/lawyer/assign/" +
+        this.state.formID.trim() +
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+    ).catch(err => {
+      alert(JSON.stringify(err));
+    });
+    const body = await response.text();
+    if (body.charAt(2) == "m") {
+      this.setState({ responseToPost: body });
+    } else {
+      this.setState({
+        responseToPost: "The form or reviewer IDs you entered is incorrect"
+      });
+    }
+  };
+
   render() {
     var { response, isLoaded } = this.state;
     if (!isLoaded) {
@@ -31,10 +67,10 @@ class formTable extends Component {
     } else {
       return (
         <div className="formTable">
-          <Table dark hover bordered>
+          <Table dark hover bordered id="myTable">
             <thead>
               <tr>
-                <th> ID</th>
+                <th className="hide"> ID</th>
                 <th> companyName </th>
                 <th> companyNameEng </th>
                 <th> companyType </th>
@@ -61,12 +97,13 @@ class formTable extends Component {
                 <th> paymentId </th>
                 <th> formStatus </th>
                 {/* <th> board </th> */}
+                <th> Assign me </th>
               </tr>
             </thead>
             <tbody>
               {response.data.map((x, key) => (
                 <tr>
-                  <td> {(key = x._id)}</td>
+                  <td className="hide"> {(key = x._id)}</td>
                   <td>{x.companyName}</td>
                   <td>{x.companyNameEng}</td>
                   <td>{x.companyType}</td>
@@ -91,7 +128,6 @@ class formTable extends Component {
                   <td>
                     {x.headquarters != undefined ? x.headquarters.fax : null}
                   </td>
-
                   <td>
                     {x.financialInfo != undefined
                       ? x.financialInfo.currency
@@ -102,6 +138,7 @@ class formTable extends Component {
                       ? x.financialInfo.capital
                       : null}
                   </td>
+
                   <td>{x.entityType}</td>
                   <td>{x.regulatedLaw}</td>
                   <td>{x.investor}</td>
@@ -117,7 +154,47 @@ class formTable extends Component {
                   <td>{x.dateOfPayment}</td>
                   <td>{x.paymentId}</td>
                   <td>{x.formStatus}</td>
-                  {/* <td>{x.board}</td> */}
+                  {/* <td>
+                    {x.board[0] != undefined && x.board != []
+                      ? x.board.map(
+                          (x, k) => (
+                            x.board[k++] != undefined && x.board != []
+                              ? x.board[k++].name
+                              : null,
+                            x.board[k++] != undefined && x.board != []
+                              ? x.board[k++].gender
+                              : null,
+                            x.board[k++] != undefined && x.board != []
+                              ? x.board[k++].investorType
+                              : null,
+                            x.board[k++] != undefined && x.board != []
+                              ? x.board[k++].nationality
+                              : null,
+                            x.board[k++] != undefined && x.board != []
+                              ? x.board[k++].idType
+                              : null,
+                            x.board[k++] != undefined && x.board != []
+                              ? x.board[k++].id
+                              : null,
+                            x.board[k++] != undefined && x.board != []
+                              ? x.board[k++].dataOfBirth
+                              : null,
+                            x.board[k++] != undefined && x.board != []
+                              ? x.board[k++].address
+                              : null,
+                            x.board[k++] != undefined && x.board != []
+                              ? x.board[k++].title
+                              : null,
+                            <br />
+                          )
+                        )
+                      : null}
+                  </td> */}
+                  <td>
+                    <Button type="submit" onClick={this.handleSubmit}>
+                      assign me
+                    </Button>{" "}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -128,4 +205,4 @@ class formTable extends Component {
   }
 }
 
-export default withAuth(formTable);
+export default withAuth(assignLaw);

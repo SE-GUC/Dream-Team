@@ -10,7 +10,11 @@ import ReviewerCase from "../../components/reviewerCase";
 import Lawyerview from "../../components/LawyerViewhisCases";
 import formTable from "../../components/formTable";
 import SignUp from "../../components/signup";
+<<<<<<< HEAD
 import Table from "../../components/usertable/userTable";
+=======
+import Table from "../../components/userTable/userTable";
+>>>>>>> backEnd
 import Layout from "../../components/layout/layout";
 import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
 import formsOfLawyer from "../../components/formsOfLawyer/formsOfLawyer";
@@ -20,6 +24,10 @@ import searchBar from "../../components/searchBar";
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
 import withAuth from "../../components/withAuth";
 import publishedCompanies from "../../components/publishedCompanies";
+<<<<<<< HEAD
+=======
+import feesCalc from "../../components/feesCalc/feesCalc";
+>>>>>>> backEnd
 
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
@@ -102,11 +110,33 @@ class HomePage extends Component {
   caseRe() {
     this.props.history.push("/case");
   }
+
+  adminARC() {
+    this.props.history.push("/adminARC");
+  }
+  assignLaw() {
+    this.props.history.push("/assignLaw");
+  }
   lawyerfilter() {
     this.props.histroy.push("/filterCase");
   }
   lawUp() {
     this.props.history.push("/lawyerUpdate");
+  }
+  feesCalc() {
+    this.props.history.push("/feesCalc");
+  }
+
+  updateUser() {
+    this.props.history.push("/updateUser");
+  }
+
+  getUser() {
+    this.props.history.push("/getUser");
+  }
+
+  assignRev() {
+    this.props.history.push("/assignRev");
   }
 
   _handleLogout = () => {
@@ -114,14 +144,6 @@ class HomePage extends Component {
 
     this.props.history.replace("/");
   };
-
-  // connecToServer() {
-  //   fetch("/");
-  // }
-
-  // componentDidMount() {
-  //   this.connecToServer();
-  // }
 
   render() {
     return (
@@ -230,26 +252,114 @@ class HomePage extends Component {
           >
             Click to view user
           </button>
+        </div>
+        <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this._handleLogout();
+            }}
+          >
+            LogOut
+          </button>
+        </div>
+        <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.caseRe();
+            }}
+          >
+            Case
+          </button>
+        </div>
+        {/* </div> */}
+        <div>To search</div>
+        <div>
+          To search
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.searchBar();
+            }}
+          >
+            Click to search
+          </button>
+        </div>
+        <div>
+          To search
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.searchBar();
+            }}
+          >
+            Click to search
+          </button>
+        </div>
+
+        <div>
+          To update user
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.updateUser();
+            }}
+          >
+            Click to update
+          </button>
+        </div>
+
+        <div>
+          To get user
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.getUser();
+            }}
+          >
+            Click to get
+          </button>
+        </div>
+
+        <div>
+          To assign Reviewer
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.assignRev();
+            }}
+          >
+            Click to get
+          </button>
+        </div>
+
+        <div>
+
+        <div>
+          To approve/reject form as an admin
           <div>
             <button
               className="btn btn-primary width-150"
               onClick={e => {
-                this._handleLogout();
+                this.adminARC();
               }}
             >
-              LogOut
+              Click to decide
             </button>
           </div>
           <div>
+            To search
             <button
               className="btn btn-primary width-150"
               onClick={e => {
-                this.caseRe();
+                this.searchBar();
               }}
             >
-              Case
+              Click to search
             </button>
           </div>
+<<<<<<< HEAD
         </div>
         <div>
           To search
@@ -274,6 +384,20 @@ class HomePage extends Component {
           </button>
         </div>
         <div>
+=======
+          <div>
+            assign a lawyer
+            <button
+              className="btn btn-primary width-150"
+              onClick={e => {
+                this.assignLaw();
+              }}
+            >
+              Click to assign
+            </button>
+          </div>
+
+>>>>>>> backEnd
           To view publishedCompanies click here
           <button
             className="btn btn-primary width-150"
@@ -355,6 +479,17 @@ class HomePage extends Component {
             className="btn btn-primary width-150"
             onClick={e => {
               this.lawUp();
+            }}
+          >
+            Click to Update
+          </button>
+        </div>
+        <div>
+          Fees Calculation
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.feesCalc();
             }}
           >
             Click to Update

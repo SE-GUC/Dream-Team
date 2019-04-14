@@ -20,6 +20,8 @@
     "react-scripts": "2.1.8",
     "react-stripe-elements": "^2.0.3",
     "react-stripe-elements-universal": "^1.2.0-3",
+    "react-view": "^1.0.0",
+    "react-view-switch": "^0.2.0",
     "reactjs-popup": "^1.3.2",
     "reactstrap": "^8.0.0",
     "stripe": "^6.28.0"
