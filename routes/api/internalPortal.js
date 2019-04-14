@@ -2,15 +2,10 @@ var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
-const userValidator = require('../../validations/userValidations');
-const formValidator = require('../../validations/formValidations');
-const bcrypt = require('bcryptjs');
+
 const User = require('../../models/User');
 const Form = require('../../models/Form');
 const typesEnum = require('../../enums/accountType');
-const formEnum = require('../../enums/formStatus');
-const entity = require('../../enums/entityType');
-const formType = require('../../enums/formType');
 const regulatedLaw = require('../../enums/regulatedLaw');
 
 mongoose.set('useNewUrlParser', true);
@@ -23,6 +18,11 @@ router.use(
     extended: false
   })
 );
+//View all Forms - Internal Portal
+router.get('/', async (req, res) => {
+  const form = await Form.find();
+  res.json({ data: form });
+});
 
 //Get Laws
 router.get('/regulatedLaw', async (req, res) => {
@@ -30,14 +30,8 @@ router.get('/regulatedLaw', async (req, res) => {
   res.json({ data: law });
 });
 
-//Read all Forms - Internal Portal
-router.get('/', async (req, res) => {
-  const form = await Form.find();
-  res.json({ data: form });
-});
-
-//Read forms by ID - Internal Portal
-router.get('/:id', async (req, res) => {
+//View forms by ID - Internal Portal
+router.get('/form/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const form = await Form.findById(id);
@@ -55,39 +49,26 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-//Undecided forms - Internal Portal (Except Admin)
-router.get('/undecidedForms', async (req, res) => {
-  const userType = req.get('type');
-  const userID = req.get('_id');
-  if (userType === typesEnum.accountTypes.LAWYER) {
-    var forms = await Form.find({
-      lawyerDecision: { $exists: false },
-      lawyer: userID
-    });
-    res.json({
-      data: forms
-    });
-  } else if (loggedintype === typesEnum.accountTypes.REVIEWER) {
-    var forms = await Form.find({
-      reviewerDecision: { $exists: false },
-      reviewer: userID
-    });
-    res.json({
-      data: forms
-    });
-  } else
-    return res.status(404).send({
-      error: 'you are not allowed to perform the requested operation'
-    });
-});
-
-//Track Forms of specific investor -  Internal Portal
-TODO: router.get('/formStatus/:id', async (req, res) => {
+//View Forms of specific investor -  Internal Portal
+router.get('/formStatus/:id', async (req, res) => {
   const investorID = req.params.id;
   var forms = await Form.find({ investor: investorID });
   res.json({
     data: forms
   });
+});
+
+//View which lawyer is working on a form
+router.get('/lawyerOfForm/:id', async (req, res) => {
+  const formID = req.params.id;
+  const form = await Form.findById(formID);
+  const lawyerID = form.lawyer;
+  if (lawyerID) {
+    const lawyer = await User.findById(form.lawyer);
+    res.json({ data: lawyer });
+  } else {
+    res.json({ msg: `There is no lawyer assigned to this form` });
+  }
 });
 
 module.exports = router;

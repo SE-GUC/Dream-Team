@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const typesEnum = require('../enums/accountType');
+const typesEnum = require("../enums/accountType");
 const userschema = new Schema({
   name: {
     type: String,
@@ -54,21 +54,12 @@ const userschema = new Schema({
     required: true
   },
   rejectionMessage: {
-    type: String,
-    default: false
+    type: String
   },
   investorType: {
-    type: String,
-    require: true
-  },
-  capital: {
-    type: Number,
-    require: true
-  },
-  capitalCurrency: {
     type: String,
     require: true
   }
 });
 
-module.exports = user = mongoose.model("User", userschema);
+module.exports = mongoose.model("User", userschema);

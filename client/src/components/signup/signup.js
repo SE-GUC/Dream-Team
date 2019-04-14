@@ -1,27 +1,27 @@
-import React, { Component } from "react";
-import "./signup.css";
-import { Form, Button, Col } from "react-bootstrap";
-import Popup from "reactjs-popup";
+import React, { Component } from 'react';
+import { Button, Col, Form } from 'react-bootstrap';
+import Popup from 'reactjs-popup';
+import './signup.css';
 
 class SignUp extends Component {
   state = {
-    name: "",
-    accountType: "",
-    accountStatus: "",
-    gender: "",
-    nationality: "",
-    email: "",
-    password: "",
-    typeID: "",
-    numberID: "",
-    phoneNumber: "",
-    faxNumber: "",
-    dateOfBirth: "",
-    address: "",
-    investorType: "",
-    capital: "",
-    capitalCurrency: "",
-    responseToPost: ""
+    name: '',
+    accountType: '',
+    accountStatus: '',
+    gender: '',
+    nationality: '',
+    email: '',
+    password: '',
+    typeID: '',
+    numberID: '',
+    phoneNumber: '',
+    faxNumber: '',
+    dateOfBirth: '',
+    address: '',
+    investorType: '',
+    capital: '',
+    capitalCurrency: '',
+    responseToPost: ''
   };
 
   handleSubmit = async e => {
@@ -29,7 +29,7 @@ class SignUp extends Component {
     const data = {
       name: this.state.name,
       accountType: this.state.accountType,
-      accountStatus: "false",
+      accountStatus: 'false',
       gender: this.state.gender,
       nationality: this.state.nationality,
       email: this.state.email,
@@ -44,22 +44,35 @@ class SignUp extends Component {
       capital: this.state.capital,
       capitalCurrency: this.state.capitalCurrency
     };
-    const response = await fetch("api/user/createUser", {
-      method: "POST",
+    const response = await fetch('api/externalPortal/createUser', {
+      method: 'POST',
       body: JSON.stringify(data),
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ name:this.state.name, accountType: this.state.accountType, gender: this.state.gender, nationality: this.state.nationality,  email:this.state.email , password:this.state.password,
-    typeID:this.state.typeID, numberID: this.state.numberID, phoneNumber: this.state.phoneNumber, faxNumber: this.state.faxNumber, dateoOfBirth: this.state.dateOfBirth, address: this.state.address, investorType: this.state.investorType, capital: this.state.capital, capitalCurrency: this.state.capitalCurrency}),
+      body: JSON.stringify({
+        name: this.state.name,
+        accountType: this.state.accountType,
+        gender: this.state.gender,
+        nationality: this.state.nationality,
+        email: this.state.email,
+        password: this.state.password,
+        typeID: this.state.typeID,
+        numberID: this.state.numberID,
+        phoneNumber: this.state.phoneNumber,
+        faxNumber: this.state.faxNumber,
+        dateoOfBirth: this.state.dateOfBirth,
+        address: this.state.address,
+        investorType: this.state.investorType,
+        capital: this.state.capital,
+        capitalCurrency: this.state.capitalCurrency
+      })
     }).catch(err => {
       alert(err);
-      
     });
     const body = await response.text();
     this.setState({ responseToPost: body });
-    this.props.history.replace("/login");
-   
+    this.props.history.replace('/login');
   };
 
   render() {
@@ -78,7 +91,7 @@ class SignUp extends Component {
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridAccountType">
-              {" "}
+              {' '}
               <Form.Label>Account Type*</Form.Label>
               <Form.Control
                 as="select"

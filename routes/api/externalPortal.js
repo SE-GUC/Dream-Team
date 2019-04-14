@@ -1,12 +1,15 @@
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const express = require('express');
-const router = express.Router();
+
 const User = require('../../models/User');
 const userValidator = require('../../validations/userValidations');
 const bcrypt = require('bcryptjs');
 const Form = require('../../models/Form');
 const formEnum = require('../../enums/formStatus');
+const passport = require('passport');
+
+const router = express.Router();
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -30,6 +33,7 @@ router.get('/companies/publishedcompanies', async (req, res) => {
 //Create user (reviewer/investor/lawyer) - Public
 router.post('/createUser', async (req, res) => {
   const user = req.body;
+  var isValidated = null;
   const userFound = await User.findOne({ email: req.body.email });
   if (userFound) return res.status(400).json({ error: 'Email already exists' });
   const salt = bcrypt.genSaltSync(10);
@@ -38,12 +42,12 @@ router.post('/createUser', async (req, res) => {
     return res
       .status(400)
       .json({ error: 'egyptians must have their national id as type id' });
-  if (req.body.accountType === 'investor')
-    var isValidated = userValidator.createInvestorValidation(req.body);
-  else if (req.body.accountType === 'lawyer')
-    var isValidated = userValidator.createLawyerValidation(req.body);
-  else if (req.body.accountType === 'reviewer')
-    var isValidated = userValidator.createReviewerValidation(req.body);
+  if (req.body.accountType == 'investor')
+    isValidated = userValidator.createInvestorValidation(req.body);
+  else if (req.body.accountType == 'lawyer')
+    isValidated = userValidator.createLawyerValidation(req.body);
+  else if (req.body.accountType == 'reviewer')
+    isValidated = userValidator.createReviewerValidation(req.body);
 
   if (isValidated.error)
     return res
@@ -58,46 +62,51 @@ router.post('/createUser', async (req, res) => {
 });
 
 //Update user
-router.put('/updateUser', async (req, res) => {
-  try {
-    const id = req.get('_id');
-    const user = await User.findById({
-      id
-    });
-    if (!user)
-      return res.status(404).send({
-        error: 'User does not exist'
+router.put(
+  '/updateUser',
+  passport.authenticate('jwt', { session: false }),
+  async (req, res) => {
+    try {
+      const id = req.payload.id;
+      const type = req.payload.type;
+      const user = await User.find({ _id: id });
+      if (!user)
+        return res.status(404).send({
+          error: 'User does not exist'
+        });
+      var isValidated = null;
+      if (user.nationality == 'egyptian' && req.body.typeID != 'national id')
+        return res
+          .status(400)
+          .json({ error: 'egyptians must have their national id as type id' });
+      if (type == 'investor')
+        isValidated = userValidator.updateInvestorValidation(req.body);
+      else if (type == 'lawyer')
+        isValidated = userValidator.updateLawyerValidation(req.body);
+      else if (type == 'reviewer')
+        isValidated = userValidator.updateReviewerValidation(req.body);
+      if (!isValidated) {
+        return res
+          .status(404)
+          .send({ msg: 'The data you entered is not correct' });
+      }
+      const dataBody = req.body;
+      if (dataBody.password) {
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(dataBody.password, salt);
+        dataBody.password = hashedPassword;
+      }
+      if (user.accountStatus == false) dataBody.$unset = { accountStatus: 1 };
+      const updatedUser = await User.findByIdAndUpdate(id, dataBody);
+      res.json({
+        msg: 'User updated successfully',
+        data: updatedUser
       });
-    if (user.nationality == 'egyptian' && req.body.typeID != 'national id')
-      return res
-        .status(400)
-        .json({ error: 'egyptians must have their national id as type id' });
-    if (req.body.accountType === 'investor')
-      var isValidated = userValidator.updateInvestorValidation(req.body);
-    else if (req.body.accountType === 'lawyer')
-      var isValidated = userValidator.updateLawyerValidation(req.body);
-    else if (req.body.accountType === 'reviewer')
-      var isValidated = userValidator.updateReviewerValidation(req.body);
-    if (!isValidated)
-      return res
-        .status(404)
-        .send({ msg: 'The data you entered is not correct' });
-    const dataBody = req.body;
-    if (dataBody.password) {
-      const salt = bcrypt.genSaltSync(10);
-      const hashedPassword = bcrypt.hashSync(password, salt);
-      dataBody.password = hashedPassword;
+    } catch (error) {
+      console.log(error);
     }
-    if (user.accountStatus == false) dataBody.$unset = { accountStatus: 1 };
-    const updatedUser = await User.findByIdAndUpdate(id, dataBody);
-    res.json({
-      msg: 'User updated successfully',
-      data: updatedUser
-    });
-  } catch (error) {
-    console.log(error);
   }
-});
+);
 
 //View SSC Rules - Public
 var SSC = [
@@ -139,6 +148,7 @@ var SSC = [
   ['', '', '', '', 'المستثمر'],
   ['', '', 'نعم', 'نص', 'الاسم'],
   ['', 'شخص', '', 'قائمة', 'نوع المستثمر'][
+    // @ts-ignore
     ('یظهر في حالة أن نوع المستثمر:- شخص',
     'یتم عرضها من قاعدة البیانات',
     'یتم عرضها من قاعدة البیانات',
@@ -177,6 +187,7 @@ var SSC = [
   ['یظهر في كل الحالات', '', 'نعم', 'نص', 'عنوان الإقامة'],
   ['یظهر في كل الحالات', '-', 'لا', 'نص', 'التلیفون'],
   ['یظهر في كل الحالات', '', 'لا', 'نص', 'الفاكس'][
+    // @ts-ignore
     ('یظهر في حالة أن نوع الشریك: - شخص - یمثل',
     '',
     'لا',
@@ -262,6 +273,7 @@ var SPC = [
   ['', '', '', '', 'المستثمر'],
   ['', '', 'نعم', 'نص', 'الاسم'],
   ['', 'شخص', '', 'قائمة', 'نوع المستثمر'][
+    // @ts-ignore
     ('یظهر في حالة أن نوع المستثمر:- شخص',
     'یتم عرضها من قاعدة البیانات',
     'یتم عرضها من قاعدة البیانات',
@@ -300,12 +312,14 @@ var SPC = [
   ['یظهر في كل الحالات', '', 'نعم', 'نص', 'عنوان الإقامة'],
   ['یظهر في كل الحالات', '-', 'لا', 'نص', 'التلیفون'],
   ['یظهر في كل الحالات', '', 'لا', 'نص', 'الفاكس'][
+    // @ts-ignore
     ('یظهر في حالة أن نوع الشریك: - شخص - یمثل',
     '',
     'لا',
     'نص',
     'البرید الإلكتروني')
   ],
+  // @ts-ignore
   [('', '', 'نعم', 'نص', 'عنوان الإقامة')]
 ];
 router.get('/information/SPC', (request, response) => {

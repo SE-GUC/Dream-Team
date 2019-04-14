@@ -1,112 +1,103 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const BoardofdirectorsSchema = require("../models/Boardofdirectors");
-const regulatedLaw = require("../enums/regulatedLaw");
-const entityType = require("../enums/entityType");
-const formStatus = require("../enums/formStatus");
-const formType = require("../enums/formType");
-const FormSchema = new Schema({
-  companyName: {
-    type: String,
-    required: true
-  },
-  companyNameEng: {
-    type: String
-    //required: false
-  },
-  companyType: {
-    type: formType.formTypes
-    // required: false
-  },
-  headquarters: {
-    governorate: {
-      type: String,
-      required: true
-    },
-    city: {
-      type: String,
-      required: true
-    },
-    address: {
-      type: String,
-      required: true
-    },
-    telephone: {
+const BoardofdirectorsSchema = require('../models/Boardofdirectors');
+const regulatedLaw = require('../enums/regulatedLaw');
+const formStatus = require('../enums/formStatus');
+const formType = require('../enums/formType');
+const FormSchema = new Schema(
+  {
+    companyName: {
       type: String
-      //required: true
     },
-    fax: {
+    companyNameEng: {
       type: String
-      // required: true
-    }
-  },
-  financialInfo: {
-    currency: {
-      type: String,
-      required: true
     },
-    capital: {
+    companyType: {
+      type: formType.formTypes
+    },
+    headquarters: {
+      governorate: {
+        type: String
+      },
+      city: {
+        type: String
+      },
+      address: {
+        type: String
+      },
+      telephone: {
+        type: String
+      },
+      fax: {
+        type: String
+      }
+    },
+    financialInfo: {
+      currency: {
+        type: String
+      },
+      capital: {
+        type: Number
+      }
+    },
+    regulatedLaw: {
+      type: regulatedLaw.regulatedLaw
+    },
+    investor: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    lawyer: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    lawyerComment: {
+      type: String
+    },
+    lawyerDecision: {
       type: Number
-      //required: true
-    }
+    },
+    reviewer: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    reviwerComment: {
+      type: String
+    },
+    reviewerDecision: {
+      type: Number
+    },
+    feesCalculation: {
+      type: String
+    },
+    dateOfApproval: {
+      type: Date
+    },
+    payment: {
+      paymentId: {
+        type: String
+      },
+      dateOfPayment: {
+        type: Date
+      },
+      method: {
+        type: String
+      },
+      lawyer: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    },
+    formStatus: {
+      type: formStatus.formStatus
+    },
+    createdByLawyer: {
+      type: Boolean,
+      default: false
+    },
+    board: [BoardofdirectorsSchema]
   },
-  entityType: {
-    type: entityType.entityType,
-    required: true
-  },
-  regulatedLaw: {
-    type: regulatedLaw.regulatedLaw,
-    required: true
-  },
-  investor: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true
-  },
-  lawyer: {
-    type: Schema.Types.ObjectId,
-    ref: "User"
-  },
-  lawyerComment: {
-    type: String
-    //required: false
-  },
-  lawyerDecision: {
-    type: Number
-    //required: false
-  },
-  reviewer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
-  },
-  reviwerComment: {
-    type: String
-  },
-  reviewerDecision: {
-    type: Number
-  },
-  feesCalculation: {
-    type: String
-  },
-  dateOfApproval: {
-    type: Date
-  },
-  amountOfPayment: {
-    type: Number
-  },
-  dateOfPayment: {
-    type: Date
-  },
-  paymentId: {
-    type: String
-  },
-  formStatus: {
-    type: formStatus.formStatus
-  },
-  createdByLawyer: {
-    type: Boolean,
-    default: false
-  },
-  board: [BoardofdirectorsSchema]
-});
-module.exports = Form = mongoose.model("Form", FormSchema);
+  { strict: false }
+);
+
+module.exports = mongoose.model('Form', FormSchema);
