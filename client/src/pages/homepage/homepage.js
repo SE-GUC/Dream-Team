@@ -1,30 +1,30 @@
-import React, { Component } from "react";
-import "../homepage/homepage.css";
-import AuthHelperMethods from "../../components/AuthHelperMethods";
-import X from "../../components/ReviewerViewhisForms/ReviewerViewhisForms";
-import Login from "../../components/login";
-import Tableform from "../../components/formTable";
-import LawyerCase from "../../components/lawyerCase";
-import ReviewerCase from "../../components/reviewerCase";
-import Lawyerview from "../../components/LawyerViewhisCases";
-import formTable from "../../components/formTable";
-import SignUp from "../../components/signup";
-import Table from "../../components/usertable/userTable";
-import Layout from "../../components/layout/layout";
-import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
-import formsOfLawyer from "../../components/formsOfLawyer/formsOfLawyer";
-import lawyerFinalizedCases from "../../components/lawyerFinalizedCases/lawyerFinalizedCases";
+import React, { Component } from 'react';
+import '../homepage/homepage.css';
+import AuthHelperMethods from '../../components/AuthHelperMethods';
+import X from '../../components/ReviewerViewhisForms/ReviewerViewhisForms';
+import Login from '../../components/login';
+import Tableform from '../../components/formTable';
+import LawyerCase from '../../components/lawyerCase';
+import ReviewerCase from '../../components/reviewerCase';
+import Lawyerview from '../../components/LawyerViewhisCases';
+import formTable from '../../components/formTable';
+import SignUp from '../../components/signup';
+import Table from '../../components/usertable/userTable';
+import Layout from '../../components/layout/layout';
+import viewAllInvestors from '../../components/viewAllInvestors/viewAllInvestors';
+import formsOfLawyer from '../../components/formsOfLawyer/formsOfLawyer';
+import lawyerFinalizedCases from '../../components/lawyerFinalizedCases/lawyerFinalizedCases';
 // import Tableform from '../../components/formTable';
-import searchBar from "../../components/searchBar";
+import searchBar from '../../components/searchBar';
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
-import withAuth from "../../components/withAuth";
-import publishedCompanies from "../../components/publishedCompanies";
+import withAuth from '../../components/withAuth';
+import publishedCompanies from '../../components/publishedCompanies';
 
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
   state = {};
   publishedCompanies() {
-    this.props.history.push("/publishedCompanies");
+    this.props.history.push('/publishedCompanies');
   }
 
   // constructor(props) {
@@ -33,74 +33,84 @@ class HomePage extends Component {
   //   // this.connecToServer = this.connecToServer.bind(this);
   // }
   viewAllForms() {
-    this.props.history.push("/viewAllForms");
+    this.props.history.push('/viewAllForms');
   }
-  lawyerview() {
-    this.props.history.push("/Lawyershowmyforms");
-  }
+
   lawyerFinalizedCases() {
-    this.props.history.push("/lawyerFinalizedCases");
+    this.props.history.push('/lawyerFinalizedCases');
   }
   viewAllInvestors() {
-    this.props.history.push("/viewAllInvestors");
+    this.props.history.push('/viewAllInvestors');
   }
   formsOfLawyer() {
-    this.props.history.push("/formsOfLawyer");
+    this.props.history.push('/formsOfLawyer');
   }
+  lawyerview() {
+    this.props.history.push('/Lawyershowmyforms');
+  }
+  constructor(props) {
+    super(props);
+    this.state = {};
+    // this.connecToServer = this.connecToServer.bind(this);
+  }
+
   reviewrview() {
-    this.props.history.push("/reviewershowmyforms");
+    this.props.history.push('/reviewershowmyforms');
   }
   update() {
-    this.props.history.push("/update");
-
-    this.props.history.push("/update");
+    this.props.history.push('/update');
   }
   viewInvestor() {
-    this.props.history.push("/investor");
+    this.props.history.push('/investor');
   }
   viewReviewers() {
-    this.props.history.push("/reviewers");
+    this.props.history.push('/reviewers');
   }
   invUpdate() {
-    this.props.history.push("/invUpdate");
+    this.props.history.push('/invUpdate');
   }
+
   login() {
-    this.props.history.push("/login");
+    this.props.history.push('/login');
   }
 
   signUp() {
-    this.props.history.push("/signup");
+    this.props.history.push('/signup');
   }
   userTable() {
-    this.props.history.push("/userTable");
+    this.props.history.push('/userTable');
   }
   employeeTable() {
-    this.props.history.push("/employeeTable");
+    this.props.history.push('/employeeTable');
   }
   formTable() {
-    this.props.history.push("/formTable");
+    this.props.history.push('/formTable');
   }
   searchBar() {
-    this.props.history.push("/searchBar");
+    this.props.history.push('/searchBar');
   }
   caseRe() {
-    this.props.history.push("/case");
+    this.props.history.push('/case');
   }
 
   lawUp() {
-    this.props.history.push("/lawyerUpdate");
+    this.props.history.push('/lawyerUpdate');
   }
+
 
   _handleLogout = () => {
     this.Auth.logout();
 
-    this.props.history.replace("/login");
+    this.props.history.replace('/login');
   };
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.connecToServer = this.connecToServer.bind(this);
-  }
+
+  // connecToServer() {
+  //   fetch("/");
+  // }
+
+  // componentDidMount() {
+  //   this.connecToServer();
+  // }
 
   render() {
     return (

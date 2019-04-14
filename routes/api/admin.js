@@ -24,6 +24,18 @@ router.post('/formType', async (req, res) => {
   console.log('Form Type created succesfully');
 });
 
+router.get('/lawyer/:id', async (req, res) => {
+//   const type = req.params.type;
+  const id = req.params.id;
+  const user = await User.findById(id);
+  if (!user)
+    return res.status(404).send({
+      error: 'This User does not exist'
+    });
+  const lawyers = await Form.find({ lawyerDecision: 1, lawyer: id });
+  res.json({ data: lawyers });
+});
+
 //Delete form type
 router.delete('/formType:id', async (req, res) => {
   const formTypeId = req.params.id;

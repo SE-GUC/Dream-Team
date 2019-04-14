@@ -1,8 +1,11 @@
-import React, { Component } from "react";
-import { Table } from "reactstrap";
-const axios = require("axios");
+import AuthHelperMethods from '../AuthHelperMethods';
+import withAuth from '../withAuth';
+import React, { Component } from 'react';
+import { Table } from 'reactstrap';
+const axios = require('axios');
 
 class viewAllInvestors extends Component {
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = {
@@ -12,10 +15,10 @@ class viewAllInvestors extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get("http://localhost:5000/api/admin/viewinvestor")
-      .then(res => {
-        const response = res.data;
+    this.Auth.fetch('api/admin/investor')
+      .then(res => res.json())
+      .then(json => {
+        const response = json;
         this.setState({ response: response });
         this.setState({ isLoaded: true });
       })
@@ -81,4 +84,4 @@ class viewAllInvestors extends Component {
   }
 }
 
-export default viewAllInvestors;
+export default withAuth(viewAllInvestors);
