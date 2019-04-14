@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "client-install": "npm install --prefix client",
-    "start": "node index.js",
+    "start": "npm run client",
     "index": "nodemon index.js",
     "test": "jest",
     "client": "cd client && npm start",
@@ -40,7 +40,8 @@
    
   },
   "engines": {
-    "node": "10.15.1"
+    "node": "10.15.1",
+    "npm":  "6.4.1"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "./Test/setup.js",
