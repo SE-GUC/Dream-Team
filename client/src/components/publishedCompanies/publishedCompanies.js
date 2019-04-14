@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import "./publishedCompanies.css";
 import Axios from "axios";
 import { Table } from "reactstrap";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 class publishedCompanies extends Component {
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = { publishedCompanies: [], isLoaded: false };
@@ -18,13 +21,16 @@ class publishedCompanies extends Component {
   //     });
   // }
   componentDidMount() {
-    Axios.get("api/user/companies/publishedcompanies/").then(res => {
-      this.setState({
-        publishedCompanies: res.data,
-        isLoaded: true
+    this.Auth.fetch("api/externalPortal/companies/publishedcompanies/")
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          publishedCompanies: json.data,
+          isLoaded: true
+        });
       });
-    });
   }
+
   render() {
     var { publishedCompanies, isLoaded } = this.state;
     if (!isLoaded) {
@@ -64,7 +70,7 @@ class publishedCompanies extends Component {
               </tr>
             </thead>
             <tbody>
-              {publishedCompanies.data.map(x => (
+              {publishedCompanies.map(x => (
                 <tr>
                   <td>{x.companyName}</td>
                   <td>{x.companyNameEng}</td>

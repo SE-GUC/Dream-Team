@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Table } from 'reactstrap';
-import AuthHelperMethods from '../AuthHelperMethods';
-import withAuth from '../withAuth';
+import React, { Component } from "react";
+import { Table } from "reactstrap";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 
 class formTable extends Component {
   Auth = new AuthHelperMethods();
@@ -14,7 +14,7 @@ class formTable extends Component {
   }
 
   componentDidMount() {
-    this.Auth.fetch('api/internalPortal')
+    this.Auth.fetch("api/internalPortal")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -64,7 +64,7 @@ class formTable extends Component {
               </tr>
             </thead>
             <tbody>
-              {response.data.map((x, key) => (
+              {response.map((x, key) => (
                 <tr>
                   <td> {(key = x._id)}</td>
                   <td>{x.companyName}</td>
