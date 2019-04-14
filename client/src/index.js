@@ -41,6 +41,16 @@ import ViewAllForms from './components/viewAllForms/viewAllForms';
 import LawyerUpdateForm from './components/lawyerUpdateForm/lawyerUpdateForm';
 import LawUpForm from './components/lawyerUpdate/lawyerUpdate';
 import NavBar from './components/layout/layout';
+import UserTable from './components/userTable/userTable';
+import UpdateTest from "./components/updateTest";
+import LawyerViewhisCases from './components/LawyerViewhisCases';
+import UserTable from "./components/userTable/userTable";
+import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import HomePage from "./pages/homepage";
+import Case from './pages/LRspecificCase';
+import 'bootstrap/dist/css/bootstrap.css';
+import ReviewerViewhisForms from './components/ReviewerViewhisForms';
 
 ReactDOM.render(
   <Router>
