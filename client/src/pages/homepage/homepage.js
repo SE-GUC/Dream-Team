@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import React, { Component } from "react";
 import "../homepage/homepage.css";
-import AuthHelperMethods from "../../components/AuthHelperMethods";
 import AuthHelperMethods from "../../components/AuthHelperMethods";
 import "../homepage/homepage.css";
 import X from "../../components/ReviewerViewhisForms/ReviewerViewhisForms";
