@@ -24,6 +24,15 @@ router.get("/", async (req, res) => {
   res.json({ data: form });
 });
 
+router.get('/search',async (req,res) =>{
+ 
+  const search = await Form.find(req.body)
+
+res.json({
+  data: search
+})
+})
+
 //Get Laws
 router.get("/regulatedLaw", async (req, res) => {
   const law = regulatedLaw.regulatedLaw;
