@@ -26,31 +26,36 @@ import UserTable from "./components/userTable/userTable";
 import "./index.css";
 import HomePage from "./pages/homepage";
 import Case from "./pages/LRspecificCase";
-import * as serviceWorker from './serviceWorker';
-import Investor from './components/investor';
-import ComRule from './components/comRule/comRule';
-import CalcRule from './components/calcRule/calcRule';
-import publishedCompanies from './components/publishedCompanies/publishedCompanies';
+import "bootstrap/dist/css/bootstrap.css";
+import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
+// import UserTable from "./components/userTable/userTable";
+import * as serviceWorker from "./serviceWorker";
+import Investor from "./components/investor";
+import ComRule from "./components/comRule/comRule";
+import CalcRule from "./components/calcRule/calcRule";
+import AdminARC from "./components/adminARC/adminARC";
+import assignLaw from "./components/assignLaw/assignLaw";
+import publishedCompanies from "./components/publishedCompanies/publishedCompanies";
 
-import viewAllInvestors from './components/viewAllInvestors/viewAllInvestors';
-import formsOfLawyer from './components/formsOfLawyer/formsOfLawyer';
-import lawyerFinalizedCases from './components/lawyerFinalizedCases/lawyerFinalizedCases';
-import Reviewers from './components/viewAllReviewers/viewAllReviewers';
-import InvUpdate from './components/investorUpdate/investorUpdate';
-import ViewAllForms from './components/viewAllForms/viewAllForms';
-import LawyerUpdateForm from './components/lawyerUpdateForm/lawyerUpdateForm';
-import LawUpForm from './components/lawyerUpdate/lawyerUpdate';
-import NavBar from './components/layout/layout';
-import UserTable from './components/userTable/userTable';
-import UpdateTest from "./components/updateTest";
-import LawyerViewhisCases from './components/LawyerViewhisCases';
+import viewAllInvestors from "./components/viewAllInvestors/viewAllInvestors";
+import formsOfLawyer from "./components/formsOfLawyer/formsOfLawyer";
+import lawyerFinalizedCases from "./components/lawyerFinalizedCases/lawyerFinalizedCases";
+import Reviewers from "./components/viewAllReviewers/viewAllReviewers";
+import InvUpdate from "./components/investorUpdate/investorUpdate";
+import ViewAllForms from "./components/viewAllForms/viewAllForms";
+import LawyerUpdateForm from "./components/lawyerUpdateForm/lawyerUpdateForm";
+import LawUpForm from "./components/lawyerUpdate/lawyerUpdate";
+import NavBar from "./components/layout/layout";
 import UserTable from "./components/userTable/userTable";
-import './index.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import UpdateTest from "./components/updateTest";
+import LawyerViewhisCases from "./components/LawyerViewhisCases";
+import UserTable from "./components/userTable/userTable";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./pages/homepage";
-import Case from './pages/LRspecificCase';
-import 'bootstrap/dist/css/bootstrap.css';
-import ReviewerViewhisForms from './components/ReviewerViewhisForms';
+import Case from "./pages/LRspecificCase";
+import "bootstrap/dist/css/bootstrap.css";
+import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
 
 ReactDOM.render(
   <Router>
@@ -75,9 +80,11 @@ ReactDOM.render(
         component={ComRule}
       />
       <Route path="/feesCalculation" component={CalcRule} />
-          <Route path="/publishedCompanies" component={publishedCompanies} />
+      <Route path="/publishedCompanies" component={publishedCompanies} />
       <Route path="/case" component={Case} />
       <Route path="/case" component={Case} />
+      <Route path="/adminARC" component={AdminARC} />
+      <Route path="/assignLaw" component={assignLaw} />
       <Route path="/viewAllInvestors" component={viewAllInvestors} />
       <Route path="/formsOfLawyer" component={formsOfLawyer} />
       <Route path="/lawyerFinalizedCases" component={lawyerFinalizedCases} />
