@@ -32,10 +32,7 @@ class Update extends Component {
 
     // var body50 =  JSON.parse(this.state.userID);
     const response1 = await this.Auth.fetch("/api/externalPortal/user/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
+      method: "GET"
     }).catch(err => {
       alert(err);
     });
@@ -84,27 +81,27 @@ class Update extends Component {
         faxNumber: JSON.stringify(body1.data.faxNumber).replace(
           /"([^"]+(?="))"/g,
           "$1"
-        ),
-        accountStatus: JSON.stringify(body1.data.accountStatus).replace(
-          /"([^"]+(?="))"/g,
-          "$1"
-        ),
-        rejectionMessage: JSON.stringify(body1.data.rejectionMessage).replace(
-          /"([^"]+(?="))"/g,
-          "$1"
-        ),
-        investorType: JSON.stringify(body1.data.investorType).replace(
-          /"([^"]+(?="))"/g,
-          "$1"
-        ),
-        capital: JSON.stringify(body1.data.capital).replace(
-          /"([^"]+(?="))"/g,
-          "$1"
-        ),
-        capitalCurrency: JSON.stringify(body1.data.capitalCurrency).replace(
-          /"([^"]+(?="))"/g,
-          "$1"
         )
+        // accountStatus: JSON.stringify(body1.data.accountStatus).replace(
+        //   /"([^"]+(?="))"/g,
+        //   "$1"
+        // ),
+        // rejectionMessage: JSON.stringify(body1.data.rejectionMessage).replace(
+        //   /"([^"]+(?="))"/g,
+        //   "$1"
+        // ),
+        // investorType: JSON.stringify(body1.data.investorType).replace(
+        //   /"([^"]+(?="))"/g,
+        //   "$1"
+        // ),
+        // capital: JSON.stringify(body1.data.capital).replace(
+        //   /"([^"]+(?="))"/g,
+        //   "$1"
+        // ),
+        // capitalCurrency: JSON.stringify(body1.data.capitalCurrency).replace(
+        //   /"([^"]+(?="))"/g,
+        //   "$1"
+        // )
       });
     } else {
       this.setState({
