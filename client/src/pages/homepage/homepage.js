@@ -1,28 +1,27 @@
-
-import React, { Component } from 'react';
 import React, { Component } from "react";
-import '../homepage/homepage.css';
-import AuthHelperMethods from "../../components/AuthHelperMethods";
-import AuthHelperMethods from '../../components/AuthHelperMethods';
+import React, { Component } from "react";
 import "../homepage/homepage.css";
-import X from '../../components/ReviewerViewhisForms/ReviewerViewhisForms';
-import Login from '../../components/login';
-import Tableform from '../../components/formTable';
-import LawyerCase from '../../components/lawyerCase';
-import ReviewerCase from '../../components/reviewerCase';
-import Lawyerview from '../../components/LawyerViewhisCases';
-import formTable from '../../components/formTable';
-import SignUp from '../../components/signup';
-import Table from '../../components/usertable/userTable';
-import Layout from '../../components/layout/layout';
-import viewAllInvestors from '../../components/viewAllInvestors/viewAllInvestors';
-import formsOfLawyer from '../../components/formsOfLawyer/formsOfLawyer';
-import lawyerFinalizedCases from '../../components/lawyerFinalizedCases/lawyerFinalizedCases';
+import AuthHelperMethods from "../../components/AuthHelperMethods";
+import AuthHelperMethods from "../../components/AuthHelperMethods";
+import "../homepage/homepage.css";
+import X from "../../components/ReviewerViewhisForms/ReviewerViewhisForms";
+import Login from "../../components/login";
+import Tableform from "../../components/formTable";
+import LawyerCase from "../../components/lawyerCase";
+import ReviewerCase from "../../components/reviewerCase";
+import Lawyerview from "../../components/LawyerViewhisCases";
+import formTable from "../../components/formTable";
+import SignUp from "../../components/signup";
+import Table from "../../components/usertable/userTable";
+import Layout from "../../components/layout/layout";
+import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
+import formsOfLawyer from "../../components/formsOfLawyer/formsOfLawyer";
+import lawyerFinalizedCases from "../../components/lawyerFinalizedCases/lawyerFinalizedCases";
 // import Tableform from '../../components/formTable';
-import searchBar from '../../components/searchBar';
+import searchBar from "../../components/searchBar";
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
-import withAuth from '../../components/withAuth';
-import publishedCompanies from '../../components/publishedCompanies';
+import withAuth from "../../components/withAuth";
+import publishedCompanies from "../../components/publishedCompanies";
 
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
@@ -102,6 +101,13 @@ class HomePage extends Component {
   caseRe() {
     this.props.history.push("/case");
   }
+
+  adminARC() {
+    this.props.history.push("/adminARC");
+  }
+  assignLaw() {
+    this.props.history.push("/assignLaw");
+  }
   lawyerfilter() {
     this.props.histroy.push("/filterCase");
   }
@@ -114,14 +120,6 @@ class HomePage extends Component {
 
     this.props.history.replace("/");
   };
-
-  // connecToServer() {
-  //   fetch("/");
-  // }
-
-  // componentDidMount() {
-  //   this.connecToServer();
-  // }
 
   render() {
     return (
@@ -251,6 +249,7 @@ class HomePage extends Component {
             </button>
           </div>
         </div>
+        <div>To search</div>
         <div>
           To search
           <button
@@ -262,7 +261,41 @@ class HomePage extends Component {
             Click to search
           </button>
         </div>
-<div>
+
+        <div>
+          To approve/reject form as an admin
+          <div>
+            <button
+              className="btn btn-primary width-150"
+              onClick={e => {
+                this.adminARC();
+              }}
+            >
+              Click to decide
+            </button>
+          </div>
+          <div>
+            To search
+            <button
+              className="btn btn-primary width-150"
+              onClick={e => {
+                this.searchBar();
+              }}
+            >
+              Click to search
+            </button>
+          </div>
+          <div>
+            assign a lawyer
+            <button
+              className="btn btn-primary width-150"
+              onClick={e => {
+                this.assignLaw();
+              }}
+            >
+              Click to assign
+            </button>
+          </div>
           To view publishedCompanies click here
           <button
             className="btn btn-primary width-150"
