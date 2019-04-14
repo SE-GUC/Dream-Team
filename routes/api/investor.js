@@ -2,7 +2,7 @@ var bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
-const stripe = require("stripe")("sk_test_Wt39GzrMj3UYvfLVB4Supgbn00FRuxflb1");
+// const stripe = require("stripe")("sk_test_Wt39GzrMj3UYvfLVB4Supgbn00FRuxflb1");
 
 router.use(require("body-parser").text());
 
@@ -32,9 +32,9 @@ router.post("/charge", async (req, res) => {
     // );
     // console.log("yes");
     let { status } = await stripe.charges.create({
-      amount: 2000,
-      currency: "usd",
-      description: "Argook",
+      amount: req.body.amount,
+      currency: req.body.currency,
+      description: req.body.description,
       source: req.body.source
     });
 
@@ -50,7 +50,9 @@ router.post("/charge", async (req, res) => {
 
 //As an investor i can pay online
 router.put("/payment", async (req, res) => {
-  var stripe = require("stripe")("sk_test_Wt39GzrMj3UYvfLVB4Supgbn00FRuxflb1");
+  var stripe = new (require("stripe"))(
+    "sk_test_Wt39GzrMj3UYvfLVB4Supgbn00FRuxflb1"
+  );
 
   stripe.customers
     .create({
