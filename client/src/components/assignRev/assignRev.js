@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import "./assignRev.css";
 import { Table } from "reactstrap";
 import { Button } from "react-bootstrap";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 
 class assignRev extends Component {
+  Auth = new AuthHelperMethods();
   state = {
     response: [],
     formID: "",
@@ -11,7 +14,7 @@ class assignRev extends Component {
     isLoaded: false
   };
   componentDidMount() {
-    fetch("api/internalPortal/unassignedForms/reviewer")
+    this.Auth.fetch("api/reviewer/pendingCase")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -35,10 +38,8 @@ class assignRev extends Component {
       }
     });
 
-    const response = await fetch(
-      "/api/reviewer/reviewer/assign/" +
-        this.state.formID.trim() +
-        "/5ca0a9f26a36eb47ec6db295/",
+    const response = await this.Auth.fetch(
+      "/api/reviewer/assign/" + this.state.formID.trim(),
       {
         method: "PUT",
         headers: {
@@ -167,4 +168,4 @@ class assignRev extends Component {
   }
 }
 
-export default assignRev;
+export default withAuth(assignRev);

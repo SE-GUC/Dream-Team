@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import "./updateUser.css";
 import { Form, Button, Col } from "react-bootstrap";
 import Popup from "reactjs-popup";
-const axios = require('axios');
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
+
 class Update extends Component {
+  Auth = new AuthHelperMethods();
   state = {
     name: "",
     accountType: "",
@@ -23,111 +26,157 @@ class Update extends Component {
     capitalCurrency: "",
     responseToPost: ""
   };
-  
+
   componentDidMount = async e => {
     // e.preventDefault();
-  
-   
+
     // var body50 =  JSON.parse(this.state.userID);
-    const response1 = await fetch('/api/user/user/getUser/5ca0c7ac6a36eb47ec6db2a3/', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-  
-      }).catch(err => { 
-        alert(err)  
-   })
+    const response1 = await this.Auth.fetch("/api/externalPortal/user/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).catch(err => {
+      alert(err);
+    });
 
-   const body1 = await response1.json();
-  
-   if(JSON.stringify(body1).charAt(2)!=="e"){
-   this.setState({
-     name:JSON.stringify(body1.data.name).replace(/"([^"]+(?="))"/g, '$1'),
-     email:JSON.stringify(body1.data.email).replace(/"([^"]+(?="))"/g, '$1'),
-     accountType:JSON.stringify(body1.data.accountType).replace(/"([^"]+(?="))"/g, '$1'),
-     gender:JSON.stringify(body1.data.gender).replace(/"([^"]+(?="))"/g, '$1'),
-     nationality:JSON.stringify(body1.data.nationality).replace(/"([^"]+(?="))"/g, '$1'),
-     typeID:JSON.stringify(body1.data.typeID).replace(/"([^"]+(?="))"/g, '$1'),
-     numberID:JSON.stringify(body1.data.numberID).replace(/"([^"]+(?="))"/g, '$1'),
-     dateOfBirth:JSON.stringify(body1.data.dateOfBirth).replace(/"([^"]+(?="))"/g, '$1'),
-     address:JSON.stringify(body1.data.address).replace(/"([^"]+(?="))"/g, '$1'),
-     phoneNumber:JSON.stringify(body1.data.phoneNumber).replace(/"([^"]+(?="))"/g, '$1'),
-     faxNumber:JSON.stringify(body1.data.faxNumber).replace(/"([^"]+(?="))"/g, '$1'),
-     accountStatus:JSON.stringify(body1.data.accountStatus).replace(/"([^"]+(?="))"/g, '$1'),
-     rejectionMessage:JSON.stringify(body1.data.rejectionMessage).replace(/"([^"]+(?="))"/g, '$1'),
-    investorType: JSON.stringify(body1.data.investorType).replace(/"([^"]+(?="))"/g, '$1'),
-    capital: JSON.stringify(body1.data.capital).replace(/"([^"]+(?="))"/g, '$1'),
-    capitalCurrency:JSON.stringify(body1.data.capitalCurrency).replace(/"([^"]+(?="))"/g, '$1'),
-  })
-   }else{
-    this.setState({ responseToPost: JSON.stringify(body1), name: "",
-    accountType: "",
-    accountStatus: "",
-    gender: "",
-    nationality: "",
-    email: "",
-    password: "",
-    typeID: "",
-    numberID: "",
-    phoneNumber: "",
-    faxNumber: "",
-    dateOfBirth: "",
-    address: "",
-    investorType: "",
-    capital: "",
-    capitalCurrency: ""});
-   }
+    const body1 = await response1.json();
 
-  
-  }
+    if (JSON.stringify(body1).charAt(2) !== "e") {
+      this.setState({
+        name: JSON.stringify(body1.data.name).replace(/"([^"]+(?="))"/g, "$1"),
+        email: JSON.stringify(body1.data.email).replace(
+          /"([^"]+(?="))"/g,
+          "$1"
+        ),
+        accountType: JSON.stringify(body1.data.accountType).replace(
+          /"([^"]+(?="))"/g,
+          "$1"
+        ),
+        gender: JSON.stringify(body1.data.gender).replace(
+          /"([^"]+(?="))"/g,
+          "$1"
+        ),
+        nationality: JSON.stringify(body1.data.nationality).replace(
+          /"([^"]+(?="))"/g,
+          "$1"
+        ),
+        typeID: JSON.stringify(body1.data.typeID).replace(
+          /"([^"]+(?="))"/g,
+          "$1"
+        ),
+        numberID: JSON.stringify(body1.data.numberID).replace(
+          /"([^"]+(?="))"/g,
+          "$1"
+        ),
+        dateOfBirth: JSON.stringify(body1.data.dateOfBirth).replace(
+          /"([^"]+(?="))"/g,
+          "$1"
+        ),
+        address: JSON.stringify(body1.data.address).replace(
+          /"([^"]+(?="))"/g,
+          "$1"
+        ),
+        phoneNumber: JSON.stringify(body1.data.phoneNumber).replace(
+          /"([^"]+(?="))"/g,
+          "$1"
+        ),
+        faxNumber: JSON.stringify(body1.data.faxNumber).replace(
+          /"([^"]+(?="))"/g,
+          "$1"
+        ),
+        accountStatus: JSON.stringify(body1.data.accountStatus).replace(
+          /"([^"]+(?="))"/g,
+          "$1"
+        ),
+        rejectionMessage: JSON.stringify(body1.data.rejectionMessage).replace(
+          /"([^"]+(?="))"/g,
+          "$1"
+        ),
+        investorType: JSON.stringify(body1.data.investorType).replace(
+          /"([^"]+(?="))"/g,
+          "$1"
+        ),
+        capital: JSON.stringify(body1.data.capital).replace(
+          /"([^"]+(?="))"/g,
+          "$1"
+        ),
+        capitalCurrency: JSON.stringify(body1.data.capitalCurrency).replace(
+          /"([^"]+(?="))"/g,
+          "$1"
+        )
+      });
+    } else {
+      this.setState({
+        responseToPost: JSON.stringify(body1),
+        name: "",
+        accountType: "",
+        accountStatus: "",
+        gender: "",
+        nationality: "",
+        email: "",
+        password: "",
+        typeID: "",
+        numberID: "",
+        phoneNumber: "",
+        faxNumber: "",
+        dateOfBirth: "",
+        address: "",
+        investorType: "",
+        capital: "",
+        capitalCurrency: ""
+      });
+    }
+  };
   handleSubmit = async e => {
     e.preventDefault();
     const data = {
       name: this.state.name,
-    //   accountType: this.state.accountType,
-    //   accountStatus: "false",
-    //   gender: this.state.gender,
-    //   nationality: this.state.nationality,
+      //   accountType: this.state.accountType,
+      //   accountStatus: "false",
+      //   gender: this.state.gender,
+      //   nationality: this.state.nationality,
       email: this.state.email,
       password: this.state.password,
       typeID: this.state.typeID,
       numberID: this.state.numberID,
       phoneNumber: this.state.phoneNumber,
       faxNumber: this.state.faxNumber,
-    //   dateOfBirth: this.state.dateOfBirth,
-      address: this.state.address,
-    //   investorType: this.state.investorType,
-    //   capital: this.state.capital,
-    //   capitalCurrency: this.state.capitalCurrency
+      //   dateOfBirth: this.state.dateOfBirth,
+      address: this.state.address
+      //   investorType: this.state.investorType,
+      //   capital: this.state.capital,
+      //   capitalCurrency: this.state.capitalCurrency
     };
 
-    
-    const response = await fetch("api/user/updateUser/5ca0c7ac6a36eb47ec6db2a3", {
+    const response = await this.Auth.fetch("api/externalPortal/updateUser", {
       method: "PUT",
-     body: JSON.stringify(data),
+      body: JSON.stringify(data),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ name:this.state.name,
-      //   accountType: this.state.accountType, gender: this.state.gender, nationality: this.state.nationality, 
-          email:this.state.email , password:this.state.password,
-    typeID:this.state.typeID, numberID: this.state.numberID, phoneNumber: this.state.phoneNumber, faxNumber: this.state.faxNumber, address: this.state.address
-   // , dateoOfBirth: this.state.dateOfBirth, investorType: this.state.investorType, capital: this.state.capital, capitalCurrency: this.state.capitalCurrency
-}),
+      body: JSON.stringify({
+        name: this.state.name,
+        //   accountType: this.state.accountType, gender: this.state.gender, nationality: this.state.nationality,
+        email: this.state.email,
+        password: this.state.password,
+        typeID: this.state.typeID,
+        numberID: this.state.numberID,
+        phoneNumber: this.state.phoneNumber,
+        faxNumber: this.state.faxNumber,
+        address: this.state.address
+        // , dateoOfBirth: this.state.dateOfBirth, investorType: this.state.investorType, capital: this.state.capital, capitalCurrency: this.state.capitalCurrency
+      })
     }).catch(err => {
       alert(err);
-      
     });
     const body = await response.text();
     this.setState({ responseToPost: body });
     // this.props.history.replace("/");
     // this.props.history.replace("/updateUser");
-
   };
 
   render() {
-   
     return (
       <div className="UpdateUser">
         <Form onSubmit={this.handleSubmit}>
@@ -145,13 +194,10 @@ class Update extends Component {
               {" "}
               <Form.Label>Account Type*</Form.Label>
               <Form.Control
-               
                 value={this.state.accountType}
                 onChange={e => this.setState({ accountType: e.target.value })}
                 readOnly
-              >
-              
-              </Form.Control>
+              />
             </Form.Group>
           </Form.Row>
 
@@ -162,9 +208,7 @@ class Update extends Component {
                 value={this.state.gender}
                 onChange={e => this.setState({ gender: e.target.value })}
                 readOnly
-              >
-                
-              </Form.Control>
+              />
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridNationality">
@@ -308,4 +352,4 @@ class Update extends Component {
   }
 }
 
-export default Update;
+export default withAuth(Update);
