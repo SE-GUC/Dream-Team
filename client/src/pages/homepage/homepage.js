@@ -23,6 +23,7 @@ import lawyerFinalizedCases from "../../components/lawyerFinalizedCases/lawyerFi
 import searchBar from "../../components/searchBar";
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
 import withAuth from "../../components/withAuth";
+import viewAllLawyer from "../../components/viewAllLawyer/viewAllLawyer";
 import publishedCompanies from "../../components/publishedCompanies";
 <<<<<<< HEAD
 =======
@@ -107,6 +108,13 @@ class HomePage extends Component {
   CheckoutForm() {
     this.props.history.push("/CheckoutForm");
   }
+  viewAllLawyer() {
+    this.props.history.push("/viewAllLawyer");
+  }
+  updateInvForm() {
+    this.props.history.push("/updateInvForm");
+  }
+
   caseRe() {
     this.props.history.push("/case");
   }
@@ -287,6 +295,28 @@ class HomePage extends Component {
           </button>
         </div>
         <div>
+          To get all lawyers
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.viewAllLawyer();
+            }}
+          >
+            View All Lawyers
+          </button>
+        </div>
+        <div>
+          for investor to update his form
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.updateInvForm();
+            }}
+          >
+            investor update form
+          </button>
+        </div>
+        <div>
           To search
           <button
             className="btn btn-primary width-150"
@@ -335,8 +365,6 @@ class HomePage extends Component {
         </div>
 
         <div>
-
-        <div>
           To approve/reject form as an admin
           <div>
             <button
@@ -359,7 +387,6 @@ class HomePage extends Component {
               Click to search
             </button>
           </div>
-<<<<<<< HEAD
         </div>
         <div>
           To search
@@ -384,7 +411,6 @@ class HomePage extends Component {
           </button>
         </div>
         <div>
-=======
           <div>
             assign a lawyer
             <button
@@ -396,8 +422,6 @@ class HomePage extends Component {
               Click to assign
             </button>
           </div>
-
->>>>>>> backEnd
           To view publishedCompanies click here
           <button
             className="btn btn-primary width-150"

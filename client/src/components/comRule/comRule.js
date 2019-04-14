@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Table } from "reactstrap";
-class calcRule extends Component {
+class comRule extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -9,7 +9,7 @@ class calcRule extends Component {
     };
   }
   componentDidMount() {
-    fetch("api/externalPortal/CalculationRules")
+    fetch("api/externalPortal/companyRules")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -29,17 +29,21 @@ class calcRule extends Component {
           <Table dark hover bordered>
             <thead>
               <tr>
-                <th>Entity </th>
-                <th> Law 159 </th>
-                <th> Law 72 </th>
+                <th>Number </th>
+                <th> Rules </th>
               </tr>
             </thead>
             <tbody>
               {response.data.map(x => (
                 <tr>
-                  <td>{x.Entity}</td>
-                  <td>{x.Law159}</td>
-                  <td>{x.Law72}</td>
+                  <td>{x.one}</td>
+                  <td>{x.two}</td>
+                  <td>{x.three}</td>
+                  <td>{x.four}</td>
+                  <td>{x.five}</td>
+                  <td>{x.six}</td>
+                  <td>{x.seven}</td>
+                  <td>{x.eight}</td>
                 </tr>
               ))}
             </tbody>
@@ -49,4 +53,4 @@ class calcRule extends Component {
     }
   }
 }
-export default calcRule;
+export default comRule;
