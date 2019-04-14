@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Table } from "reactstrap";
-
+import AuthHelperMethods from "../AuthHelperMethods";
 class userTable extends Component {
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = {
@@ -11,14 +12,17 @@ class userTable extends Component {
   }
 
   componentDidMount() {
-    fetch("api/user/getUsers")
+    this.Auth.fetch("api/user/getUser")
       .then(res => res.json())
       .then(json => {
         this.setState({
           isLoaded: true,
           response: json
         });
-      });
+      })
+      .catch(error => console.log(error));
+
+    // console.log(this.Auth.getConfirm.type);
   }
 
   render() {
