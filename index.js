@@ -54,7 +54,7 @@ app.get("/", (req, res) => res.send(`<h1>Person</h1>`));
 // app.use("/api/reviewer", reviewer);
 app.use(
   "/api/externalPortal",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   externalPortal
 );
 
