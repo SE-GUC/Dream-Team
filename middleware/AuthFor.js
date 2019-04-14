@@ -1,8 +1,8 @@
-module.exports = AuthFor = function() {
+const AuthFor = function() {
   var roles = arguments;
   return function(req, res, next) {
-    flag = false;
-    const loggedType = req.body.payload.type;
+    var flag = false;
+    const loggedType = req.payload.type;
     for (var i = 0, j = roles.length; i < j; i++) {
       if (roles[i] == loggedType) {
         flag = true;
@@ -12,3 +12,4 @@ module.exports = AuthFor = function() {
     next();
   };
 };
+module.exports = AuthFor;

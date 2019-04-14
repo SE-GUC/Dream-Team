@@ -18,6 +18,20 @@ router.use(
     extended: false
   })
 );
+//View all Forms - Internal Portal
+router.get('/', async (req, res) => {
+  const form = await Form.find();
+  res.json({ data: form });
+});
+
+router.get('/search',async (req,res) =>{
+ 
+  const search = await Form.find(req.body)
+
+res.json({
+  data: search
+})
+})
 
 //Get Laws
 router.get('/regulatedLaw', async (req, res) => {
@@ -25,14 +39,8 @@ router.get('/regulatedLaw', async (req, res) => {
   res.json({ data: law });
 });
 
-//View all Forms - Internal Portal
-router.get('/', async (req, res) => {
-  const form = await Form.find();
-  res.json({ data: form });
-});
-
 //View forms by ID - Internal Portal
-router.get('/:id', async (req, res) => {
+router.get('/form/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const form = await Form.findById(id);
@@ -48,32 +56,6 @@ router.get('/:id', async (req, res) => {
       msg: 'This Form does not exist'
     });
   }
-});
-
-//View Undecided forms - Internal Portal (Except Admin)
-router.get('/undecidedForms', async (req, res) => {
-  const userType = req.get('type');
-  const userID = req.get('_id');
-  if (userType === typesEnum.accountTypes.LAWYER) {
-    var forms = await Form.find({
-      lawyerDecision: { $exists: false },
-      lawyer: userID
-    });
-    res.json({
-      data: forms
-    });
-  } else if (userType === typesEnum.accountTypes.REVIEWER) {
-    var forms = await Form.find({
-      reviewerDecision: { $exists: false },
-      reviewer: userID
-    });
-    res.json({
-      data: forms
-    });
-  } else
-    return res.status(404).send({
-      error: 'you are not allowed to perform the requested operation'
-    });
 });
 
 //View Forms of specific investor -  Internal Portal

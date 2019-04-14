@@ -12,6 +12,8 @@ const Form = require("../../models/Form");
 const typesEnum = require("../../enums/accountType");
 const formEnum = require("../../enums/formStatus");
 const userEnum = require("../../enums/accountType");
+const validations = require("./functions");
+const FormTypes = require("../../models/FormTypes");
 // const stripe = require("stripe");
 
 mongoose.set("useNewUrlParser", true);
@@ -27,10 +29,6 @@ router.use(
 
 router.post("/charge", async (req, res) => {
   try {
-    // var stripe = require("stripe")(
-    //   "sk_test_Wt39GzrMj3UYvfLVB4Supgbn00FRuxflb1"
-    // );
-    // console.log("yes");
     let { status } = await stripe.charges.create({
       amount: req.body.amount,
       currency: req.body.currency,
@@ -44,7 +42,7 @@ router.post("/charge", async (req, res) => {
       msg: err.message
     });
 
-    // res.status(500).end();
+    res.status(500).end();
   }
 });
 
@@ -126,9 +124,9 @@ router.put("/payment", async (req, res) => {
 });
 
 //View my rejected forms -Investor
-router.get("/viewRejectedForms", async (req, res) => {
+router.get("/rejectedForms", async (req, res) => {
   try {
-    const id = req.get("_id");
+    const id = req.payload.id;
     const form = await Form.find({
       formStatus: formEnum.formStatus.investor,
       investor: id
@@ -148,21 +146,22 @@ router.get("/viewRejectedForms", async (req, res) => {
 });
 
 //Create Form - Investor, Lawyer
-router.post("/form", async (req, res) => {
+router.post("/createForm", async (req, res) => {
   try {
     var investorID = "";
     var lawyerID = "";
-    if (req.get("type") == typesEnum.accountTypes.lawyer) {
-      lawyerID = req.get("_id");
+    if (req.payload.type == typesEnum.accountTypes.LAWYER) {
+      lawyerID = req.payload.id;
       investorID = req.body.investor;
-    } else investorID = req.get("_id");
-
-    if (req.body.companyName) {
-      const company = await Form.findOne({
-        companyName: req.body.companyName
-      });
-      if (company)
-        return res.status(400).json({ error: "Company Name already exists" });
+    } else investorID = req.payload.id;
+    if (req.body.companyType == "SPC" || req.body.companyType == "SSC") {
+      if (req.body.companyName) {
+        const company = await Form.findOne({
+          companyName: req.body.companyName
+        });
+        if (company)
+          return res.status(400).json({ error: "Company Name already exists" });
+      }
     }
     //SSC Conditions
     if (req.body.companyName == "SSC") {
@@ -170,7 +169,6 @@ router.post("/form", async (req, res) => {
         investor: investorID,
         companyType: "SSC"
       });
-
       if (invssc)
         return res.status(400).json({
           error: "The investor cannot Establish multiple SSC Companies"
@@ -191,7 +189,6 @@ router.post("/form", async (req, res) => {
             "investors establishing SSC must have at least one egyptian manager"
         });
     }
-
     //SPC Conditions
     if (req.body.board && req.body.companyType == "SPC") {
       console.log(req.body.board);
@@ -199,14 +196,21 @@ router.post("/form", async (req, res) => {
         .status(400)
         .json({ error: "investors establishing SPC cannot have board" });
     }
-
-    var isValidated = formValidator.createValidation(req.body);
-    if (isValidated.error)
-      return res
-        .status(400)
-        .send({ error: isValidated.error.details[0].message });
+    if (req.body.companyType == "SPC" || req.body.companyType == "SSC") {
+      var isValidated = formValidator.createValidation(req.body);
+      if (isValidated.error)
+        return res
+          .status(400)
+          .send({ error: isValidated.error.details[0].message });
+    }
+    if (req.body.companyType != "SPC" && req.body.companyType != "SSC") {
+      const formtype = await FormTypes.find({ formType: req.body.companyType });
+      const updated = req.body;
+      delete updated.companyType;
+      validations.validateForm(updated, formtype, res);
+    }
     var formBody = req.body;
-    if (req.get("type") == "lawyer") {
+    if (req.payload.type == "lawyer") {
       (formBody.createdByLawyer = true),
         (formBody.lawyer = lawyerID),
         (formBody.lawyerDecision = true),
@@ -225,17 +229,17 @@ router.post("/form", async (req, res) => {
 //Update Form - Investor, Lawyer
 router.put("/form/:formId", async (req, res) => {
   try {
-    const userID = req.get("_id");
+    const userID = req.payload.id;
     const formId = req.params.formId;
     const form = await Form.findById(formId);
     if (!form) return res.status(404).send({ error: "Form does not exist" });
     //AUTHORIZATION
     if (
-      (req.get("type") == userEnum.accountTypes.LAWYER &&
-        (form.createdByLawyer == false ||
-          form.lawyer != userID ||
-          form.formStatus != formEnum.formStatus.LAWYER)) ||
-      (req.get("type") == userEnum.accountTypes.INVESTOR &&
+      req.payload.type == userEnum.accountTypes.LAWYER &&
+      (form.createdByLawyer == false ||
+        form.lawyer != userID ||
+        form.formStatus != formEnum.formStatus.LAWYER) &&
+      (req.payload.type == userEnum.accountTypes.INVESTOR &&
         (form.investor != userID ||
           form.formStatus != formEnum.formStatus.INVESTOR))
     ) {
@@ -248,34 +252,23 @@ router.put("/form/:formId", async (req, res) => {
       if (company)
         return res.status(400).json({ error: "Company Name already exists" });
     }
-    //SSC Conditions
-    if (req.body.companyName == "SSC" || form.companyType == "SSC") {
-      const invssc = await Form.findOne({
-        investor: form.investor,
-        companyType: "SSC"
-      });
-
-      if (invssc)
-        return res.status(400).json({
-          error: "The investor cannot Establish multiple SSC Companies"
-        });
-      const inv = await User.findById(form.investor);
-      var flag = true;
-      if (inv.nationality != "Egyptian") {
-        const b = req.body.board;
-        flag = false;
-        for (var i = 0; i < b.length; i++) {
-          if (b[i].nationality == "Egyptian") {
-            flag = true;
-          }
+    const inv = await User.findById(form.investor);
+    var flag = true;
+    if (inv.nationality != "Egyptian") {
+      const b = req.body.board;
+      flag = false;
+      for (var i = 0; i < b.length; i++) {
+        if (b[i].nationality == "Egyptian") {
+          flag = true;
         }
       }
-      if (!flag)
-        return res.status(400).json({
-          error:
-            "investors establishing SSC must have at least one egyptian manager"
-        });
     }
+    if (!flag)
+      return res.status(400).json({
+        error:
+          "investors establishing SSC must have at least one egyptian manager"
+      });
+    // }
 
     //SPC Conditions
     if (req.body.board && req.body.companyType == "SPC") {
@@ -335,7 +328,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const form = await Form.findById(id);
-    const investorID = req.get("_id");
+    const investorID = req.payload.id;
     if (investorID != form.investor)
       return res
         .status(400)
@@ -351,10 +344,10 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-//Track all my request/case status-Investor
+//right//Track all my request/case status-Investor
 router.get("/trackRequest", async (req, res) => {
   try {
-    const id = req.get("_id");
+    const id = req.payload.id;
     const form = await Form.find({ investor: id });
 
     if (!form)
@@ -373,7 +366,7 @@ router.get("/trackRequest", async (req, res) => {
 
 //View my pending companies-Investor
 router.get("/pending", async (req, res) => {
-  const id = req.get("_id");
+  const id = req.payload.id;
   const forms = await Form.find({
     investor: id,
     formStatus: { $ne: formEnum.formStatus.APPROVED }
@@ -385,7 +378,7 @@ router.get("/pending", async (req, res) => {
 
 //View my running companies-Investor
 router.get("/running", async (req, res) => {
-  const id = req.get("_id");
+  const id = req.payload.id;
   const forms = await Form.find({
     investor: id,
     formStatus: formEnum.formStatus.APPROVED

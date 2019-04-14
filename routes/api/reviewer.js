@@ -29,7 +29,7 @@ router.use(
 router.put('/sendRejectionMsg/:id', async (req, res) => {
   try {
     const formID = req.params.id;
-    const reviewerID = req.get('_id');
+    const reviewerID = req.payload.id;
     const form = await Form.findById(formID);
     if (!form) return res.status(404).send({ error: 'form does not exist' });
     if (form.reviewer != reviewerID)
@@ -53,7 +53,7 @@ router.put('/sendRejectionMsg/:id', async (req, res) => {
 router.put('/accept/:id', async (req, res) => {
   try {
     const formID = req.params.id;
-    const reviewerID = req.get('_id');
+    const reviewerID = req.payload.id;
     const form = await Form.findById(formID);
     if (!form)
       return res.status(404).send({ error: 'This form does not exist' });
@@ -74,12 +74,12 @@ router.put('/accept/:id', async (req, res) => {
 });
 
 //Assign me to review this form - Reviewer
-router.put('/reviewer/assign/:id', async (req, res) => {
+router.put('/assign/:id', async (req, res) => {
   const formID = req.params.id;
-  const reviewerID = req.get('_id');
+  const reviewerID = req.payload.id;
   const form = await Form.findById(formID);
   if (!form) return res.status(404).send({ error: 'Form does not exist' });
-  if (form.formStatus == formEnum.formStatus.reviewer) {
+  if (form.formStatus == formEnum.formStatus.REVIEWER) {
     await Form.findByIdAndUpdate(formID, { reviewer: reviewerID });
     res.json({ msg: 'Form status is updated successfully' });
   } else {
@@ -88,9 +88,9 @@ router.put('/reviewer/assign/:id', async (req, res) => {
 });
 
 //View all forms that I have approved/rejected
-TODO: router.get('/reviewer/AR/', async (req, res) => {
-  const type = req.get('accountType');
-  const reviewerID = req.get('_id');
+TODO: router.get('/AR', async (req, res) => {
+  const type = req.payload.type;
+  const reviewerID = req.payload.id;
   console.log(reviewerID);
   const user = await User.findById(reviewerID);
   if (!user)
@@ -113,7 +113,7 @@ TODO: router.get('/reviewer/AR/', async (req, res) => {
 
 //Show pending cases(workpage) - Reviewer
 router.get('/pendingCase', async (req, res) => {
-  const id = req.get('_id');
+  const id = req.payload.id;
   const form = await Form.find({
     reviewer: id,
     reviewerDecision: { $exists: false }
