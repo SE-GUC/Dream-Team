@@ -1,105 +1,115 @@
 import React, { Component } from "react";
 import { Table } from "reactstrap";
-import withAuth from '../withAuth';
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 
-  
 class filter extends Component {
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = {
       response: [],
-      filtered:[],
+      filtered: [],
       isLoaded: false
     };
   }
 
   componentDidMount() {
-    fetch("api/form/search")
+    this.Auth.fetch("api/internalPortal/search")
       .then(res => res.json())
       .then(json => {
         this.setState({
           isLoaded: true,
           response: json,
-          filtered:json
+          filtered: json
         });
       });
   }
-filterCompany=(e)=>{
- let currentList = [];
-let newList = [];
-if (e.target.value !== ""&&e.target.value!= null) {
-  currentList = this.state.response;
-  console.log(currentList);
-  newList = currentList.data.filter((item) => {
-    var lc;
-    if(item.companyName){
-      lc = item.companyName.toLowerCase();}
-      
-      const filter = e.target.value.toLowerCase();
-      if(lc){ 
-        return lc.includes(filter);}
+  filterCompany = e => {
+    let currentList = [];
+    let newList = [];
+    if (e.target.value !== "" && e.target.value != null) {
+      currentList = this.state.response;
+      console.log(currentList);
+      newList = currentList.data.filter(item => {
+        var lc;
+        if (item.companyName) {
+          lc = item.companyName.toLowerCase();
+        }
+
+        const filter = e.target.value.toLowerCase();
+        if (lc) {
+          return lc.includes(filter);
+        }
         return false;
       });
     } else {
       newList = this.state.response;
     }
-    if(e.target.value===undefined){
+    if (e.target.value === undefined) {
       newList = this.state.response;
-     }
-    if(e.target.value==null){
+    }
+    if (e.target.value == null) {
       newList = this.state.response;
-     }
+    }
     console.log(newList);
-this.setState({
-filtered: {
-  data:newList
-}
-});
-
-
-
-}
-filterCompanyEng=(e)=>{
-  let currentList = [];
- let newList = [];
- if(e.target.value==null){
-  newList = this.state.response;
- }
- if (e.target.value !== ""&&e.target.value!= null) {
- currentList = this.state.response;
- newList = currentList.data.filter((item) => {
-          var lc;
-          if(item.companyNameEng){
-       lc = item.companyNameEng.toLowerCase();}
-  const filter = e.target.value.toLowerCase();
-         if(lc){ 
-  return lc.includes(filter);}
-  return false;
- });
- } else {
- newList = this.state.response;
- }
- this.setState({
- filtered: {
-   data:newList
- }
- });
- 
- 
- 
- }
-  
+    this.setState({
+      filtered: {
+        data: newList
+      }
+    });
+  };
+  filterCompanyEng = e => {
+    let currentList = [];
+    let newList = [];
+    if (e.target.value == null) {
+      newList = this.state.response;
+    }
+    if (e.target.value !== "" && e.target.value != null) {
+      currentList = this.state.response;
+      newList = currentList.data.filter(item => {
+        var lc;
+        if (item.companyNameEng) {
+          lc = item.companyNameEng.toLowerCase();
+        }
+        const filter = e.target.value.toLowerCase();
+        if (lc) {
+          return lc.includes(filter);
+        }
+        return false;
+      });
+    } else {
+      newList = this.state.response;
+    }
+    this.setState({
+      filtered: {
+        data: newList
+      }
+    });
+  };
 
   render() {
-    var { response, isLoaded ,filtered} = this.state;
+    var { response, isLoaded, filtered } = this.state;
     if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
       return (
         <div className="Table">
-        companyName:
-        <input type="text" className="input" onChange={this.filterCompany} placeholder="Search CompanyName..." name="target" />
-        <input type="text" className="input" onChange={this.filterCompanyEng} placeholder="Search companyNameEng..." name="target" />
+          companyName:
+          <input
+            type="text"
+            className="input"
+            onChange={this.filterCompany}
+            placeholder="Search CompanyName..."
+            name="target"
+          />
+          <input
+            type="text"
+            className="input"
+            onChange={this.filterCompanyEng}
+            placeholder="Search companyNameEng..."
+            name="target"
+          />
           <Table dark hover bordered>
             <thead>
               <tr>
@@ -126,9 +136,9 @@ filterCompanyEng=(e)=>{
             </thead>
 
             <tbody>
-              {filtered.data.map((x) => (
+              {filtered.data.map(x => (
                 <tr>
-                <td>{x.id}</td>
+                  <td>{x.id}</td>
                   <td>{x.companyName}</td>
                   <td>{x.companyNameEng}</td>
                   <td>{x.companyType}</td>
@@ -155,8 +165,6 @@ filterCompanyEng=(e)=>{
       );
     }
   }
-
 }
 
-
-export default filter;
+export default withAuth(filter);
