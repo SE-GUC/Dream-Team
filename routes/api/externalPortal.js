@@ -61,8 +61,8 @@ router.post("/createUser", async (req, res) => {
 //Update user
 router.put("/updateUser", async (req, res) => {
   try {
-    const id = req.header("_id");
-    const type = req.header("type");
+    const id = req.payload.id;
+    const type = req.payload.type;
     console.log(id);
     const user = await User.find({ _id: id });
     if (!user)

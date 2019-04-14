@@ -29,7 +29,7 @@ router.use(
 router.put("/sendRejectionMsg/:id", async (req, res) => {
   try {
     const formID = req.params.id;
-    const reviewerID = req.header("_id");
+    const reviewerID = req.payload.id;
     const form = await Form.findById(formID);
     if (!form) return res.status(404).send({ error: "form does not exist" });
     if (form.reviewer != reviewerID)
@@ -53,7 +53,7 @@ router.put("/sendRejectionMsg/:id", async (req, res) => {
 router.put("/accept/:id", async (req, res) => {
   try {
     const formID = req.params.id;
-    const reviewerID = req.header("_id");
+    const reviewerID = req.payload.id;
     const form = await Form.findById(formID);
     if (!form)
       return res.status(404).send({ error: "This form does not exist" });
@@ -76,7 +76,7 @@ router.put("/accept/:id", async (req, res) => {
 //Assign me to review this form - Reviewer
 router.put("/reviewer/assign/:id", async (req, res) => {
   const formID = req.params.id;
-  const reviewerID = req.header("_id");
+  const reviewerID = req.payload.id;
   const form = await Form.findById(formID);
   if (!form) return res.status(404).send({ error: "Form does not exist" });
   if (form.formStatus == formEnum.formStatus.REVIEWER) {
@@ -90,7 +90,7 @@ router.put("/reviewer/assign/:id", async (req, res) => {
 //View all forms that I have approved/rejected
 TODO: router.get("/reviewer/AR/", async (req, res) => {
   const type = req.header("accountType");
-  const reviewerID = req.header("_id");
+  const reviewerID = req.payload.id;
   console.log(reviewerID);
   const user = await User.findById(reviewerID);
   if (!user)
@@ -113,7 +113,7 @@ TODO: router.get("/reviewer/AR/", async (req, res) => {
 
 //Show pending cases(workpage) - Reviewer
 router.get("/pendingCase", async (req, res) => {
-  const id = req.header("_id");
+  const id = req.payload.id;
   const form = await Form.find({
     reviewer: id,
     reviewerDecision: { $exists: false }
