@@ -97,9 +97,6 @@ class HomePage extends Component {
     this.props.history.push('/lawyerUpdate');
   }
 
-  lawUp() {
-    this.props.history.push('/lawyerUpdate');
-  }
 
   _handleLogout = () => {
     this.Auth.logout();
