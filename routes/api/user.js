@@ -1,4 +1,4 @@
-import { path } from "../../models/Boardofdirectors";
+var board = require("../../models/Boardofdirectors");
 
 var bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -14,6 +14,7 @@ const formEnum = require("../../enums/formStatus");
 const entity = require("../../enums/entityType");
 const formType = require("../../enums/formType");
 const regulatedLaw = require("../../enums/regulatedLaw");
+var path = require("path");
 var fs = require("fs");
 
 mongoose.set("useNewUrlParser", true);
@@ -164,10 +165,11 @@ router.get("/companyRules", (request, response) => {
 });
 
 //As a User I should be able to view fees Calculation Rules
-router.get("/CalculationRules", function(request, response, next) {
-  var html = fs.readFileSync("rules/calculationRule.html", "utf8");
-  response.sendfile(path.join(__dirname + "calculationRule.html"));
+router.get("/CalculationRules", function(request, response) {
+  response.sendFile(path.join("rules/calculationRule.html"));
 });
+// var html = fs.readFileSync("rules/calculationRule.html", "utf8");
+//   response.sendfile(path.join(__dirname + "calculationRule.html"));
 //   fs.readFile("rules/calculationRule.html", function(req, html) {
 //     if (err) console.log(err);
 //     response.json({ html });

@@ -6,3 +6,4 @@
 6: SSC can't have the same investor founder to Multiple SSC Companies
 7: A Contract will be Generated for SSC Companies after Lawyer Fills Form. 
 8:A Decision will be Generated for SPC Companies after Lawyer Fills Form.
+
