@@ -262,6 +262,99 @@ class HomePage extends Component {
             Click to search
           </button>
         </div>
+<div>
+          To view publishedCompanies click here
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.publishedCompanies();
+            }}
+          />
+        </div>
+        <div>
+          investor Update Rejected Forms
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.invUpdate();
+            }}
+          >
+            Click to view
+          </button>
+        </div>
+
+        <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.viewAllInvestors();
+            }}
+          >
+            View All Investors
+          </button>
+        </div>
+
+        <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.formsOfLawyer();
+            }}
+          >
+            View Forms of Lawyer
+          </button>
+        </div>
+
+        <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.lawyerFinalizedCases();
+            }}
+          >
+            View Lawyers Finalized Cases
+          </button>
+        </div>
+        <div>
+          To view all Reviewers
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.viewReviewers();
+            }}
+          >
+            Click to view
+          </button>
+        </div>
+        <div>
+          To view all forms
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.viewAllForms();
+            }}
+          >
+            Click to view
+          </button>
+        </div>
+
+        <div>
+          Lawyer Update Form
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.lawUp();
+            }}
+          >
+            Click to Update
+          </button>
+        </div>
+        <button
+          className="btn btn-primary width-150"
+          onClick={e => {
+            this.searchBar();
+          }}
+        />
       </div>
     );
   }
