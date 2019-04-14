@@ -25,41 +25,31 @@ class filter extends Component {
       });
   }
 filterCompany=(e)=>{
- // Variable to hold the original version of the list
  let currentList = [];
- // Variable to hold the filtered list before putting into state
 let newList = [];
-
- // If the search bar isn't empty
 if (e.target.value !== ""&&e.target.value!= null) {
-     // Assign the original list to currentList
-currentList = this.state.response;
-console.log(currentList)
-console.log(currentList.data)
-
-     // Use .filter() to determine which items should be displayed
-     // based on the search terms
-newList = currentList.data.filter((item) => {
-         // change current item to lowercase
-         var lc;
-         if(item.companyName){
+  currentList = this.state.response;
+  console.log(currentList);
+  newList = currentList.data.filter((item) => {
+    var lc;
+    if(item.companyName){
       lc = item.companyName.toLowerCase();}
-         // change search term to lowercase
- const filter = e.target.value.toLowerCase();
- console.log(filter)
-         // check to see if the current list item includes the search term
-         // If it does, it will be added to newList. Using lowercase eliminates
-         // issues with capitalization in search terms and search content
-        if(lc){ 
- return lc.includes(filter);}
- return false;
-});
-} else {
-     // If the search bar is empty, set newList to original task list
-newList = this.state.response;
-}
-console.log(newList)
- // Set the filtered state based on what our rules added to newList
+      
+      const filter = e.target.value.toLowerCase();
+      if(lc){ 
+        return lc.includes(filter);}
+        return false;
+      });
+    } else {
+      newList = this.state.response;
+    }
+    if(e.target.value===undefined){
+      newList = this.state.response;
+     }
+    if(e.target.value==null){
+      newList = this.state.response;
+     }
+    console.log(newList);
 this.setState({
 filtered: {
   data:newList
@@ -69,6 +59,35 @@ filtered: {
 
 
 }
+filterCompanyEng=(e)=>{
+  let currentList = [];
+ let newList = [];
+ if(e.target.value==null){
+  newList = this.state.response;
+ }
+ if (e.target.value !== ""&&e.target.value!= null) {
+ currentList = this.state.response;
+ newList = currentList.data.filter((item) => {
+          var lc;
+          if(item.companyNameEng){
+       lc = item.companyNameEng.toLowerCase();}
+  const filter = e.target.value.toLowerCase();
+         if(lc){ 
+  return lc.includes(filter);}
+  return false;
+ });
+ } else {
+ newList = this.state.response;
+ }
+ this.setState({
+ filtered: {
+   data:newList
+ }
+ });
+ 
+ 
+ 
+ }
   
 
   render() {
@@ -79,7 +98,8 @@ filtered: {
       return (
         <div className="Table">
         companyName:
-        <input type="text" className="input" onChange={this.filterCompany} placeholder="Search..." name="target" />
+        <input type="text" className="input" onChange={this.filterCompany} placeholder="Search CompanyName..." name="target" />
+        <input type="text" className="input" onChange={this.filterCompanyEng} placeholder="Search companyNameEng..." name="target" />
           <Table dark hover bordered>
             <thead>
               <tr>
