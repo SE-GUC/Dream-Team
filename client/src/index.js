@@ -7,6 +7,7 @@ import EmployeeTable from "./components/employeeTable";
 import SignUp from "./components/signup";
 import FormTable from "./components/formTable";
 import HomePage from "./pages/homepage";
+import UpdateInvForm from "./components/updateInvForm";
 // import Login from './components/login';
 // import UpdateTest from './components/updateTest';
 // import EmployeeTable from './components/employeeTable';
@@ -46,6 +47,7 @@ ReactDOM.render(
       <Route path="/feesCalculation" component={CalcRule} />
       <Route path="/case" component={Case} />
       <Route path="/viewAllLawyer" component={viewAllLawyer} />
+      <Route path="/updateInvForm" component={UpdateInvForm} />
     </div>
   </Router>,
   document.getElementById("root")
