@@ -1,3 +1,5 @@
+import { path } from "../../models/Boardofdirectors";
+
 var bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const express = require("express");
@@ -12,6 +14,7 @@ const formEnum = require("../../enums/formStatus");
 const entity = require("../../enums/entityType");
 const formType = require("../../enums/formType");
 const regulatedLaw = require("../../enums/regulatedLaw");
+var fs = require("fs");
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
@@ -27,7 +30,7 @@ router.use(
 //view all users
 
 router.get("/getUsers", async (req, res) => {
-  const users = await user.find();
+  const users = await User.find();
   res.json({ data: users });
 });
 
@@ -75,19 +78,20 @@ router.post("/createUser", async (req, res) => {
 
   const salt = bcrypt.genSaltSync(10);
   const hashedPassword = bcrypt.hashSync(password, salt);
+  var isValidated = null;
   if (req.body.nationality == "egyptian" && req.body.typeID != "national id")
     return res
       .status(400)
       .json({ error: "egyptians must have their national id as type id" });
   if (req.body.accountType === "investor")
-    var isValidated = userValidator.createInvestorValidation(req.body);
+    isValidated = userValidator.createInvestorValidation(req.body);
   else if (req.body.accountType === "lawyer")
-    var isValidated = userValidator.createLawyerValidation(req.body);
+    isValidated = userValidator.createLawyerValidation(req.body);
   else if (req.body.accountType === "reviewer")
-    var isValidated = userValidator.createReviewerValidation(req.body);
+    isValidated = userValidator.createReviewerValidation(req.body);
   else if (req.body.accountType === "admin")
-    var isValidated = userValidator.createAdminValidation(req.body);
-  isValidated = true;
+    isValidated = userValidator.createAdminValidation(req.body);
+  // isValidated = true;
 
   if (isValidated.error)
     return res
@@ -129,18 +133,19 @@ router.put("/updateUser/:id", async (req, res) => {
       return res.status(404).send({
         error: "Admin does not exist"
       });
+    var isValidated = null;
     if (law.nationality == "egyptian" && req.body.typeID != "national id")
       return res
         .status(400)
         .json({ error: "egyptians must have their national id as type id" });
     if (req.body.accountType === "investor")
-      var isValidated = userValidator.updateInvestorValidation(req.body);
+      isValidated = userValidator.updateInvestorValidation(req.body);
     else if (req.body.accountType === "lawyer")
-      var isValidated = userValidator.updateLawyerValidation(req.body);
+      isValidated = userValidator.updateLawyerValidation(req.body);
     else if (req.body.accountType === "reviewer")
-      var isValidated = userValidator.updateReviewerValidation(req.body);
+      isValidated = userValidator.updateReviewerValidation(req.body);
     else if (req.body.accountType === "admin")
-      var isValidated = userValidator.updateAdminValidation(req.body);
+      isValidated = userValidator.updateAdminValidation(req.body);
     const updatedUser = await User.findByIdAndUpdate(id, req.body);
     res.json({
       msg: "User updated successfully"
@@ -152,7 +157,6 @@ router.put("/updateUser/:id", async (req, res) => {
 });
 //get companies rules
 router.get("/companyRules", (request, response) => {
-  var fs = require("fs");
   fs.readFile("rules/companyRule.txt", "utf8", function(err, data) {
     if (err) console.log(err);
     response.json({ data });
@@ -160,32 +164,14 @@ router.get("/companyRules", (request, response) => {
 });
 
 //As a User I should be able to view fees Calculation Rules
-var feesCalculationRules = [
-  ["Entity", "Law 159", "Law 72"],
-  [
-    "GAFI",
-    " واحد في الألف من رأس المال الحد الأدنى: 100 الحد الأقصى: 1000",
-    "لا یوجد"
-  ],
-  [
-    "الهیئة العامة للاستثمار والمناطق الحرة إیداعات واردة من جهات تتعامل مع البنك المركزي",
-    "",
-    ""
-  ],
-  [
-    "Notary Public مصلحة الشهر العقاري والتوثیق إیداعات واردة من جهات تتعامل مع البنك المركزي",
-    "ربع في المائة من رأس المال الحد الأدنى: 10 الحد الأقصى: 1000",
-    "لا یوجد"
-  ],
-  [
-    "Commercial جهاز تنمیة التجارة الداخلیة إیداعات واردة من جهات تتعامل مع البنك المركزي",
-    "56 جم مقسم إلى (51 إیرادات + 5 دائنون)",
-    "610 جم مقسم إلى (100 إیرادات + 6دائنون)"
-  ]
-];
-router.get("/information/feesCalculationRules", (request, response) => {
-  response.send(feesCalculationRules);
+router.get("/CalculationRules", function(request, response, next) {
+  var html = fs.readFileSync("rules/calculationRule.html", "utf8");
+  response.sendfile(path.join(__dirname + "calculationRule.html"));
 });
+//   fs.readFile("rules/calculationRule.html", function(req, html) {
+//     if (err) console.log(err);
+//     response.json({ html });
+//   });
 
 //As a User I should be able to view all published companies
 router.get("/companies/publishedcompanies", async (req, res) => {
