@@ -9,7 +9,7 @@ import ReviewerCase from "../../components/reviewerCase";
 import Lawyerview from "../../components/LawyerViewhisCases";
 import formTable from "../../components/formTable";
 import SignUp from "../../components/signup";
-import Table from "../../components/userTable/userTable";
+import Table from "../../components/usertable/userTable";
 // import Tableform from '../../components/formTable';
 import searchBar from "../../components/searchBar";
 // import AuthHelperMethods from '../../components/AuthHelperMethods';
@@ -181,26 +181,26 @@ class HomePage extends Component {
           >
             Click to view user
           </button>
-          <div>
-            <button
-              className="btn btn-primary width-150"
-              onClick={e => {
-                this._handleLogout();
-              }}
-            >
-              LogOut
-            </button>
-          </div>
-          <div>
-            <button
-              className="btn btn-primary width-150"
-              onClick={e => {
-                this.caseRe();
-              }}
-            >
-              Case
-            </button>
-          </div>
+        </div>
+        <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this._handleLogout();
+            }}
+          >
+            LogOut
+          </button>
+        </div>
+        <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.caseRe();
+            }}
+          >
+            Case
+          </button>
         </div>
         <div>
           To search

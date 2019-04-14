@@ -1,6 +1,5 @@
-import React, { Component } from "react";
-import { Table } from "reactstrap";
-
+import React, { Component } from "./node_modules/react";
+import { Table } from "./node_modules/reactstrap";
 class userTable extends Component {
   constructor(props) {
     super(props);
