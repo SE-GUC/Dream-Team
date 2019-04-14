@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./case.css";
 import { Table } from "reactstrap";
-import AuthHelperMethods from "../AuthHelperMethods";
-import withAuth from "../withAuth";
+import AuthHelperMethods from "../../components/AuthHelperMethods";
+import withAuth from "../../components/withAuth";
 
 class Case extends Component {
   Auth = new AuthHelperMethods();

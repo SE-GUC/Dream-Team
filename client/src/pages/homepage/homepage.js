@@ -1,4 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
+import { Table } from "reactstrap";
+import AuthHelperMethods from "../../components/AuthHelperMethods";
+import withAuth from "../../components/withAuth";
 import feesCalc from "../../components/feesCalc/feesCalc";
 import formsOfLawyer from "../../components/formsOfLawyer/formsOfLawyer";
 import formTable from "../../components/formTable";

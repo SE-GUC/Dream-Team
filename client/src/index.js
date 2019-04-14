@@ -26,7 +26,7 @@ import AdminARC from "./components/adminARC/adminARC";
 import assignLaw from "./components/assignLaw/assignLaw";
 
 import UpdateUser from "./components/updateUser/updateUser";
-import UserTable from "./components/userTable/userTable";
+import UserTable from "./components/usertable/userTable";
 import ViewAllForms from "./components/viewAllForms/viewAllForms";
 import viewAllInvestors from "./components/viewAllInvestors/viewAllInvestors";
 import Reviewers from "./components/viewAllReviewers/viewAllReviewers";
@@ -49,6 +49,10 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
 import HomePage from "./pages/homepage";
 import Case from "./pages/LRspecificCase";
+import searchBar from "./components/searchBar";
+import UpdateInvForm from "./components/updateInvForm";
+import formsOfLawyer from "./components/formsOfLawyer";
+import lawyerFinalizedCases from "./components/lawyerFinalizedCases/lawyerFinalizedCases";
 
 // import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
 
