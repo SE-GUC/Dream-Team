@@ -70,7 +70,7 @@ class publishedCompanies extends Component {
               </tr>
             </thead>
             <tbody>
-              {publishedCompanies.map(x => (
+              {publishedCompanies.data.map(x => (
                 <tr>
                   <td>{x.companyName}</td>
                   <td>{x.companyNameEng}</td>
