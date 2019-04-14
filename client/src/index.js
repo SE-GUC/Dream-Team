@@ -29,7 +29,6 @@ import "./index.css";
 import HomePage from "./pages/homepage";
 import Case from "./pages/LRspecificCase";
 import "bootstrap/dist/css/bootstrap.css";
-import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
 // import UserTable from "./components/userTable/userTable";
 import * as serviceWorker from "./serviceWorker";
 import Investor from "./components/investor";
@@ -49,17 +48,13 @@ import InvUpdate from "./components/investorUpdate/investorUpdate";
 import ViewAllForms from "./components/viewAllForms/viewAllForms";
 import LawyerUpdateForm from "./components/lawyerUpdateForm/lawyerUpdateForm";
 import LawUpForm from "./components/lawyerUpdate/lawyerUpdate";
-import NavBar from "./components/layout/layout";
-import UserTable from "./components/userTable/userTable";
-import UpdateTest from "./components/updateTest";
-import LawyerViewhisCases from "./components/LawyerViewhisCases";
-import UserTable from "./components/userTable/userTable";
+import feesCalc from "./components/feesCalc/feesCalc";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import HomePage from "./pages/homepage";
-import Case from "./pages/LRspecificCase";
+// import HomePage from "./pages/homepage";
+// import Case from "./pages/LRspecificCase";
 import "bootstrap/dist/css/bootstrap.css";
-import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
+// import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
 
 ReactDOM.render(
   <Router>
@@ -98,6 +93,7 @@ ReactDOM.render(
       <Route path="/viewAllForms" component={ViewAllForms} />
       <Route path="/lawyerUpdateForm" component={LawyerUpdateForm} />
       <Route path="/lawyerUpdate" component={LawUpForm} />
+      <Route path="/feesCalc" component={feesCalc} />
     </div>
   </Router>,
   document.getElementById("root")
