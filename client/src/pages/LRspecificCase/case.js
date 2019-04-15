@@ -48,10 +48,7 @@ class Case extends Component {
     const response = await this.Auth.fetch(
       "/api/internalPortal/form/" + this.state.formID + "/",
       {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
+        method: "GET"
       }
     );
 
@@ -104,10 +101,7 @@ class Case extends Component {
       const response1 = await fetch(
         "/api/internalPortal/user/" + body50 + "/",
         {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json"
-          }
+          method: "GET"
         }
       );
       const body1 = await response1.json();
@@ -133,10 +127,7 @@ class Case extends Component {
       const response2 = await this.Auth.fetch(
         "/api/internalPortal/user/" + body500 + "/",
         {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json"
-          }
+          method: "GET"
         }
       );
 

@@ -98,3 +98,5 @@ ReactDOM.render(
   document.getElementById("root")
 );
 ReactDOM.render(<NavBar />, document.getElementById("Nav"));
+
+serviceWorker.unregister();

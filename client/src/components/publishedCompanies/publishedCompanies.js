@@ -25,7 +25,7 @@ class publishedCompanies extends Component {
       .then(res => res.json())
       .then(json => {
         this.setState({
-          publishedCompanies: json.data,
+          publishedCompanies: json,
           isLoaded: true
         });
       });

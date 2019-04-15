@@ -1,4 +1,3 @@
-import withAuth from "../withAuth";
 import React, { Component } from "react";
 import { Table } from "reactstrap";
 import AuthHelperMethods from "../AuthHelperMethods";
