@@ -148,25 +148,12 @@ class Update extends Component {
 
     const response = await this.Auth.fetch("api/externalPortal/updateUser", {
       method: "PUT",
-      body: JSON.stringify(data),
-
-      body: JSON.stringify({
-        name: this.state.name,
-        //   accountType: this.state.accountType, gender: this.state.gender, nationality: this.state.nationality,
-        email: this.state.email,
-        password: this.state.password,
-        typeID: this.state.typeID,
-        numberID: this.state.numberID,
-        phoneNumber: this.state.phoneNumber,
-        faxNumber: this.state.faxNumber,
-        address: this.state.address
-        // , dateoOfBirth: this.state.dateOfBirth, investorType: this.state.investorType, capital: this.state.capital, capitalCurrency: this.state.capitalCurrency
-      })
+      body: JSON.stringify(data)
     }).catch(err => {
       alert(err);
     });
-    const body = await response.text();
-    this.setState({ responseToPost: body });
+    // const body = await response.text();
+    this.setState({ responseToPost: response });
     // this.props.history.replace("/");
     // this.props.history.replace("/updateUser");
   };
