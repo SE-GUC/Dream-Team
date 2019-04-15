@@ -2,7 +2,7 @@ import withAuth from "../withAuth";
 import React, { Component } from "react";
 import { Table } from "reactstrap";
 import AuthHelperMethods from "../AuthHelperMethods";
-
+import withAuth from "../withAuth";
 //As a reviewer, I should get all my forms and approve/reject and add comments on each form
 //one specific ID
 class viewRejectedForms extends Component {
@@ -18,10 +18,7 @@ class viewRejectedForms extends Component {
 
   reject(x) {
     const response = this.Auth.fetch("api/reviewer/sendRejectionMsg/" + x, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      }
+      method: "PUT"
     }).catch(err => {
       this.state({ responseToPost: err });
     });
@@ -30,10 +27,7 @@ class viewRejectedForms extends Component {
   }
   accept(x) {
     const response = this.Auth.fetch("api/reviewer/accept/" + x, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      }
+      method: "PUT"
     }).catch(err => {
       this.state({ responseToPost: err });
     });

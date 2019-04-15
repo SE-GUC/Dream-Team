@@ -40,10 +40,7 @@ class userTable extends Component {
     const response = await this.Auth.fetch(
       "/api/admin/approve/" + this.state.userID + "/",
       {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        }
+        method: "PUT"
       }
 
       // this.props.history.re("/"),
@@ -54,9 +51,6 @@ class userTable extends Component {
       "/api/admin/sendRejectionMsg/" + this.state.userID + "/",
       {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
         body: JSON.stringify({ rejectionMessage: "" })
       }
 
@@ -89,10 +83,7 @@ class userTable extends Component {
     const response = await this.Auth.fetch(
       "/api/admin/reject/" + this.state.userID + "/",
       {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        }
+        method: "PUT"
       }
       // this.props.history.replace("/"),
       // this.props.history.replace("/adminARC")
@@ -120,9 +111,7 @@ class userTable extends Component {
       "/api/admin/sendRejectionMsg/" + this.state.userID + "/",
       {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
+
         body: JSON.stringify({ rejectionMessage: this.state.message })
       }
 

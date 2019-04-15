@@ -459,4 +459,4 @@ class UpdateInvForm extends Component {
   }
 }
 
-export default UpdateInvForm;
+export default withAuth(UpdateInvForm);

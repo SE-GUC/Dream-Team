@@ -41,7 +41,6 @@ class CheckoutForm extends Component {
 
     let response = await this.Auth.fetch("api/investor/charge", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     });
     if (response.ok) {

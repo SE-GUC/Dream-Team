@@ -149,9 +149,7 @@ class Update extends Component {
     const response = await this.Auth.fetch("api/externalPortal/updateUser", {
       method: "PUT",
       body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      },
+
       body: JSON.stringify({
         name: this.state.name,
         //   accountType: this.state.accountType, gender: this.state.gender, nationality: this.state.nationality,

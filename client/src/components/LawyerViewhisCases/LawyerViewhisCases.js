@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import './LawyerViewhisCases.css';
+import React, { Component } from "react";
+import "./LawyerViewhisCases.css";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 class Lview extends Component {
+  Auth = new AuthHelperMethods();
   state = {
-    lawyerID: '',
+    lawyerID: "",
     responseToPost: []
   };
 
   handleSubmit = async e => {
     e.preventDefault();
-    const response = await fetch('/api/lawyer/pendingCase', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+    const response = await this.Auth.fetch("/api/lawyer/pendingCase", {
+      method: "GET"
       //   body: JSON.stringify({ _id:this.state.formID })
     });
 
@@ -42,4 +42,4 @@ class Lview extends Component {
   }
 }
 
-export default Lview;
+export default withAuth(Lview);

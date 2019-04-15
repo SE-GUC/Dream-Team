@@ -1,17 +1,16 @@
-import React, { Component } from 'react';
-
+import React, { Component } from "react";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 class review extends Component {
+  Auth = new AuthHelperMethods();
   state = {
     responseToPost: []
   };
 
   handleSubmit = async e => {
     e.preventDefault();
-    const response = await fetch('/api/reviewer/pendingCase', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+    const response = await this.Auth.fetch("/api/reviewer/pendingCase", {
+      method: "GET"
     });
 
     const body = await response.json();
@@ -37,4 +36,4 @@ class review extends Component {
   }
 }
 
-export default review;
+export default withAuth(review);

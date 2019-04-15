@@ -41,10 +41,7 @@ class assignRev extends Component {
     const response = await this.Auth.fetch(
       "/api/reviewer/assign/" + this.state.formID.trim(),
       {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        }
+        method: "PUT"
       }
     ).catch(err => {
       alert(JSON.stringify(err));

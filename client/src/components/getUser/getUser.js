@@ -32,10 +32,7 @@ class getUser extends Component {
     const response = await this.Auth.fetch(
       "/api/admin/user" + this.state.userID + "/",
       {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
+        method: "GET"
       }
     ).catch(err => {
       alert(err);

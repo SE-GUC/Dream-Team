@@ -38,13 +38,10 @@ class userTable extends Component {
         });
       }
     });
-    const response = await fetch(
+    const response = await this.Auth.fetch(
       "/api/lawyer/accept/" + this.state.formID.trim() + "/",
       {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        }
+        method: "PUT"
       }
 
       // this.props.history.re("/"),
@@ -55,9 +52,6 @@ class userTable extends Component {
       "/api/lawyer/sendRejectionMsg/" + this.state.formID.trim() + "/",
       {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
         body: JSON.stringify({ lawyerComment: "" })
       }
 
@@ -89,10 +83,7 @@ class userTable extends Component {
     const response = await this.Auth.fetch(
       "/api/lawyer/sendRejectionMsg/" + this.state.formID.trim() + "/",
       {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        }
+        method: "PUT"
       }
 
       // window.location.reload()
@@ -114,13 +105,11 @@ class userTable extends Component {
         this.setState({ formID: cells[0].textContent });
       }
     });
-    const response = await fetch(
+    const response = await this.Auth.fetch(
       "/api/lawyer/sendRejectionMsg/" + this.state.formID.trim() + "/",
       {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
+
         body: JSON.stringify({ lawyerComment: this.state.message })
       }
 
@@ -130,7 +119,7 @@ class userTable extends Component {
     //    this.props.history.dispatch("/adminARC",null)
   };
   componentDidMount() {
-    fetch("api/lawyer/pendingCase/5ca0c88e6a36eb47ec6db2a5/")
+    this.Auth.fetch("api/lawyer/pendingCase")
       .then(res => res.json())
       .then(json => {
         this.setState({

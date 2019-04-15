@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Table } from "reactstrap";
 import updateTest from "../updateTest";
-
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 class viewRejectedForms extends Component {
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = {
@@ -103,4 +105,4 @@ class viewRejectedForms extends Component {
   }
 }
 
-export default viewRejectedForms;
+export default withAuth(viewRejectedForms);

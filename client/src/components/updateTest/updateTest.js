@@ -30,9 +30,6 @@ class UpdateTest extends Component {
       "api/investor/form/" + this.state.formID + "/",
       {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
         body: JSON.stringify({
           companyName: this.state.companyName,
           companyNameEng: this.state.companyNameEng,

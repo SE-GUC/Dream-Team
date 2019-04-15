@@ -1,29 +1,24 @@
-import React, { Component } from 'react';
-import './reviewerCase.css';
-
+import React, { Component } from "react";
+import "./reviewerCase.css";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 class Case extends Component {
+  Auth = new AuthHelperMethods();
   state = {
-    responseToPost  : ''
+    responseToPost: ""
   };
 
   handleSubmit = async e => {
     e.preventDefault();
-    const response = await fetch('/api/reviewer/AR', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    //   body: JSON.stringify({ _id:this.state.formID })
+    const response = await this.Auth.fetch("/api/reviewer/AR", {
+      method: "GET"
+      //   body: JSON.stringify({ _id:this.state.formID })
     });
     const body = await response.text();
 
-this.setState({ responseToPost:body
-    });
+    this.setState({ responseToPost: body });
+  };
 
-
-  ;}
-
-  
   render() {
     return (
       <div className="ReviewerCase">
@@ -31,17 +26,14 @@ this.setState({ responseToPost:body
           <p>
             <strong>Me as a Reviewer I should get my decided forms</strong>
           </p>
-         
-         
+
           <button type="submit">search</button>
         </form>
         <p>{this.state.responseToPost}</p>
         <p>{this.state.reviewerID}</p>
-        
-    
       </div>
     );
   }
 }
 
-export default Case;
+export default withAuth(Case);

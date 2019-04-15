@@ -30,9 +30,6 @@ class LawyerFillForm extends Component {
     e.preventDefault();
     const response = await this.Auth.fetch("api/lawyer/createForm/", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
       body: JSON.stringify({
         companyName: this.state.companyName,
         companyNameEng: this.state.companyNameEng,
