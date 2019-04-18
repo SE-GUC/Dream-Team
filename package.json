@@ -24,6 +24,7 @@
     "enjoi": "^5.0.2",
     "express": "^4.16.4",
     "google-libphonenumber": "^3.2.2",
+    "html-pdf": "^2.2.0",
     "joi": "^14.3.1",
     "joi-currency": "^1.0.2",
     "joi-phone-number": "^2.1.1",
