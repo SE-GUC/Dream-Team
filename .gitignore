@@ -1,6 +1,10 @@
 node_modules
-~$Sprint2_3_Backlog_Template.xlsx
+client/node_modules
+draft.js
+routes/api/dra.js
+routes/api/commonFunc.js
 Sprint2_3_Backlog_Template.xlsx
-Sprint2_Backlog_Template.xlsx
+~$Sprint2_3_Backlog_Template.xlsx
 ~$Sprint2_Backlog_Template.xlsx
 ~$Sprint_1 Backlog.xlsx
+~$Sprint4_Backlog_Template.xlsx

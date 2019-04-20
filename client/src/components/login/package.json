@@ -1,0 +1,6 @@
+{
+    "main": "login.js",
+    "dependencies": {
+        "react-popup": "^0.10.0"
+    }
+}
