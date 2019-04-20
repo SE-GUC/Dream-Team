@@ -1,51 +1,52 @@
 import React, { Component } from "react";
 import { Table } from "reactstrap";
-class CalcRule extends Component {
+class calcRule extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      response: [],
+      isLoaded: false
+    };
+  }
+  componentDidMount() {
+    fetch("api/externalPortal/CalculationRules")
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          isLoaded: true,
+          response: json
+        });
+      });
+  }
+
   render() {
-    return (
-      <Table striped bordered hover variant="dark">
-        <thead>
-          <tr>
-            <th>Entity</th>
-            <th>Law 159</th>
-            <th>Law 72</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>GAFI</td>
-            <td>
-              واحد في الألف من رأس المال الحد الأدنى: 100 الحد الأقصى: 1000
-            </td>
-            <td>لا یوجد</td>
-          </tr>
-          <tr>
-            <td>
-              الهیئة العامة للاستثمار والمناطق الحرة إیداعات واردة من جهات
-              تتعامل مع البنك المركزي
-            </td>
-            <td> </td>
-            <td> </td>
-          </tr>
-          <tr>
-            <td>
-              Notary Public مصلحة الشهر العقاري والتوثیق إیداعات واردة من جهات
-              تتعامل مع البنك المركزي
-            </td>
-            <td>ربع في المائة من رأس المال الحد الأدنى: 10 الحد الأقصى 1000</td>
-            <td>لا یوجد</td>
-          </tr>
-          <tr>
-            <td>
-              Commercial جهاز تنمیة التجارة الداخلیة إیداعات واردة من جهات
-              تتعامل مع البنك المركزي
-            </td>
-            <td>56 جم مقسم إلى (51 إیرادات + 5 دائنون)</td>
-            <td>610 جم مقسم إلى (100 إیرادات + 6دائنون)</td>
-          </tr>
-        </tbody>
-      </Table>
-    );
+    var { response, isLoaded } = this.state;
+    if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <div className="rule">
+          <Table dark hover bordered>
+            <thead>
+              <tr>
+                <th>Entity </th>
+                <th> Law 159 </th>
+                <th> Law 72 </th>
+              </tr>
+            </thead>
+            <tbody>
+              {response.data.map(x => (
+                <tr>
+                  <td>{x.Entity}</td>
+                  <td>{x.Law159}</td>
+                  <td>{x.Law72}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      );
+    }
   }
 }
-export default CalcRule;
+export default calcRule;

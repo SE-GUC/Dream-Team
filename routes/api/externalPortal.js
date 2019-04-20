@@ -1,157 +1,130 @@
 var bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const express = require("express");
-const router = express.Router();
+const fs = require("fs");
 const User = require("../../models/User");
 const userValidator = require("../../validations/userValidations");
-const formValidator = require("../../validations/formValidations");
 const bcrypt = require("bcryptjs");
 const Form = require("../../models/Form");
-const typesEnum = require("../../enums/accountType");
 const formEnum = require("../../enums/formStatus");
-const entity = require("../../enums/entityType");
-const formType = require("../../enums/formType");
-const regulatedLaw = require("../../enums/regulatedLaw");
+const passport = require("passport");
+
+const router = express.Router();
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 
-// configuration option that tells the parser to use the classic encoding
+//Configuration option that tells the parser to use the classic encoding
 router.use(
   bodyParser.urlencoded({
     extended: false
   })
 );
 
-//view all users
-
-router.get("/getUsers", async (req, res) => {
-  const users = await user.find();
-  res.json({ data: users });
+//View all published companies  - Public
+router.get("/companies/publishedcompanies", async (req, res) => {
+  const form = await Form.find({ formStatus: formEnum.formStatus.APPROVED });
+  res.json({
+    data: form
+  });
 });
 
-// get user by id
-router.get("/user/getUser/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const user = await User.findById(id);
-    if (!user)
-      return res.status(404).send({
-        error: "This User does not exist"
-      });
-    res.json({
-      data: user
-    });
-  } catch (err) {
-    res.json({
-      msg: err.message
-    });
-  }
+router.get("/companyRules", (request, response) => {
+  const a = fs.readFile("rules/companyRule.txt", "utf8", function(err, data) {
+    response.json({ data: JSON.parse(data) });
+  });
 });
 
-// create user (reviewer/investor/admin/lawyer)
+//As a User I should be able to view fees Calculation Rules
+router.get("/CalculationRules", function(request, response) {
+  const a = fs.readFile("rules/calculationRule.txt", "utf8", function(
+    err,
+    data
+  ) {
+    response.json({ data: JSON.parse(data) });
+  });
+});
+
+//Create user (reviewer/investor/lawyer) - Public
 router.post("/createUser", async (req, res) => {
-  const {
-    name,
-    accountType,
-    gender,
-    nationality,
-    typeID,
-    numberID,
-    dateOfBirth,
-    address,
-    phoneNumber,
-    faxNumber,
-    accountStatus,
-    email,
-    password,
-    investorType,
-    capital,
-    capitalCurrency
-  } = req.body;
-  const user = await User.findOne({ email });
-  if (user) return res.status(400).json({ error: "Email already exists" });
-
+  const user = req.body;
+  var isValidated = null;
+  const userFound = await User.findOne({ email: req.body.email });
+  if (userFound) return res.status(400).json({ error: "Email already exists" });
   const salt = bcrypt.genSaltSync(10);
-  const hashedPassword = bcrypt.hashSync(password, salt);
+  const hashedPassword = bcrypt.hashSync(req.body.password, salt);
   if (req.body.nationality == "egyptian" && req.body.typeID != "national id")
     return res
       .status(400)
       .json({ error: "egyptians must have their national id as type id" });
-  if (req.body.accountType === "investor")
-    var isValidated = userValidator.createInvestorValidation(req.body);
-  else if (req.body.accountType === "lawyer")
-    var isValidated = userValidator.createLawyerValidation(req.body);
-  else if (req.body.accountType === "reviewer")
-    var isValidated = userValidator.createReviewerValidation(req.body);
-  else if (req.body.accountType === "admin")
-    var isValidated = userValidator.createAdminValidation(req.body);
-  isValidated = true;
+  if (req.body.accountType == "investor")
+    isValidated = userValidator.createInvestorValidation(req.body);
+  else if (req.body.accountType == "lawyer")
+    isValidated = userValidator.createLawyerValidation(req.body);
+  else if (req.body.accountType == "reviewer")
+    isValidated = userValidator.createReviewerValidation(req.body);
 
   if (isValidated.error)
     return res
       .status(400)
       .send({ error: isValidated.error.details[0].message });
-  const newUser = new User({
-    name,
-    accountType,
-    gender,
-    nationality,
-    typeID,
-    numberID,
-    dateOfBirth,
-    address,
-    phoneNumber,
-    faxNumber,
-    accountStatus,
-    email,
-    password: hashedPassword,
-    investorType,
-    capital,
-    capitalCurrency
-  });
+  user.password = hashedPassword;
+  const newUser = new User(user);
   newUser
     .save()
     .then(user => res.json({ data: user }))
     .catch(err => res.json({ error: "Can not create User" }));
 });
 
-// UPDATE USER INFO by id
-//has to check the id is current user id
-router.put("/updateUser/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const law = await User.find({
-      id
-    });
-    if (!law)
-      return res.status(404).send({
-        error: "Admin does not exist"
+//Update user
+router.put(
+  "/updateUser",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const id = req.payload.id;
+      const type = req.payload.type;
+      const user = await User.find({ _id: id });
+      if (!user)
+        return res.status(404).send({
+          error: "User does not exist"
+        });
+      var isValidated = null;
+      if (user.nationality == "egyptian" && req.body.typeID != "national id")
+        return res
+          .status(400)
+          .json({ error: "egyptians must have their national id as type id" });
+      if (type == "investor")
+        isValidated = userValidator.updateInvestorValidation(req.body);
+      else if (type == "lawyer")
+        isValidated = userValidator.updateLawyerValidation(req.body);
+      else if (type == "reviewer")
+        isValidated = userValidator.updateReviewerValidation(req.body);
+      if (!isValidated) {
+        return res
+          .status(404)
+          .send({ msg: "The data you entered is not correct" });
+      }
+      const dataBody = req.body;
+      if (dataBody.password) {
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(dataBody.password, salt);
+        dataBody.password = hashedPassword;
+      }
+      if (user.accountStatus == false) dataBody.$unset = { accountStatus: 1 };
+      const updatedUser = await User.findByIdAndUpdate(id, dataBody);
+      res.json({
+        msg: "User updated successfully",
+        data: updatedUser
       });
-    if (law.nationality == "egyptian" && req.body.typeID != "national id")
-      return res
-        .status(400)
-        .json({ error: "egyptians must have their national id as type id" });
-    if (req.body.accountType === "investor")
-      var isValidated = userValidator.updateInvestorValidation(req.body);
-    else if (req.body.accountType === "lawyer")
-      var isValidated = userValidator.updateLawyerValidation(req.body);
-    else if (req.body.accountType === "reviewer")
-      var isValidated = userValidator.updateReviewerValidation(req.body);
-    else if (req.body.accountType === "admin")
-      var isValidated = userValidator.updateAdminValidation(req.body);
-    const updatedUser = await User.findByIdAndUpdate(id, req.body);
-    res.json({
-      msg: "User updated successfully"
-    });
-  } catch (error) {
-    // We will be handling the error later
-    console.log(error);
+    } catch (error) {
+      console.log(error);
+    }
   }
-});
+);
 
-//As a User I should be able to view published company details
+//View SSC Rules - Public
 var SSC = [
   ["قواعد التحقق", "اختیارات القائمة", "اجباري", "نوع الحقل", "اسم الحقل"],
   ["", "سیتم عرضهم من قاعدة البیانات", "نعم", "قائمة", "القانون المنظم"],
@@ -191,6 +164,7 @@ var SSC = [
   ["", "", "", "", "المستثمر"],
   ["", "", "نعم", "نص", "الاسم"],
   ["", "شخص", "", "قائمة", "نوع المستثمر"][
+    // @ts-ignore
     ("یظهر في حالة أن نوع المستثمر:- شخص",
     "یتم عرضها من قاعدة البیانات",
     "یتم عرضها من قاعدة البیانات",
@@ -229,6 +203,7 @@ var SSC = [
   ["یظهر في كل الحالات", "", "نعم", "نص", "عنوان الإقامة"],
   ["یظهر في كل الحالات", "-", "لا", "نص", "التلیفون"],
   ["یظهر في كل الحالات", "", "لا", "نص", "الفاكس"][
+    // @ts-ignore
     ("یظهر في حالة أن نوع الشریك: - شخص - یمثل",
     "",
     "لا",
@@ -270,7 +245,11 @@ var SSC = [
     "صفة الشخص في مجلس المدیرین"
   ]
 ];
-//$("#DealerDiv").html("<h1>"+ SSC + "</h1>");
+router.get("/information/SSC", (request, response) => {
+  response.send(SSC);
+});
+
+//View SPC rules - Public
 var SPC = [
   ["قواعد التحقق", "اختیارات القائمة", "اجباري", "نوع الحقل", "اسم الحقل"],
   ["", "سیتم عرضهم من قاعدة البیانات", "نعم", "قائمة", "القانون المنظم"],
@@ -310,6 +289,7 @@ var SPC = [
   ["", "", "", "", "المستثمر"],
   ["", "", "نعم", "نص", "الاسم"],
   ["", "شخص", "", "قائمة", "نوع المستثمر"][
+    // @ts-ignore
     ("یظهر في حالة أن نوع المستثمر:- شخص",
     "یتم عرضها من قاعدة البیانات",
     "یتم عرضها من قاعدة البیانات",
@@ -348,16 +328,21 @@ var SPC = [
   ["یظهر في كل الحالات", "", "نعم", "نص", "عنوان الإقامة"],
   ["یظهر في كل الحالات", "-", "لا", "نص", "التلیفون"],
   ["یظهر في كل الحالات", "", "لا", "نص", "الفاكس"][
+    // @ts-ignore
     ("یظهر في حالة أن نوع الشریك: - شخص - یمثل",
     "",
     "لا",
     "نص",
     "البرید الإلكتروني")
   ],
+  // @ts-ignore
   [("", "", "نعم", "نص", "عنوان الإقامة")]
 ];
-//$("#DealerDiv").html("<h2>"+ SPC + "</h2>");
+router.get("/information/SPC", (request, response) => {
+  response.send(SPC);
+});
 
+//View SSC and SPC rules - Public
 var SSCandSPC = [
   ["1", "SSC Minimum Capital Limit is 50,000 EGP"],
   [
@@ -402,21 +387,11 @@ var SSCandSPC = [
   ],
   ["15", "The System should be available in Arabic and English"]
 ];
-//$("#DealerDiv").html("<h4>"+ SSCandSPC + "</h4>");
-
-router.get("/information/SSC", (request, response) => {
-  response.send(SSC);
-});
-
-router.get("/information/SPC", (request, response) => {
-  response.send(SPC);
-});
-
 router.get("/information/SSCandSPC", (request, response) => {
   response.send(SSCandSPC);
 });
 
-//As a User I should be able to view fees Calculation Rules
+//View fees Calculation Rules - Public
 var feesCalculationRules = [
   ["Entity", "Law 159", "Law 72"],
   [
@@ -443,21 +418,22 @@ var feesCalculationRules = [
 router.get("/information/feesCalculationRules", (request, response) => {
   response.send(feesCalculationRules);
 });
-
-//As a User I should be able to view all published companies
-router.get("/companies/publishedcompanies", async (req, res) => {
-  const form = await Form.find({ formStatus: { $nin: [false] } });
-  res.json({
-    data: form
-  });
+//right//Get my info
+router.get("/user", async (req, res) => {
+  try {
+    const id = req.payload.id;
+    const user = await User.findById(id);
+    if (!user)
+      return res.status(404).send({
+        error: "This User does not exist"
+      });
+    res.json({
+      data: user
+    });
+  } catch (err) {
+    res.json({
+      msg: err.message
+    });
+  }
 });
-
-//Search in all published Companies #1.1 sprint 3
-router.get("/search", async (req, res) => {
-  const search = await Form.find(req.body);
-  res.json({
-    data: search
-  });
-});
-
 module.exports = router;
