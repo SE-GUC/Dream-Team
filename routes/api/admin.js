@@ -34,7 +34,7 @@ router.delete('/formType:id', async (req, res) => {
 //View form types
 router.get('/formType', async (req, res) => {
   const formType = await FormTypes.find();
-  if (!formType) res.status(400).send({ error: 'There is no form types' });
+  if (!formType) res.status(400).send({ error: 'There are no form types' });
   else res.json({ data: formType });
 });
 

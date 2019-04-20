@@ -37,9 +37,9 @@ app.use(morgan('combined'));
 app.use(getPayload);
 
 // initiallize passport
-app.use(passport.initialize());
+//app.use(passport.initialize());
 
-require('./auth/auth')(passport);
+//require('./auth/auth')(passport);
 // require('./config/passport')(passport);
 // Entry point
 app.get('/', (req, res) => res.send(`<h1>Person</h1>`));
@@ -56,9 +56,10 @@ app.use('/api/externalPortal', externalPortal);
 
 app.use(
   '/api/admin',
-  passport.authenticate('jwt', { session: false }),
-  AuthFor(typesEnum.ADMIN),
   admin
+  // passport.authenticate('jwt', { session: false }),
+  // AuthFor(typesEnum.ADMIN),
+  // admin
 );
 app.use(
   '/api/internalPortal',
