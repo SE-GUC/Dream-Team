@@ -8,6 +8,7 @@ import filtercase from "./components/filterCase/filterCase";
 import FormTable from "./components/formTable";
 import LawyerFillForm from "./components/LawyerFillForm";
 import Login from "./components/login";
+
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SignUp from "./components/signup";
@@ -24,9 +25,9 @@ import AssignRev from "./components/assignRev/assignRev";
 import viewAllLawyer from "./components/viewAllLawyer/viewAllLawyer";
 import AdminARC from "./components/adminARC/adminARC";
 import assignLaw from "./components/assignLaw/assignLaw";
-
+import internalPortal from "./components/internalPortal/internalPortal";
 import UpdateUser from "./components/updateUser/updateUser";
-import UserTable from "./components/userTable/userTable";
+// import UserTable from "./components/userTable/userTable";
 import ViewAllForms from "./components/viewAllForms/viewAllForms";
 import viewAllInvestors from "./components/viewAllInvestors/viewAllInvestors";
 import Reviewers from "./components/viewAllReviewers/viewAllReviewers";
@@ -53,7 +54,7 @@ import searchBar from "./components/searchBar";
 import UpdateInvForm from "./components/updateInvForm";
 import formsOfLawyer from "./components/formsOfLawyer";
 import lawyerFinalizedCases from "./components/lawyerFinalizedCases/lawyerFinalizedCases";
-import pdfUpload from "./components/pdfUpload/pdfUpload";
+// import pdfUpload from "./components/pdfUpload/pdfUpload";
 import externalPortal from "./components/externalPortal/externalPortal";
 import lawyer from "./components/lawyer/lawyer";
 
@@ -65,13 +66,14 @@ ReactDOM.render(
       <Route exact path="/" component={HomePage} />
       <Route path="/filter" component={filtercase} />
       <Route path="/login" component={Login} />
+
       <Route path="/investor" component={Investor} />
       <Route path="/LawyerFillForm" component={LawyerFillForm} />
       <Route path="/signup" component={SignUp} />
       <Route path="/update" component={UpdateTest} />
       <Route path="/employeeTable" component={EmployeeTable} />
       <Route path="/formTable" component={FormTable} />
-      <Route path="/userTable" component={UserTable} />
+      {/* <Route path="/userTable" component={UserTable} /> */}
       <Route path="/searchBar" component={searchBar} />
       <Route path="/reviewershowmyforms" component={ReviewerViewhisForms} />
       <Route path="/Lawyershowmyforms" component={LawyerViewhisCases} />
@@ -96,14 +98,17 @@ ReactDOM.render(
       <Route path="/lawyerUpdateForm" component={LawyerUpdateForm} />
       <Route path="/lawyerUpdate" component={LawUpForm} />
       <Route path="/feesCalc" component={feesCalc} />
-      <Route path="/pdfUpload" component={pdfUpload} />
       <Route path="/lawyer" component={lawyer} />
 
       <Route path="/externalPortal" component={externalPortal} />
+      <Route path="/internalPortal" component={internalPortal} />
     </div>
   </Router>,
+
   document.getElementById("root")
 );
+
 ReactDOM.render(<NavBar />, document.getElementById("Nav"));
+
 //ReactDOM.render(<pdfUpload />, document.getElementById("root"));
 // serviceWorker.unregister();
