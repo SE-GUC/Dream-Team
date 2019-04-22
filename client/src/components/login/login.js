@@ -37,39 +37,41 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="Login">
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={this.state.email}
-              onChange={e => this.setState({ email: e.target.value })}
-            />
-          </Form.Group>
+      <div className="background-image2">
+        <div className="LoginView">
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label className="InputContainer">Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                value={this.state.email}
+                onChange={e => this.setState({ email: e.target.value })}
+              />
+            </Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={e => this.setState({ password: e.target.value })}
-            />
-          </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label className="InputContainer">Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={e => this.setState({ password: e.target.value })}
+              />
+            </Form.Group>
 
-          <Popup
-            trigger={
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            }
-            position="bottom center"
-          >
-            <div>{this.state.responseToPost}</div>
-          </Popup>
-        </Form>
+            <Popup
+              trigger={
+                <Button variant="primary" type="submit">
+                  Submit
+                </Button>
+              }
+              position="bottom center"
+            >
+              <div>{this.state.responseToPost}</div>
+            </Popup>
+          </Form>
+        </div>
       </div>
     );
   }

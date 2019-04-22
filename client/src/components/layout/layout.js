@@ -24,9 +24,7 @@ class Layout extends Component {
     if (this.props.type == "investor") {
       menu = (
         <div>
-          <Nav.Link href="/invUpdate">
-           Update{" "}
-          </Nav.Link>
+          <Nav.Link href="/invUpdate">Update </Nav.Link>
           <Nav.Link href="/publishedCompanies">
             View Publishes Companies
           </Nav.Link>
@@ -104,8 +102,6 @@ class Layout extends Component {
     return (
       <div>
         <Navbar bg="dark" variant="dark">
-          {/* <div className="control" onClick={this.handleClick}> */}
-          {/* <Nav.Item text="beno" onClick={this.handleClick} /> */}
           <img src={logo} className="btno " onClick={this.handleClick} />
           <div className={this.state.isShow ? "content" : "invisible"}>
             <div id="mySidenav" className="sidenav">
@@ -122,19 +118,21 @@ class Layout extends Component {
           </div>
           {/* </div> */}
           <Navbar.Brand href="/">Sumerge</Navbar.Brand>
-          <Nav className="layout">
-            <Nav.Link href="#home" to="/">
-              Home
-            </Nav.Link>
-            <Nav.Link href="#companies">Companies</Nav.Link>
-            <Nav.Link href="/companyRules" to="/companyRules">
-              Companies Rules
-            </Nav.Link>
-            <Nav.Link href="/feesCalculation" to="/feesCalculation">
-              Calculation Fees Rules
-            </Nav.Link>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link href="/externalPortal">External Portal</Nav.Link>
+              <Nav.Link href="/internalPortal">Internal Portal</Nav.Link>
+              <Nav.Link href="/lawyer">Lawyer</Nav.Link>
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/publishedCompanies">Companies</Nav.Link>
+              <Nav.Link href="/companyRules">Companies Rules</Nav.Link>
+              <Nav.Link href="/feesCalculation">
+                Calculation Fees Rules
+              </Nav.Link>
+            </Nav>
             {rightNavBar}
-          </Nav>
+          </Navbar.Collapse>
         </Navbar>
       </div>
     );
