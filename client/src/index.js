@@ -26,7 +26,7 @@ import AdminARC from "./components/adminARC/adminARC";
 import assignLaw from "./components/assignLaw/assignLaw";
 
 import UpdateUser from "./components/updateUser/updateUser";
-import UserTable from "./components/usertable/userTable";
+import UserTable from "./components/userTable/userTable";
 import ViewAllForms from "./components/viewAllForms/viewAllForms";
 import viewAllInvestors from "./components/viewAllInvestors/viewAllInvestors";
 import Reviewers from "./components/viewAllReviewers/viewAllReviewers";
@@ -55,6 +55,7 @@ import formsOfLawyer from "./components/formsOfLawyer";
 import lawyerFinalizedCases from "./components/lawyerFinalizedCases/lawyerFinalizedCases";
 import pdfUpload from "./components/pdfUpload/pdfUpload";
 import externalPortal from "./components/externalPortal/externalPortal";
+import lawyer from "./components/lawyer/lawyer";
 
 // import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
 
@@ -96,6 +97,7 @@ ReactDOM.render(
       <Route path="/lawyerUpdate" component={LawUpForm} />
       <Route path="/feesCalc" component={feesCalc} />
       <Route path="/pdfUpload" component={pdfUpload} />
+      <Route path="/lawyer" component={lawyer} />
 
       <Route path="/externalPortal" component={externalPortal} />
     </div>

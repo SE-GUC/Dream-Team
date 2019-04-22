@@ -10,6 +10,7 @@ import lawyerFinalizedCases from "../../components/lawyerFinalizedCases/lawyerFi
 import searchBar from "../../components/searchBar";
 import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
 import "../homepage/homepage.css";
+import lawyer from "../../components/lawyer/lawyer";
 
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
