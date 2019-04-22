@@ -22,7 +22,7 @@ class externalPortal extends Component {
         <a />=
         <a className={"signUp"} href="/signUp">
           {" "}
-          Sign up{" "}
+          Sign Up{" "}
         </a>
         <div className="control" onClick={this.handleClick}>
           MENU

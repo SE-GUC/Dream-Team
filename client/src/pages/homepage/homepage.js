@@ -158,7 +158,7 @@ class HomePage extends Component {
           </button>
         </div>
 
-        <div>
+        {/* <div>
           To view externalPortal
           <button
             className="btn btn-primary width-150"
@@ -168,7 +168,7 @@ class HomePage extends Component {
           >
             view
           </button>
-        </div>
+        </div> */}
 
         <div>
           lawyer fill form
