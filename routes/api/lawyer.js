@@ -297,7 +297,7 @@ router.put("/sendRejectionMsg/:id", async (req, res) => {
     const reject = {
       // lawyerComment: req.body.lawyerComment,
       lawyerDecision: -1,
-      $push: { lawyerComment: formID },
+      $push: { lawyerComment: req.body.lawyerComment },
       formStatus: formEnum.formStatus.INVESTOR
     };
     await Form.findByIdAndUpdate(formID, reject);
