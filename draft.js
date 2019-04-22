@@ -60,12 +60,37 @@ const PDF = (form, investor) => {
   html = html.replace(/{capital}/g, form.financialInfo.capital);
   html = html.replace(/{dateOfApproval}/g, form.dateOfApproval);
   html = html.replace(/{investorName}/g, investor.name);
-  var x = pdf
+  const x = pdf
     .create(html, options)
     .toFile("./resources/businesscard2.pdf", function(err, res) {
       if (err) return console.log(err);
       console.log(res); // { filename: '/app/businesscard.pdf' }
     });
+
+  return res.status(200).send();
+  const uploadTask = storage.ref(`pdfs/${x.name}`).put(x);
+  uploadTask.on(
+    "state_changed",
+    snapshot => {
+      // progrss function ...
+    },
+    error => {
+      // error function ....
+      console.log(error);
+    },
+    () => {
+      // complete function ....
+      storage
+        .ref("pdfs")
+        .child(x.name)
+        .getDownloadURL()
+        .then(url => {
+          console.log(url);
+          this.setState({ url });
+        });
+    }
+  );
 };
+
 PDF(form, investor);
 // var res = x.replace("(Heading)", "hohoho");
