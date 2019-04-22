@@ -287,6 +287,7 @@ router.put("/sendRejectionMsg/:id", async (req, res) => {
   try {
     const formID = req.params.id;
     const lawyerID = req.payload.id;
+    // const lawyerID = "5cb2ff4e871ef190f3a869b4";
     const form = await Form.findById(formID);
     if (!form) return res.status(404).send({ error: "form does not exist" });
     if (form.lawyer != lawyerID)
@@ -294,8 +295,9 @@ router.put("/sendRejectionMsg/:id", async (req, res) => {
         .status(404)
         .send({ error: "This form does not belong to you" });
     const reject = {
-      lawyerComment: req.body.lawyerComment,
+      // lawyerComment: req.body.lawyerComment,
       lawyerDecision: -1,
+      $push: { lawyerComment: formID },
       formStatus: formEnum.formStatus.INVESTOR
     };
     await Form.findByIdAndUpdate(formID, reject);
@@ -313,6 +315,7 @@ router.put("/accept/:id", async (req, res) => {
     const form = await Form.findById(formID);
     if (!form)
       return res.status(404).send({ error: "This form does not exist" });
+    console.log(form);
     if (form.lawyer != lawyerID)
       return res
         .status(404)

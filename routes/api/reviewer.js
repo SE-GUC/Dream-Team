@@ -37,8 +37,8 @@ router.put("/sendRejectionMsg/:id", async (req, res) => {
         .status(404)
         .send({ error: "This form does not belong to you" });
     const reject = {
-      reviewerComment: req.body.reviewerComment,
       reviewerDecision: -1,
+      $push: { lawyerComment: formID },
       formStatus: formEnum.formStatus.LAWYER,
       $unset: { lawyer: 1, lawyerDecision: 1, lawyerComment: 1 }
     };
