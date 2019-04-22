@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-jest": "23.6.0",
+    "blk-design-system-react": "^1.0.0",
     "bootstrap": "^4.3.1",
     "jwt-decode": "^2.2.0",
     "react": "^16.8.6",

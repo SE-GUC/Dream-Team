@@ -53,12 +53,12 @@ import searchBar from "./components/searchBar";
 import UpdateInvForm from "./components/updateInvForm";
 import formsOfLawyer from "./components/formsOfLawyer";
 import lawyerFinalizedCases from "./components/lawyerFinalizedCases/lawyerFinalizedCases";
-
+import login2 from "./components/login2/login2"
 // import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
 
 ReactDOM.render(
   <Router>
-    <div>
+    <div><Route path="/login2" component={login2} />
       <Route exact path="/" component={HomePage} />
       <Route path="/filter" component={filtercase} />
       <Route path="/login" component={Login} />
@@ -97,6 +97,6 @@ ReactDOM.render(
   </Router>,
   document.getElementById("root")
 );
-ReactDOM.render(<NavBar />, document.getElementById("Nav"));
+//ReactDOM.render(<NavBar />, document.getElementById("Nav"));
 
 serviceWorker.unregister();

@@ -128,6 +128,9 @@ class HomePage extends Component {
     this.props.history.push("/assignRev");
   }
 
+  login2() {
+    this.props.history.push("/login2");
+  }
   _handleLogout = () => {
     this.Auth.logout();
 
@@ -150,6 +153,17 @@ class HomePage extends Component {
             }}
           >
             login
+          </button>
+        </div>
+        <div>
+          login2
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.login2();
+            }}
+          >
+            login2
           </button>
         </div>
         <div>
