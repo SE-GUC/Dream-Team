@@ -26,9 +26,9 @@ class Login extends Component {
           this.props.onChange(false);
           return alert("Sorry those credentials don't exist!");
         }
-        console.log('Login call')
-        this.props.onChange(true);
-        // this.props.history.replace("/");
+        console.log("Login call");
+        // this.props.onChange(true);
+        this.props.history.push("/");
       })
       .catch(err => {
         alert(err);

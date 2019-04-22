@@ -43,23 +43,25 @@ import Case from "./pages/LRspecificCase";
 class App extends Component {
   Auth = new AuthHelperMethods();
 
-  state = {
+  statue = {
     isLoggedIn: false
   };
 
   loggedStatus = newState => {
-    this.setState({ isLoggedIn: newState });
+    this.statue = {
+      isLoggedIn: newState
+    };
   };
 
   render() {
-    console.log("this.logged.isLoggedIn " + this.state.isLoggedIn);
+    // console.log("this.logged.isLoggedIn " + this.state.isLoggedIn);
     return (
       <div>
-        <Navigation isLoggedin={this.state.isLoggedIn} type={"investor"} />
+        <Navigation isLoggedin={this.statue.isLoggedIn} type={"investor"} />
         <div>
           <Route exact path="/" component={homepage} />
           <Route path="/filter" component={filtercase} />
-          <Route path="/login" component={Login} />
+          {/* <Route path="/login" component={Login} /> */}
           <Route path="/investor" component={Investor} />
           <Route path="/LawyerFillForm" component={LawyerFillForm} />
           <Route path="/signup" component={SignUp} />
@@ -96,8 +98,10 @@ class App extends Component {
           <Route path="/feesCalc" component={feesCalc} />
           <Route path="/externalPortal" component={externalPortal} />
           <Route
-            path="/investor"
-            render={() => <Login onChange={this.loggedStatus.bind(this)} />}
+            path="/login"
+            render={props => (
+              <Login {...props} onChange={this.loggedStatus.bind(this)} />
+            )}
           />
         </div>
       </div>
