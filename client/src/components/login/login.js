@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "./login.css";
-import AuthHelperMethods from "../AuthHelperMethods";
 import { Button, Form } from "react-bootstrap";
 import Popup from "reactjs-popup";
+import AuthHelperMethods from "../AuthHelperMethods";
+import "./login.css";
 // import withAuth from './components/withAuth';
 class Login extends Component {
   Auth = new AuthHelperMethods();
@@ -19,13 +19,16 @@ class Login extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
+    console.log("LOGIN");
     this.Auth.login(this.state.email, this.state.password)
       .then(res => {
         if (res === false) {
+          this.props.onChange(false);
           return alert("Sorry those credentials don't exist!");
         }
-        this.props.history.replace("/");
-        // window.location.href = "/";
+        console.log('Login call')
+        this.props.onChange(true);
+        // this.props.history.replace("/");
       })
       .catch(err => {
         alert(err);

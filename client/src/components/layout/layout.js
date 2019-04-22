@@ -1,32 +1,26 @@
-import { Navbar } from "react-bootstrap";
-import { Nav } from "react-bootstrap";
 import React, { Component } from "react";
+import { Nav, Navbar } from "react-bootstrap";
 import AuthHelperMethods from "../AuthHelperMethods";
 
 class Layout extends Component {
   Auth = new AuthHelperMethods();
   state = {
-    isLoggedIn: false,
-    rightNavBar: ""
+    isShow: false
   };
-
   componentDidMount() {
     this.setState({ isLoggedIn: this.Auth.loggedIn() });
-    console.log(this.state.isLoggedIn);
   }
+
+  handleClick = () => {
+    this.setState({ isShow: !this.state.isShow });
+  };
 
   render() {
     var rightNavBar;
+    var menu;
 
-    if (this.state.isLoggedIn == false) {
-      rightNavBar = (
-        <Nav>
-          <Nav.Link href="/login">Login</Nav.Link>
-          <Nav.Link href="/signup">Sign Up</Nav.Link>
-        </Nav>
-      );
-    } else {
-      console.log(this.state.isLoggedIn);
+    if (this.props.isLoggedin == true) {
+      console.log("value is true");
       rightNavBar = (
         <Nav>
           <Nav.Link href="/login">{this.Auth.getConfirm().name}</Nav.Link>
@@ -35,24 +29,32 @@ class Layout extends Component {
           </Nav.Link>
         </Nav>
       );
+    } else {
+      console.log("value is false");
+      rightNavBar = (
+        <Nav>
+          <Nav.Link href="/login">Login</Nav.Link>
+          <Nav.Link href="/signup">Sign Up</Nav.Link>
+        </Nav>
+      );
     }
     return (
       <div>
         <Navbar bg="dark" variant="dark">
           <Navbar.Brand href="/">Sumerge</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link href="/externalPortal">External Portal</Nav.Link>
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/publishedCompanies">Companies</Nav.Link>
-              <Nav.Link href="/companyRules">Companies Rules</Nav.Link>
-              <Nav.Link href="/feesCalculation">
-                Calculation Fees Rules
-              </Nav.Link>
-            </Nav>
+          <Nav className="layout">
+            <Nav.Link href="#home" to="/">
+              Home
+            </Nav.Link>
+            <Nav.Link href="#companies">Companies</Nav.Link>
+            <Nav.Link href="/companyRules" to="/companyRules">
+              Companies Rules
+            </Nav.Link>
+            <Nav.Link href="/feesCalculation" to="/feesCalculation">
+              Calculation Fees Rules
+            </Nav.Link>
             {rightNavBar}
-          </Navbar.Collapse>
+          </Nav>
         </Navbar>
       </div>
     );

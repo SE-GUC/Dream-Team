@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./externalPortal.css";
-import Login from "../login/login";
 
 class externalPortal extends Component {
   constructor(props) {
@@ -24,24 +23,6 @@ class externalPortal extends Component {
           {" "}
           Sign Up{" "}
         </a>
-        <div className="control" onClick={this.handleClick}>
-          MENU
-          <div className={this.state.isShow ? "content" : "invisible"}>
-            <div id="mySidenav" className="sidenav">
-              <button
-                onClick={this.handleClick}
-                type="button"
-                className="closebtn"
-              >
-                &times;
-              </button>
-              <a href="/feesCalculation">View Laws and Calculation Rules </a>
-              <a href="/publishedCompanies">View Publishes Companies</a>
-              <a href="/signup">Sign Up</a>
-              <a href="/login">Sign In</a>
-            </div>
-          </div>
-        </div>
       </div>
     );
   }

@@ -8,28 +8,27 @@ import CalcRule from "./components/calcRule/calcRule";
 import CheckoutForm from "./components/CheckoutForm/App";
 import ComRule from "./components/comRule/comRule";
 import EmployeeTable from "./components/employeeTable";
+import externalPortal from "./components/externalPortal/externalPortal";
 import feesCalc from "./components/feesCalc/feesCalc";
 import Navigation from "./components/layout/layout";
 import Login from "./components/login/login";
 import homepage from "./pages/homepage/homepage";
 class App extends Component {
   Auth = new AuthHelperMethods();
-  constructor(props) {
-    super(props);
-    this.logged = {
-      isLoggedIn: false
-    };
-  }
-  // loggedState.bind(this)
 
-  loggedStatus = newState => {
-    this.setState(newState);
+  state = {
+    isLoggedIn: false
   };
 
-  render(props) {
+  loggedStatus = newState => {
+    this.setState({ isLoggedIn: newState });
+  };
+
+  render() {
+    console.log("this.logged.isLoggedIn " + this.state.isLoggedIn);
     return (
       <div>
-        <Navigation logged={this.logged.isLoggedIn} />
+        <Navigation isLoggedin={this.state.isLoggedIn} />
         <div>
           <Route exact path="/" component={homepage} />
           <Route path="/employeeTable" component={EmployeeTable} />
@@ -40,8 +39,9 @@ class App extends Component {
           <Route path="/assignLaw" component={assignLaw} />
           <Route path="/assignRev" component={AssignRev} />
           <Route path="/feesCalc" component={feesCalc} />
+          <Route path="/externalPortal" component={externalPortal} />
           <Route
-            path="/login"
+            path="/investor"
             render={() => <Login onChange={this.loggedStatus.bind(this)} />}
           />
         </div>
