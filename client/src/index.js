@@ -53,6 +53,8 @@ import searchBar from "./components/searchBar";
 import UpdateInvForm from "./components/updateInvForm";
 import formsOfLawyer from "./components/formsOfLawyer";
 import lawyerFinalizedCases from "./components/lawyerFinalizedCases/lawyerFinalizedCases";
+import pdfUpload from "./components/pdfUpload/pdfUpload";
+import externalPortal from "./components/externalPortal/externalPortal";
 
 // import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
 
@@ -93,10 +95,13 @@ ReactDOM.render(
       <Route path="/lawyerUpdateForm" component={LawyerUpdateForm} />
       <Route path="/lawyerUpdate" component={LawUpForm} />
       <Route path="/feesCalc" component={feesCalc} />
+      <Route path="/pdfUpload" component={pdfUpload} />
+
+      <Route path="/externalPortal" component={externalPortal} />
     </div>
   </Router>,
   document.getElementById("root")
 );
 ReactDOM.render(<NavBar />, document.getElementById("Nav"));
-
-serviceWorker.unregister();
+//ReactDOM.render(<pdfUpload />, document.getElementById("root"));
+// serviceWorker.unregister();

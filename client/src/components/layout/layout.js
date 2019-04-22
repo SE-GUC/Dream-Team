@@ -44,7 +44,7 @@ class Layout extends Component {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/companies">Companies</Nav.Link>
+              <Nav.Link href="/publishedCompanies">Companies</Nav.Link>
               <Nav.Link href="/companyRules">Companies Rules</Nav.Link>
               <Nav.Link href="/feesCalculation">
                 Calculation Fees Rules

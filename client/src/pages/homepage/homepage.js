@@ -70,7 +70,9 @@ class HomePage extends Component {
   login() {
     this.props.history.push("/login");
   }
-
+  externalPortal() {
+    this.props.history.push("/externalPortal");
+  }
   signUp() {
     this.props.history.push("/signup");
   }
@@ -127,6 +129,9 @@ class HomePage extends Component {
   assignRev() {
     this.props.history.push("/assignRev");
   }
+  pdfUpload() {
+    this.props.history.push("/pdfUpload");
+  }
 
   _handleLogout = () => {
     this.Auth.logout();
@@ -152,6 +157,19 @@ class HomePage extends Component {
             login
           </button>
         </div>
+
+        <div>
+          To view externalPortal
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.externalPortal();
+            }}
+          >
+            view
+          </button>
+        </div>
+
         <div>
           lawyer fill form
           <button
@@ -229,6 +247,17 @@ class HomePage extends Component {
             }}
           >
             Click to view form
+          </button>
+        </div>
+        <div>
+          pdf upload
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.pdfUpload();
+            }}
+          >
+            Click to upload
           </button>
         </div>
         <div>
@@ -402,13 +431,14 @@ class HomePage extends Component {
               Click to assign
             </button>
           </div>
-          To view publishedCompanies click here
+          {/* To view publishedCompanies click here
           <button
             className="btn btn-primary width-150"
             onClick={e => {
               this.publishedCompanies();
             }}
           />
+        </div> */}
         </div>
         <div>
           investor Update Rejected Forms
@@ -504,6 +534,25 @@ class HomePage extends Component {
             className="btn btn-primary width-150"
             onClick={e => {
               this.searchBar();
+            }}
+          />
+        </div>
+        <div>
+          side Bar
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.feesCalc();
+            }}
+          >
+            Click to Update
+          </button>
+        </div>
+        <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.sideBar();
             }}
           />
         </div>
