@@ -405,4 +405,14 @@ router.get("/AR", async (req, res) => {
   } else res.json({ msg: "No Forms for this lawyer " });
 });
 
+//not assigned to a Lawyer
+router.get("/notAssignedLawyer", async (req, res) => {
+  // const forms=await Form.find();
+  const form = await Form.find({
+    formStatus: formEnum.formStatus.LAWYER,
+    lawyer: null
+  });
+  res.json({ data: form });
+});
+
 module.exports = router;
