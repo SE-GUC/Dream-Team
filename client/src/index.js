@@ -27,7 +27,7 @@ import AdminARC from "./components/adminARC/adminARC";
 import assignLaw from "./components/assignLaw/assignLaw";
 import internalPortal from "./components/internalPortal/internalPortal";
 import UpdateUser from "./components/updateUser/updateUser";
-import UserTable from "./components/usertable/userTable";
+// import UserTable from "./components/userTable/userTable";
 import ViewAllForms from "./components/viewAllForms/viewAllForms";
 import viewAllInvestors from "./components/viewAllInvestors/viewAllInvestors";
 import Reviewers from "./components/viewAllReviewers/viewAllReviewers";
@@ -46,7 +46,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/css/bootstrap.css";
-import footer from "./components/footer/footer";
 
 import "./index.css";
 import HomePage from "./pages/homepage";
@@ -57,6 +56,7 @@ import formsOfLawyer from "./components/formsOfLawyer";
 import lawyerFinalizedCases from "./components/lawyerFinalizedCases/lawyerFinalizedCases";
 // import pdfUpload from "./components/pdfUpload/pdfUpload";
 import externalPortal from "./components/externalPortal/externalPortal";
+import lawyer from "./components/lawyer/lawyer";
 
 // import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
 
@@ -73,7 +73,7 @@ ReactDOM.render(
       <Route path="/update" component={UpdateTest} />
       <Route path="/employeeTable" component={EmployeeTable} />
       <Route path="/formTable" component={FormTable} />
-      <Route path="/userTable" component={UserTable} />
+      {/* <Route path="/userTable" component={UserTable} /> */}
       <Route path="/searchBar" component={searchBar} />
       <Route path="/reviewershowmyforms" component={ReviewerViewhisForms} />
       <Route path="/Lawyershowmyforms" component={LawyerViewhisCases} />
@@ -98,7 +98,8 @@ ReactDOM.render(
       <Route path="/lawyerUpdateForm" component={LawyerUpdateForm} />
       <Route path="/lawyerUpdate" component={LawUpForm} />
       <Route path="/feesCalc" component={feesCalc} />
-      {/* <Route path="/pdfUpload" component={pdfUpload} /> */}
+      <Route path="/lawyer" component={lawyer} />
+
       <Route path="/externalPortal" component={externalPortal} />
       <Route path="/internalPortal" component={internalPortal} />
     </div>
@@ -108,7 +109,6 @@ ReactDOM.render(
 );
 
 ReactDOM.render(<NavBar />, document.getElementById("Nav"));
-// ReactDOM.render(<footer />, document.getElementById("root"));
 
 //ReactDOM.render(<pdfUpload />, document.getElementById("root"));
 // serviceWorker.unregister();

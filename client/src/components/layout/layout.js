@@ -45,6 +45,7 @@ class Layout extends Component {
             <Nav className="mr-auto">
               <Nav.Link href="/externalPortal">External Portal</Nav.Link>
               <Nav.Link href="/internalPortal">Internal Portal</Nav.Link>
+              <Nav.Link href="/lawyer">Lawyer</Nav.Link>
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/publishedCompanies">Companies</Nav.Link>
               <Nav.Link href="/companyRules">Companies Rules</Nav.Link>
