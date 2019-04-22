@@ -28,7 +28,7 @@ class App extends Component {
     console.log("this.logged.isLoggedIn " + this.state.isLoggedIn);
     return (
       <div>
-        <Navigation isLoggedin={this.state.isLoggedIn} />
+        <Navigation isLoggedin={this.state.isLoggedIn} type={"investor"} />
         <div>
           <Route exact path="/" component={homepage} />
           <Route path="/employeeTable" component={EmployeeTable} />

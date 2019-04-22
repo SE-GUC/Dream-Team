@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import AuthHelperMethods from "../AuthHelperMethods";
+import "./layout.css";
+import logo from "./menu_white.png";
 
 class Layout extends Component {
   Auth = new AuthHelperMethods();
@@ -17,7 +19,64 @@ class Layout extends Component {
 
   render() {
     var rightNavBar;
+
     var menu;
+    if (this.props.type == "investor") {
+      menu = (
+        <div>
+          <Nav.Link href="/invUpdate">
+           Update{" "}
+          </Nav.Link>
+          <Nav.Link href="/publishedCompanies">
+            View Publishes Companies
+          </Nav.Link>
+          <Nav.Link href="/signup">Sign Up</Nav.Link>
+          <Nav.Link href="/login">Sign In</Nav.Link>
+        </div>
+      );
+    }
+    if (this.props.type == "lawyer") {
+      menu = (
+        <div>
+          <Nav.Link href="/feesCalculation">
+            View Laws and Calculation Rules{" "}
+          </Nav.Link>
+          <Nav.Link href="/publishedCompanies">
+            View Publishes Companies
+          </Nav.Link>
+          <Nav.Link href="/signup">Sign Up</Nav.Link>
+          <Nav.Link href="/login">Sign In</Nav.Link>
+        </div>
+      );
+    }
+    if (this.props.type == "reviewer") {
+      menu = (
+        <div>
+          <Nav.Link href="/feesCalculation">
+            View Laws and Calculation Rules{" "}
+          </Nav.Link>
+          <Nav.Link href="/publishedCompanies">
+            View Publishes Companies
+          </Nav.Link>
+          <Nav.Link href="/signup">Sign Up</Nav.Link>
+          <Nav.Link href="/login">Sign In</Nav.Link>
+        </div>
+      );
+    }
+    if (this.props.type == "admin") {
+      menu = (
+        <div>
+          <Nav.Link href="/feesCalculation">
+            View Laws and Calculation Rules{" "}
+          </Nav.Link>
+          <Nav.Link href="/publishedCompanies">
+            View Publishes Companies
+          </Nav.Link>
+          <Nav.Link href="/signup">Sign Up</Nav.Link>
+          <Nav.Link href="/login">Sign In</Nav.Link>
+        </div>
+      );
+    }
 
     if (this.props.isLoggedin == true) {
       console.log("value is true");
@@ -38,9 +97,30 @@ class Layout extends Component {
         </Nav>
       );
     }
+    const closebutton = {
+      color: "white"
+    };
+
     return (
       <div>
         <Navbar bg="dark" variant="dark">
+          {/* <div className="control" onClick={this.handleClick}> */}
+          {/* <Nav.Item text="beno" onClick={this.handleClick} /> */}
+          <img src={logo} className="btno " onClick={this.handleClick} />
+          <div className={this.state.isShow ? "content" : "invisible"}>
+            <div id="mySidenav" className="sidenav">
+              <button
+                onClick={this.handleClick}
+                type="button"
+                className="closebtn"
+                style={closebutton}
+              >
+                &times;
+              </button>
+              {menu}
+            </div>
+          </div>
+          {/* </div> */}
           <Navbar.Brand href="/">Sumerge</Navbar.Brand>
           <Nav className="layout">
             <Nav.Link href="#home" to="/">
