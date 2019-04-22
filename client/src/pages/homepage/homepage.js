@@ -132,6 +132,9 @@ class HomePage extends Component {
   pdfUpload() {
     this.props.history.push("/pdfUpload");
   }
+  loginPage() {
+    this.props.history.push("/login2");
+  }
 
   _handleLogout = () => {
     this.Auth.logout();
@@ -249,7 +252,7 @@ class HomePage extends Component {
             Click to view form
           </button>
         </div>
-        <div>
+        {/* <div>
           pdf upload
           <button
             className="btn btn-primary width-150"
@@ -259,7 +262,7 @@ class HomePage extends Component {
           >
             Click to upload
           </button>
-        </div>
+        </div> */}
         <div>
           To view user table
           <button

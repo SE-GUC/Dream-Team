@@ -102,36 +102,3 @@ button {
   background-size: cover;
   background-attachment: fixed;
 }
-/* @-webkit-keyframes slideIn {
-  0% {
-    transform: translateX(-900px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-@-moz-keyframes slideIn {
-  0% {
-    transform: translateX(-900px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-@keyframes slideIn {
-  0% {
-    transform: translateX(-900px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {
-    padding-top: 15px;
-  }
-  .sidenav a {
-    font-size: 18px;
-  }
-} */
