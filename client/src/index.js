@@ -15,7 +15,7 @@ import formCardTable from "./components/formCardTable/formCardTable";
 // import FormTable from './components/formTable';
 import searchBar from "./components/searchBar";
 
-import UserTable from "./components/usertable/userTable";
+import UserTable from "./components/userTable/userTable";
 import LawyerViewhisCases from "./components/LawyerViewhisCases";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";

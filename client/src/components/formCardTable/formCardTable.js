@@ -23,7 +23,7 @@ class formCardTable extends Component {
       .then(json => {
         // delete json.data.password;
         delete json.data._id;
-        console.log(json);
+        // console.log(json);
         this.setState({
           isLoaded: true,
           response: json
@@ -33,22 +33,37 @@ class formCardTable extends Component {
 
   render() {
     var { response, isLoaded } = this.state;
+    // if (!isLoaded) {
+    //   return <div>Loading...</div>;
+    // } else {
+    //   let elements = response.data.map(element => {
+    //     return <li key={element.id}>{element.name}</li>;
+    //   });
+    //   return <ul>{elements}</ul>;
+    // }
+
     if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
+      var keys = Object.keys(response);
+      const items = [];
+      var key;
+      var innerKey;
+      // var x;
+
       return response.data.map(x => (
         <div class="card">
-          <div class="card-block">
-            <h4 class="card-title">{x.companyName}</h4>
-            <h6 class="card-subtitle text-muted" />
+          <div className="card-block">
+            <h4 className="card-title">{x.companyName}</h4>
+            <h6 className="card-subtitle text-muted" />
+            <ul>{items}</ul>
+            <p className="card-text p-y-1">{x.address}</p>
+            <p className="card-text p-y-1">{x.companyType}</p>
 
-            <p class="card-text p-y-1">{x.companyNameEng}</p>
-            <p class="card-text p-y-1">{x.address}</p>
-
-            <a href="#" class="card-link">
+            <a href={"/" + x._id} className="card-link">
               link
             </a>
-            <a href="#" class="card-link">
+            <a href="#" className="card-link">
               Second link
             </a>
           </div>

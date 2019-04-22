@@ -53,7 +53,7 @@ class HomePage extends Component {
   formCard() {
     this.props.history.push("/formCardTable");
   }
-  Auth = new AuthHelperMethods();
+  // Auth = new AuthHelperMethods();
   caseRe() {
     this.props.history.push("/case");
   }
