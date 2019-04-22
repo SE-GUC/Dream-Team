@@ -43,6 +43,7 @@ class Layout extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
+              <Nav.Link href="/externalPortal">External Portal</Nav.Link>
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/publishedCompanies">Companies</Nav.Link>
               <Nav.Link href="/companyRules">Companies Rules</Nav.Link>
