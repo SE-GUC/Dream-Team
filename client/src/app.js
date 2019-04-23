@@ -14,7 +14,7 @@ import externalPortal from "./components/externalPortal/externalPortal";
 import feesCalc from "./components/feesCalc/feesCalc";
 import filtercase from "./components/filterCase/filterCase";
 import formsOfLawyer from "./components/formsOfLawyer";
-import FormTable from "./components/formTable";
+import FormTable from "./components/formTable/formTable";
 import GetUser from "./components/getUser/getUser";
 import Investor from "./components/investor";
 import InvUpdate from "./components/investorUpdate/investorUpdate";
@@ -35,11 +35,18 @@ import UpdateUser from "./components/updateUser/updateUser";
 import ViewAllForms from "./components/viewAllForms/viewAllForms";
 import viewAllInvestors from "./components/viewAllInvestors/viewAllInvestors";
 import viewAllLawyer from "./components/viewAllLawyer/viewAllLawyer";
+import fillform from "./components/InvestorFillForm/InvestorFillForm";
 import Reviewers from "./components/viewAllReviewers/viewAllReviewers";
+import investorPortal from "./components/investorComponent/investorComponent";
+import internalPortal from "./components/internalPortal/internalPortal";
+// import userTable from "./components/usertable/userTable";
 import "./index.css";
 import homepage from "./pages/homepage/homepage";
 import Case from "./pages/LRspecificCase";
-
+import trackRequest from "./components/investorTrackRequest/investorTrackRequest";
+import InvestorFillForm from "./components/InvestorFillForm/InvestorFillForm";
+import investorTrackRequest from "./components/investorTrackRequest/investorTrackRequest";
+import adminComponent from "./components/adminComponent/adminComponent";
 class App extends Component {
   Auth = new AuthHelperMethods();
 
@@ -60,6 +67,7 @@ class App extends Component {
         <Navigation isLoggedin={this.statue.isLoggedIn} type={"investor"} />
         <div>
           <Route exact path="/" component={homepage} />
+          <Route path="/investorComponent" component={investorPortal} />
           <Route path="/filter" component={filtercase} />
           {/* <Route path="/login" component={Login} /> */}
           <Route path="/investor" component={Investor} />
@@ -68,7 +76,8 @@ class App extends Component {
           <Route path="/update" component={UpdateTest} />
           <Route path="/employeeTable" component={EmployeeTable} />
           <Route path="/formTable" component={FormTable} />
-          {/* <Route path="/userTable" component={UserTable} /> */}
+          {/* <Route path="/userTable" component={userTable} /> */}
+          <Route path="/InvestorFillForm" component={fillform} />
           <Route path="/searchBar" component={searchBar} />
           <Route path="/reviewershowmyforms" component={ReviewerViewhisForms} />
           <Route path="/Lawyershowmyforms" component={LawyerViewhisCases} />
@@ -85,18 +94,24 @@ class App extends Component {
           <Route path="/getUser" component={GetUser} />
           <Route path="/assignRev" component={AssignRev} />
           <Route path="/viewAllInvestors" component={viewAllInvestors} />
+          <Route path="/internalPortal" component={internalPortal} />
           <Route path="/formsOfLawyer" component={formsOfLawyer} />
           <Route
             path="/lawyerFinalizedCases"
             component={lawyerFinalizedCases}
           />
           <Route path="/reviewers" component={Reviewers} />
-          <Route path="/invUpdate" component={InvUpdate} />
+          <Route path="/investorUpdate" component={InvUpdate} />
           <Route path="/viewAllForms" component={ViewAllForms} />
           <Route path="/lawyerUpdateForm" component={LawyerUpdateForm} />
           <Route path="/lawyerUpdate" component={LawUpForm} />
           <Route path="/feesCalc" component={feesCalc} />
           <Route path="/externalPortal" component={externalPortal} />
+          <Route path="/adminComponent" component={adminComponent} />
+          <Route
+            path="/investorTrackRequest"
+            component={investorTrackRequest}
+          />
           <Route
             path="/login"
             render={props => (

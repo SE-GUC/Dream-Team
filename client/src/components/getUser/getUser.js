@@ -30,7 +30,7 @@ class getUser extends Component {
 
     // var body50 =  JSON.parse(this.state.userID);
     const response = await this.Auth.fetch(
-      "/api/admin/user" + this.state.userID + "/",
+      "/api/admin/user/" + this.state.userID + "/",
       {
         method: "GET"
       }

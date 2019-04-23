@@ -121,6 +121,8 @@ class Layout extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
+              <Nav.Link href="/adminComponent"> Admin Portal</Nav.Link>
+              <Nav.Link href="/investorComponent"> Investor Portal</Nav.Link>
               <Nav.Link href="/externalPortal">External Portal</Nav.Link>
               <Nav.Link href="/internalPortal">Internal Portal</Nav.Link>
               <Nav.Link href="/lawyer">Lawyer</Nav.Link>
@@ -128,6 +130,7 @@ class Layout extends Component {
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/publishedCompanies">Companies</Nav.Link>
               <Nav.Link href="/companyRules">Companies Rules</Nav.Link>
+
               <Nav.Link href="/feesCalculation">
                 Calculation Fees Rules
               </Nav.Link>

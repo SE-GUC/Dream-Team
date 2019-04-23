@@ -4,39 +4,20 @@ import AuthHelperMethods from "../AuthHelperMethods";
 import withAuth from "../withAuth";
 //As a reviewer, I should get all my forms and approve/reject and add comments on each form
 //one specific ID
-class viewAllForms extends Component {
+class investorTrackRequest extends Component {
   Auth = new AuthHelperMethods();
-  constructor(props) {
-    super(props);
-    this.state = {
-      response: [],
-      isLoaded: false,
-      update: true
-    };
-  }
+  state = {
+    response: {},
+    isLoaded: false,
+    update: true
+  };
 
-  reject(x) {
-    const response = this.Auth.fetch("api/reviewer/sendRejectionMsg/" + x, {
-      method: "PUT"
-    }).catch(err => {
-      this.state({ responseToPost: err });
-    });
-    const body = response.text();
-    this.setState({ responseToPost: body });
-  }
-  accept(x) {
-    const response = this.Auth.fetch("api/reviewer/accept/" + x, {
-      method: "PUT"
-    }).catch(err => {
-      this.state({ responseToPost: err });
-    });
-    const body = response.text();
-    this.setState({ responseToPost: body });
-  }
   componentDidMount() {
-    this.Auth.fetch("api/reviewer/pendingCase")
+    this.Auth.fetch("api/investor/trackRequest")
       .then(response => response.json())
       .then(json => {
+        console.log("the object");
+        console.log(json);
         this.setState({
           isLoaded: true,
           response: json
@@ -45,14 +26,10 @@ class viewAllForms extends Component {
       .catch(error => console.error(error));
   }
 
-  update(formId, investorId) {
-    this.props.history.push("/update");
-  }
-
   render() {
-    var { response, isLoaded } = this.state;
+    var { isLoaded, response } = this.state;
     let x;
-
+    console.log("the state " + isLoaded);
     if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
@@ -93,15 +70,20 @@ class viewAllForms extends Component {
               </tr>
             </thead>
             <tbody>
+              {/* {console.log(response.data)} */}
               {response.data.map((x, key) => (
                 <tr>
-                  <td> {x.headquarters.address}</td>
-                  <td> {x.headquarters.city}</td>
-                  <td> {x.headquarters.governorate}</td>
-                  <td> {x.headquarters.telephone}</td>
-                  <td> {x.headquarters.fax}</td>
-                  <td> {x.financialInfo.currency}</td>
-                  <td> {x.financialInfo.capital}</td>
+                  {x.headquarters ? (
+                    <div>
+                      <td> {x.headquarters.address}</td>
+                      <td> {x.headquarters.city}</td>
+                      <td> {x.headquarters.governorate}</td>
+                      <td> {x.headquarters.telephone}</td>
+                      <td> {x.headquarters.fax}</td>
+                      <td> {x.financialInfo.currency}</td>
+                      <td> {x.financialInfo.capital}</td>
+                    </div>
+                  ) : null}
 
                   <td> {x._id}</td>
                   <td>{x.companyName}</td>
@@ -123,32 +105,6 @@ class viewAllForms extends Component {
                   <td>{x.paymentId}</td>
                   <td>{x.formStatus}</td>
                   <td>{x.formType}</td>
-                  <td>
-                    {
-                      <button
-                        className="btn btn-primary width-150"
-                        onClick={e => {
-                          this.accept(x._id);
-                        }}
-                      >
-                        Click to accept
-                      </button>
-                    }
-                  </td>
-                  <p>{this.state.responseToPost}</p>
-
-                  <td>
-                    {
-                      <button
-                        className="btn btn-primary width-150"
-                        onClick={e => {
-                          this.reject(x._id);
-                        }}
-                      >
-                        Click to reject
-                      </button>
-                    }
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -160,4 +116,4 @@ class viewAllForms extends Component {
   }
 }
 
-export default withAuth(viewAllForms);
+export default withAuth(investorTrackRequest);

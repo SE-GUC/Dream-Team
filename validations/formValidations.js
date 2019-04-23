@@ -9,7 +9,7 @@ module.exports = {
         .min(3)
         .max(500)
         .required(),
-      companyNameEnglish: Joi.string()
+      companyNameEng: Joi.string()
         .min(3)
         .max(500),
       companyType: Joi.string().required(),

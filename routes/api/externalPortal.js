@@ -64,6 +64,8 @@ router.post("/createUser", async (req, res) => {
     isValidated = userValidator.createLawyerValidation(req.body);
   else if (req.body.accountType == "reviewer")
     isValidated = userValidator.createReviewerValidation(req.body);
+  else if (req.body.accountType == "admin")
+    isValidated = userValidator.createAdminValidation(req.body);
 
   if (isValidated.error)
     return res
