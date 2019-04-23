@@ -35,7 +35,7 @@ class Login extends Component {
         // window.location.href = "/";
       })
       .catch(err => {
-        alert(err);
+        alert(err.message);
       });
   };
 
