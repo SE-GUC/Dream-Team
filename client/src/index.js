@@ -16,6 +16,40 @@ import AssignRev from "./components/assignRev/assignRev";
 import viewAllLawyer from "./components/viewAllLawyer/viewAllLawyer";
 import AdminARC from "./components/adminARC/adminARC";
 import assignLaw from "./components/assignLaw/assignLaw";
+<<<<<<< HEAD
+=======
+import ReviewerCase from "./components/reviewerCase/reviewerCase";
+import UpdateUser from "./components/updateUser/updateUser";
+import UserTable from "./components/usertable/userTable";
+import ViewAllForms from "./components/viewAllForms/viewAllForms";
+import viewAllInvestors from "./components/viewAllInvestors/viewAllInvestors";
+import Reviewers from "./components/viewAllReviewers/viewAllReviewers";
+import InvUpdate from "./components/investorUpdate/investorUpdate";
+import LawyerUpdateForm from "./components/lawyerUpdateForm/lawyerUpdateForm";
+import LawUpForm from "./components/lawyerUpdate/lawyerUpdate";
+import NavBar from "./components/layout/layout";
+import LawyerViewhisCases from "./components/LawyerViewhisCases";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.css";
+import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
+import feesCalc from "./components/feesCalc/feesCalc";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.css";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.css";
+import Reviewer from "./pages/reviewer/reviewer";
+import "./index.css";
+import HomePage from "./pages/homepage";
+import Case from "./pages/LRspecificCase";
+import searchBar from "./components/searchBar";
+import UpdateInvForm from "./components/updateInvForm";
+import formsOfLawyer from "./components/formsOfLawyer";
+import lawyerFinalizedCases from "./components/lawyerFinalizedCases/lawyerFinalizedCases";
+import pdfUpload from "./components/pdfUpload/pdfUpload";
+import externalPortal from "./components/externalPortal/externalPortal";
+>>>>>>> 960819cf6f799174e905e9998e857c3c421a54f7
 
 import UpdateUser from "./components/updateUser/updateUser";
 // import UserTable from "./components/usertable/userTable";
