@@ -27,7 +27,8 @@ router.use(
   })
 );
 
-router.post("/charge", async (req, res) => {
+router.post("/charge/:id", async (req, res) => {
+  const formId = req.params.id;
   try {
     let { status } = await stripe.charges.create({
       amount: req.body.amount,
@@ -37,6 +38,14 @@ router.post("/charge", async (req, res) => {
     });
 
     res.json({ status });
+    var form = await Form.findById(formId);
+    Form.findOneAndUpdate(
+      { _id: formId },
+      {
+        dateOfPayment: new Date(),
+        method: "cash"
+      }
+    );
   } catch (err) {
     res.json({
       msg: err.message
@@ -71,9 +80,7 @@ router.put("/payment", async (req, res) => {
         // customer: source.customer
       });
     })
-    .then(charge => {
-      // New charge created on a new customer
-    })
+    .then(charge => {})
     .catch(err => {
       res.json({
         msg: err.message

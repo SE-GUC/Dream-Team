@@ -46,6 +46,7 @@ import Reviewers from "./components/viewAllReviewers/viewAllReviewers";
 import "./index.css";
 import homepage from "./pages/homepage/homepage";
 import Case from "./pages/LRspecificCase";
+import adminPortal from "./components/adminPortal/adminPortal";
 class App extends Component {
   Auth = new AuthHelperMethods();
 
