@@ -1,5 +1,7 @@
-import firebase from "firebase/app";
-import "firebase/storage";
+// import { model } from "mongoose";
+
+const firebase = require("firebase/app");
+var storageFire = require("firebase/storage");
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyCT2dsHnPv7Uuq_yAH2iqCaPmg6QZ5DLQ4",
@@ -11,4 +13,6 @@ var config = {
 };
 firebase.initializeApp(config);
 const storage = firebase.storage();
-export { storage, firebase as default };
+module.exports = storage;
+// export default { storage, firebase };
+// export default firebase;

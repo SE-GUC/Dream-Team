@@ -45,7 +45,7 @@ const investor = {
 var fs = require("fs");
 var pdf = require("html-pdf");
 const PDF = (form, investor) => {
-  var html = fs.readFileSync("./contract72.html", "utf8");
+  var html = fs.readFileSync("./resources/contract72.html", "utf8");
   var options = { format: "A4" };
   html = html.replace(/{companyName}/g, form.companyName);
   html = html.replace(/{companyNameEng}/g, form.companyNameEnglish);
@@ -62,7 +62,7 @@ const PDF = (form, investor) => {
   html = html.replace(/{investorName}/g, investor.name);
   var x = pdf
     .create(html, options)
-    .toFile("./resources/businesscard2.pdf", function(err, res) {
+    .toFile("./resources/refq.pdf", function(err, res) {
       if (err) return console.log(err);
       console.log(res); // { filename: '/app/businesscard.pdf' }
     });

@@ -14,8 +14,9 @@ const formEnum = require("../../enums/formStatus");
 const userEnum = require("../../enums/accountType");
 const validations = require("./functions");
 const FormTypes = require("../../models/FormTypes");
-// const stripe = require("stripe");
 
+// const stripe = require("stripe");
+const upload = require("../../upload");
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
@@ -221,9 +222,29 @@ router.post("/createForm", async (req, res) => {
     }
     const newForm = await Form.create(formBody);
     res.json({ msg: "Form was created successfully ", data: newForm });
+    const InvestorModel = await User.findById(investorID);
+    upload(Form, InvestorModel);
   } catch (error) {
     console.log(error);
   }
+});
+
+//download contract
+router.get("/viewContract/:id", async (req, res) => {
+  const type = req.params.type;
+  const id = req.params.id;
+  const user = await User.findById(id);
+  if (!user)
+    return res.status(404).send({
+      error: "This User does not exist"
+    });
+
+  // const form = await Form.findOne(
+  //   { investor: id },
+  //   { dateOfPayment: 1, amountOfPayment: 1, _id: 0 }
+  // );
+
+  res.download(`../../resources/${id}.pdf`);
 });
 
 //Update Form - Investor, Lawyer

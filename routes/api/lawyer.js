@@ -2,9 +2,10 @@
 var bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const express = require("express");
-
+const upload = require("../../upload");
 const User = require("../../models/User");
 const Form = require("../../models/Form");
+const InvestorModel = require("../../models/User");
 const formEnum = require("../../enums/formStatus");
 const userEnum = require("../../enums/accountType");
 const typesEnum = require("../../enums/accountType");
@@ -86,7 +87,7 @@ router.post("/createForm", async (req, res) => {
         return res.status(400).json({ error: "Company Name already exists" });
     }
     //SSC Conditions
-    if (req.body.companyName == "SSC") {
+    if (req.body.companyType == "SSC") {
       const invssc = await Form.findOne({
         investor: investorID,
         companyType: "SSC"
@@ -141,9 +142,29 @@ router.post("/createForm", async (req, res) => {
     }
     const newForm = await Form.create(formBody);
     res.json({ msg: "Form was created successfully ", data: newForm });
+    const Investor = await InvestorModel.findById(investorID);
+    upload(Form, Investor);
   } catch (error) {
     console.log(error);
   }
+});
+
+//download contract
+router.get("/viewContract/:id", async (req, res) => {
+  const type = req.params.type;
+  const id = req.params.id;
+  const user = await User.findById(id);
+  if (!user)
+    return res.status(404).send({
+      error: "This User does not exist"
+    });
+
+  // const form = await Form.findOne(
+  //   { investor: id },
+  //   { dateOfPayment: 1, amountOfPayment: 1, _id: 0 }
+  // );
+
+  res.download(`../../resources/${id}.pdf`);
 });
 
 //NEEDS MINIMIZATION-Update Form - Investor, Lawyer
