@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
+const Form = require("../../models/Form");
 const typesEnum = require("../../enums/accountType");
 const FormTypes = require("../../models/FormTypes");
 const Enjoi = require("enjoi");

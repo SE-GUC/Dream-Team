@@ -16,11 +16,6 @@ class userTable extends Component {
     message: "",
     showbutton: false
   };
-  // handleChange(event) {
-  //   var x = document.getElementsByClassName("hide");
-  //   x.getElementsByClassName.display = "none";
-  // }
-  //accept
   handleClick = async e => {
     e.preventDefault();
 
@@ -42,10 +37,6 @@ class userTable extends Component {
       {
         method: "PUT"
       }
-
-      // this.props.history.re("/"),
-      // this.props.history.replace("/adminARC")
-      // window.location.reload()
     );
     const response1 = await this.Auth.fetch(
       "/api/admin/sendRejectionMsg/" + this.state.userID + "/",
@@ -56,11 +47,6 @@ class userTable extends Component {
 
       // window.location.reload()
     );
-
-    // window.lo;
-    //  this.props.history.dispatch("/adminARC",null)
-    // this.props.history.replace("/");
-    // this.props.history.replace("/adminARC");
   };
   //reject
   handleSubmitR = async e => {
