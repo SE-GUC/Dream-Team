@@ -2,18 +2,9 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import EmployeeTable from "./components/employeeTable";
-import filtercase from "./components/filterCase/filterCase";
-import FormTable from "./components/formTable";
-import LawyerFillForm from "./components/LawyerFillForm";
-import Login from "./components/login";
-
+import { BrowserRouter as Router } from "react-router-dom";
+import App from "./app";
 import "./index.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import SignUp from "./components/signup";
-import UpdateTest from "./components/updateTest";
-import "bootstrap/dist/css/bootstrap.css";
 import * as serviceWorker from "./serviceWorker";
 import Investor from "./components/investor";
 import ComRule from "./components/comRule/comRule";
@@ -25,9 +16,9 @@ import AssignRev from "./components/assignRev/assignRev";
 import viewAllLawyer from "./components/viewAllLawyer/viewAllLawyer";
 import AdminARC from "./components/adminARC/adminARC";
 import assignLaw from "./components/assignLaw/assignLaw";
-import internalPortal from "./components/internalPortal/internalPortal";
+
 import UpdateUser from "./components/updateUser/updateUser";
-// import UserTable from "./components/userTable/userTable";
+// import UserTable from "./components/usertable/userTable";
 import ViewAllForms from "./components/viewAllForms/viewAllForms";
 import viewAllInvestors from "./components/viewAllInvestors/viewAllInvestors";
 import Reviewers from "./components/viewAllReviewers/viewAllReviewers";
@@ -56,59 +47,66 @@ import formsOfLawyer from "./components/formsOfLawyer";
 import lawyerFinalizedCases from "./components/lawyerFinalizedCases/lawyerFinalizedCases";
 // import pdfUpload from "./components/pdfUpload/pdfUpload";
 import externalPortal from "./components/externalPortal/externalPortal";
-import lawyer from "./components/lawyer/lawyer";
-
+import investorComponent from "./components/investorComponent/investorComponent";
+import InvestorFillForm from "./components/InvestorFillForm/InvestorFillForm";
+import adminComponent from "./components/adminComponent/adminComponent";
+import InvestorUpdateForm from "./components/InvestorUpdateForm/InvestorUpdateForm";
+import investorAmountDate from "./components/investorAmountDate/investorAmountDate";
+import investorTrackRequest from "./components/investorTrackRequest/investorTrackRequest";
 // import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
 
-ReactDOM.render(
+const app = (
   <Router>
-    <div>
-      <Route exact path="/" component={HomePage} />
-      <Route path="/filter" component={filtercase} />
-      <Route path="/login" component={Login} />
-
-      <Route path="/investor" component={Investor} />
-      <Route path="/LawyerFillForm" component={LawyerFillForm} />
-      <Route path="/signup" component={SignUp} />
-      <Route path="/update" component={UpdateTest} />
-      <Route path="/employeeTable" component={EmployeeTable} />
-      <Route path="/formTable" component={FormTable} />
-      {/* <Route path="/userTable" component={UserTable} /> */}
-      <Route path="/searchBar" component={searchBar} />
-      <Route path="/reviewershowmyforms" component={ReviewerViewhisForms} />
-      <Route path="/Lawyershowmyforms" component={LawyerViewhisCases} />
-      <Route path="/companyRules" component={ComRule} />
-      <Route path="/feesCalculation" component={CalcRule} />
-      <Route path="/publishedCompanies" component={publishedCompanies} />
-      <Route path="/case" component={Case} />
-      <Route path="/CheckoutForm" component={CheckoutForm} />
-      <Route path="/viewAllLawyer" component={viewAllLawyer} />
-      <Route path="/updateInvForm" component={UpdateInvForm} />
-      <Route path="/adminARC" component={AdminARC} />
-      <Route path="/assignLaw" component={assignLaw} />
-      <Route path="/updateUser" component={UpdateUser} />
-      <Route path="/getUser" component={GetUser} />
-      <Route path="/assignRev" component={AssignRev} />
-      <Route path="/viewAllInvestors" component={viewAllInvestors} />
-      <Route path="/formsOfLawyer" component={formsOfLawyer} />
-      <Route path="/lawyerFinalizedCases" component={lawyerFinalizedCases} />
-      <Route path="/reviewers" component={Reviewers} />
-      <Route path="/invUpdate" component={InvUpdate} />
-      <Route path="/viewAllForms" component={ViewAllForms} />
-      <Route path="/lawyerUpdateForm" component={LawyerUpdateForm} />
-      <Route path="/lawyerUpdate" component={LawUpForm} />
-      <Route path="/feesCalc" component={feesCalc} />
-      <Route path="/lawyer" component={lawyer} />
-
-      <Route path="/externalPortal" component={externalPortal} />
-      <Route path="/internalPortal" component={internalPortal} />
-    </div>
-  </Router>,
-
-  document.getElementById("root")
+    <App />
+  </Router>
 );
+ReactDOM.render(app, document.getElementById("root"));
 
-ReactDOM.render(<NavBar />, document.getElementById("Nav"));
+// ReactDOM.render(
+//   <div>
+//     <div id="Nav">
+//       <NavBar />
+//     </div>
+//     <Router>
+//       <div>
+// <Route exact path="/" component={HomePage} />
+// <Route path="/filter" component={filtercase} />
+// <Route path="/login" component={Login} />
+// <Route path="/investor" component={Investor} />
+// <Route path="/LawyerFillForm" component={LawyerFillForm} />
+// <Route path="/signup" component={SignUp} />
+// <Route path="/update" component={UpdateTest} />
+// <Route path="/employeeTable" component={EmployeeTable} />
+// <Route path="/formTable" component={FormTable} />
+// <Route path="/userTable" component={UserTable} />
+// <Route path="/searchBar" component={searchBar} />
+// <Route path="/reviewershowmyforms" component={ReviewerViewhisForms} />
+// <Route path="/Lawyershowmyforms" component={LawyerViewhisCases} />
+// <Route path="/companyRules" component={ComRule} />
+// <Route path="/feesCalculation" component={CalcRule} />
+// <Route path="/publishedCompanies" component={publishedCompanies} />
+// <Route path="/case" component={Case} />
+// <Route path="/CheckoutForm" component={CheckoutForm} />
+// <Route path="/viewAllLawyer" component={viewAllLawyer} />
+// <Route path="/updateInvForm" component={UpdateInvForm} />
+// <Route path="/adminARC" component={AdminARC} />
+// <Route path="/assignLaw" component={assignLaw} />
+// <Route path="/updateUser" component={UpdateUser} />
+// <Route path="/getUser" component={GetUser} />
+// <Route path="/assignRev" component={AssignRev} />
+// <Route path="/viewAllInvestors" component={viewAllInvestors} />
+// <Route path="/formsOfLawyer" component={formsOfLawyer} />
+// <Route path="/lawyerFinalizedCases" component={lawyerFinalizedCases} />
+// <Route path="/reviewers" component={Reviewers} />
+// <Route path="/invUpdate" component={InvUpdate} />
+// <Route path="/viewAllForms" component={ViewAllForms} />
+// <Route path="/lawyerUpdateForm" component={LawyerUpdateForm} />
+// <Route path="/lawyerUpdate" component={LawUpForm} />
+// <Route path="/feesCalc" component={feesCalc} />
+//       </div>
+//     </Router>
+//   </div>,
+//   document.getElementById("root")
+// );
 
-//ReactDOM.render(<pdfUpload />, document.getElementById("root"));
-// serviceWorker.unregister();
+serviceWorker.unregister();

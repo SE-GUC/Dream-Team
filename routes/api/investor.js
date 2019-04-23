@@ -63,7 +63,6 @@ router.put("/payment", async (req, res) => {
       });
     })
     .then(source => {
-      // console.log(source.customer);
       return stripe.charges.create({
         amount: req.body.amount,
         currency: req.body.currency,
@@ -204,6 +203,7 @@ router.post("/createForm", async (req, res) => {
           .send({ error: isValidated.error.details[0].message });
     }
     if (req.body.companyType != "SPC" && req.body.companyType != "SSC") {
+      console.log(req.body.companyType);
       const formtype = await FormTypes.find({ formType: req.body.companyType });
       const updated = req.body;
       delete updated.companyType;
@@ -272,7 +272,6 @@ router.put("/form/:formId", async (req, res) => {
 
     //SPC Conditions
     if (req.body.board && req.body.companyType == "SPC") {
-      console.log(req.body.board);
       return res
         .status(400)
         .json({ error: "investors establishing SPC cannot have board" });
@@ -306,9 +305,10 @@ router.put("/form/:formId", async (req, res) => {
 });
 
 //As an investor , I should be notified with the amount and the due date (fees calculation)
-FIXME: router.get("/notifyAmountAndDueDate/:id", async (req, res) => {
+router.get("/notifyAmountAndDueDate", async (req, res) => {
   const type = req.params.type;
-  const id = req.params.id;
+
+  const id = req.payload.id;
   const user = await User.findById(id);
   if (!user)
     return res.status(404).send({
@@ -319,7 +319,6 @@ FIXME: router.get("/notifyAmountAndDueDate/:id", async (req, res) => {
     { investor: id },
     { dateOfPayment: 1, amountOfPayment: 1, _id: 0 }
   );
-
   res.json({ data: form });
 });
 
@@ -349,7 +348,6 @@ router.get("/trackRequest", async (req, res) => {
   try {
     const id = req.payload.id;
     const form = await Form.find({ investor: id });
-
     if (!form)
       return res.status(404).send({
         error: "This form does not exist"

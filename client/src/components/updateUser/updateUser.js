@@ -152,8 +152,8 @@ class Update extends Component {
     }).catch(err => {
       alert(err);
     });
-    // const body = await response.text();
-    this.setState({ responseToPost: response });
+    const body = await response.text();
+    this.setState({ responseToPost: body });
     // this.props.history.replace("/");
     // this.props.history.replace("/updateUser");
   };

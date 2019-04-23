@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./externalPortal.css";
-import Login from "../login/login";
 
 class externalPortal extends Component {
   constructor(props) {
