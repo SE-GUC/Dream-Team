@@ -112,6 +112,7 @@ class App extends Component {
           <Route path="/feesCalc" component={feesCalc} />
           <Route path="/InvestorFillForm" component={fillform} />
           <Route path="/searchBar" component={searchBar} />
+          <Route path="/adminPortal" component={adminPortal} />
           <Route path="/reviewershowmyforms" component={ReviewerViewhisForms} />
           <Route path="/Lawyershowmyforms" component={LawyerViewhisCases} />
           <Route path="/companyRules" component={ComRule} />

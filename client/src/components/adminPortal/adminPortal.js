@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./externalPortal.css";
+import "./adminPortal.css";
 
-class externalPortal extends Component {
+class adminPortal extends Component {
   constructor(props) {
     super(props);
     this.state = { isShow: false };
@@ -14,6 +14,7 @@ class externalPortal extends Component {
   render() {
     return (
       <div className="background-image">
+       
         <div className="control" onClick={this.handleClick}>
           MENU
           <div className={this.state.isShow ? "content" : "invisible"}>
@@ -26,9 +27,9 @@ class externalPortal extends Component {
                 &times;
               </button>
               <a href="/feesCalculation">View Laws and Calculation Rules </a>
-              <a href="/publishedCompanies">View Published Companies</a>
-              <a href="/signup">Sign Up</a>
-              <a href="/login">Sign In</a>
+              <a href="/publishedCompanies">View Publishes Companies</a>
+
+              <a href="/adminARC">adminARC</a>
             </div>
           </div>
         </div>
@@ -37,4 +38,4 @@ class externalPortal extends Component {
   }
 }
 
-export default externalPortal;
+export default adminPortal;
