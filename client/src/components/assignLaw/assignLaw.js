@@ -37,7 +37,6 @@ class assignLaw extends Component {
         this.setState({ formID: cells[0].textContent });
       }
     });
-
     const response = await this.Auth.fetch(
       "/api/lawyer/assign/" +
         this.state.formID.trim() +

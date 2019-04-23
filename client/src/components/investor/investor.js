@@ -1,18 +1,24 @@
 import React, { Component } from "react";
 import "./investor.css";
+import { Table } from "reactstrap";
 import AuthHelperMethods from "../AuthHelperMethods";
 import withAuth from "../withAuth";
 
 class investor extends Component {
   Auth = new AuthHelperMethods();
-  constructor(props) {
-    super(props);
-    this.state = {
-      response: [],
-      isLoaded: false
-    };
+  state = {
+    response: [],
+    isLoaded: false
+  };
+  delete(x) {
+    const response = this.Auth.fetch("api/investor/" + x, {
+      method: "DELETE"
+    }).catch(err => {
+      this.setState({ responseToPost: err });
+    });
+    var body = response;
+    this.setState({ responseToPost: body });
   }
-
   componentDidMount() {
     this.Auth.fetch("api/investor/running")
       .then(res => res.json())
@@ -56,7 +62,7 @@ class investor extends Component {
             SearchForPending
           </button>
 
-          <table>
+          <Table dark hover bordered striped size="sm">
             <thead>
               <tr>
                 <th> ID</th>
@@ -117,11 +123,24 @@ class investor extends Component {
                   <td>{x.dateOfPayment}</td>
                   <td>{x.paymentId}</td>
                   <td>{x.formStatus}</td>
+                  <td>
+                    {
+                      <button
+                        className="btn btn-primary width-150"
+                        onClick={e => {
+                          this.delete(x._id);
+                        }}
+                      >
+                        delete
+                      </button>
+                    }
+                  </td>
+                  <p>{this.state.responseToPost}</p>
                   {/* <td>{x.board}</td> */}
                 </tr>
               ))}
             </tbody>
-          </table>
+          </Table>
         </div>
       );
     }

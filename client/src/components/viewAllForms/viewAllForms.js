@@ -34,7 +34,7 @@ class viewRejectedForms extends Component {
     this.setState({ responseToPost: body });
   }
   componentDidMount() {
-    this.Auth.fetch("api/reviewer/pendingCase")
+    this.Auth.fetch("api/internalPortal/")
       .then(response => response.json())
       .then(json => {
         this.setState({
@@ -61,13 +61,6 @@ class viewRejectedForms extends Component {
           <Table dark hover bordered>
             <thead>
               <tr>
-                <th> address</th>
-                <th> city </th>
-                <th> governorate </th>
-                <th> telephone </th>
-                <th> Fax </th>
-                <th> currency </th>
-                <th> capital </th>
                 <th> ID</th>
                 <th> companyName </th>
                 <th> companyNameEng </th>
@@ -95,14 +88,6 @@ class viewRejectedForms extends Component {
             <tbody>
               {response.data.map((x, key) => (
                 <tr>
-                  <td> {x.headquarters.address}</td>
-                  <td> {x.headquarters.city}</td>
-                  <td> {x.headquarters.governorate}</td>
-                  <td> {x.headquarters.telephone}</td>
-                  <td> {x.headquarters.fax}</td>
-                  <td> {x.financialInfo.currency}</td>
-                  <td> {x.financialInfo.capital}</td>
-
                   <td> {x._id}</td>
                   <td>{x.companyName}</td>
                   <td>{x.companyNameEng}</td>

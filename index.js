@@ -46,51 +46,51 @@ require("./auth/auth")(passport);
 app.get("/", (req, res) => res.send(`<h1>Person</h1>`));
 
 // Direct to Route Handlers
-app.use("/api/user", user);
-app.use("/api/admin", admin);
+// app.use("/api/user", user);
+// app.use("/api/admin", admin);
+// app.use("/api/externalPortal", externalPortal);
+// app.use("/api/internalPortal", internalPortal);
+// app.use("/api/investor", investor);
+// app.use("/api/lawyer", lawyer);
+// app.use("/api/reviewer", reviewer);
 app.use("/api/externalPortal", externalPortal);
-app.use("/api/internalPortal", internalPortal);
-app.use("/api/investor", investor);
-app.use("/api/lawyer", lawyer);
-app.use("/api/reviewer", reviewer);
-app.use("/api/externalPortal", externalPortal);
 
-// app.use(
-//   "/api/admin",
-//   passport.authenticate("jwt", { session: false }),
-//   AuthFor(typesEnum.ADMIN),
-//   admin
-// );
-// app.use(
-//   "/api/internalPortal",
-//   passport.authenticate("jwt", { session: false }),
-//   AuthFor(typesEnum.REVIEWER, typesEnum.LAWYER, typesEnum.ADMIN),
-//   internalPortal
-// );
-// app.use(
-//   "/api/investor",
-//   passport.authenticate("jwt", { session: false }),
-//   AuthFor(typesEnum.INVESTOR),
-//   investor
-// );
-// app.use(
-//   "/api/lawyer",
-//   passport.authenticate("jwt", { session: false }),
-//   AuthFor(typesEnum.LAWYER),
-//   lawyer
-// );
+app.use(
+  "/api/admin",
+  passport.authenticate("jwt", { session: false }),
+  AuthFor(typesEnum.ADMIN),
+  admin
+);
+app.use(
+  "/api/internalPortal",
+  passport.authenticate("jwt", { session: false }),
+  AuthFor(typesEnum.REVIEWER, typesEnum.LAWYER, typesEnum.ADMIN),
+  internalPortal
+);
+app.use(
+  "/api/investor",
+  passport.authenticate("jwt", { session: false }),
+  AuthFor(typesEnum.INVESTOR),
+  investor
+);
+app.use(
+  "/api/lawyer",
+  passport.authenticate("jwt", { session: false }),
+  AuthFor(typesEnum.LAWYER),
+  lawyer
+);
 
-// app.use(
-//   "/api/reviewer",
-//   passport.authenticate("jwt", { session: false }),
+app.use(
+  "/api/reviewer",
+  passport.authenticate("jwt", { session: false }),
 
-//   AuthFor(typesEnum.REVIEWER),
-//   reviewer
-// );
-// app.use("/api/login", login);
-// app.use((req, res) =>
-//   res.status(404).send(`<h1>Can not find what you're looking for</h1>`)
-// );
+  AuthFor(typesEnum.REVIEWER),
+  reviewer
+);
+app.use("/api/login", login);
+app.use((req, res) =>
+  res.status(404).send(`<h1>Can not find what you're looking for</h1>`)
+);
 
 let port = process.env.PORT;
 if (port == null || port == "") {

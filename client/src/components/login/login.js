@@ -24,7 +24,11 @@ class Login extends Component {
         if (res === false) {
           return alert("Sorry those credentials don't exist!");
         }
-        this.props.history.replace("/");
+        const type = this.Auth.getConfirm().type;
+        if (type === "investor") this.props.history.replace("/investor");
+        if (type === "admin") this.props.history.replace("/admin");
+        if (type === "reviewer") this.props.history.replace("/reviewer");
+        if (type === "lawyer") this.props.history.replace("/lawyer");
         // window.location.href = "/";
       })
       .catch(err => {

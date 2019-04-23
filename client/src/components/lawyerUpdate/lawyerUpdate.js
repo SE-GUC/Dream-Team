@@ -16,8 +16,8 @@ class LawyerUpdate extends Component {
       componentCall: ""
     };
   }
-  componentDillMount() {
-    this.Auth.fetch("api/lawyer/rejectedForms")
+  componentDidMount() {
+    this.Auth.fetch("api/lawyer/form/:formid")
       .then(res => res.json())
       .then(json => {
         this.setState({
