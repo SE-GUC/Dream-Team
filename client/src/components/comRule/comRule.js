@@ -29,22 +29,36 @@ class comRule extends Component {
           <Table dark hover bordered>
             <thead>
               <tr>
-                <th>Number </th>
                 <th> Rules </th>
               </tr>
             </thead>
             <tbody>
               {response.data.map(x => (
-                <tr>
-                  <td>{x.one}</td>
-                  <td>{x.two}</td>
-                  <td>{x.three}</td>
-                  <td>{x.four}</td>
-                  <td>{x.five}</td>
-                  <td>{x.six}</td>
-                  <td>{x.seven}</td>
-                  <td>{x.eight}</td>
-                </tr>
+                <div>
+                  <tr>
+                    <th>{x.one}</th>
+                  </tr>
+                  <tr>
+                    <th>{x.two}</th>
+                  </tr>
+                  <th>{x.three}</th>
+
+                  <tr>
+                    <th>{x.four}</th>
+                  </tr>
+                  <tr>
+                    <th>{x.five}</th>
+                  </tr>
+                  <tr>
+                    <th>{x.six}</th>
+                  </tr>
+                  <tr>
+                    <th>{x.seven}</th>
+                  </tr>
+                  <tr>
+                    <th>{x.eight}</th>
+                  </tr>
+                </div>
               ))}
             </tbody>
           </Table>
