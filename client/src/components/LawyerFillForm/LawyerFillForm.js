@@ -79,13 +79,14 @@ let title = this.state.title;
   console.log(b);
   // this.setState({ b: currentState });
   //   console.log(this.state.b);
-  this.setState({ 
-    board: this.state.board.push([b])
-  })
+  // this.setState({ 
+  //   board: this.state.board.concat()
+  // })
   // this.setState(prevState => ({
   //   board: [...prevState.myArray, b]
   // }))
-  
+  var joined = this.state.board.concat(this.state.b);
+this.setState({ board: joined })
 console.log(this.state.board)
   }}
   fillForm = async e => {
