@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./externalPortal.css";
+import "./reviewer.css";
 
-class externalPortal extends Component {
+class reviewer extends Component {
   constructor(props) {
     super(props);
     this.state = { isShow: false };
@@ -10,10 +10,11 @@ class externalPortal extends Component {
   handleClick = () => {
     this.setState({ isShow: !this.state.isShow });
   };
-  signUp() {}
+
   render() {
     return (
       <div className="background-image">
+        {/* <h2>Sumerge</h2> */}
         <div className="control" onClick={this.handleClick}>
           MENU
           <div className={this.state.isShow ? "content" : "invisible"}>
@@ -25,10 +26,14 @@ class externalPortal extends Component {
               >
                 &times;
               </button>
-              <a href="/feesCalculation">View Laws and Calculation Rules </a>
-              <a href="/publishedCompanies">View Published Companies</a>
-              <a href="/signup">Sign Up</a>
-              <a href="/login">Sign In</a>
+              <a href="/assignRev"> View Unreviewed Forms</a>
+              <a href="/filter">Search For a Company</a>
+              <a href="/formTable">View All Forms</a>
+              <a href="/reviewershowmyforms">View My Undecided Forms</a>
+              <a href="/reviewerCase"> View My Decided Forms</a>
+              <a href="/viewAllForms">Accept/Reject My Forms </a>
+              <a href="/updateUser">Update My Info </a>
+              {/* <a href="/searchBar">Search</a> */}
             </div>
           </div>
         </div>
@@ -37,4 +42,4 @@ class externalPortal extends Component {
   }
 }
 
-export default externalPortal;
+export default reviewer;

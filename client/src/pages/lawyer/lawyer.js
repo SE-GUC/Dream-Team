@@ -14,9 +14,9 @@ import "../homepage/homepage.css";
 class lawyer extends Component {
   Auth = new AuthHelperMethods();
   state = {};
-  publishedCompanies() {
-    this.props.history.push("/publishedCompanies");
-  }
+  // publishedCompanies() {
+  //   this.props.history.push("/publishedCompanies");
+  // }
   viewAllForms() {
     this.props.history.push("/viewAllForms");
   }
@@ -80,13 +80,13 @@ class lawyer extends Component {
             Click to assign
           </button>
         </div>
-        To view publishedCompanies click here
+        {/* To view publishedCompanies click here
         <button
           className="btn btn-primary width-150"
           onClick={e => {
             this.publishedCompanies();
           }}
-        />
+        /> */}
         <div>
           <button
             className="btn btn-primary width-150"

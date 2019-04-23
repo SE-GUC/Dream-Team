@@ -94,6 +94,8 @@ router.post("/createUser", async (req, res) => {
     isValidated = userValidator.createLawyerValidation(req.body);
   else if (req.body.accountType == "reviewer")
     isValidated = userValidator.createReviewerValidation(req.body);
+  else if (req.body.accountType == "admin")
+    isValidated = userValidator.createAdminValidation(req.body);
 
   if (isValidated.error)
     return res
@@ -106,7 +108,6 @@ router.post("/createUser", async (req, res) => {
     .then(user => res.json({ data: user }))
     .catch(err => res.json({ error: "Can not create User" }));
 });
-
 //Update user
 router.put(
   "/updateUser",
@@ -153,7 +154,6 @@ router.put(
     }
   }
 );
-
 //View SSC Rules - Public
 var SSC = [
   ["قواعد التحقق", "اختیارات القائمة", "اجباري", "نوع الحقل", "اسم الحقل"],

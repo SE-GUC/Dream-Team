@@ -13,11 +13,12 @@ class LawyerUpdate extends Component {
       response: [],
       isLoaded: false,
       update: true,
-      componentCall: ""
+      componentCall: "",
+      id: ""
     };
   }
-  componentDillMount() {
-    this.Auth.fetch("api/lawyer/rejectedForms")
+  componentDidMount() {
+    this.Auth.fetch("api/lawyer/form/" + this.state.id)
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -26,6 +27,20 @@ class LawyerUpdate extends Component {
         });
       });
   }
+  handleUpdate = async e => {
+    e.preventDefault();
+
+    await document.getElementById("myTable1").addEventListener("click", evt => {
+      var btn = evt.target;
+      console.log(btn.tagName);
+      if (btn.tagName === "BUTTON") {
+        var row = btn.parentNode.parentNode; //td than tr
+        var cells = row.getElementsByTagName("td"); //cells
+        //    console.log(cells[0].textContent, cells[1].textContent);
+        this.setState({ id: cells[0].textContent });
+      }
+    });
+  };
   // componentDidMount() {
   //   axios
 
@@ -83,7 +98,7 @@ class LawyerUpdate extends Component {
     } else {
       return (
         <div className="formTable">
-          <Table dark hover bordered>
+          <Table dark hover bordered id="myTable1">
             <thead>
               <tr>
                 <th> address</th>
@@ -173,6 +188,11 @@ class LawyerUpdate extends Component {
                         Click to update
                       </button>
                     }
+                    <td>
+                      <button onClick={this.handleUpdate}>
+                        Submit The Update
+                      </button>
+                    </td>
                   </td>
                   <td />
                 </tr>

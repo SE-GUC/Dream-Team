@@ -9,6 +9,7 @@ import lawyerFinalizedCases from "../../components/lawyerFinalizedCases/lawyerFi
 // import Tableform from '../../components/formTable';
 import searchBar from "../../components/searchBar";
 import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
+import adminComponent from "../../components/adminComponent/adminComponent";
 import "../homepage/homepage.css";
 import lawyer from "../../components/lawyer/lawyer";
 
@@ -130,9 +131,9 @@ class HomePage extends Component {
   assignRev() {
     this.props.history.push("/assignRev");
   }
-  pdfUpload() {
-    this.props.history.push("/pdfUpload");
-  }
+  // pdfUpload() {
+  //   this.props.history.push("/pdfUpload");
+  // }
   loginPage() {
     this.props.history.push("/login2");
   }
@@ -142,6 +143,9 @@ class HomePage extends Component {
 
     this.props.history.replace("/");
   };
+  reviewerCase() {
+    this.props.history.push("/reviewerCase");
+  }
 
   render() {
     return (
@@ -559,6 +563,18 @@ class HomePage extends Component {
               this.sideBar();
             }}
           />
+        </div>
+
+        <div>
+          reviewerCase
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.reviewerCase();
+            }}
+          >
+            Click to review
+          </button>
         </div>
       </div>
     );

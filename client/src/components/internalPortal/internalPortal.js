@@ -16,10 +16,6 @@ class internalPortal extends Component {
       <div className="background-image">
         {/* <h2>Sumerge</h2> */}
 
-        <a className={"signUp"} href="/signUp">
-          {" "}
-          Sign Up{" "}
-        </a>
         <div className="control" onClick={this.handleClick}>
           MENU
           <div className={this.state.isShow ? "content" : "invisible"}>
@@ -33,8 +29,7 @@ class internalPortal extends Component {
               </button>
               <a href="/case">Lawyer Working on a Case </a>
               <a href="/formTable">View All Cases</a>
-              <a href="/viewAllInvestors">View Investors</a>
-              <a href="/signup">Sign Up</a>
+
               <a href="/updateUser">Update Profile</a>
             </div>
           </div>

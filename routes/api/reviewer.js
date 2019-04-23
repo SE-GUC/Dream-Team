@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
+const passport = require("passport");
 
 const userValidator = require("../../validations/userValidations");
 const formValidator = require("../../validations/formValidations");
@@ -122,6 +123,15 @@ router.get("/pendingCase", async (req, res) => {
     return res.status(404).send({
       error: "This form does not exist"
     });
+  res.json({ data: form });
+});
+//not Assigned to reviewer
+router.get("/notAssignedReviewer", async (req, res) => {
+  // const forms=await Form.find();
+  const form = await Form.find({
+    formStatus: formEnum.formStatus.REVIEWER,
+    reviewer: null
+  });
   res.json({ data: form });
 });
 

@@ -15,7 +15,7 @@ class filter extends Component {
   }
 
   componentDidMount() {
-    this.Auth.fetch("api/internalPortal/search")
+    this.Auth.fetch("api/internalPortal/")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -28,7 +28,11 @@ class filter extends Component {
   filterCompany = e => {
     let currentList = [];
     let newList = [];
-    if (e.target.value !== "" && e.target.value != null) {
+    console.log(e.target.value);
+    if (
+      e.target.value != "".replace(/"([^"]+(?="))"/g, "$1") &&
+      e.target.value != null
+    ) {
       currentList = this.state.response;
       console.log(currentList);
       newList = currentList.data.filter(item => {
@@ -43,15 +47,16 @@ class filter extends Component {
         }
         return false;
       });
-    } else {
-      newList = this.state.response;
     }
-    if (e.target.value === undefined) {
-      newList = this.state.response;
-    }
-    if (e.target.value == null) {
-      newList = this.state.response;
-    }
+    // else {
+    //   newList = this.state.response;
+    // }
+    // if (e.target.value === undefined) {
+    //   newList = this.state.response;
+    // }
+    // if (e.target.value == null) {
+    //   newList = this.state.response;
+    // }
     console.log(newList);
     this.setState({
       filtered: {
@@ -78,9 +83,10 @@ class filter extends Component {
         }
         return false;
       });
-    } else {
-      newList = this.state.response;
     }
+    //  else {
+    //   newList = this.state.response;
+    // }
     this.setState({
       filtered: {
         data: newList

@@ -3,7 +3,6 @@ import withAuth from "../withAuth";
 import React, { Component } from "react";
 import { Table, Button } from "reactstrap";
 import axios from "axios";
-// const axios = require("axios");
 import "./formsOfLawyer.css";
 
 class formsOfLawyer extends Component {
@@ -56,6 +55,9 @@ class formsOfLawyer extends Component {
           response: json
         });
       });
+  }
+  componentDidMount() {
+    this.handleSubmit();
   }
 
   render() {

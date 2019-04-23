@@ -50,12 +50,12 @@ class Layout extends Component {
     if (this.props.type == "reviewer") {
       menu = (
         <div>
-          <Nav.Link href="/feesCalculation">
+          {/* <Nav.Link href="/feesCalculation">
             View Laws and Calculation Rules{" "}
           </Nav.Link>
           <Nav.Link href="/publishedCompanies">
             View Publishes Companies
-          </Nav.Link>
+          </Nav.Link> */}
           <Nav.Link href="/signup">Sign Up</Nav.Link>
           <Nav.Link href="/login">Sign In</Nav.Link>
         </div>
@@ -114,7 +114,7 @@ class Layout extends Component {
               >
                 &times;
               </button>
-              {menu}
+              {/* {menu} */}
             </div>
           </div>
           {/* </div> */}
@@ -122,15 +122,18 @@ class Layout extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
+              {/* <Nav.Link href="/adminComponent"> Admin Portal</Nav.Link>
+              <Nav.Link href="/investorComponent"> Investor Portal</Nav.Link> */}
               <Nav.Link href="/externalPortal">External Portal</Nav.Link>
               <Nav.Link href="/internalPortal">Internal Portal</Nav.Link>
-              <Nav.Link href="/lawyer">Lawyer</Nav.Link>
+              {/* <Nav.Link href="/lawyer">Lawyer</Nav.Link>
+              <Nav.Link href="/reviewer">reviewer</Nav.Link> */}
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/publishedCompanies">Companies</Nav.Link>
               <Nav.Link href="/companyRules">Companies Rules</Nav.Link>
               <Nav.Link href="/adminPortal">Admin portal</Nav.Link>
               <Nav.Link href="/feesCalculation">
-                Calculation Fees Rules
+                 Calculation Fees Rules
               </Nav.Link>
             </Nav>
             {rightNavBar}

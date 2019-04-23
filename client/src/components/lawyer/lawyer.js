@@ -35,15 +35,15 @@ class lawyer extends Component {
               >
                 &times;
               </button>
-              <a href="/publishedCompanies">View published Companies </a>
+              {/* <a href="/publishedCompanies">View published Companies </a> */}
               <a href="/viewAllForms">View all Forms</a>
               <a href="/LawyerFillForm">Fill Lawyer Form</a>
               <a href="/lawyerFinalizedCases">View Lawyer Finalized Cases</a>
               <a href="/formsOfLawyer">forms of lawyer</a>
-              <a href="/Lawyershowmyforms">lawyer show my forms</a>
+              <a href="/Lawyershowmyforms">lawyer show pending forms</a>
               <a href="/assignLaw">I want to get assigned to a form</a>
               <a href="/filterCase">Filter Cases</a>
-              <a href="/lawyerUpdate">Update a Lawyer</a>
+              <a href="/lawyerUpdate">Update a form</a>
             </div>
           </div>
         </div>

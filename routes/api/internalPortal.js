@@ -7,6 +7,7 @@ const User = require("../../models/User");
 const Form = require("../../models/Form");
 const typesEnum = require("../../enums/accountType");
 const regulatedLaw = require("../../enums/regulatedLaw");
+const passport = require("passport");
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);

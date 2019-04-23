@@ -1,45 +1,50 @@
 import React, { Component } from "react";
-import "./LawyerViewhisCases.css";
+import { Table } from "reactstrap";
 import AuthHelperMethods from "../AuthHelperMethods";
 import withAuth from "../withAuth";
-class Lview extends Component {
+//As a reviewer, I should get all my forms and approve/reject and add comments on each form
+//one specific ID
+class investorTrackRequest extends Component {
   Auth = new AuthHelperMethods();
   state = {
-    responseToPost: [],
-    isLoaded: false
+    response: {},
+    isLoaded: false,
+    update: true
   };
 
-  // handleSubmit = async e => {
-  //   e.preventDefault();
-  //   const response = await this.Auth.fetch("/api/lawyer/pendingCase", {
-  //     method: "GET"
-  //     //   body: JSON.stringify({ _id:this.state.formID })
-  //   });
-  handleSubmit() {
-    this.Auth.fetch("/api/lawyer/pendingCase")
-      .then(res => res.json())
-      .then(json => {
-        this.setState({ response: json, isLoaded: true });
-      });
-  }
-
   componentDidMount() {
-    this.handleSubmit();
+    this.Auth.fetch("api/investor/trackRequest")
+      .then(response => response.json())
+      .then(json => {
+        console.log("the object");
+        console.log(json);
+        this.setState({
+          isLoaded: true,
+          response: json
+        });
+      })
+      .catch(error => console.error(error));
   }
 
   render() {
-    var { response, isLoaded } = this.state;
+    var { isLoaded, response } = this.state;
+    let x;
+    console.log("the state " + isLoaded);
     if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
       return (
-        <body className="Case">
-          {/* <form onSubmit={this.handleSubmit}>
-            Please insert Form ID: */}
-          {/* </form> */}
-          <table>
+        <div className="formTable">
+          <Table dark hover bordered>
             <thead>
               <tr>
+                <th> address</th>
+                <th> city </th>
+                <th> governorate </th>
+                <th> telephone </th>
+                <th> Fax </th>
+                <th> currency </th>
+                <th> capital </th>
                 <th> ID</th>
                 <th> companyName </th>
                 <th> companyNameEng </th>
@@ -59,25 +64,31 @@ class Lview extends Component {
                 <th> dateOfPayment </th>
                 <th> paymentId </th>
                 <th> formStatus </th>
-                {/* <th> board </th> */}
+                <th> formType </th>
+                <th> Reviewer accept </th>
+                <th> Reviewer Reject </th>
               </tr>
             </thead>
-
             <tbody>
-              {response.data.map(x => (
+              {/* {console.log(response.data)} */}
+              {response.data.map((x, key) => (
                 <tr>
+                  {x.headquarters ? (
+                    <div>
+                      <td> {x.headquarters.address}</td>
+                      <td> {x.headquarters.city}</td>
+                      <td> {x.headquarters.governorate}</td>
+                      <td> {x.headquarters.telephone}</td>
+                      <td> {x.headquarters.fax}</td>
+                      <td> {x.financialInfo.currency}</td>
+                      <td> {x.financialInfo.capital}</td>
+                    </div>
+                  ) : null}
+
                   <td> {x._id}</td>
                   <td>{x.companyName}</td>
                   <td>{x.companyNameEng}</td>
                   <td>{x.companyType}</td>
-                  {/* <td>{x.headquarters}</td> */}
-                  {/* <td>{x.city}</td>
-              <td>{x.address}</td>
-              <td>{x.telephone}</td>
-              <td>{x.fax}</td>
-              <td>{x.currency}</td>
-              <td>{x.capital}</td> */}
-
                   <td>{x.entityType}</td>
                   <td>{x.regulatedLaw}</td>
                   <td>{x.investor}</td>
@@ -93,15 +104,16 @@ class Lview extends Component {
                   <td>{x.dateOfPayment}</td>
                   <td>{x.paymentId}</td>
                   <td>{x.formStatus}</td>
-                  {/* <td>{x.board}</td> */}
+                  <td>{x.formType}</td>
                 </tr>
               ))}
             </tbody>
-          </table>
-        </body>
+          </Table>
+          <div>{x}</div>
+        </div>
       );
     }
   }
 }
 
-export default withAuth(Lview);
+export default withAuth(investorTrackRequest);

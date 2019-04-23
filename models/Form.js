@@ -95,6 +95,10 @@ const FormSchema = new Schema(
       type: Boolean,
       default: false
     },
+    approvedForms: {
+      type: [Schema.Types.ObjectId],
+      ref: "Form"
+    },
     board: [BoardofdirectorsSchema]
   },
   { strict: false }

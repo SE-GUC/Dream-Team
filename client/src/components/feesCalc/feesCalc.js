@@ -13,7 +13,6 @@ class feesCalc extends Component {
     };
   }
   handleSubmit() {
-    console.log("hiiii");
 
     this.Auth.fetch("api/lawyer/feesCalculation/" + this.state.id, {
       method: "PUT"
