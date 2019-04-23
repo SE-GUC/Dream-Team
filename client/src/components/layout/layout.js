@@ -72,6 +72,7 @@ class Layout extends Component {
           </Nav.Link>
           <Nav.Link href="/signup">Sign Up</Nav.Link>
           <Nav.Link href="/login">Sign In</Nav.Link>
+          <Nav.Link href="/adminPortal">Admin Portal</Nav.Link>
         </div>
       );
     }
@@ -127,6 +128,7 @@ class Layout extends Component {
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/publishedCompanies">Companies</Nav.Link>
               <Nav.Link href="/companyRules">Companies Rules</Nav.Link>
+              <Nav.Link href="/adminPortal">Admin portal</Nav.Link>
               <Nav.Link href="/feesCalculation">
                 Calculation Fees Rules
               </Nav.Link>

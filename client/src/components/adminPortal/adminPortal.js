@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./externalPortal.css";
+import "./adminPortal.css";
 
-class externalPortal extends Component {
+class adminPortal extends Component {
   constructor(props) {
     super(props);
     this.state = { isShow: false };
@@ -28,7 +28,8 @@ class externalPortal extends Component {
               </button>
               <a href="/feesCalculation">View Laws and Calculation Rules </a>
               <a href="/publishedCompanies">View Publishes Companies</a>
-              
+
+              <a href="/adminARC">adminARC</a>
             </div>
           </div>
         </div>
@@ -37,4 +38,4 @@ class externalPortal extends Component {
   }
 }
 
-export default externalPortal;
+export default adminPortal;

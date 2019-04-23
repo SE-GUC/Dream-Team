@@ -39,7 +39,7 @@ import Reviewers from "./components/viewAllReviewers/viewAllReviewers";
 import "./index.css";
 import homepage from "./pages/homepage/homepage";
 import Case from "./pages/LRspecificCase";
-
+import adminPortal from "./components/adminPortal/adminPortal";
 class App extends Component {
   Auth = new AuthHelperMethods();
 
@@ -70,6 +70,7 @@ class App extends Component {
           <Route path="/formTable" component={FormTable} />
           {/* <Route path="/userTable" component={UserTable} /> */}
           <Route path="/searchBar" component={searchBar} />
+          <Route path="/adminPortal" component={adminPortal} />
           <Route path="/reviewershowmyforms" component={ReviewerViewhisForms} />
           <Route path="/Lawyershowmyforms" component={LawyerViewhisCases} />
           <Route path="/companyRules" component={ComRule} />

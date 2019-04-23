@@ -16,7 +16,7 @@ class formsOfLawyer extends Component {
     };
   }
   handleSubmit() {
-    this.Auth.fetch('api/admin/lawyer/' + this.state.id + '/')
+    this.Auth.fetch('api/admin/lawyer/')
       .then(res => res.json())
       .then(json => {
         this.setState({ response: json, isLoaded: true });
