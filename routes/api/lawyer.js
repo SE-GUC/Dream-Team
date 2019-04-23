@@ -152,6 +152,7 @@ router.put("/form/:formid", async (req, res) => {
     const userID = req.payload.id;
     const formid = req.params.formid;
     const form = await Form.findById(formid);
+
     if (!form) return res.status(404).send({ error: "Form does not exist" });
     //AUTHORIZATION
     if (

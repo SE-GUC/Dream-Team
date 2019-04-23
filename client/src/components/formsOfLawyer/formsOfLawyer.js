@@ -1,8 +1,8 @@
-import AuthHelperMethods from '../AuthHelperMethods';
-import withAuth from '../withAuth';
-import React, { Component } from 'react';
-import { Table } from 'reactstrap';
-import axios from 'axios';
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
+import React, { Component } from "react";
+import { Table } from "reactstrap";
+import axios from "axios";
 // const axios = require("axios");
 
 class formsOfLawyer extends Component {
@@ -11,45 +11,29 @@ class formsOfLawyer extends Component {
     super(props);
     this.state = {
       response: [],
-      isLoaded: false,
-      id: ''
+      isLoaded: false
     };
   }
   handleSubmit() {
-    this.Auth.fetch('api/admin/lawyer/' + this.state.id + '/')
+    this.Auth.fetch("api/lawyer/lawyerForms")
       .then(res => res.json())
       .then(json => {
         this.setState({ response: json, isLoaded: true });
       });
   }
+  componentDidMount() {
+    this.handleSubmit();
+  }
 
   render() {
     var { response, isLoaded } = this.state;
     if (!isLoaded) {
-      return (
-        <div>
-          <body className="formsOfLawyer">
-            Please insert Lawyer ID:
-            <input
-              type="text"
-              value={this.state.id}
-              onChange={e => this.setState({ id: e.target.value })}
-            />
-            <button onClick={y => this.handleSubmit()}>search</button>
-          </body>
-        </div>
-      );
+      return <div>Loading...</div>;
     } else {
       return (
         <body className="Case">
           {/* <form onSubmit={this.handleSubmit}>
             Please insert Form ID: */}
-          <button onClick={y => this.handleSubmit()}>search</button>
-          <input
-            type="text"
-            value={this.state.id}
-            onChange={e => this.setState({ id: e.target.value })}
-          />
           {/* </form> */}
           <table>
             <thead>

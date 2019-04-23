@@ -14,7 +14,7 @@ class assignLaw extends Component {
     isLoaded: false
   };
   componentDidMount() {
-    this.Auth.fetch("api/lawyer/pendingCase/")
+    this.Auth.fetch("api/lawyer/notAssignedLawyer/")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -26,7 +26,6 @@ class assignLaw extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-
     await document.getElementById("myTable").addEventListener("click", evt => {
       var btn = evt.target;
       console.log(btn.tagName);
@@ -46,8 +45,8 @@ class assignLaw extends Component {
     ).catch(err => {
       alert(JSON.stringify(err));
     });
-    const body = await response.text();
-    if (body.charAt(2) == "m") {
+    const body = await response.msg;
+    if (body.charAt(0) == "F") {
       this.setState({ responseToPost: body });
     } else {
       this.setState({
