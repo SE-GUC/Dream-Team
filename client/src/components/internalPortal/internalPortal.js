@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./externalPortal.css";
+import "./internalPortal.css";
 
-class externalPortal extends Component {
+class internalPortal extends Component {
   constructor(props) {
     super(props);
     this.state = { isShow: false };
@@ -15,10 +15,7 @@ class externalPortal extends Component {
     return (
       <div className="background-image">
         {/* <h2>Sumerge</h2> */}
-        <a className={"logIn"} href="/login">
-          Login{" "}
-        </a>
-        <a />=
+
         <a className={"signUp"} href="/signUp">
           {" "}
           Sign Up{" "}
@@ -34,10 +31,11 @@ class externalPortal extends Component {
               >
                 &times;
               </button>
-              <a href="/feesCalculation">View Laws and Calculation Rules </a>
-              <a href="/publishedCompanies">View Publishes Companies</a>
+              <a href="/case">Lawyer Working on a Case </a>
+              <a href="/formTable">View All Cases</a>
+              <a href="/viewAllInvestors">View Investors</a>
               <a href="/signup">Sign Up</a>
-              <a href="/login">Sign In</a>
+              <a href="/updateUser">Update Profile</a>
             </div>
           </div>
         </div>
@@ -46,4 +44,4 @@ class externalPortal extends Component {
   }
 }
 
-export default externalPortal;
+export default internalPortal;

@@ -53,6 +53,19 @@ body {
     overflow: hidden;
     outline: none;
   }
+  .btno {
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    width: 3vw;
+    height: 4vh;
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    background: url(./menu_white.png)
+  }
+  .btno:hover {
+    filter: invert(100%);
+    background-color : (255,255,255,0);
+  }
   .signUp {
     font-size: 50px;
     font-weight: bold;
@@ -85,12 +98,16 @@ body {
     font-size: 20px;
     font-weight: bold;
     color: #03a9f4;
-    border: 1px solid #ced6d6;
+    /* border: 1px solid #ced6d6; */
+    background: url(./menu_white.png) no-repeat;
     display: block;
     float: left;
     padding: 5px 10px;
   }
   
+  .menu {
+    background-image: url(./menu_white.png);
+  }
   .background-image {
     background: url("../../picpic.jpg") no-repeat 50% fixed / cover;
   }
