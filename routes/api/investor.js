@@ -306,9 +306,10 @@ router.put("/form/:formId", async (req, res) => {
 });
 
 //As an investor , I should be notified with the amount and the due date (fees calculation)
-FIXME: router.get("/notifyAmountAndDueDate/:id", async (req, res) => {
+router.get("/notifyAmountAndDueDate", async (req, res) => {
   const type = req.params.type;
-  const id = req.params.id;
+
+  const id = req.payload.id;
   const user = await User.findById(id);
   if (!user)
     return res.status(404).send({
@@ -319,7 +320,7 @@ FIXME: router.get("/notifyAmountAndDueDate/:id", async (req, res) => {
     { investor: id },
     { dateOfPayment: 1, amountOfPayment: 1, _id: 0 }
   );
-
+  console.log(form);
   res.json({ data: form });
 });
 

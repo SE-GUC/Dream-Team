@@ -16,6 +16,7 @@
     "react-bootstrap-table-next": "^3.1.0",
     "react-bootstrap-table2-filter": "^1.1.8",
     "react-dom": "^16.8.6",
+    "react-materialize": "^3.1.1",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "react-stripe-elements": "^2.0.3",
@@ -41,5 +42,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/react-router": "^3.0.20"
+  }
 }

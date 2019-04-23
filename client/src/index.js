@@ -55,7 +55,12 @@ import formsOfLawyer from "./components/formsOfLawyer";
 import lawyerFinalizedCases from "./components/lawyerFinalizedCases/lawyerFinalizedCases";
 import pdfUpload from "./components/pdfUpload/pdfUpload";
 import externalPortal from "./components/externalPortal/externalPortal";
-
+import investorComponent from "./components/investorComponent/investorComponent";
+import InvestorFillForm from "./components/InvestorFillForm/InvestorFillForm";
+import adminComponent from "./components/adminComponent/adminComponent";
+import InvestorUpdateForm from "./components/InvestorUpdateForm/InvestorUpdateForm";
+import investorAmountDate from "./components/investorAmountDate/investorAmountDate";
+import investorTrackRequest from "./components/investorTrackRequest/investorTrackRequest";
 // import ReviewerViewhisForms from "./components/ReviewerViewhisForms";
 
 ReactDOM.render(
@@ -96,12 +101,18 @@ ReactDOM.render(
       <Route path="/lawyerUpdate" component={LawUpForm} />
       <Route path="/feesCalc" component={feesCalc} />
       <Route path="/pdfUpload" component={pdfUpload} />
-
       <Route path="/externalPortal" component={externalPortal} />
+      <Route path="/investorComponent" component={investorComponent} />
+      <Route path="/InvestorFillForm" component={InvestorFillForm} />
+      <Route path="/adminComponent" component={adminComponent} />
+      <Route path="/InvestorUpdateForm" component={InvestorUpdateForm} />
+      <Route path="/investorAmountDate" component={investorAmountDate} />
+      <Route path="/investorTrackRequest" component={investorTrackRequest} />
     </div>
   </Router>,
   document.getElementById("root")
 );
 ReactDOM.render(<NavBar />, document.getElementById("Nav"));
+//ReactDOM.render(<footer />, document.getElementById('footer'));
 //ReactDOM.render(<pdfUpload />, document.getElementById("root"));
 // serviceWorker.unregister();

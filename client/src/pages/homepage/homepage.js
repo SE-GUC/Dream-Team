@@ -9,6 +9,7 @@ import lawyerFinalizedCases from "../../components/lawyerFinalizedCases/lawyerFi
 // import Tableform from '../../components/formTable';
 import searchBar from "../../components/searchBar";
 import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
+import adminComponent from "../../components/adminComponent/adminComponent";
 import "../homepage/homepage.css";
 
 class HomePage extends Component {
