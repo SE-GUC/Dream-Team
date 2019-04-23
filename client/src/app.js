@@ -14,7 +14,7 @@ import externalPortal from "./components/externalPortal/externalPortal";
 import feesCalc from "./components/feesCalc/feesCalc";
 import filtercase from "./components/filterCase/filterCase";
 import formsOfLawyer from "./components/formsOfLawyer";
-import FormTable from "./components/formTable";
+import FormTable from "./components/formTable/formTable";
 import GetUser from "./components/getUser/getUser";
 import Investor from "./components/investor";
 import InvUpdate from "./components/investorUpdate/investorUpdate";
@@ -38,6 +38,7 @@ import viewAllLawyer from "./components/viewAllLawyer/viewAllLawyer";
 import fillform from "./components/InvestorFillForm/InvestorFillForm";
 import Reviewers from "./components/viewAllReviewers/viewAllReviewers";
 import investorPortal from "./components/investorComponent/investorComponent";
+import internalPortal from "./components/internalPortal/internalPortal";
 // import userTable from "./components/usertable/userTable";
 import "./index.css";
 import homepage from "./pages/homepage/homepage";
@@ -93,6 +94,7 @@ class App extends Component {
           <Route path="/getUser" component={GetUser} />
           <Route path="/assignRev" component={AssignRev} />
           <Route path="/viewAllInvestors" component={viewAllInvestors} />
+          <Route path="/internalPortal" component={internalPortal} />
           <Route path="/formsOfLawyer" component={formsOfLawyer} />
           <Route
             path="/lawyerFinalizedCases"

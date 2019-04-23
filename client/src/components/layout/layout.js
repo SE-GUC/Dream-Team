@@ -129,6 +129,7 @@ class Layout extends Component {
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/publishedCompanies">Companies</Nav.Link>
               <Nav.Link href="/companyRules">Companies Rules</Nav.Link>
+
               <Nav.Link href="/feesCalculation">
                 Calculation Fees Rules
               </Nav.Link>
