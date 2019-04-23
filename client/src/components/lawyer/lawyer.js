@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import "./externalPortal.css";
+import "./lawyer.css";
+import Login from "../login/login";
 
-class externalPortal extends Component {
+class lawyer extends Component {
   constructor(props) {
     super(props);
     this.state = { isShow: false };
@@ -14,7 +15,7 @@ class externalPortal extends Component {
   render() {
     return (
       <div className="background-image">
-        {/* <h2>Sumerge</h2> */}
+        {/* <h2>Sumerge</h2>
         <a className={"logIn"} href="/login">
           Login{" "}
         </a>
@@ -22,7 +23,7 @@ class externalPortal extends Component {
         <a className={"signUp"} href="/signUp">
           {" "}
           Sign Up{" "}
-        </a>
+        </a> */}
         <div className="control" onClick={this.handleClick}>
           MENU
           <div className={this.state.isShow ? "content" : "invisible"}>
@@ -34,10 +35,15 @@ class externalPortal extends Component {
               >
                 &times;
               </button>
-              <a href="/feesCalculation">View Laws and Calculation Rules </a>
-              <a href="/publishedCompanies">View Publishes Companies</a>
-              <a href="/signup">Sign Up</a>
-              <a href="/login">Sign In</a>
+              <a href="/publishedCompanies">View published Companies </a>
+              <a href="/viewAllForms">View all Forms</a>
+              <a href="/LawyerFillForm">Fill Lawyer Form</a>
+              <a href="/lawyerFinalizedCases">View Lawyer Finalized Cases</a>
+              <a href="/formsOfLawyer">forms of lawyer</a>
+              <a href="/Lawyershowmyforms">lawyer show my forms</a>
+              <a href="/assignLaw">I want to get assigned to a form</a>
+              <a href="/filterCase">Filter Cases</a>
+              <a href="/lawyerUpdate">Update a Lawyer</a>
             </div>
           </div>
         </div>
@@ -46,4 +52,4 @@ class externalPortal extends Component {
   }
 }
 
-export default externalPortal;
+export default lawyer;

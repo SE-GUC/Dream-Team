@@ -4,7 +4,7 @@ import AuthHelperMethods from "../AuthHelperMethods";
 import withAuth from "../withAuth";
 //As a reviewer, I should get all my forms and approve/reject and add comments on each form
 //one specific ID
-class viewRejectedForms extends Component {
+class viewAllForms extends Component {
   Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
@@ -160,4 +160,4 @@ class viewRejectedForms extends Component {
   }
 }
 
-export default withAuth(viewRejectedForms);
+export default withAuth(viewAllForms);

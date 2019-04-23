@@ -5,7 +5,7 @@ import AuthHelperMethods from "../AuthHelperMethods";
 import Login from "../login/login";
 
 class investorComponent extends Component {
-  // Auth = new AuthHelperMethods();
+  Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
     this.state = { isShow: false };
@@ -37,7 +37,7 @@ class investorComponent extends Component {
               <a href="/InvestorFillForm"> Create a new Form </a>
               <a href="/investorUpdate">To Update Rejected Forms</a>
               <a href="/updateInvForm">To Update Forms</a>
-              <a href="/pdfUpload"> To Generate a PDF</a>
+              {/* <a href="/pdfUpload"> To Generate a PDF</a> */}
               <a href="/CheckoutForm"> Payment</a>
 
               <a href="/investorAmountDate"> Amount & Due Dates</a>

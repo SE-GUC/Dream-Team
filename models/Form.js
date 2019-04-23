@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const BoardofdirectorsSchema = require('../models/Boardofdirectors');
-const regulatedLaw = require('../enums/regulatedLaw');
-const formStatus = require('../enums/formStatus');
-const formType = require('../enums/formType');
+const BoardofdirectorsSchema = require("../models/Boardofdirectors");
+const regulatedLaw = require("../enums/regulatedLaw");
+const formStatus = require("../enums/formStatus");
+const formType = require("../enums/formType");
 const FormSchema = new Schema(
   {
     companyName: {
@@ -45,24 +45,24 @@ const FormSchema = new Schema(
     },
     investor: {
       type: Schema.Types.ObjectId,
-      ref: 'User'
+      ref: "User"
     },
     lawyer: {
       type: Schema.Types.ObjectId,
-      ref: 'User'
+      ref: "User"
     },
     lawyerComment: {
-      type: String
+      type: []
     },
     lawyerDecision: {
       type: Number
     },
     reviewer: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+      ref: "User"
     },
     reviwerComment: {
-      type: String
+      type: []
     },
     reviewerDecision: {
       type: Number
@@ -85,7 +85,7 @@ const FormSchema = new Schema(
       },
       lawyer: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: "User"
       }
     },
     formStatus: {
@@ -100,4 +100,4 @@ const FormSchema = new Schema(
   { strict: false }
 );
 
-module.exports = mongoose.model('Form', FormSchema);
+module.exports = mongoose.model("Form", FormSchema);

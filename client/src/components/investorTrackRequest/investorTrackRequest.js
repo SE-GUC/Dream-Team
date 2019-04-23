@@ -6,19 +6,18 @@ import withAuth from "../withAuth";
 //one specific ID
 class investorTrackRequest extends Component {
   Auth = new AuthHelperMethods();
-  constructor(props) {
-    super(props);
-    this.state = {
-      response: [],
-      isLoaded: false,
-      update: true
-    };
-  }
+  state = {
+    response: {},
+    isLoaded: false,
+    update: true
+  };
 
   componentDidMount() {
     this.Auth.fetch("api/investor/trackRequest")
       .then(response => response.json())
       .then(json => {
+        console.log("the object");
+        console.log(json);
         this.setState({
           isLoaded: true,
           response: json
@@ -28,10 +27,10 @@ class investorTrackRequest extends Component {
   }
 
   render() {
-    var { response, isLoaded } = this.state;
+    var { isLoaded, response } = this.state;
     let x;
-
-    if (!isLoaded && response.data != undefined) {
+    console.log("the state " + isLoaded);
+    if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
       return (
@@ -71,15 +70,20 @@ class investorTrackRequest extends Component {
               </tr>
             </thead>
             <tbody>
+              {/* {console.log(response.data)} */}
               {response.data.map((x, key) => (
                 <tr>
-                  <td> {x.headquarters.address}</td>
-                  <td> {x.headquarters.city}</td>
-                  <td> {x.headquarters.governorate}</td>
-                  <td> {x.headquarters.telephone}</td>
-                  <td> {x.headquarters.fax}</td>
-                  <td> {x.financialInfo.currency}</td>
-                  <td> {x.financialInfo.capital}</td>
+                  {x.headquarters ? (
+                    <div>
+                      <td> {x.headquarters.address}</td>
+                      <td> {x.headquarters.city}</td>
+                      <td> {x.headquarters.governorate}</td>
+                      <td> {x.headquarters.telephone}</td>
+                      <td> {x.headquarters.fax}</td>
+                      <td> {x.financialInfo.currency}</td>
+                      <td> {x.financialInfo.capital}</td>
+                    </div>
+                  ) : null}
 
                   <td> {x._id}</td>
                   <td>{x.companyName}</td>

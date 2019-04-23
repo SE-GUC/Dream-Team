@@ -11,6 +11,7 @@ import searchBar from "../../components/searchBar";
 import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
 import adminComponent from "../../components/adminComponent/adminComponent";
 import "../homepage/homepage.css";
+import lawyer from "../../components/lawyer/lawyer";
 
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
@@ -130,8 +131,11 @@ class HomePage extends Component {
   assignRev() {
     this.props.history.push("/assignRev");
   }
-  pdfUpload() {
-    this.props.history.push("/pdfUpload");
+  // pdfUpload() {
+  //   this.props.history.push("/pdfUpload");
+  // }
+  loginPage() {
+    this.props.history.push("/login2");
   }
 
   _handleLogout = () => {
@@ -250,7 +254,7 @@ class HomePage extends Component {
             Click to view form
           </button>
         </div>
-        <div>
+        {/* <div>
           pdf upload
           <button
             className="btn btn-primary width-150"
@@ -260,7 +264,7 @@ class HomePage extends Component {
           >
             Click to upload
           </button>
-        </div>
+        </div> */}
         <div>
           To view user table
           <button

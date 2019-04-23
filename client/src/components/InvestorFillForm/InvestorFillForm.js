@@ -1,35 +1,35 @@
-import React, { Component } from 'react';
-import AuthHelperMethods from '../AuthHelperMethods';
-import withAuth from '../withAuth';
+import React, { Component } from "react";
+import AuthHelperMethods from "../AuthHelperMethods";
+import withAuth from "../withAuth";
 
 class InvestorFillForm extends Component {
   Auth = new AuthHelperMethods();
   state = {
-    companyName: '',
-    companyNameEng: '',
-    companyType: '',
+    companyName: "",
+    companyNameEng: "",
+    companyType: "",
     headquarters: {
-      governorate: '',
-      city: '',
-      address: '',
-      telephone: '',
-      fax: ''
+      governorate: "",
+      city: "",
+      address: "",
+      telephone: "",
+      fax: ""
     },
     financialInfo: {
-      currency: '',
-      capital: ''
+      currency: "",
+      capital: ""
     },
-    entityType: '',
+    entityType: "",
     board: [],
-    regulatedLaw: '',
-    inID: '',
-    id: '',
-    responseToPost: ''
+    regulatedLaw: "",
+    inID: "",
+    id: "",
+    responseToPost: ""
   };
   fillForm = async e => {
     e.preventDefault();
-    const response = await this.Auth.fetch('api/investor/createForm/', {
-      method: 'POST',
+    const response = await this.Auth.fetch("api/investor/createForm/", {
+      method: "POST",
       body: JSON.stringify({
         companyName: this.state.companyName,
         companyNameEng: this.state.companyNameEng,
@@ -45,11 +45,12 @@ class InvestorFillForm extends Component {
           currency: this.state.currency,
           capital: this.state.capital
         },
-        regulatedLaw: this.state.regulatedLaw,
-        entityType: this.state.entityType
+        regulatedLaw: this.state.regulatedLaw
+        // entityType: this.state.entityType
       })
     }).catch(err => {
-      this.setState({ responseToPost: err });
+      // this.setState({ responseToPost: err });
+      console.log(err);
     });
     const body1 = await response.text();
     this.setState({ responseToPost: body1 });

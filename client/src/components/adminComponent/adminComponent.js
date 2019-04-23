@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import './adminComponent.css';
-import AuthHelperMethods from '../AuthHelperMethods';
+import React, { Component } from "react";
+import "./adminComponent.css";
+import AuthHelperMethods from "../AuthHelperMethods";
 
-import Login from '../login/login';
+import Login from "../login/login";
 
 class adminComponent extends Component {
   // Auth = new AuthHelperMethods();
@@ -23,7 +23,7 @@ class adminComponent extends Component {
         <a />= */}
         <div className="control" onClick={this.handleClick}>
           Menu
-          <div className={this.state.isShow ? 'content' : 'invisible'}>
+          <div className={this.state.isShow ? "content" : "invisible"}>
             <div id="mySidenav" className="sidenav">
               <button
                 onClick={this.handleClick}
@@ -37,10 +37,10 @@ class adminComponent extends Component {
               <a href="/formsOfLawyer"> View Forms of Lawyer </a>
               <a href="/getUser">View User</a>
               <a href="/userTable">View All Users</a>
-              <a href="/viewAllForms"> View All Forms</a>
+
               <a href="/viewAllInvestors"> View All Investors</a>
               <a href="/viewAllLawyer"> View All Lawyers</a>
-              <a href="/viewAllReviewers"> View All Reviewers</a>
+              <a href="/reviewers"> View All Reviewers</a>
             </div>
           </div>
         </div>

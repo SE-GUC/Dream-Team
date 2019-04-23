@@ -44,39 +44,35 @@ class SignUp extends Component {
       capital: this.state.capital,
       capitalCurrency: this.state.capitalCurrency
     };
-
     const response = await fetch("api/externalPortal/createUser", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json"
-        // mode: 'no-cors'
-        // ,
-        // 'access-control-allow-origin'
-      }
-      // body: JSON.stringify({
-      //   name: this.state.name,
-      //   accountType: this.state.accountType,
-      //   gender: this.state.gender,
-      //   nationality: this.state.nationality,
-      //   email: this.state.email,
-      //   password: this.state.password,
-      //   typeID: this.state.typeID,
-      //   numberID: this.state.numberID,
-      //   phoneNumber: this.state.phoneNumber,
-      //   faxNumber: this.state.faxNumber,
-      //   dateOfBirth: this.state.dateOfBirth,
-      //   address: this.state.address
-      //   investorType: this.state.investorType,
-      //   capital: this.state.capital,
-      //   capitalCurrency: this.state.capitalCurrency
-      // })
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        accountType: this.state.accountType,
+        gender: this.state.gender,
+        nationality: this.state.nationality,
+        email: this.state.email,
+        password: this.state.password,
+        typeID: this.state.typeID,
+        numberID: this.state.numberID,
+        phoneNumber: this.state.phoneNumber,
+        faxNumber: this.state.faxNumber,
+        dateoOfBirth: this.state.dateOfBirth,
+        address: this.state.address,
+        investorType: this.state.investorType,
+        capital: this.state.capital,
+        capitalCurrency: this.state.capitalCurrency
+      })
     }).catch(err => {
       alert(err);
     });
     const body = await response.text();
     this.setState({ responseToPost: body });
-    // this.props.history.replace('/login');
+    this.props.history.replace("/login");
   };
 
   render() {
@@ -113,7 +109,7 @@ class SignUp extends Component {
 
           <Form.Row>
             <Form.Group as={Col} controlId="formGridGender">
-              <Form.Label>Gender *</Form.Label>
+              <Form.Label className="InputContainer">Gender *</Form.Label>
               <Form.Control
                 as="select"
                 value={this.state.gender}
@@ -135,6 +131,7 @@ class SignUp extends Component {
               />
             </Form.Group>
           </Form.Row>
+
           <Form.Row>
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label>Email *</Form.Label>
@@ -147,7 +144,7 @@ class SignUp extends Component {
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridPassword">
-              <Form.Label>Password *</Form.Label>
+              <Form.Label className="InputContainer">Password *</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Password"
@@ -201,75 +198,74 @@ class SignUp extends Component {
             </Form.Group>
           </Form.Row>
 
-          <Form.Row>
-            <Form.Group as={Col} controlId="formGridDateofBirth">
-              <Form.Label>Date of Birth *</Form.Label>
-              <Form.Control
-                type="date"
-                placeholder="Enter your date of birth"
-                value={this.state.dateOfBirth}
-                onChange={e => this.setState({ dateOfBirth: e.target.value })}
-              />
-            </Form.Group>
-          </Form.Row>
-
           <Form.Group controlId="formGridAddress">
-            <Form.Label>Address *</Form.Label>
+            <Form.Label className="InputContainer">Address *</Form.Label>
             <Form.Control
-              placeholder="1234 Main St"
-              value={this.state.address}
-              onChange={e => this.setState({ address: e.target.value })}
+              type="date"
+              placeholder="Enter your date of birth"
+              value={this.state.dateOfBirth}
+              onChange={e => this.setState({ dateOfBirth: e.target.value })}
             />
           </Form.Group>
 
           <Form.Row>
             <Form.Group as={Col} controlId="formGridInvestorType">
-              <Form.Label>Investor Type</Form.Label>
+              <Form.Label className="InputContainer">Investor Type</Form.Label>
               <Form.Control
-                // type="investorType"
+                type="investorType"
                 placeholder="Enter type of Investor"
                 value={this.state.investorType}
                 onChange={e => this.setState({ investorType: e.target.value })}
               />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridCapital">
-              <Form.Label>Capital</Form.Label>
-              <Form.Control
-                // type="capital"
-                placeholder="Enter your Capital"
-                value={this.state.capital}
-                onChange={e => this.setState({ capital: e.target.value })}
-              />
-            </Form.Group>
+            <Form.Row>
+              <Form.Group as={Col} controlId="formGridInvestorType">
+                <Form.Label>Investor Type</Form.Label>
+                <Form.Control
+                  // type="investorType"
+                  placeholder="Enter type of Investor"
+                  value={this.state.investorType}
+                  onChange={e =>
+                    this.setState({ investorType: e.target.value })
+                  }
+                />
+              </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridCapitalCurrency">
-              <Form.Label>Capital Currency</Form.Label>
-              <Form.Control
-                // type="capitalCurrency"
-                placeholder="Enter the currency of your capital"
-                value={this.state.capitalCurrency}
-                onChange={e =>
-                  this.setState({ capitalCurrency: e.target.value })
+              <Form.Group as={Col} controlId="formGridCapital">
+                <Form.Label>Capital</Form.Label>
+                <Form.Control
+                  // type="capital"
+                  placeholder="Enter your Capital"
+                  value={this.state.capital}
+                  onChange={e => this.setState({ capital: e.target.value })}
+                />
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="formGridCapitalCurrency">
+                <Form.Label>Capital Currency</Form.Label>
+                <Form.Control
+                  // type="capitalCurrency"
+                  placeholder="Enter the currency of your capital"
+                  value={this.state.capitalCurrency}
+                  onChange={e =>
+                    this.setState({ capitalCurrency: e.target.value })
+                  }
+                />
+              </Form.Group>
+              <div>{this.state.responseToPost}</div>
+              <Popup
+                trigger={
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
                 }
-              />
-            </Form.Group>
+                position="bottom center"
+              >
+                <div>{this.state.responseToPost}</div>
+              </Popup>
+            </Form.Row>
           </Form.Row>
-
-          <Form.Group id="formGridCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
-          <div>{this.state.responseToPost}</div>
-          <Popup
-            trigger={
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            }
-            position="bottom center"
-          >
-            <div>{this.state.responseToPost}</div>
-          </Popup>
         </Form>
       </div>
     );
