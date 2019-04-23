@@ -7,7 +7,7 @@ import adminComponent from "./components/adminComponent/adminComponent";
 import assignLaw from "./components/assignLaw/assignLaw";
 import AssignRev from "./components/assignRev/assignRev";
 import AuthHelperMethods from "./components/AuthHelperMethods";
-import adminPortal from "./components/adminPortal/adminPortal";
+// import adminPortal from "./components/adminPortal/adminPortal";
 import CalcRule from "./components/calcRule/calcRule";
 import CheckoutForm from "./components/CheckoutForm/App";
 import ComRule from "./components/comRule/comRule";
