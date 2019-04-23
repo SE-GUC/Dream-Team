@@ -52,8 +52,10 @@
     "jest": "23.6.0",
     "nodemon": "^1.18.10"
   },
+  "devDependencies": {},
   "engines": {
-    "node": "10.15.1"
+    "node": "10.15.1",
+    "npm": "6.4.1"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "./Test/setup.js",
