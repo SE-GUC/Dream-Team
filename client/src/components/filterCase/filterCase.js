@@ -3,7 +3,7 @@ import { Table } from "reactstrap";
 import AuthHelperMethods from "../AuthHelperMethods";
 import withAuth from "../withAuth";
 
-class filter extends Component {
+ class filter extends Component {
   Auth = new AuthHelperMethods();
   constructor(props) {
     super(props);
@@ -14,8 +14,8 @@ class filter extends Component {
     };
   }
 
-  componentDidMount() {
-    this.Auth.fetch("api/internalPortal/search")
+   componentDidMount() {
+    this.fetch("api/internalPortal/search")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -37,7 +37,7 @@ class filter extends Component {
           lc = item.companyName.toLowerCase();
         }
 
-        const filter = e.target.value.toLowerCase();
+         const filter = e.target.value.toLowerCase();
         if (lc) {
           return lc.includes(filter);
         }
@@ -88,7 +88,7 @@ class filter extends Component {
     });
   };
 
-  render() {
+   render() {
     var { response, isLoaded, filtered } = this.state;
     if (!isLoaded) {
       return <div>Loading...</div>;
@@ -135,7 +135,7 @@ class filter extends Component {
               </tr>
             </thead>
 
-            <tbody>
+             <tbody>
               {filtered.data.map(x => (
                 <tr>
                   <td>{x.id}</td>
@@ -167,4 +167,4 @@ class filter extends Component {
   }
 }
 
-export default withAuth(filter);
+ export default filter;

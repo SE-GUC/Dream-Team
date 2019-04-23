@@ -61,12 +61,12 @@ app.use(
   AuthFor(typesEnum.ADMIN),
   admin
 );
-app.use(
-  "/api/internalPortal",
-  passport.authenticate("jwt", { session: false }),
-  AuthFor(typesEnum.REVIEWER, typesEnum.LAWYER, typesEnum.ADMIN),
-  internalPortal
-);
+// app.use(
+//   "/api/internalPortal",
+//   passport.authenticate("jwt", { session: false }),
+//   AuthFor(typesEnum.REVIEWER, typesEnum.LAWYER, typesEnum.ADMIN),
+//   internalPortal
+// );
 app.use(
   "/api/investor",
   passport.authenticate("jwt", { session: false }),
