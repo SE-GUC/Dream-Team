@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
+const passport = require("passport");
 
 const userValidator = require("../../validations/userValidations");
 const formValidator = require("../../validations/formValidations");
