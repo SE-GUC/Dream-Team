@@ -142,6 +142,9 @@ class HomePage extends Component {
 
     this.props.history.replace("/");
   };
+  reviewerCase() {
+    this.props.history.push("/reviewerCase");
+  }
 
   render() {
     return (
@@ -559,6 +562,18 @@ class HomePage extends Component {
               this.sideBar();
             }}
           />
+        </div>
+
+        <div>
+          reviewerCase
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.reviewerCase();
+            }}
+          >
+            Click to review
+          </button>
         </div>
       </div>
     );

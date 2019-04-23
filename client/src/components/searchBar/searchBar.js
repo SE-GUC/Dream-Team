@@ -6,8 +6,8 @@ const bodyParser = require("body-parser");
 class searchBar extends React.Component {
   state = {
     query: "",
-    orgData: [],
-    filteredData: []
+    orgData: []
+    // filteredData: []
   };
 
   handleInputChange = event => {
@@ -25,25 +25,38 @@ class searchBar extends React.Component {
     });
   };
 
-  getData = () => {
-    fetch(`api/form/search`)
-      .then(response => response.json())
-      .then(response => {
-        const { query } = this.state;
-        const filteredData = _.filter(response, element => {
-          return element.some(v => v === query);
-        });
+  handleSubmit = () => {
+    fetch(
+      "api/internalPortal/",
+      {
+        method: "GET",
+        body: this.state.query
+      }
 
-        this.setState({
-          orgData: response,
-          filteredData: filteredData
-        });
-      });
+        .then(response => response.json())
+        .then(res => {
+          // const { query } = this.state;
+          // const filteredData = _.filter(res, element => {
+          //   return element.some(v => v === query);
+          // });
+
+          this.setState({
+            orgData: res
+            // ,
+            // filteredData: filteredData
+          });
+        })
+    );
   };
 
-  componentWillMount() {
-    this.getData();
-  }
+  //  const response = await this.Auth.fetch(
+  //     "/api/admin/user" + this.state.userID + "/",
+  //     {
+  //       method: "GET"
+  //     }
+  //   ).catch(err => {
+  //     alert(err);
+  //   });
 
   render() {
     console.log("yt3lmo");
@@ -54,12 +67,16 @@ class searchBar extends React.Component {
             placeholder="Search for..."
             S
             value={this.state.query}
-            onChange={this.handleInputChange}
+            onChange={e => this.setState({ query: e.target.value })}
           />
+
+          <button type="submit" onClick={this.handleSubmit}>
+            search
+          </button>
         </form>
         <div>
-          {this.state.filteredData.map(i => (
-            <p>{i.name}</p>
+          {this.state.orgData.map(i => (
+            <p>{i.companyName}</p>
           ))}
         </div>
       </div>
