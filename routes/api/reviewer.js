@@ -125,5 +125,14 @@ router.get("/pendingCase", async (req, res) => {
     });
   res.json({ data: form });
 });
+//not Assigned to reviewer
+router.get("/notAssignedReviewer", async (req, res) => {
+  // const forms=await Form.find();
+  const form = await Form.find({
+    formStatus: formEnum.formStatus.REVIEWER,
+    reviewer: null
+  });
+  res.json({ data: form });
+});
 
 module.exports = router;

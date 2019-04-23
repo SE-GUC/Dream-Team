@@ -161,6 +161,7 @@ router.put("/form/:formid", async (req, res) => {
     const userID = req.payload.id;
     const formid = req.params.formid;
     const form = await Form.findById(formid);
+
     if (!form) return res.status(404).send({ error: "Form does not exist" });
     //AUTHORIZATION
     if (
@@ -338,6 +339,7 @@ router.put("/accept/:id", async (req, res) => {
         .send({ error: "This form does not belong to you" });
     var approved = {
       lawyerDecision: 1,
+      $push: { approvedForms: formID },
       formStatus: formEnum.formStatus.REVIEWER
     };
     await Form.findByIdAndUpdate(formID, approved);
@@ -424,6 +426,16 @@ router.get("/AR", async (req, res) => {
     //Check condition
     res.json({ data: dec });
   } else res.json({ msg: "No Forms for this lawyer " });
+});
+
+//not assigned to a Lawyer
+router.get("/notAssignedLawyer", async (req, res) => {
+  // const forms=await Form.find();
+  const form = await Form.find({
+    formStatus: formEnum.formStatus.LAWYER,
+    lawyer: null
+  });
+  res.json({ data: form });
 });
 
 module.exports = router;
