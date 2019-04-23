@@ -26,18 +26,12 @@ class Login extends Component {
           this.props.onChange(false);
           return alert("Sorry those credentials don't exist!");
         }
-<<<<<<< HEAD
         const type = this.Auth.getConfirm().type;
         if (type === "investor") this.props.history.replace("/investor");
         if (type === "admin") this.props.history.replace("/admin");
         if (type === "reviewer") this.props.history.replace("/reviewer");
         if (type === "lawyer") this.props.history.replace("/lawyer");
         // window.location.href = "/";
-=======
-        console.log("Login call");
-        // this.props.onChange(true);
-        this.props.history.push("/");
->>>>>>> frontEnd
       })
       .catch(err => {
         alert(err);
