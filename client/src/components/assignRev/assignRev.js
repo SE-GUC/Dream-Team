@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./assignRev.css";
-import { Table } from "reactstrap";
 import { Button } from "react-bootstrap";
+import { Table } from "reactstrap";
 import AuthHelperMethods from "../AuthHelperMethods";
 import withAuth from "../withAuth";
+import "./assignRev.css";
 
 class assignRev extends Component {
   Auth = new AuthHelperMethods();
@@ -47,13 +47,13 @@ class assignRev extends Component {
       alert(JSON.stringify(err));
     });
     const body = await response.text();
-    if (body.charAt(2) == "m") {
+    // if (body.charAt(2) == "m") {
       this.setState({ responseToPost: body });
-    } else {
-      this.setState({
-        responseToPost: "The form or reviewer IDs you entered is incorrect"
-      });
-    }
+    // } else {
+    //   this.setState({
+    //     responseToPost: "The form or reviewer IDs you entered is incorrect"
+    //   });
+    // }
   };
 
   render() {
