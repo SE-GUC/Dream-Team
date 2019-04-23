@@ -21,7 +21,37 @@ router.use(
     extended: false
   })
 );
-
+router.post("/createUser", async (req, res) => {
+  const user = req.body;
+  var isValidated = null;
+  const userFound = await User.findOne({ email: req.body.email });
+  if (userFound) return res.status(400).json({ error: "Email already exists" });
+  const salt = bcrypt.genSaltSync(10);
+  const hashedPassword = bcrypt.hashSync(req.body.password, salt);
+  if (req.body.nationality == "egyptian" && req.body.typeID != "national id")
+    return res
+      .status(400)
+      .json({ error: "egyptians must have their national id as type id" });
+  if (req.body.accountType == "investor")
+    isValidated = userValidator.createInvestorValidation(req.body);
+  else if (req.body.accountType == "lawyer")
+    isValidated = userValidator.createLawyerValidation(req.body);
+  else if (req.body.accountType == "reviewer")
+    isValidated = userValidator.createReviewerValidation(req.body);
+  else if (req.body.accountType == "admin")
+    isValidated = userValidator.createAdminValidation(req.body);
+ 
+  if (isValidated.error)
+    return res
+      .status(400)
+      .send({ error: isValidated.error.details[0].message });
+  user.password = hashedPassword;
+  const newUser = new User(user);
+  newUser
+    .save()
+    .then(user => res.json({ data: user }))
+    .catch(err => res.json({ error: "Can not create User" }));
+ });
 //View all published companies  - Public
 router.get("/companies/publishedcompanies", async (req, res) => {
   const form = await Form.find({ formStatus: formEnum.formStatus.APPROVED });
@@ -64,6 +94,8 @@ router.post("/createUser", async (req, res) => {
     isValidated = userValidator.createLawyerValidation(req.body);
   else if (req.body.accountType == "reviewer")
     isValidated = userValidator.createReviewerValidation(req.body);
+  else if (req.body.accountType == "admin")
+    isValidated = userValidator.createAdminValidation(req.body);
 
   if (isValidated.error)
     return res
@@ -76,7 +108,6 @@ router.post("/createUser", async (req, res) => {
     .then(user => res.json({ data: user }))
     .catch(err => res.json({ error: "Can not create User" }));
 });
-
 //Update user
 router.put(
   "/updateUser",
@@ -123,7 +154,6 @@ router.put(
     }
   }
 );
-
 //View SSC Rules - Public
 var SSC = [
   ["قواعد التحقق", "اختیارات القائمة", "اجباري", "نوع الحقل", "اسم الحقل"],

@@ -2,7 +2,7 @@
 var bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const express = require("express");
-
+const upload = require("../../upload");
 const User = require("../../models/User");
 const Form = require("../../models/Form");
 const formEnum = require("../../enums/formStatus");
@@ -58,6 +58,8 @@ router.put("/feesCalculation/:id", async (req, res) => {
       return res
         .status(400)
         .send({ error: isValidated.error.details[0].message });
+    // @ts-ignore
+    // @ts-ignore
     const updatedForm = await Form.findByIdAndUpdate(id, {
       feesCalculation: totalActualFees
     });
@@ -69,14 +71,19 @@ router.put("/feesCalculation/:id", async (req, res) => {
 });
 
 //NEEDS MINIMIZATION-Create Form - Investor, Lawyer
+
 router.post("/createForm", async (req, res) => {
   try {
     var investorID = "";
     var lawyerID = "";
+    // @ts-ignore
     if (req.payload.type == typesEnum.accountTypes.LAWYER) {
+      // @ts-ignore
       lawyerID = req.payload.id;
       investorID = req.body.investor;
+      // @ts-ignore
     } else investorID = req.payload.id;
+    // @ts-ignore
     console.log(req.payload.id);
     if (req.body.companyName) {
       const company = await Form.findOne({
@@ -86,7 +93,7 @@ router.post("/createForm", async (req, res) => {
         return res.status(400).json({ error: "Company Name already exists" });
     }
     //SSC Conditions
-    if (req.body.companyName == "SSC") {
+    if (req.body.companyType == "SSC") {
       const invssc = await Form.findOne({
         investor: investorID,
         companyType: "SSC"
@@ -122,6 +129,7 @@ router.post("/createForm", async (req, res) => {
         .json({ error: "investors establishing SPC cannot have board" });
     }
     var isValidated = {};
+    // @ts-ignore
     if (req.payload.type == "lawyer")
       isValidated = formValidator.createValidationLawyer(req.body);
     else isValidated = formValidator.createValidationLawyer(req.body);
@@ -130,6 +138,7 @@ router.post("/createForm", async (req, res) => {
         .status(400)
         .send({ error: isValidated.error.details[0].message });
     var formBody = req.body;
+    // @ts-ignore
     if (req.payload.type == "lawyer") {
       (formBody.createdByLawyer = true),
         (formBody.lawyer = lawyerID),
@@ -141,24 +150,48 @@ router.post("/createForm", async (req, res) => {
     }
     const newForm = await Form.create(formBody);
     res.json({ msg: "Form was created successfully ", data: newForm });
+    const Investor = await User.findById(investorID);
+    upload(newForm, Investor);
   } catch (error) {
     console.log(error);
   }
 });
 
+//download contract
+router.get("/viewContract/:id", async (req, res) => {
+  const type = req.params.type;
+  const id = req.params.id;
+  const user = await User.findById(id);
+  // if (!user)
+  //   return res.status(404).send({
+  //     error: "This User does not exist"
+  //   });
+
+  // const form = await Form.findOne(
+  //   { investor: id },
+  //   { dateOfPayment: 1, amountOfPayment: 1, _id: 0 }
+  // );
+
+  res.download(`/resources/${id}.pdf`);
+});
+
 //NEEDS MINIMIZATION-Update Form - Investor, Lawyer
 router.put("/form/:formid", async (req, res) => {
   try {
+    // @ts-ignore
     const userID = req.payload.id;
     const formid = req.params.formid;
     const form = await Form.findById(formid);
+
     if (!form) return res.status(404).send({ error: "Form does not exist" });
     //AUTHORIZATION
     if (
+      // @ts-ignore
       req.payload.type == userEnum.accountTypes.LAWYER &&
       (form.createdByLawyer == false ||
         form.lawyer != userID ||
         form.formStatus != formEnum.formStatus.LAWYER) &&
+      // @ts-ignore
       (req.payload.type == userEnum.accountTypes.INVESTOR &&
         (form.investor != userID ||
           form.formStatus != formEnum.formStatus.INVESTOR))
@@ -241,6 +274,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const formId = req.params.id;
     const form = await Form.findById(formId);
+    // @ts-ignore
     const investorID = req.payload.id;
     if (investorID != form.investor)
       return res
@@ -258,6 +292,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 router.get("/lawyerForms", async (req, res) => {
+  // @ts-ignore
   const id = req.payload.id;
   const user = await User.findById(id);
   if (!user)
@@ -272,6 +307,7 @@ router.get("/lawyerForms", async (req, res) => {
 //View all my Finalized cases - Lawyer
 router.get("/", async (req, res) => {
   //   const type = req.params.type;
+  // @ts-ignore
   const id = req.payload.id;
   const user = await User.findById(id);
   if (!user)
@@ -286,7 +322,9 @@ router.get("/", async (req, res) => {
 router.put("/sendRejectionMsg/:id", async (req, res) => {
   try {
     const formID = req.params.id;
+    // @ts-ignore
     const lawyerID = req.payload.id;
+    // const lawyerID = "5cb2ff4e871ef190f3a869b4";
     const form = await Form.findById(formID);
     if (!form) return res.status(404).send({ error: "form does not exist" });
     if (form.lawyer != lawyerID)
@@ -294,8 +332,9 @@ router.put("/sendRejectionMsg/:id", async (req, res) => {
         .status(404)
         .send({ error: "This form does not belong to you" });
     const reject = {
-      lawyerComment: req.body.lawyerComment,
+      // lawyerComment: req.body.lawyerComment,
       lawyerDecision: -1,
+      $push: { lawyerComment: req.body.lawyerComment },
       formStatus: formEnum.formStatus.INVESTOR
     };
     await Form.findByIdAndUpdate(formID, reject);
@@ -309,16 +348,19 @@ router.put("/sendRejectionMsg/:id", async (req, res) => {
 router.put("/accept/:id", async (req, res) => {
   try {
     const formID = req.params.id;
+    // @ts-ignore
     const lawyerID = req.payload.id;
     const form = await Form.findById(formID);
     if (!form)
       return res.status(404).send({ error: "This form does not exist" });
+    console.log(form);
     if (form.lawyer != lawyerID)
       return res
         .status(404)
         .send({ error: "This form does not belong to you" });
     var approved = {
       lawyerDecision: 1,
+      $push: { approvedForms: formID },
       formStatus: formEnum.formStatus.REVIEWER
     };
     await Form.findByIdAndUpdate(formID, approved);
@@ -330,6 +372,7 @@ router.put("/accept/:id", async (req, res) => {
 
 //Show my pending cases - Lawyer
 router.get("/pendingCase", async (req, res) => {
+  // @ts-ignore
   const id = req.payload.id;
   const form = await Form.find({
     lawyer: id,
@@ -345,6 +388,7 @@ router.get("/pendingCase", async (req, res) => {
 //Assign me to review this form - Lawyer
 router.put("/assign/:id", async (req, res) => {
   const formID = req.params.id;
+  // @ts-ignore
   const lawyerID = req.payload.id;
   const form = await Form.findById(formID);
   if (!form) return res.status(404).send({ error: "Form does not exist" });
@@ -359,6 +403,7 @@ router.put("/assign/:id", async (req, res) => {
 //Mark payment as done (Cash)
 router.put("/payment/:id", async (req, res) => {
   const formId = req.params.id;
+  // @ts-ignore
   const lawyerId = req.payload.id;
   var form = await Form.findById(formId);
   if (!form) res.status(404).send({ error: "This form is not found" });
@@ -380,7 +425,9 @@ router.put("/payment/:id", async (req, res) => {
 });
 
 router.get("/AR", async (req, res) => {
+  // @ts-ignore
   const type = req.payload.type;
+  // @ts-ignore
   const lawyerID = req.payload.id;
 
   const user = await User.findById(lawyerID);
@@ -391,6 +438,8 @@ router.get("/AR", async (req, res) => {
   const dec = await Form.find({ lawyerDecision: 1 } || { lawyerDecision: -1 });
   console.log(dec);
   if (type === typesEnum.accountTypes.LAWYER && dec) {
+    // @ts-ignore
+    // @ts-ignore
     const forms = await Form.find({
       lawyer: lawyerID,
       $or: [{ lawyerDecision: -1 }, { lawyerDecision: 1 }]
@@ -398,6 +447,16 @@ router.get("/AR", async (req, res) => {
     //Check condition
     res.json({ data: dec });
   } else res.json({ msg: "No Forms for this lawyer " });
+});
+
+//not assigned to a Lawyer
+router.get("/notAssignedLawyer", async (req, res) => {
+  // const forms=await Form.find();
+  const form = await Form.find({
+    formStatus: formEnum.formStatus.LAWYER,
+    lawyer: null
+  });
+  res.json({ data: form });
 });
 
 module.exports = router;

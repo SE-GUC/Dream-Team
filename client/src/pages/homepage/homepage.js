@@ -9,7 +9,9 @@ import lawyerFinalizedCases from "../../components/lawyerFinalizedCases/lawyerFi
 // import Tableform from '../../components/formTable';
 import searchBar from "../../components/searchBar";
 import viewAllInvestors from "../../components/viewAllInvestors/viewAllInvestors";
+import adminComponent from "../../components/adminComponent/adminComponent";
 import "../homepage/homepage.css";
+import lawyer from "../../components/lawyer/lawyer";
 
 class HomePage extends Component {
   Auth = new AuthHelperMethods();
@@ -70,7 +72,9 @@ class HomePage extends Component {
   login() {
     this.props.history.push("/login");
   }
-
+  externalPortal() {
+    this.props.history.push("/externalPortal");
+  }
   signUp() {
     this.props.history.push("/signup");
   }
@@ -127,16 +131,25 @@ class HomePage extends Component {
   assignRev() {
     this.props.history.push("/assignRev");
   }
+  // pdfUpload() {
+  //   this.props.history.push("/pdfUpload");
+  // }
+  loginPage() {
+    this.props.history.push("/login2");
+  }
 
   _handleLogout = () => {
     this.Auth.logout();
 
     this.props.history.replace("/");
   };
+  reviewerCase() {
+    this.props.history.push("/reviewerCase");
+  }
 
   render() {
     return (
-      <div className="HomePage">
+      <div className="HomePage" >
         <div className="App-header">
           <h2>Welcome Home</h2>
         </div>
@@ -152,6 +165,19 @@ class HomePage extends Component {
             login
           </button>
         </div>
+
+        {/* <div>
+          To view externalPortal
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.externalPortal();
+            }}
+          >
+            view
+          </button>
+        </div> */}
+
         <div>
           lawyer fill form
           <button
@@ -231,6 +257,17 @@ class HomePage extends Component {
             Click to view form
           </button>
         </div>
+        {/* <div>
+          pdf upload
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.pdfUpload();
+            }}
+          >
+            Click to upload
+          </button>
+        </div> */}
         <div>
           To view user table
           <button
@@ -402,13 +439,14 @@ class HomePage extends Component {
               Click to assign
             </button>
           </div>
-          To view publishedCompanies click here
+          {/* To view publishedCompanies click here
           <button
             className="btn btn-primary width-150"
             onClick={e => {
               this.publishedCompanies();
             }}
           />
+        </div> */}
         </div>
         <div>
           investor Update Rejected Forms
@@ -506,6 +544,37 @@ class HomePage extends Component {
               this.searchBar();
             }}
           />
+        </div>
+        <div>
+          side Bar
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.feesCalc();
+            }}
+          >
+            Click to Update
+          </button>
+        </div>
+        <div>
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.sideBar();
+            }}
+          />
+        </div>
+
+        <div>
+          reviewerCase
+          <button
+            className="btn btn-primary width-150"
+            onClick={e => {
+              this.reviewerCase();
+            }}
+          >
+            Click to review
+          </button>
         </div>
       </div>
     );

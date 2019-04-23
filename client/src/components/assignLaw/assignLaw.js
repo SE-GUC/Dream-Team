@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./assignLaw.css";
-import { Table } from "reactstrap";
 import { Button } from "react-bootstrap";
+import { Table } from "reactstrap";
 import AuthHelperMethods from "../AuthHelperMethods";
 import withAuth from "../withAuth";
+import "./assignLaw.css";
 
 class assignLaw extends Component {
   Auth = new AuthHelperMethods();
@@ -14,7 +14,7 @@ class assignLaw extends Component {
     isLoaded: false
   };
   componentDidMount() {
-    this.Auth.fetch("api/lawyer/pendingCase/")
+    this.Auth.fetch("api/lawyer/notAssignedLawyer/")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -26,35 +26,36 @@ class assignLaw extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-
-    await document.getElementById("myTable").addEventListener("click", evt => {
-      var btn = evt.target;
-      console.log(btn.tagName);
-      if (btn.tagName === "BUTTON") {
-        var row = btn.parentNode.parentNode; //td than tr
-        var cells = row.getElementsByTagName("td"); //cells
-        console.log(cells[0].textContent, cells[1].textContent);
-        this.setState({ formID: cells[0].textContent });
-      }
-    });
-
-    const response = await this.Auth.fetch(
-      "/api/lawyer/assign/" +
-        this.state.formID.trim() +
-        {
-          method: "PUT"
+    await document
+      .getElementById("myTable")
+      .addEventListener("click", async evt => {
+        var btn = evt.target;
+        console.log(btn.tagName);
+        if (btn.tagName === "BUTTON") {
+          var row = btn.parentNode.parentNode; //td than tr
+          var cells = row.getElementsByTagName("td"); //cells
+          console.log(cells[0].textContent, cells[1].textContent);
+          await this.setState({ formID: cells[0].textContent });
         }
+      });
+    const response = await this.Auth.fetch(
+      "/api/lawyer/assign/" + this.state.formID.trim(),
+      {
+        method: "PUT"
+      }
     ).catch(err => {
       alert(JSON.stringify(err));
     });
-    const body = await response.text();
-    if (body.charAt(2) == "m") {
+    console.log("response");
+    console.log(response);
+    const body = await response;
+    // if (body.charAt(2) == "m") {
       this.setState({ responseToPost: body });
-    } else {
-      this.setState({
-        responseToPost: "The form or reviewer IDs you entered is incorrect"
-      });
-    }
+    // } else {
+    //   this.setState({
+    //     responseToPost: "The form or reviewer IDs you entered is incorrect"
+    //   });
+    // }
   };
 
   render() {

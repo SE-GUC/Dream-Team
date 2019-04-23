@@ -5,7 +5,7 @@ const router = express.Router();
 const stripe = require("stripe")("sk_test_Wt39GzrMj3UYvfLVB4Supgbn00FRuxflb1");
 
 router.use(require("body-parser").text());
-
+const upload = require("../../upload");
 const formValidator = require("../../validations/formValidations");
 const User = require("../../models/User");
 const Form = require("../../models/Form");
@@ -27,7 +27,8 @@ router.use(
   })
 );
 
-router.post("/charge", async (req, res) => {
+router.post("/charge/:id", async (req, res) => {
+  const formId = req.params.id;
   try {
     let { status } = await stripe.charges.create({
       amount: req.body.amount,
@@ -37,6 +38,14 @@ router.post("/charge", async (req, res) => {
     });
 
     res.json({ status });
+    var form = await Form.findById(formId);
+    Form.findOneAndUpdate(
+      { _id: formId },
+      {
+        dateOfPayment: new Date(),
+        method: "cash"
+      }
+    );
   } catch (err) {
     res.json({
       msg: err.message
@@ -63,7 +72,6 @@ router.put("/payment", async (req, res) => {
       });
     })
     .then(source => {
-      // console.log(source.customer);
       return stripe.charges.create({
         amount: req.body.amount,
         currency: req.body.currency,
@@ -72,9 +80,7 @@ router.put("/payment", async (req, res) => {
         // customer: source.customer
       });
     })
-    .then(charge => {
-      // New charge created on a new customer
-    })
+    .then(charge => {})
     .catch(err => {
       res.json({
         msg: err.message
@@ -204,6 +210,7 @@ router.post("/createForm", async (req, res) => {
           .send({ error: isValidated.error.details[0].message });
     }
     if (req.body.companyType != "SPC" && req.body.companyType != "SSC") {
+      console.log(req.body.companyType);
       const formtype = await FormTypes.find({ formType: req.body.companyType });
       const updated = req.body;
       delete updated.companyType;
@@ -221,94 +228,36 @@ router.post("/createForm", async (req, res) => {
     }
     const newForm = await Form.create(formBody);
     res.json({ msg: "Form was created successfully ", data: newForm });
+    const InvestorModel = await User.findById(investorID);
+    upload(newForm, InvestorModel);
   } catch (error) {
     console.log(error);
   }
 });
 
-//Update Form - Investor, Lawyer
-router.put("/form/:formId", async (req, res) => {
-  try {
-    const userID = req.payload.id;
-    const formId = req.params.formId;
-    const form = await Form.findById(formId);
-    if (!form) return res.status(404).send({ error: "Form does not exist" });
-    //AUTHORIZATION
-    if (
-      req.payload.type == userEnum.accountTypes.LAWYER &&
-      (form.createdByLawyer == false ||
-        form.lawyer != userID ||
-        form.formStatus != formEnum.formStatus.LAWYER) &&
-      (req.payload.type == userEnum.accountTypes.INVESTOR &&
-        (form.investor != userID ||
-          form.formStatus != formEnum.formStatus.INVESTOR))
-    ) {
-      return res.status(404).send({ error: "You have no authorization" });
-    }
-    if (req.body.companyName) {
-      const company = await Form.findOne({
-        companyName: req.body.companyName
-      });
-      if (company)
-        return res.status(400).json({ error: "Company Name already exists" });
-    }
-    const inv = await User.findById(form.investor);
-    var flag = true;
-    if (inv.nationality != "Egyptian") {
-      const b = req.body.board;
-      flag = false;
-      for (var i = 0; i < b.length; i++) {
-        if (b[i].nationality == "Egyptian") {
-          flag = true;
-        }
-      }
-    }
-    if (!flag)
-      return res.status(400).json({
-        error:
-          "investors establishing SSC must have at least one egyptian manager"
-      });
-    // }
+//download contract
+router.get("/viewContract/:id", async (req, res) => {
+  const type = req.params.type;
+  const id = req.params.id;
+  const user = await User.findById(id);
+  // if (!user)
+  //   return res.status(404).send({
+  //     error: "This User does not exist"
+  //   });
 
-    //SPC Conditions
-    if (req.body.board && req.body.companyType == "SPC") {
-      console.log(req.body.board);
-      return res
-        .status(400)
-        .json({ error: "investors establishing SPC cannot have board" });
-    }
+  // const form = await Form.findOne(
+  //   { investor: id },
+  //   { dateOfPayment: 1, amountOfPayment: 1, _id: 0 }
+  // );
 
-    //Validations and Insertion
-    var isValidated = formValidator.updateValidation(req.body);
-    if (isValidated.error)
-      return res
-        .status(400)
-        .send({ error: isValidated.error.details[0].message });
-    var formBody = req.body;
-    if (
-      (form.formStatus =
-        formEnum.formStatus.INVESTOR && form.lawyerDecision == -1)
-    ) {
-      formBody.formStatus = formEnum.formStatus.LAWYER;
-      formBody.$unset = { lawyerDecision: 1, lawyer: 1 };
-    } else if (
-      (form.formStatus =
-        formEnum.formStatus.LAWYER && form.reviewerDecision == -1)
-    ) {
-      formBody.formStatus = formEnum.formStatus.REVIEWER;
-      formBody.$unset = { reviewerDecision: 1, reviewer: 1 };
-    }
-    await Form.findByIdAndUpdate(formId, formBody);
-    res.json({ msg: "Form updated successfully" });
-  } catch (e) {
-    console.log(e);
-  }
+  res.download(`resources/${id}.pdf`);
 });
 
 //As an investor , I should be notified with the amount and the due date (fees calculation)
-FIXME: router.get("/notifyAmountAndDueDate/:id", async (req, res) => {
+router.get("/notifyAmountAndDueDate", async (req, res) => {
   const type = req.params.type;
-  const id = req.params.id;
+
+  const id = req.payload.id;
   const user = await User.findById(id);
   if (!user)
     return res.status(404).send({
@@ -319,7 +268,6 @@ FIXME: router.get("/notifyAmountAndDueDate/:id", async (req, res) => {
     { investor: id },
     { dateOfPayment: 1, amountOfPayment: 1, _id: 0 }
   );
-
   res.json({ data: form });
 });
 
@@ -349,7 +297,6 @@ router.get("/trackRequest", async (req, res) => {
   try {
     const id = req.payload.id;
     const form = await Form.find({ investor: id });
-
     if (!form)
       return res.status(404).send({
         error: "This form does not exist"

@@ -7,6 +7,7 @@ const User = require("../../models/User");
 const Form = require("../../models/Form");
 const typesEnum = require("../../enums/accountType");
 const regulatedLaw = require("../../enums/regulatedLaw");
+const passport = require("passport");
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
@@ -24,14 +25,13 @@ router.get("/", async (req, res) => {
   res.json({ data: form });
 });
 
-router.get('/search',async (req,res) =>{
- 
-  const search = await Form.find(req.body)
+router.get("/search", async (req, res) => {
+  const search = await Form.find(req.body);
 
-res.json({
-  data: search
-})
-})
+  res.json({
+    data: search
+  });
+});
 
 //Get Laws
 router.get("/regulatedLaw", async (req, res) => {
@@ -66,6 +66,7 @@ router.get("/formStatus/:id", async (req, res) => {
     data: forms
   });
 });
+
 //right//Get user by id - Admin
 router.get("/user/:id", async (req, res) => {
   try {

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "./login.css";
-import AuthHelperMethods from "../AuthHelperMethods";
 import { Button, Form } from "react-bootstrap";
 import Popup from "reactjs-popup";
+import AuthHelperMethods from "../AuthHelperMethods";
+import "./login.css";
 // import withAuth from './components/withAuth';
 class Login extends Component {
   Auth = new AuthHelperMethods();
@@ -19,12 +19,19 @@ class Login extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
+    console.log("LOGIN");
     this.Auth.login(this.state.email, this.state.password)
       .then(res => {
         if (res === false) {
+          this.props.onChange(false);
           return alert("Sorry those credentials don't exist!");
         }
-        this.props.history.replace("/");
+        const type = this.Auth.getConfirm().type;
+        if (type === "investor")
+          this.props.history.replace("/investorComponent");
+        if (type === "admin") this.props.history.replace("/admin");
+        if (type === "reviewer") this.props.history.replace("/reviewer");
+        if (type === "lawyer") this.props.history.replace("/lawyer");
         // window.location.href = "/";
       })
       .catch(err => {
@@ -34,39 +41,41 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="Login">
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={this.state.email}
-              onChange={e => this.setState({ email: e.target.value })}
-            />
-          </Form.Group>
+      <div className="background-image2">
+        <div className="LoginView">
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label className="InputContainer">Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                value={this.state.email}
+                onChange={e => this.setState({ email: e.target.value })}
+              />
+            </Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={e => this.setState({ password: e.target.value })}
-            />
-          </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label className="InputContainer">Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={e => this.setState({ password: e.target.value })}
+              />
+            </Form.Group>
 
-          <Popup
-            trigger={
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            }
-            position="bottom center"
-          >
-            <div>{this.state.responseToPost}</div>
-          </Popup>
-        </Form>
+            <Popup
+              trigger={
+                <Button variant="primary" type="submit">
+                  Submit
+                </Button>
+              }
+              position="bottom center"
+            >
+              <div>{this.state.responseToPost}</div>
+            </Popup>
+          </Form>
+        </div>
       </div>
     );
   }
